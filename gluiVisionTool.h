@@ -9,6 +9,8 @@ class GluiVisionTool{
  public: 
   void start();
   GluiVisionTool(int argc, char ** argv);
+ private:
+  int main_window;
 };
 
 #endif
