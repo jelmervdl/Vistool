@@ -1,6 +1,12 @@
 # main
 Sources = main.cpp 
 
+#texture reader
+Sources += glTexture.cpp
+
+#PNG gate
+Sources += pngLoad.cpp
+
 #input/output
 Sources += fileDialog.cpp
 

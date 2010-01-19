@@ -10,10 +10,12 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_Core = -framework CoreFoundation
 
 #Header include path
+	Head_Path += -I/usr/local/include 
 	Head_Path += -I/opt/local/include 
 
 #Library paths
-	Lib_Path += -L/opt/local/lib 
+	Lib_Path += -I/usr/local/lib 
+#	Lib_Path += -L/opt/local/lib 
 #	Lib_Path += -L"/System/Library/Frameworks/OpenGL.framework/Libraries" 
 #	Head_Path += -I"/System/Library/Frameworks/OpenGL.framework/Headers"
 	Head_Path += -I"/System/Library/Frameworks/Carbon.framework/Headers"	
@@ -24,14 +26,15 @@ endif
 ##################################################################
 
 # Global
-Lib_GLUI = -lglui
+Lib_GLUI = -framework GLUI
+Lib_PNG = -lpng
 
 Required += $(MacOSXReq)
 
 Global += -m32
 
 #Libaries
-Libraries = $(Required) $(Lib_GLUT) $(Lib_GLUI)
+Libraries = $(Required) $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG)
 
 #Flags
 Cpp_Flags = -Wall -DUNIX -g
@@ -44,14 +47,20 @@ Linker = $(Cpp_Comp)
 
 include Make.inc
 
-all: $(Target)
+all: bla $(Target)
+	@echo "compiling complete\n"
+
+bla:
+	@echo "\n\ncompiling $(Sources) into $(Target) \n"
 
 .SUFFIXES: .cpp
 
 .cpp.o:
+	@echo "\ncompiling object $@"
 	$(Cpp_Comp) $(Global) -c $(Cpp_Flags) -o $@ $< $(Head_Path)
 
 $(Target): $(Objects)
+	@echo "\nlinking objects to $@"
 	 $(Linker) $(Global) $(Libraries) -o $(Target) $(Objects) $(Head_Path) $(Lib_Path)
 
 clean:
@@ -59,4 +68,5 @@ clean:
 	rm -f $(Objects)
 
 run: all
+	@echo "\nstarting application:\n"
 	./$(Target)

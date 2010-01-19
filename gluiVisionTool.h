@@ -4,13 +4,15 @@
 #include <stdio.h>
 #include <GLUT/glut.h>
 #include "glui.h"
+#include "fileDialog.h"
+#include "glTexture.h"
 
-class GluiVisionTool{
- public: 
-  void start();
-  GluiVisionTool(int argc, char ** argv);
- private:
-  int main_window;
-};
+void display(void);
+void start(int argc, char ** argv);
+void initTextures(char * dir_add);
+void drawTexture(GLuint texName, int twidth, int theight);
+
+
+
 
 #endif
