@@ -15,9 +15,6 @@ ifeq ("$(shell uname)", "Darwin")
 
 #Library paths
 	Lib_Path += -I/usr/local/lib 
-#	Lib_Path += -L/opt/local/lib 
-#	Lib_Path += -L"/System/Library/Frameworks/OpenGL.framework/Libraries" 
-#	Head_Path += -I"/System/Library/Frameworks/OpenGL.framework/Headers"
 	Head_Path += -I"/System/Library/Frameworks/Carbon.framework/Headers"	
 	Head_Path += -I"/Library/Frameworks/SDL.framework/Headers"
 	Head_Path += -I"/System/Library/Frameworks/CoreFoundation.framework/Headers"
@@ -48,10 +45,10 @@ Linker = $(Cpp_Comp)
 include Make.inc
 
 all: bla $(Target)
-	@echo "compiling complete\n"
+	@echo "\ncompiling complete"
 
 bla:
-	@echo "\n\ncompiling $(Sources) into $(Target) \n"
+	@echo "\ncompiling $(Sources) into $(Target)"
 
 .SUFFIXES: .cpp
 
@@ -64,9 +61,9 @@ $(Target): $(Objects)
 	 $(Linker) $(Global) $(Libraries) -o $(Target) $(Objects) $(Head_Path) $(Lib_Path)
 
 clean:
-	@echo "removing all objects\n"
+	@echo "removing all objects"
 	rm -f $(Objects)
 
 run: all
-	@echo "\nstarting application:\n"
+	@echo "\nstarting application:"
 	./$(Target)

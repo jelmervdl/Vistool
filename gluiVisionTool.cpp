@@ -32,7 +32,6 @@ void start(int argc, char ** argv){
 
 
 void display(){
-  printf("ooh\n");
   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
   glPushMatrix();
@@ -45,13 +44,9 @@ void display(){
 }
 
 void initTextures(){
-  printf("initializing texture .. ");
   char * location; 
-  //asprintf(&location, "%s/game_resources/Leaf0.png", dir_add);
   location = (char *) requestFile();
-  printf("yo yo %s", location);
   initTexture(&ctext,location, &ct_width, &ct_height);
-  printf("done!\n");
 }
 
 void  drawTexture(GLuint texName, int twidth, int theight) {
