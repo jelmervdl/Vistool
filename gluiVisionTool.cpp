@@ -13,42 +13,45 @@ void start(int argc, char ** argv){
   glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
   glutInitWindowPosition( 50, 50 );
   glutInitWindowSize( 300, 300 );
+
   main_window = glutCreateWindow( "GLUI Example 3" );
-
-
+  glutDisplayFunc(display);
+  initTextures();
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   glOrtho(0, 300, 300, 0, 0, 1); // we want 2d projection mode!                                                                                       
   glMatrixMode(GL_MODELVIEW); // bring us back to model mode                                                                                          
   glDisable( GL_DEPTH_TEST); //2d, no depth                                                                                                           
   glDisable( GL_LIGHTING ); // 2d, no light  
-
-  glutDisplayFunc(display);
-
+  display();
+  display();
+  display(); 
+  glEnd();
   glutMainLoop();
 }
 
 
 void display(){
+  printf("ooh\n");
   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
   glPushMatrix();
-  glTranslatef(140.0, 20.0, 0.0);
+  //  glTranslatef(140.0, 20.0, 0.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  drawTexture(ctext, 100, 100);
+  drawTexture(ctext, 300, 300);
   glPopMatrix();
-  glTranslatef(100.0,50.0,0.0);
-  glScaled(3.0, 3.0, 1.0);
-  drawTexture(ctext, 100, 100);
   glLoadIdentity();
+  glutSwapBuffers();
 }
 
-void initTextures(char * dir_add){
+void initTextures(){
+  printf("initializing texture .. ");
   char * location; 
-  //  asprintf(&location, "%s/game_resources/Leaf0.png", dir_add);
+  //asprintf(&location, "%s/game_resources/Leaf0.png", dir_add);
   location = (char *) requestFile();
   printf("yo yo %s", location);
-  //initTexture(&ctext,location, &ct_width, &ct_height);
+  initTexture(&ctext,location, &ct_width, &ct_height);
+  printf("done!\n");
 }
 
 void  drawTexture(GLuint texName, int twidth, int theight) {

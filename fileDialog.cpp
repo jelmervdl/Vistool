@@ -60,7 +60,7 @@ void callback( NavEventCallbackMessage theSelector, NavCBRecPtr callBackParams, 
     break;
   }
   case kNavCBTerminate: {
-    NavDialogDispose( dialog ); 
+    //NavDialogDispose( dialog ); 
     break;
   }
   }

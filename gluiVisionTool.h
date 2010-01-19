@@ -9,7 +9,7 @@
 
 void display(void);
 void start(int argc, char ** argv);
-void initTextures(char * dir_add);
+void initTextures();
 void drawTexture(GLuint texName, int twidth, int theight);
 
 
