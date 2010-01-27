@@ -4,9 +4,11 @@
 #include <stdio.h>
 #include <GLUT/glut.h>
 #include "glui.h"
-#include "fileDialog.h"
+#include "fd.h"
 #include "glTexture.h"
 
+void loadPicture();
+void initGlui();
 void display(void);
 void start(int argc, char ** argv);
 void initTextures();

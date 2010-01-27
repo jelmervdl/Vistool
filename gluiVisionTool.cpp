@@ -1,5 +1,6 @@
 #include "gluiVisionTool.h"
 
+GLUI * glui;
 GLuint ctext;
 size_t ct_width;
 size_t ct_height;
@@ -24,10 +25,20 @@ void start(int argc, char ** argv){
   glDisable( GL_DEPTH_TEST); //2d, no depth                                                                                                           
   glDisable( GL_LIGHTING ); // 2d, no light  
   display();
-  display();
-  display(); 
   glEnd();
+  initGlui();
   glutMainLoop();
+}
+
+void initGlui(){
+  glui = GLUI_Master.create_glui( "GLUI", 0, 400, 50 );
+  glui->add_statictext( "Cool Vision Tool" ); 
+  glui->add_button( "Quit", 0,(GLUI_Update_CB)exit );
+  glui->add_button( "Load Picture", 0, (GLUI_Update_CB)initTextures );
+}
+
+void loadPicture(){
+  printf("boom\n");
 }
 
 
@@ -45,8 +56,9 @@ void display(){
 
 void initTextures(){
   char * location; 
-  location = (char *) requestFile();
+  location = (char *) askFile();
   initTexture(&ctext,location, &ct_width, &ct_height);
+  display();
 }
 
 void  drawTexture(GLuint texName, int twidth, int theight) {

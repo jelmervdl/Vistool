@@ -36,6 +36,5 @@ void initTexture(GLuint * texName, char *filename, size_t * twidth, size_t * the
 	*twidth = (size_t) width;
 	*theight = (size_t) height;
 	glGenTextures(1, texName);
-	setupGLTexture(image, (long unsigned int)width, (long unsigned int)height, *texName);
-	
+	setupGLTexture(image, (long unsigned int)width, (long unsigned int)height, *texName);	
 }
