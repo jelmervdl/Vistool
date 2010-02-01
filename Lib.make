@@ -26,4 +26,4 @@ endif
 Lib_GLUI = -framework GLUI
 Lib_PNG = -lpng
 
-Magickpp += `Magick++-config --cppflags --cxxflags --ldflags --libs`
+Lib_Magickpp += `Magick++-config --cppflags --cxxflags --ldflags --libs`

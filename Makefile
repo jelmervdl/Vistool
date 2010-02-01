@@ -3,10 +3,10 @@ include Inc.make
 
 Required += $(MacOSXReq)
 
-Global += -m32
+#Global += -m32
 
 #Libaries
-Libraries = $(Required) $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa)
+Libraries = $(Required) $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_Magickpp)
 
 #Flags
 Cpp_Flags = -Wall -DUNIX -g
