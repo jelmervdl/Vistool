@@ -7,9 +7,6 @@ Obj-c_Sources = fd.mm
 #texture reader
 Sources += glTexture.cpp
 
-#PNG gate
-Sources += pngLoad.cpp
-
 #glut/glui
 Sources += gluiVisionTool.cpp
 

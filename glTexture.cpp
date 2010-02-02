@@ -2,42 +2,17 @@
 #include<iostream>
 
 using namespace Magick;
+using namespace  std;
 
-int setupGLTexture(char *image, long unsigned int width, long unsigned int height, int texName) 
-{	
-	if (image == NULL)
-    {
-		return 0;
-    }
-	
-	printf("(loadTexture) width: %d height: %d\n", (int)width, (int)height); 
-	
-	/* create a new texture object
-	 * and bind it to texname (unsigned integer > 0)
-	 */
-
-	glBindTexture(GL_TEXTURE_2D, texName);
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, 
-				 GL_RGBA, GL_UNSIGNED_BYTE, image);
-	free(image);
-	return 1; 
-}
-
-void initTexture(int window, GLuint * texName, char *filename, size_t * twidth, size_t * theight){
-  long unsigned int result, *width, *height;
-  char *image;
-  Image im(image);
+void initTexture(int window, GLuint * texName, string filename, size_t * twidth, size_t * theight){
+  Image im(filename);
   Blob blob;
+
   im.magick("RGBA");
   im.write(&blob);
   *twidth = im.columns();
   *theight = im.rows();
+
   glutSetWindow(window);
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, *texName);
@@ -49,8 +24,5 @@ void initTexture(int window, GLuint * texName, char *filename, size_t * twidth, 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexImage2D(GL_TEXTURE_2D, 0 , GL_RGBA, im.columns(), im.rows(), 0, 
 	       GL_RGBA, GL_UNSIGNED_BYTE, blob.data());
-  std::cout << "image " << image << " bound to" << *texName << std::endl;
-  std::cout << "we are at window " << glutGetWindow() << std::endl;;
   glDisable(GL_TEXTURE_2D);
-
 }

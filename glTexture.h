@@ -6,11 +6,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string>
 #include <png.h>
-#include "pngLoad.h"
 
-int setupGLTexture(char *image, long unsigned int width, long unsigned int height, int texName);
-void initTexture(int window, GLuint * texName, char *filename, size_t * twidth, size_t * theight);
+using namespace std;
+
+void initTexture(int window, GLuint * texName, string filename, size_t * twidth, size_t * theight);
 
 #endif
