@@ -1,3 +1,8 @@
 *.o
 machineVisionTool
 test
+*.class
+aap.jpg
+src/imageHandling.h
+label-index-subset
+runtime
