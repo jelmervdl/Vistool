@@ -6,9 +6,10 @@ include Inc.make
 #Libaries
 Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_JNI) $(Lib_Boost) $(Lib_OpenCV) $(Lib_Magickpp) 
 
-#Flags
-Cpp_Flags = -Wall -DUNIX -g
+Java_Include = -D 'USER_CLASSPATH="$(CLASSPATH2)"'
 
+#Flags
+Cpp_Flags = -Wall -DUNIX -g $(Java_Include)
 
 #Compiler
 Cpp_Comp = g++

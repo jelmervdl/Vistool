@@ -3,5 +3,7 @@
 // commit?
 #include <stdio.h>
 #include "gluiVisionTool.h"
+#include "ml.h"
+#include "jniKalooga.h"
 #endif
 

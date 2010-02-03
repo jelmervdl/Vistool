@@ -1,9 +1,9 @@
 #include "main.h"
-#include "ml.h"
 
 int main(int argc, char ** argv){
-  CvKNearest hand;
+  saveFile();
   printf("starting up vision tool..\n");
-  start( argc , argv);
+  //std::cout  << " " <<  PAPAPATH << std::endl;
+  //  start( argc , argv);
   return  0;
 }
