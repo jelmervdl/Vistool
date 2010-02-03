@@ -1,6 +1,9 @@
 #include "gluiVisionTool.h"
 
+using namespace std;
+
 GLUI * glui;
+GLUI * classes;
 GLuint ctext;
 size_t ct_width;
 size_t ct_height;
@@ -18,7 +21,7 @@ void start(int argc, char ** argv){
   window_height = 800;
   window_width = 800;
   glutInitWindowSize( window_width, window_height );
-  main_window = glutCreateWindow( "GLUI Example 3" );
+  main_window = glutCreateWindow( "Image Viewer" );
   glutDisplayFunc(display);
   glGenTextures(1, &ctext);
   initTextures();
@@ -36,21 +39,33 @@ void start(int argc, char ** argv){
 }
 
 void initGlui(){
-  glui = GLUI_Master.create_glui( "GLUI", 0, 400, 50 );
-  glui->add_statictext( "Cool Vision Tool" ); 
+  glui = GLUI_Master.create_glui( "Control", 0, 950, 50 );
+  glui->add_statictext( "Vision Tool" ); 
   glui->add_button( "Quit", 0,(GLUI_Update_CB)exit );
   glui->add_button( "Load Picture", 0, (GLUI_Update_CB)loadPicture );
-  //glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)loadDataset );
+  glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)loadDataset );
   glui->set_main_gfx_window(main_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
 
 void loadDataset(){
-  
+  classes = GLUI_Master.create_glui( "classes", 0, 950, 250 );
+  list<Category> * db = new list<Category>();
+  size_t c = 0;
+  int aap = 0;
+  if(isDataset(askFile(),db)){
+    cout << "is dataset" << endl;
+    for(list<Category>::iterator it = db->begin();it != db->end(); ++it){
+      classes->add_checkbox((const char *)it->getName().c_str(), &aap, 1, (GLUI_Update_CB) loadPicture);
+      c++;
+      if(c%10==0)
+	classes->add_column(true);
+    }
+  }
+  free(db);
 }
 
 void display(void){
-  using namespace std;
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW); // bring us back to model mode                                                                                          
   glLoadIdentity();

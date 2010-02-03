@@ -8,6 +8,11 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_Cocoa = -framework Cocoa
 	Lib_Carbon = -framework Carbon
 	Lib_Core = -framework CoreFoundation
+	Lib_Magickpp = `Magick++-config --cppflags --cxxflags --ldflags --libs`
+	Lib_GLUI = -framework GLUI
+	Lib_PNG = -lpng
+	Lib_JNI = -framework JavaVM
+	Lib_Boost += -lboost_filesystem-mt -lboost_system-mt
 
 #Header include path
 	Head_Path += -I/usr/local/include 
@@ -18,12 +23,10 @@ ifeq ("$(shell uname)", "Darwin")
 	Head_Path += -I"/System/Library/Frameworks/Carbon.framework/Headers"	
 	Head_Path += -I"/Library/Frameworks/SDL.framework/Headers"
 	Head_Path += -I"/System/Library/Frameworks/CoreFoundation.framework/Headers"
-	MacOSXReq = $(Lib_Carbon) $(Lib_Core)
+	Head_Path += -I/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers/
 endif
 ##################################################################
 
-# Global
-Lib_GLUI = -framework GLUI
-Lib_PNG = -lpng
 
-Lib_Magickpp += `Magick++-config --cppflags --cxxflags --ldflags --libs`
+
+
