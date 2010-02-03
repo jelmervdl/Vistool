@@ -4,7 +4,7 @@ include Inc.make
 #Global += -m32
 
 #Libaries
-Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_Magickpp) $(Lib_JNI) $(Lib_Boost)
+Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_JNI) $(Lib_Boost) $(Lib_OpenCV) $(Lib_Magickpp) 
 
 #Flags
 Cpp_Flags = -Wall -DUNIX -g
@@ -52,6 +52,7 @@ clean:
 
 #Run
 run: all
+	@echo $(Lib_Magickpp)
 	@echo "\nRunning: main application:"
 	./$(Target)
 

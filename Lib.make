@@ -13,6 +13,7 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_PNG = -lpng
 	Lib_JNI = -framework JavaVM
 	Lib_Boost += -lboost_filesystem-mt -lboost_system-mt
+	Lib_OpenCV = -lml -lcv
 
 #Header include path
 	Head_Path += -I/usr/local/include 
@@ -24,6 +25,8 @@ ifeq ("$(shell uname)", "Darwin")
 	Head_Path += -I"/Library/Frameworks/SDL.framework/Headers"
 	Head_Path += -I"/System/Library/Frameworks/CoreFoundation.framework/Headers"
 	Head_Path += -I/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers/
+	Head_Path += -I/System/Library/Frameworks/OpenCV.framework/Headers/
+
 endif
 ##################################################################
 
