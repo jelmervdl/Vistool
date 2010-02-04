@@ -53,7 +53,6 @@ clean:
 
 #Run
 run: all
-	@echo $(Lib_Magickpp)
 	@echo "\nRunning: main application:"
 	./$(Target)
 
