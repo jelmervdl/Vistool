@@ -12,25 +12,43 @@ int main(int argc, char ** argv){
   image.magick("BGR");
   image.write(&blob);
   cout << "image's depth is: " << image.depth() << endl;
-  Mat aap, hond; 
-  aap = Mat(image.size().height(),
+  Mat orig, hsv; 
+  orig = Mat(image.size().height(),
 	    image.size().width(), 
 	    CV_8UC3, 
 	    (void *) blob.data());
-  cvtColor(aap, hond, CV_BGR2RGB);
-  int rbins, bbins, gbins;
-  rbins = 255;
-  bbins = 255;
-  gbins = 255;
-  int histSize[] = {rbins, bbins, gbins};
-  float rranges[] = {0, 255};
-  float granges[] = {0, 255};
-  float branges[] = {0, 255};
-  float * ranges [] = {rranges, branges, granges};
-  int channels [] = {0, 1 ,2};
+  cvtColor(orig, hsv, CV_BGR2HSV);
+
+  int hbins = 1, sbins = 100;
+  int histSize[] = {hbins, sbins};
+
+  float hranges[] = { 0, 180 };
+  float sranges[] = { 0, 256 };
+  float* ranges[] = { hranges, sranges };
   MatND hist;
-  calcHist( &hond, 1, channels, Mat(), hist, 3, histSize, 
-  return  0;
+
+  int channels[] = {0, 1};
+  calcHist( &hsv, 1, channels, Mat(), 
+	    hist, 2, histSize, (const float **) ranges,
+	    true, 
+	    false );
+  double maxVal=0;
+  minMaxLoc(hist, 0, &maxVal, 0, 0);
+
+  int scale = 10;
+  Mat histImg = Mat::zeros(sbins*scale, hbins*10, CV_8UC1);
+
+  for( int h = 0; h < hbins; h++ )
+    for( int s = 0; s < sbins; s++ )
+      {
+	float binVal = hist.at<float>(h, s);
+	int intensity = cvRound(binVal*255/maxVal);
+	rectangle( histImg, Point(h*scale, s*scale),
+		     Point( (h+1)*scale - 1, (s+1)*scale - 1),
+		     Scalar::all(intensity),
+		     CV_FILLED );
+      }
+  imwrite("oopie.jpg", histImg);
 }
 
 void printLibraries(){
