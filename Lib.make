@@ -13,7 +13,7 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_PNG = -lpng
 	Lib_JNI = -framework JavaVM
 	Lib_Boost += -lboost_filesystem-mt -lboost_system-mt
-	Lib_OpenCV = -lml -lcv
+	Lib_OpenCV = -lml -lcv -lcxcore -lhighgui
 
 #Header include path
 	Head_Path += -I/usr/local/include 

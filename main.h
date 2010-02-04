@@ -3,7 +3,9 @@
 // commit?
 #include <stdio.h>
 #include "gluiVisionTool.h"
-#include "ml.h"
+#include "cv.h"
+#include "highgui.h"
 #include "jniKalooga.h"
+void printLibraries();
 #endif
 
