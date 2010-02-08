@@ -1,9 +1,12 @@
 #include "main.h"
 
+
+using namespace xercesc;
+
 int main(int argc, char ** argv){
-  printLibraries();
-  //saveFile();
-  printf("starting up vision tool..\n");
+  Parameters * param = Parameters::getInstance();
+  //param->printParameters();
+  /*
   using namespace cv;
   using namespace Magick;
   using namespace std;
@@ -49,6 +52,7 @@ int main(int argc, char ** argv){
 		     CV_FILLED );
       }
   imwrite("oopie.jpg", histImg);
+  */
 }
 
 void printLibraries(){
@@ -59,3 +63,5 @@ void printLibraries(){
   printf("Using Library: %s %d\n", "magick++", 1);
   printf("Using Library: %s %d\n", "opencv", 1);  
 }
+
+

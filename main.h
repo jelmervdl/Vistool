@@ -6,6 +6,9 @@
 #include "cv.h"
 #include "highgui.h"
 #include "jniKalooga.h"
+#include "parameters.h"
+
+
 void printLibraries();
 #endif
 
