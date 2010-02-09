@@ -57,6 +57,13 @@ void Parameters::printParameters(){
   }
 }
 
+float Parameters::getfParameter(string str){
+  return floatParameters[str];
+}
+int  Parameters::getiParameter(string str){
+  return intParameters[str];
+}
+
 void Parameters::readFile(char * str){
   XMLPlatformUtils::Initialize();
   XercesDOMParser* parser = new XercesDOMParser();

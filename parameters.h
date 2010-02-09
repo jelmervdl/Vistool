@@ -26,6 +26,8 @@ class Parameters{
   static Parameters * getInstance();
   void saveReal(string str, float f);
   void saveInteger(string str, int f);
+  float getfParameter(string str);
+  int  getiParameter(string str);
   ~Parameters();
   bool hasHistogram();
   bool hasParameters(string * reqParams, size_t n);

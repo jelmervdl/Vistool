@@ -6,6 +6,7 @@ Sources += gluiVisionTool.cpp
 Sources += jniKalooga.cpp
 Sources += fileManagement.cpp
 Sources += parameters.cpp
+Sources += featureExtractor.cpp
 #object
 Objects = $(Sources:.cpp=.o)
 Obj-c_Objects = $(Obj-c_Sources:.mm=.o)
