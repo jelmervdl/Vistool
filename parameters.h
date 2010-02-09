@@ -1,7 +1,6 @@
 #ifndef PARAMETERS_H
 #define PARAMETERS_H
 
-
 #define NO_PARAMETERS 100
 
 #include <iostream>
@@ -13,7 +12,6 @@
 #include <xercesc/sax/HandlerBase.hpp>
 #include <xercesc/util/XMLString.hpp>
 
-
 using namespace std;
 
 class Parameters{
@@ -21,11 +19,13 @@ class Parameters{
   static bool instanceFlag;
   static Parameters * singleton; 
   map<string, float> floatParameters;
+  map<string, int> intParameters;
   Parameters();
  public:
   void readFile(char * str);
   static Parameters * getInstance();
-  void save(string str, float f);
+  void saveReal(string str, float f);
+  void saveInteger(string str, int f);
   ~Parameters();
   bool hasHistogram();
   bool hasParameters(string * reqParams, size_t n);

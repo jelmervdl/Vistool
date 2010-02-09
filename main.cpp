@@ -1,10 +1,12 @@
 #include "main.h"
 
-
 using namespace xercesc;
 
 int main(int argc, char ** argv){
   Parameters * param = Parameters::getInstance();
+  param->readFile("parameters.xml");
+  param->printParameters();
+
   //param->printParameters();
   /*
   using namespace cv;
