@@ -2,18 +2,20 @@
 
 using namespace std;
 
-GLUI * glui;
-GLUI * classes;
+GLUI *glui;
+GLUI *classes;
 GLuint ctext;
 size_t ct_width;
 size_t ct_height;
 size_t window_width;
 size_t window_height;
 int main_window;
+vector<Category> *currentdb;
+
 
 // current texture identified + properties
 
-void start(int argc, char ** argv){
+void start(int argc, char **argv){
   glutInit(&argc, argv);
   printf("Starting up glut...\n");
   glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
@@ -50,19 +52,18 @@ void initGlui(){
 
 void loadDataset(){
   classes = GLUI_Master.create_glui( "classes", 0, 950, 250 );
-  list<Category> * db = new list<Category>();
+  currentdb= new vector<Category>();
   size_t c = 0;
   int aap = 0;
-  if(isDataset(askFile(),db)){
+  if(isDataset(askFile(),currentdb)){
     cout << "is dataset" << endl;
-    for(list<Category>::iterator it = db->begin();it != db->end(); ++it){
+    for(vector<Category>::iterator it = currentdb->begin();it != currentdb->end(); ++it){
       classes->add_checkbox((const char *)it->getName().c_str(), &aap, 1, (GLUI_Update_CB) loadPicture);
       c++;
       if(c%10==0)
 	classes->add_column(true);
     }
   }
-  free(db);
 }
 
 void display(void){
@@ -86,7 +87,7 @@ void display(void){
 }
 
 void initTextures(){
-  char * location; 
+  char *location; 
   location =  askFile();
   initTexture(main_window, &ctext, location, &ct_width, &ct_height);
 }
@@ -111,7 +112,7 @@ void loadPicture(){
   glutSetWindow(main_window);
   GLuint a;
   glGenTextures(1,&a);
-  char * location =  askFile();
+  char *location =  askFile();
   initTexture(main_window, &a, location, &ct_width, &ct_height);
   ctext = a;
 }

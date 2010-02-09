@@ -16,7 +16,6 @@ Cpp_Comp = g++
 #Linker
 Linker = $(Cpp_Comp)
 
-
 .SUFFIXES: .cpp
 
 all: $(Target) 

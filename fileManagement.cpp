@@ -3,18 +3,39 @@
 using namespace boost::filesystem;
 using namespace std;
 
-void printDatabase(list<Category> * db){
+void createTrainAndTestSet(vector<Category> * cats, vector<Sample> * samples, vector<string> * targets, float cut){
+  size_t currentClass = 0;
+  for(vector<Category>::iterator it = cats->begin(); it != cats->end(); ++it){
+    cout <<  "doing class: " << it->getName() << endl;
+    vector<string> files = it->file_list();
+    random_shuffle( files.begin(), files.end()); 
+    size_t icut = (size_t) (cut * files.size());
+    cout << "de cut is " << icut << "van de " << files.size() << endl;
+    size_t count = 0;
+    for(vector<string>::iterator it2 = files.begin(); it2 != files.end(); ++it2){
+      if(count < icut){
+	Sample s  = Sample(currentClass, *it2);
+	samples->push_back(s);
+      }else
+	targets->push_back(*it2);
+      count++;
+    }
+    currentClass++;
+  }
+}
+
+void printDatabase(vector<Category> * db){
   cout << "Database contains " << db->size() << " classes, including:\n";
-  for(list<Category>::iterator it = db->begin(); 
+  for(vector<Category>::iterator it = db->begin(); 
       it!=db->end(); ++it){
     cout << "\t" << it->getName() << endl;
-    list<string> f = it->file_list();
-    for(list<string>::iterator it2 = f.begin(); it2!=f.end(); ++it2)
+    vector<string> f = it->file_list();
+    for(vector<string>::iterator it2 = f.begin(); it2!=f.end(); ++it2)
       cout << "\t\t" << *it2 << endl;
   }
 }
 
-bool isDataset(string dir, list<Category> * classes){
+bool isDataset(string dir, vector<Category> * classes){
   path full_path =  system_complete(dir);
   directory_iterator end_itr;
   if(is_directory(full_path)){
@@ -36,7 +57,7 @@ bool isDataset(string dir, list<Category> * classes){
     }
     catch(...){
     }
-  for(list<Category>::iterator it = classes->begin(); 
+  for(vector<Category>::iterator it = classes->begin(); 
 	  it!=classes->end(); 
 	  ++it){
       }
@@ -65,7 +86,7 @@ Category::Category(string give_name){
     name = give_name;
 }
 
-list <string> Category::file_list(){
+vector <string> Category::file_list(){
   return files;
 }
 
@@ -78,4 +99,18 @@ void Category::add_file(string file){
 }
 size_t Category::size(){
   return files.size();
+}
+
+
+Sample::Sample(size_t cl, string loc){
+  sample_class = cl;
+  location = loc;
+}
+
+string Sample::getLocation(){
+  return location;
+}
+
+size_t Sample::getClass(){
+  return sample_class;
 }

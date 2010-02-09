@@ -7,6 +7,9 @@
 #include "highgui.h"
 #include "jniKalooga.h"
 #include "parameters.h"
+#include "featureExtractor.h"
+#include "fileManagement.h"
+#include <vector>
 
 
 void printLibraries();

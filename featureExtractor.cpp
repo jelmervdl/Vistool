@@ -41,4 +41,3 @@ vector<float> FeatureExtractor::extractHistogram(Mat * hsv){
       }
   return data;
 }
-
