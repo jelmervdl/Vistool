@@ -15,6 +15,8 @@ int main(int argc, char ** argv){
   vector<Sample> samples;
   vector<string> target;
   createTrainAndTestSet(&participating, &samples, &target, 0.8);
+  for(vector<Sample>::iterator it = samples.begin(); it != samples.end(); ++it)
+    cout << it->getClass() << it->getLocation() << "kalooooga" <<  endl;
 
   /*
   FeatureExtractor * f = new FeatureExtractor();

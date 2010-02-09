@@ -6,11 +6,9 @@ using namespace std;
 void createTrainAndTestSet(vector<Category> * cats, vector<Sample> * samples, vector<string> * targets, float cut){
   size_t currentClass = 0;
   for(vector<Category>::iterator it = cats->begin(); it != cats->end(); ++it){
-    cout <<  "doing class: " << it->getName() << endl;
     vector<string> files = it->file_list();
     random_shuffle( files.begin(), files.end()); 
     size_t icut = (size_t) (cut * files.size());
-    cout << "de cut is " << icut << "van de " << files.size() << endl;
     size_t count = 0;
     for(vector<string>::iterator it2 = files.begin(); it2 != files.end(); ++it2){
       if(count < icut){
