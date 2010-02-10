@@ -12,6 +12,7 @@ Sources += nnclassifier.cpp
 Sources += feature.cpp
 Sources += sample.cpp
 Sources += category.cpp
+Sources += descriptorWriter.cpp
 #object
 Objects = $(Sources:.cpp=.o)
 Obj-c_Objects = $(Obj-c_Sources:.mm=.o)
@@ -36,3 +37,5 @@ CLASSPATH = $(subst $(space),:, $(Java_Libs))
 CLASSPATH2 = $(subst $(space),:, $(Java_Objs))
 
 Java_Headers = src/imageHandling.h
+
+DescriptorLocation = desc/

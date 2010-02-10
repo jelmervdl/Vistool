@@ -2,22 +2,29 @@
 
 using namespace xercesc;
 int main(int argc, char ** argv){
+  
   Parameters * param = Parameters::getInstance();
   param->readFile((char *)"parameters.xml");
-  param->printParameters();
+
   vector<Category> cats;
   isDataset("/Users/mauricemulder/workspace/datasets/caltech101", &cats);
+
   vector<Category> participating;
   participating.push_back(cats.at(0));
   participating.push_back(cats.at(1));
   vector<Sample> samples;
   vector<string> target;
   createTrainAndTestSet(&participating, &samples, &target, 0.8);
-  NNClassifier * nncl = new NNClassifier();
-  nncl->trainOnSet(&samples);
-  delete nncl;
-  /*
+  FeatureExtractor *f  = new FeatureExtractor();
+  f->createAndSaveDescriptors(&participating);
+  delete f;
+  cout << "ok: " << DESCRIPTOR_LOCATION << endl;
+  */
+  //writing
+  
   FeatureExtractor * f = new FeatureExtractor();
+  
+  /*
   Image image("/Users/mauricemulder/workspace/datasets/caltech101/BACKGROUND_Google/image_0005.jpg");
   Blob blob;
   image.magick("BGR");
@@ -33,6 +40,7 @@ int main(int argc, char ** argv){
   free(f);
   free(param);
   */
+    
 }
 
 void printLibraries(){

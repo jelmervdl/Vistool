@@ -11,6 +11,8 @@
 #include "fileManagement.h"
 #include <vector>
 #include "nnclassifier.h"
+#include <fstream>
+#include "descriptorWriter.h"
 
 void printLibraries();
 #endif

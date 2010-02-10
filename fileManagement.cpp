@@ -79,3 +79,4 @@ bool is_image (boost::filesystem::path::string_type  string){
   }
   return false;
 }
+

@@ -5,6 +5,12 @@ using namespace std;
 using namespace cv;
 
 Feature FeatureExtractor::getFeatures(string location){
+  cout << "ok..." << endl;
+}
+
+void FeatureExtractor::createAndSaveDescriptors(vector<Category> * particip){
+  cout << "test" << endl;
+  
 }
 
 vector<float> FeatureExtractor::extractHistogram(Mat * hsv){
@@ -44,3 +50,4 @@ vector<float> FeatureExtractor::extractHistogram(Mat * hsv){
       }
   return data;
 }
+
