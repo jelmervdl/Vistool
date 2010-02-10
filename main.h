@@ -10,7 +10,7 @@
 #include "featureExtractor.h"
 #include "fileManagement.h"
 #include <vector>
-
+#include "nnclassifier.h"
 
 void printLibraries();
 #endif

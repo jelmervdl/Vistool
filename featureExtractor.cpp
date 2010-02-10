@@ -4,6 +4,9 @@ using namespace Magick;
 using namespace std;
 using namespace cv;
 
+Feature FeatureExtractor::getFeatures(string location){
+}
+
 vector<float> FeatureExtractor::extractHistogram(Mat * hsv){
   Parameters * p = Parameters::getInstance();
   if(!p->hasHistogram()){

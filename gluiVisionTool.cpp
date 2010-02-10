@@ -1,7 +1,6 @@
 #include "gluiVisionTool.h"
 
 using namespace std;
-
 GLUI *glui;
 GLUI *classes;
 GLuint ctext;

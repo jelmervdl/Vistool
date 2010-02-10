@@ -8,30 +8,10 @@
 #include <algorithm>
 #include <numeric>
 #include <iterator>
+#include "sample.h"
+#include "category.h"
 
 using namespace std;
-
-class Category{
- private:
-  string  name;
-  vector <string> files;
- public:
-  Category(string give_name);
-  size_t size();
-  string getName();
-  vector <string> file_list();
-  void add_file(string  file);
-};
-
-class Sample{
- private:
-  size_t sample_class;
-  string location;
- public:
-  Sample(size_t cl, string loc);
-  string getLocation();
-  size_t getClass();
-};
 
 void printDatabase(vector<Category> * db);
 bool is_image (string  str);

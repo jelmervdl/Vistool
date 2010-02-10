@@ -59,3 +59,8 @@ run: all
 java:
 	@echo "\nRunning: Java "
 	java -classpath $(CLASSPATH2) imageHandling $<
+
+check-syntax: 
+	$(MAKE) syntax-target SYNTAX="-fsyntax-only"
+
+syntax-target: $(Objects)

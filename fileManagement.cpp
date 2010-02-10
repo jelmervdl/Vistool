@@ -79,36 +79,3 @@ bool is_image (boost::filesystem::path::string_type  string){
   }
   return false;
 }
-
-Category::Category(string give_name){
-    name = give_name;
-}
-
-vector <string> Category::file_list(){
-  return files;
-}
-
-string Category::getName(){
-  return name;
-}
-
-void Category::add_file(string file){
-  files.push_back(file);
-}
-size_t Category::size(){
-  return files.size();
-}
-
-
-Sample::Sample(size_t cl, string loc){
-  sample_class = cl;
-  location = loc;
-}
-
-string Sample::getLocation(){
-  return location;
-}
-
-size_t Sample::getClass(){
-  return sample_class;
-}

@@ -1,12 +1,10 @@
 #include "main.h"
 
 using namespace xercesc;
-
 int main(int argc, char ** argv){
   Parameters * param = Parameters::getInstance();
   param->readFile((char *)"parameters.xml");
   param->printParameters();
-
   vector<Category> cats;
   isDataset("/Users/mauricemulder/workspace/datasets/caltech101", &cats);
   vector<Category> participating;
@@ -15,9 +13,9 @@ int main(int argc, char ** argv){
   vector<Sample> samples;
   vector<string> target;
   createTrainAndTestSet(&participating, &samples, &target, 0.8);
-  for(vector<Sample>::iterator it = samples.begin(); it != samples.end(); ++it)
-    cout << it->getClass() << it->getLocation() << "kalooooga" <<  endl;
-
+  NNClassifier * nncl = new NNClassifier();
+  nncl->trainOnSet(&samples);
+  delete nncl;
   /*
   FeatureExtractor * f = new FeatureExtractor();
   Image image("/Users/mauricemulder/workspace/datasets/caltech101/BACKGROUND_Google/image_0005.jpg");
