@@ -13,6 +13,8 @@
 #include "nnclassifier.h"
 #include <fstream>
 #include "descriptorWriter.h"
+#include "myImage.h"
+
 
 void printLibraries();
 #endif

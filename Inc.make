@@ -13,6 +13,7 @@ Sources += feature.cpp
 Sources += sample.cpp
 Sources += category.cpp
 Sources += descriptorWriter.cpp
+Sources += myImage.cpp
 #object
 Objects = $(Sources:.cpp=.o)
 Obj-c_Objects = $(Obj-c_Sources:.mm=.o)

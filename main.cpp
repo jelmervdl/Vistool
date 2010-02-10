@@ -2,7 +2,9 @@
 
 using namespace xercesc;
 int main(int argc, char ** argv){
-  
+  MyImage my("/Users/mauricemulder/workspace/datasets/caltech101/BACKGROUND_Google/image_0005.jpg");
+  Mat * m = my.getOpenCVMat();
+  /*
   Parameters * param = Parameters::getInstance();
   param->readFile((char *)"parameters.xml");
 
@@ -15,15 +17,12 @@ int main(int argc, char ** argv){
   vector<Sample> samples;
   vector<string> target;
   createTrainAndTestSet(&participating, &samples, &target, 0.8);
+
   FeatureExtractor *f  = new FeatureExtractor();
   f->createAndSaveDescriptors(&participating);
   delete f;
-  cout << "ok: " << DESCRIPTOR_LOCATION << endl;
   */
-  //writing
-  
-  FeatureExtractor * f = new FeatureExtractor();
-  
+    
   /*
   Image image("/Users/mauricemulder/workspace/datasets/caltech101/BACKGROUND_Google/image_0005.jpg");
   Blob blob;
