@@ -16,6 +16,7 @@ string MyImage::getLocation(){
   return location;
 }
 
+
 Mat* MyImage::getOpenCVMat(){
   if(mat == NULL)  {
     Mat orig;
@@ -23,12 +24,12 @@ Mat* MyImage::getOpenCVMat(){
     magick->magick("BGR");
     Blob blb ;
     magick->write(&blb);
+    mat = new Mat();
     orig = Mat(image->size().height(),
 	       image->size().width(), 
 	       CV_8UC3, 
 	       (void *) blb.data());
-    mat = new Mat();
-    cvtColor(orig, *mat, CV_BGR2HSV);
+    cvtColor(orig, *mat, CV_RGB2HSV);
     magick->magick("RGB");
   }
   return mat;
