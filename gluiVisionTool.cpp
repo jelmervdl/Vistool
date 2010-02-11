@@ -11,9 +11,6 @@ size_t window_height;
 int main_window;
 vector<Category> *currentdb;
 
-
-// current texture identified + properties
-
 void start(int argc, char **argv){
   glutInit(&argc, argv);
   printf("Starting up glut...\n");
@@ -51,7 +48,7 @@ void initGlui(){
 
 void loadDataset(){
   classes = GLUI_Master.create_glui( "classes", 0, 950, 250 );
-  currentdb= new vector<Category>();
+  currentdb = new vector<Category>();
   size_t c = 0;
   int aap = 0;
   if(isDataset(askFile(),currentdb)){

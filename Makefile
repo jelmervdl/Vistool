@@ -48,13 +48,20 @@ $(Target): $(Java_Objects) $(Java_Headers) $(Objects) $(Obj-c_Objects)
 
 #Clean
 clean:
-	@echo "\nRemoving: all objects"
-	rm -f $(Objects) $(Obj-c_Objects) $(Java_Headers) $(Java_Objects)
+	@echo "\nRemoving: all c++ objects "
+	rm -f $(Objects) 
+
+cleanall: clean
+	@echo "\nRemoving: descriptors "
+	rm -r $(DescriptorLocation)*
+	@echo "\nRemoving: support files "
+	rm $(Obj-c_Objects) $(Java_Headers) $(Java_Objects)
 
 #Run
 run: all
 	@echo "\nRunning: main application:"
 	./$(Target)
+	@echo "Program ended."
 
 #Run java
 java:

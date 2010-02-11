@@ -9,7 +9,6 @@ Sources += parameters.cpp
 Sources += featureExtractor.cpp
 Sources += classifier.cpp
 Sources += nnclassifier.cpp
-Sources += feature.cpp
 Sources += sample.cpp
 Sources += category.cpp
 Sources += descriptorWriter.cpp

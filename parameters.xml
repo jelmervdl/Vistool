@@ -6,7 +6,7 @@
     <sbins>30.5</sbins>
   </real>
   <integer>
-    <hbins> 30 </hbins>
-    <sbins> 30 </sbins>
+    <hbins> 50 </hbins>
+    <sbins> 50 </sbins>
   </integer>
 </parameters>

@@ -5,9 +5,6 @@ using namespace std;
 using namespace cv;
 using namespace boost::filesystem;
 
-Feature FeatureExtractor::getFeatures(string location){
-  cout << "ok..." << endl;
-}
 
 void FeatureExtractor::createAndSaveDescriptors(vector<Category> * particip){
   cout << "Extracting Features..." << endl;
@@ -23,11 +20,11 @@ void FeatureExtractor::createAndSaveDescriptors(vector<Category> * particip){
     if(!is_directory(p))
       create_directory(p);
     for(vector<string>::iterator file = files.begin(); file != files.end(); ++file ){
-      cout << aap+name+"/"+*file << endl; 
       MyImage image(root+"/"+*file);
       vector<float> features = extractHistogram(&image);
       writeDescriptor(&features, aap+name+"/"+*file+".desc");
     }
+    cout << "done!" << endl;
   }
 }
 
