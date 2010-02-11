@@ -14,7 +14,7 @@
 #include <fstream>
 #include "descriptorWriter.h"
 #include "myImage.h"
-
+#include "dataset.h"
 
 void printLibraries();
 #endif

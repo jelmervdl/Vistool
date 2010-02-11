@@ -3,7 +3,18 @@
 using namespace boost::filesystem;
 using namespace std;
 
-void createTrainAndTestSet(vector<Category> * cats, vector<Sample> * samples, vector<string> * targets, float cut){
+bool is_image (boost::filesystem::path::string_type  string){
+  if(string == ".png"){
+    return true;
+  }
+  if(string == ".jpg"){
+    return true;
+  }
+  return false;
+}
+
+/*
+void createTrainAndTestSet(vector<Category> * cats, vector<DataPoint> * samples, float cut){
   size_t currentClass = 0;
   for(vector<Category>::iterator it = cats->begin(); it != cats->end(); ++it){
     vector<string> files = it->file_list();
@@ -22,21 +33,24 @@ void createTrainAndTestSet(vector<Category> * cats, vector<Sample> * samples, ve
   }
 }
 
+
 void printDatabase(vector<Category> * db){
   cout << "Database contains " << db->size() << " classes, including:\n";
   for(vector<Category>::iterator it = db->begin(); 
       it!=db->end(); ++it){
     cout << "\t" << it->getName() << endl;
-    vector<string> f = it->file_list();
-    for(vector<string>::iterator it2 = f.begin(); it2!=f.end(); ++it2)
-      cout << "\t\t" << *it2 << endl;
+    vector<DataPoint> f = it->getDataPoints();
+    for(vector<DataPoint>::iterator it2 = f.begin(); it2!=f.end(); ++it2)
+      cout << "\t\t" << it2->getImageURL() << endl;
   }
 }
 
-bool isDataset(string dir, vector<Category> * classes){
+
+bool isDataset(string dir, Dataset * classes){
   path full_path =  system_complete(dir);
   directory_iterator end_itr;
   if(is_directory(full_path)){
+    classes->setRoot(dir);
     try{
       for ( directory_iterator itr( full_path ); itr != end_itr;++itr ){
 	if(is_directory(itr->path())){
@@ -44,12 +58,13 @@ bool isDataset(string dir, vector<Category> * classes){
 			  (string) itr->path().file_string().c_str());
 	  for ( directory_iterator sitr(itr->path()); sitr != end_itr; ++sitr){
 	    if(is_image((string)sitr->path().extension())){
-	      newcat.add_file(sitr->path().filename().c_str());
+	      DataPoint n (sitr->path().filename().c_str());
+	      newcat.addDataPoint(n);
 	    }
 	  }  
 	  Category newcat2 = newcat;
 	  if(newcat.size() > 10){
-	    classes->push_back(newcat);
+	    classes->addCategory(newcat);
 	  }
 	}
       }
@@ -70,14 +85,4 @@ bool isDataset(string dir, vector<Category> * classes){
   else
     return 0;
 }
-
-bool is_image (boost::filesystem::path::string_type  string){
-  if(string == ".png"){
-    return true;
-  }
-  if(string == ".jpg"){
-    return true;
-  }
-  return false;
-}
-
+*/

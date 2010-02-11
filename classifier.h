@@ -2,7 +2,7 @@
 #define CLASSIFIER_H
 
 #include <vector>
-#include "sample.h"
+#include "dataPoint.h"
 #include <iostream>
 #include "featureExtractor.h"
 
@@ -12,7 +12,7 @@ class Classifier{
  public:
   virtual void train(vector<string> * files)=0;
   virtual int  classify(vector<float>  *points)=0;
-  void trainOnSet(vector<Sample> * samples);
+  void trainOnSet(vector<DataPoint> * data_points);
 };
 
 

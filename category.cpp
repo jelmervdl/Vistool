@@ -5,19 +5,19 @@ Category::Category(string give_name, string rt){
     root = rt;
 }
 
-vector <string> Category::file_list(){
-  return files;
+vector <DataPoint> Category::getDataPoints(){
+  return data_points;
 }
 
 string Category::getName(){
   return name;
 }
 
-void Category::add_file(string file){
-  files.push_back(file);
+void Category::addDataPoint(DataPoint dp){
+  data_points.push_back(dp);
 }
 size_t Category::size(){
-  return files.size();
+  return data_points.size();
 }
 
 string Category::getRoot(){

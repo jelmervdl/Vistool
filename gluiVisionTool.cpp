@@ -47,6 +47,7 @@ void initGlui(){
 }
 
 void loadDataset(){
+  /*
   classes = GLUI_Master.create_glui( "classes", 0, 950, 250 );
   currentdb = new vector<Category>();
   size_t c = 0;
@@ -60,6 +61,7 @@ void loadDataset(){
 	classes->add_column(true);
     }
   }
+  */
 }
 
 void display(void){

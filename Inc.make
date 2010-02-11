@@ -1,6 +1,8 @@
 # main
 Sources = main.cpp 
 Obj-c_Sources = fd.mm
+Sources += dataPoint.cpp
+Sources += dataset.cpp
 Sources += glTexture.cpp
 Sources += gluiVisionTool.cpp
 Sources += jniKalooga.cpp
@@ -9,7 +11,6 @@ Sources += parameters.cpp
 Sources += featureExtractor.cpp
 Sources += classifier.cpp
 Sources += nnclassifier.cpp
-Sources += sample.cpp
 Sources += category.cpp
 Sources += descriptorWriter.cpp
 Sources += myImage.cpp

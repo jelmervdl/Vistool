@@ -4,22 +4,12 @@ using namespace xercesc;
 int main(int argc, char ** argv){
   Parameters * param = Parameters::getInstance();
   param->readFile((char *)"parameters.xml");
+  Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
+  dset.enableCategory("airplanes");
+  dset.enableCategory("accordion");
+  dset.print();
 
-  vector<Category> cats;
-  isDataset("/Users/mauricemulder/workspace/datasets/caltech101", &cats);
 
-  vector<Category> participating;
-  participating.push_back(cats.at(0));
-  participating.push_back(cats.at(1));
-  vector<Sample> samples;
-  vector<string> target;
-  createTrainAndTestSet(&participating, &samples, &target, 0.8);
-
-  FeatureExtractor *f  = new FeatureExtractor();
-  f->createAndSaveDescriptors(&participating);
-  delete f;
-  
-    
   /*
   Image image("/Users/mauricemulder/workspace/datasets/caltech101/BACKGROUND_Google/image_0005.jpg");
   Blob blob;

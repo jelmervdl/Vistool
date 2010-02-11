@@ -3,20 +3,21 @@
 
 #include <string>
 #include <vector>
+#include"dataPoint.h"
 
 using namespace std;
 
 class Category{
  private:
-  string  name;
+  string name;
   string root;
-  vector <string> files;
+  vector <DataPoint> data_points;
  public:
   Category(string give_name, string root);
   string getRoot();
   size_t size();
   string getName();
-  vector <string> file_list();
-  void add_file(string  file);
+  vector <DataPoint> getDataPoints();
+  void addDataPoint(DataPoint dp);
 };
 #endif

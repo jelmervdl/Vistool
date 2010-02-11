@@ -8,15 +8,15 @@
 #include <algorithm>
 #include <numeric>
 #include <iterator>
-#include "sample.h"
+#include "dataPoint.h"
 #include "category.h"
 
 using namespace std;
 
-void printDatabase(vector<Category> * db);
+//void printDatabase(vector<Category> * db);
 bool is_image (string  str);
-bool isDataset(string dir, vector<Category> * classes);
-void createTrainAndTestSet(vector<Category> * cats, vector<Sample> * samples, vector<string> * targets, float cut);
+//bool isDataset(string dir, vector<Category> * classes);
+//void createTrainAndTestSet(vector<Category> * cats, vector<DataPoint> * samples, float cut);
 
 
 

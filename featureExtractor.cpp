@@ -5,27 +5,30 @@ using namespace std;
 using namespace cv;
 using namespace boost::filesystem;
 
-
-void FeatureExtractor::createAndSaveDescriptors(vector<Category> * particip){
+vector<string> FeatureExtractor::createAndSaveDescriptors(vector<Category> * particip){
   cout << "Extracting Features..." << endl;
+  vector<string> descriptorFiles;
   for(vector<Category>::iterator category = particip->begin();
 	category != particip->end();
 	++category){
     string name = category->getName();
     cout << "class: " << name << endl;
-    vector<string> files = category->file_list();
+    vector<DataPoint> files = category->getDataPoints();
     string root = category->getRoot();
     string aap = DESCRIPTOR_LOCATION;
     path p = complete(path(aap+name, native));
     if(!is_directory(p))
       create_directory(p);
-    for(vector<string>::iterator file = files.begin(); file != files.end(); ++file ){
-      MyImage image(root+"/"+*file);
+    for(vector<DataPoint>::iterator file = files.begin(); file != files.end(); ++file ){
+      MyImage image(root+"/"+file->getImageURL());
       vector<float> features = extractHistogram(&image);
-      writeDescriptor(&features, aap+name+"/"+*file+".desc");
+      string descpath = aap+name+"/"+file->getImageURL()+".desc";
+      writeDescriptor(&features,descpath);
+      descriptorFiles.push_back(descpath);
     }
-    cout << "done!" << endl;
+    cout << "done!" << endl;  
   }
+  return descriptorFiles;
 }
 
 vector<float> FeatureExtractor::extractHistogram(MyImage * image){
