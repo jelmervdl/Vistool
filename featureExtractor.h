@@ -12,6 +12,10 @@
 #include "highgui.h"
 #include "feature.h"
 #include "category.h"
+#include "myImage.h"
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/fstream.hpp>
+#include "descriptorWriter.h"
 
 using namespace cv;
 using namespace Magick;
@@ -20,7 +24,7 @@ class FeatureExtractor{
  public:
   void createAndSaveDescriptors();
   Feature getFeatures(string location);
-  vector<float> extractHistogram(Mat * mat);
+  vector<float> extractHistogram(MyImage *image);
   void createAndSaveDescriptors(vector<Category> * particip);
 };
 

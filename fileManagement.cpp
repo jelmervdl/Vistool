@@ -40,10 +40,11 @@ bool isDataset(string dir, vector<Category> * classes){
     try{
       for ( directory_iterator itr( full_path ); itr != end_itr;++itr ){
 	if(is_directory(itr->path())){
-	  Category newcat((string) itr->path().filename().c_str());
+	  Category newcat((string) itr->path().filename().c_str(),
+			  (string) itr->path().file_string().c_str());
 	  for ( directory_iterator sitr(itr->path()); sitr != end_itr; ++sitr){
 	    if(is_image((string)sitr->path().extension())){
-	      newcat.add_file(sitr->path().file_string().c_str());
+	      newcat.add_file(sitr->path().filename().c_str());
 	    }
 	  }  
 	  Category newcat2 = newcat;

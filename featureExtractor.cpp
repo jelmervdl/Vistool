@@ -3,17 +3,36 @@
 using namespace Magick;
 using namespace std;
 using namespace cv;
+using namespace boost::filesystem;
 
 Feature FeatureExtractor::getFeatures(string location){
   cout << "ok..." << endl;
 }
 
 void FeatureExtractor::createAndSaveDescriptors(vector<Category> * particip){
-  cout << "test" << endl;
-  
+  cout << "Extracting Features..." << endl;
+  for(vector<Category>::iterator category = particip->begin();
+	category != particip->end();
+	++category){
+    string name = category->getName();
+    cout << "class: " << name << endl;
+    vector<string> files = category->file_list();
+    string root = category->getRoot();
+    string aap = DESCRIPTOR_LOCATION;
+    path p = complete(path(aap+name, native));
+    if(!is_directory(p))
+      create_directory(p);
+    for(vector<string>::iterator file = files.begin(); file != files.end(); ++file ){
+      cout << aap+name+"/"+*file << endl; 
+      MyImage image(root+"/"+*file);
+      vector<float> features = extractHistogram(&image);
+      writeDescriptor(&features, aap+name+"/"+*file+".desc");
+    }
+  }
 }
 
-vector<float> FeatureExtractor::extractHistogram(Mat * hsv){
+vector<float> FeatureExtractor::extractHistogram(MyImage * image){
+  Mat * hsv = image->getOpenCVMat();
   Parameters * p = Parameters::getInstance();
   if(!p->hasHistogram()){
     throw NO_PARAMETERS;

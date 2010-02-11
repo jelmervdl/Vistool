@@ -9,9 +9,11 @@ using namespace std;
 class Category{
  private:
   string  name;
+  string root;
   vector <string> files;
  public:
-  Category(string give_name);
+  Category(string give_name, string root);
+  string getRoot();
   size_t size();
   string getName();
   vector <string> file_list();
