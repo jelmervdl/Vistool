@@ -26,3 +26,19 @@ void initTexture(int window, GLuint * texName, string filename, size_t * twidth,
 	       GL_RGBA, GL_UNSIGNED_BYTE, blob.data());
   glDisable(GL_TEXTURE_2D);
 }
+
+void  drawTexture(GLuint texName, int twidth, int theight) {
+  glEnable(GL_TEXTURE_2D); 
+  glBindTexture(GL_TEXTURE_2D, texName); 
+  glBegin(GL_QUADS);
+  glTexCoord2f(1.0f, 1.0f);
+  glVertex2f(0 + twidth, 0 + theight);
+  glTexCoord2f(1.0f, 0.0f);
+  glVertex2f(0 + twidth, 0);
+  glTexCoord2f(0.0f, 0.0f);
+  glVertex2f(0, 0);
+  glTexCoord2f(0.0f, 1.0f);
+  glVertex2f(0, 0 + theight);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+}

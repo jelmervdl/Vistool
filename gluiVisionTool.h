@@ -10,14 +10,15 @@
 #include "fd.h"
 #include "glTexture.h"
 #include "fileManagement.h"
+#include "dataset.h"
 
-void loadPicture();
+void test();
 void loadDataset();
+void loadPicture();
+void initTextures();
 void initGlui();
 void display(void);
 void start(int argc, char ** argv);
-void initTextures();
-void drawTexture(GLuint texName, int twidth, int theight);
 void myGlutIdle( void );
 
 #endif

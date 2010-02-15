@@ -17,7 +17,6 @@ using namespace std;
 
 class Dataset{
  private:
-  vector<bool> mask;
   vector<Category> categories;
   string root;
  public:
@@ -27,10 +26,12 @@ class Dataset{
   void enableCategory(size_t i);
   void enableCategory(string str);
 
-  vector<Category> getCategories();
+  vector<Category> * getCategories();
   string getRoot();
+  vector<Category> getEnabled();
 
   void print();
+  void printEnabled();
 
   Dataset(string rt);
 };

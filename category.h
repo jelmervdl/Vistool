@@ -10,9 +10,11 @@ using namespace std;
 class Category{
  private:
   string name;
-  string root;
   vector <DataPoint> data_points;
+  string root; 
+  int enabled; 
  public:
+  int * getEnabled();
   Category(string give_name, string root);
   string getRoot();
   size_t size();

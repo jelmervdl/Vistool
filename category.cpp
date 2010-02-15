@@ -1,8 +1,11 @@
 #include "category.h"
 
-Category::Category(string give_name, string rt){
-    name = give_name;
-    root = rt;
+int * Category::getEnabled(){
+  return &enabled;
+}
+
+Category::Category(string give_name, string rt): 
+  name(give_name), root(rt), enabled(0){
 }
 
 vector <DataPoint> Category::getDataPoints(){

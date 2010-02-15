@@ -2,6 +2,9 @@
 
 using namespace xercesc;
 int main(int argc, char ** argv){
+  start(argc, argv);
+  /*
+
   Parameters * param = Parameters::getInstance();
   param->readFile((char *)"parameters.xml");
   Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
@@ -9,8 +12,6 @@ int main(int argc, char ** argv){
   dset.enableCategory("accordion");
   dset.print();
 
-
-  /*
   Image image("/Users/mauricemulder/workspace/datasets/caltech101/BACKGROUND_Google/image_0005.jpg");
   Blob blob;
   image.magick("BGR");

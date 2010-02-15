@@ -7,8 +7,8 @@ string Dataset::getRoot(){
   return root;
 }
 
-vector<Category> Dataset::getCategories(){
-  return categories;
+vector<Category> * Dataset::getCategories(){
+  return &categories;
 }
 
 void Dataset::addCategory(Category cat){
@@ -40,7 +40,6 @@ Dataset::Dataset(string str): root(str){
     catch(...){
     }
   } 
-  mask.resize(categories.size());
 }
 
 void Dataset::setRoot(string str){
@@ -48,26 +47,27 @@ void Dataset::setRoot(string str){
 }
 
 void Dataset::enableCategory(size_t i){
-  mask.at(i) = 1;
+  *categories.at(i).getEnabled() = 1;
 }
 void Dataset::enableCategory(string str){
   for(size_t i = 0; i < categories.size(); ++i)
     if(categories.at(i).getName().compare(str)==0)
-      mask.at(i) = true;
+      *categories.at(i).getEnabled() = true;
 }
 
 void Dataset::print(){
   cout << "Database contains " << categories.size() << " classes" << endl << endl;
   cout << "Enabled Classes: " << endl;
   for(size_t i = 0; i < categories.size(); ++i)
-    if(mask.at(i))
+    if(*categories.at(i).getEnabled())
       cout << categories.at(i).getName() << endl;
   cout << endl;
 }
 
-void Dataset::train(){
+vector<Category> Dataset::getEnabled(){
+  vector<Category> enabled;
   for(size_t i = 0; i < categories.size(); ++i)
-    if(mask.at(i)){
-      
-    }
+    if(*categories.at(i).getEnabled())
+      enabled.push_back(categories.at(i));
+  return enabled;
 }
