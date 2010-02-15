@@ -4,8 +4,8 @@ int * Category::getEnabled(){
   return &enabled;
 }
 
-Category::Category(string give_name, string rt): 
-  name(give_name), root(rt), enabled(0){
+Category::Category(string give_name, string rt, size_t lab): 
+  name(give_name), root(rt), enabled(0), label(lab){
 }
 
 vector <DataPoint> Category::getDataPoints(){

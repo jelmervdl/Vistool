@@ -9,14 +9,14 @@ class DataPoint{
  private:
   int label;
   string image_url;
+  string filename;
   string descriptor_url;
  public:
-  DataPoint(size_t lab, string url);
-  DataPoint(string url);
+  DataPoint(size_t lab, string filename, string url, string descriptor);
   void setDescriptorURL(string url);
-  string getImageURL();
+  string getFileName();
   string getDescriptorURL();
-  bool hasDescriptor();
+  string getImageURL();
   size_t getLabel();
 };
 

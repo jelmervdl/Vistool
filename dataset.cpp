@@ -18,21 +18,28 @@ void Dataset::addCategory(Category cat){
 Dataset::Dataset(string str): root(str){
   path full_path =  system_complete(root);
   directory_iterator end_itr;
+  size_t label = 0;
   if(is_directory(full_path)){
     try{
       for (directory_iterator itr( full_path ); itr != end_itr;++itr ){
 	if(is_directory(itr->path())){
-	  Category newcat((string) itr->path().filename().c_str(),
-			  (string) itr->path().file_string().c_str());
+	  string root, descriptor, catname;
+	  root = (string) itr->path().file_string().c_str();
+	  catname = (string) itr->path().filename().c_str();
+	  Category newcat(catname, root, label);
 	  for ( directory_iterator sitr(itr->path()); sitr != end_itr; ++sitr){
 	    if(is_image((string)sitr->path().extension())){
-	      DataPoint n (sitr->path().filename().c_str());
+	      string filename = (string) sitr->path().filename().c_str();
+	      string fileurl = (string) sitr->path().file_string().c_str();
+	      string descriptor = DESCRIPTOR_LOCATION+catname+"/"+filename+".desc";
+	      DataPoint n (label, filename, fileurl, descriptor);
 	      newcat.addDataPoint(n);
 	    }
 	  }  
 	  Category newcat2 = newcat;
 	  if(newcat.size() > 10){
 	    addCategory(newcat);
+	    label++;
 	  }
 	}
       }

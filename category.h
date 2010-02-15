@@ -9,13 +9,15 @@ using namespace std;
 
 class Category{
  private:
+  
   string name;
   vector <DataPoint> data_points;
   string root; 
   int enabled; 
+  size_t label;
  public:
   int * getEnabled();
-  Category(string give_name, string root);
+  Category(string give_name, string root, size_t lab);
   string getRoot();
   size_t size();
   string getName();

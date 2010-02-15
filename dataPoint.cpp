@@ -1,12 +1,9 @@
 #include "dataPoint.h"
 
-DataPoint::DataPoint(size_t lab, string url):
-  label(lab),image_url(url){
+DataPoint::DataPoint(size_t lab, string fname, string url, string descriptor):
+  label(lab),image_url(url),filename(fname),descriptor_url(descriptor){
 }
 
-DataPoint::DataPoint(string url):
-  label(-1), image_url(url){
-}
 
 void DataPoint::setDescriptorURL(string url){
   descriptor_url = url;
@@ -20,10 +17,11 @@ string DataPoint::getDescriptorURL(){
   return descriptor_url;
 }
 
-bool DataPoint::hasDescriptor(){
-  return true;
-  //TODO implement this stub
-}
+
 size_t DataPoint::getLabel(){
   return label;
+}
+
+string DataPoint::getFileName(){
+  return filename;
 }

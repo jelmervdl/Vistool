@@ -20,46 +20,30 @@ void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
     if(!is_directory(p))
       create_directory(p);
     for(vector<DataPoint>::iterator file = files.begin(); file != files.end(); ++file ){
+      renewDescriptor(&*file);
+      /*
       string imURL = root+"/"+file->getImageURL();
       string descpath = aap+name+"/"+file->getImageURL()+".desc";
       if(!exists(path(descpath)) || 
 	 last_write_time(parameters) < last_write_time(path(imURL))){
-	cout <<"writing descriptor file" << endl << last_write_time(parameters) << 
-	  endl << last_write_time(path(imURL)) << endl;
 	MyImage image(root+"/"+file->getImageURL());
 	vector<float> features = extractHistogram(&image);
 	writeDescriptor(&features,descpath);
 	file->setDescriptorURL(descpath);
-      } else cout << "descriptor already exists and up to date..." << endl;
+      } 
+      */
     }
   }
 }
 
-vector<string> FeatureExtractor::createAndSaveDescriptors(vector<Category> * particip){
-  cout << "Extracting Features..." << endl;
-  vector<string> descriptorFiles;
-  for(vector<Category>::iterator category = particip->begin();
-	category != particip->end();
-	++category){
-    string name = category->getName();
-    cout << "class: " << name << endl;
-    vector<DataPoint> files = category->getDataPoints();
-    string root = category->getRoot();
-    string aap = DESCRIPTOR_LOCATION;
-    path p = complete(path(aap+name, native));
-    if(!is_directory(p))
-      create_directory(p);
-    cout << last_write_time(p) << "aaah";
-    for(vector<DataPoint>::iterator file = files.begin(); file != files.end(); ++file ){
-      MyImage image(root+"/"+file->getImageURL());
-      vector<float> features = extractHistogram(&image);
-      string descpath = aap+name+"/"+file->getImageURL()+".desc";
-      writeDescriptor(&features,descpath);
-      descriptorFiles.push_back(descpath);
-    }
-    cout << "done!" << endl;  
-  }
-  return descriptorFiles;
+void FeatureExtractor::renewDescriptor(DataPoint * dp){
+  path parameters = complete(path(Parameters::getInstance()->getFile()));
+  if(!exists(path(dp->getDescriptorURL())) || 
+     last_write_time(parameters) < last_write_time(path(dp->getImageURL()))){
+    MyImage image(dp->getImageURL());
+    vector<float> features = extractHistogram(&image);
+    writeDescriptor(&features,dp->getDescriptorURL());
+  } 
 }
 
 vector<float> FeatureExtractor::extractHistogram(MyImage * image){

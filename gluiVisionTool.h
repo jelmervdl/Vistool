@@ -15,12 +15,15 @@
 
 void extractFeatures();
 void test();
-void loadDataset();
+void askDataset();
 void loadPicture();
 void initTextures();
 void initGlui();
 void display(void);
 void start(int argc, char ** argv);
 void myGlutIdle( void );
+void loadDataset(string location);
+void loadCaltech();
+
 
 #endif

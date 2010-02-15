@@ -25,6 +25,7 @@ class FeatureExtractor{
   void saveDescriptorsToFile(Dataset * ds);
   vector<string> createAndSaveDescriptors(vector<Category> * particip);
   vector<float> extractHistogram(MyImage *image);
+  void renewDescriptor(DataPoint * db);
 };
 
 #endif

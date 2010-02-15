@@ -1,7 +1,8 @@
 #include "gluiVisionTool.h"
 
-using namespace std;
 
+using namespace std;
+GLUI_StaticText *txt;
 GLUI *glui;
 GLUI *classes;
 GLuint ctext;
@@ -36,9 +37,12 @@ void start(int argc, char **argv){
   glutMainLoop();
 }
 
-void loadDataset(){
+void askDataset(){
+  loadDataset(askFile());
+}
+
+void loadDataset(string location){
   classes = GLUI_Master.create_glui( "classes", 0, 950, 250 );
-  char * location = askFile();
   currentdb = new Dataset(location);
   vector<Category> * cats = currentdb->getCategories();
   size_t c = 0;
@@ -59,8 +63,11 @@ void loadDataset(){
 }
 
 void extractFeatures(){
+  txt->set_text("extracting...");
+  glutPostRedisplay();
   FeatureExtractor f;
   f.saveDescriptorsToFile(currentdb);
+  txt->set_text("done");
 }
 
 void test(){
@@ -115,9 +122,15 @@ void myGlutIdle( void )
 void initGlui(){
   glui = GLUI_Master.create_glui( "Control", 0, 950, 50 );
   glui->add_statictext( "Vision Tool" ); 
+  txt = glui->add_statictext( "waiting" ); 
   glui->add_button( "Quit", 0,(GLUI_Update_CB)exit );
   glui->add_button( "Load Picture", 0, (GLUI_Update_CB)loadPicture );
-  glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)loadDataset );
+  glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)askDataset );
+  glui->add_button( "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
   glui->set_main_gfx_window(main_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
+}
+
+void loadCaltech(){
+  loadDataset("/Users/mauricemulder/workspace/datasets/caltech101/");
 }
