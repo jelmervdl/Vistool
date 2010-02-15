@@ -21,8 +21,10 @@ class Parameters{
   map<string, float> floatParameters;
   map<string, int> intParameters;
   Parameters();
+  string file;
  public:
   void readFile(char * str);
+  string getFile();
   static Parameters * getInstance();
   void saveReal(string str, float f);
   void saveInteger(string str, int f);

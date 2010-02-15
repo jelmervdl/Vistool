@@ -64,7 +64,12 @@ int  Parameters::getiParameter(string str){
   return intParameters[str];
 }
 
+string Parameters::getFile(){
+  return file;
+}
+
 void Parameters::readFile(char * str){
+  file = str;
   XMLPlatformUtils::Initialize();
   XercesDOMParser* parser = new XercesDOMParser();
   parser->setValidationScheme(XercesDOMParser::Val_Always);

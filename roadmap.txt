@@ -1,5 +1,11 @@
-Histogram Features
-KNN
-Fix da buttons!
-Fix da display.
+Histogram Featuresdone
+Fix da buttons! done
+Fix da display. done
+
+
+loading from file
+KNN 
 LibSVN
+Fix error handling.
+Sift features
+
