@@ -13,6 +13,7 @@ class DataPoint{
  public:
   DataPoint(size_t lab, string url);
   DataPoint(string url);
+  void setDescriptorURL(string url);
   string getImageURL();
   string getDescriptorURL();
   bool hasDescriptor();

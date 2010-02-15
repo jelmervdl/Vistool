@@ -2,6 +2,8 @@
 
 using namespace xercesc;
 int main(int argc, char ** argv){
+  Parameters * p = Parameters::getInstance();
+  p->readFile((char *) "parameters.xml");
   start(argc, argv);
   /*
 

@@ -44,7 +44,7 @@ void loadDataset(){
   vector<Category> * cats = currentdb->getCategories();
   size_t c = 0;
   classes->add_button( "Print Enabled", 0, (GLUI_Update_CB)test );
-  classes->add_button( "Extract Descriptors", 0, (GLUI_Update_CB)NULL );
+  classes->add_button( "Extract Descriptors", 0, (GLUI_Update_CB)extractFeatures );
   classes->add_column(true);
   if(currentdb != NULL){
     for(size_t i = 0; i < cats->size(); ++i){
@@ -58,6 +58,11 @@ void loadDataset(){
     }
 
   }
+}
+
+void extractFeatures(){
+  FeatureExtractor f;
+  f.saveDescriptorsToFile(currentdb);
 }
 
 void test(){

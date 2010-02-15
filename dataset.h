@@ -19,6 +19,7 @@ class Dataset{
  private:
   vector<Category> categories;
   string root;
+  vector<string> descriptorFiles;
  public:
   void setRoot(string str);
   void addCategory(Category cat);

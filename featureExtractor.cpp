@@ -5,6 +5,28 @@ using namespace std;
 using namespace cv;
 using namespace boost::filesystem;
 
+void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
+  vector<Category> enabled= ds->getEnabled();
+  for(vector<Category>::iterator category = enabled.begin();
+      category != enabled.end();
+      ++category){
+    string name = category->getName();
+    vector<DataPoint> files = category->getDataPoints();
+    string root = category->getRoot();
+    string aap = DESCRIPTOR_LOCATION;
+    path p = complete(path(aap+name, native));
+    if(!is_directory(p))
+      create_directory(p);
+    for(vector<DataPoint>::iterator file = files.begin(); file != files.end(); ++file ){
+      MyImage image(root+"/"+file->getImageURL());
+      vector<float> features = extractHistogram(&image);
+      string descpath = aap+name+"/"+file->getImageURL()+".desc";
+      writeDescriptor(&features,descpath);
+      file->setDescriptorURL(descpath);
+    }
+  }
+}
+
 vector<string> FeatureExtractor::createAndSaveDescriptors(vector<Category> * particip){
   cout << "Extracting Features..." << endl;
   vector<string> descriptorFiles;
@@ -35,6 +57,7 @@ vector<float> FeatureExtractor::extractHistogram(MyImage * image){
   Mat * hsv = image->getOpenCVMat();
   Parameters * p = Parameters::getInstance();
   if(!p->hasHistogram()){
+    cout << "histogram parameters not found" << endl;
     throw NO_PARAMETERS;
   }
   int hbins = p->getiParameter("hbins"), sbins = p->getiParameter("sbins");
@@ -69,4 +92,3 @@ vector<float> FeatureExtractor::extractHistogram(MyImage * image){
       }
   return data;
 }
-

@@ -11,7 +11,9 @@
 #include "glTexture.h"
 #include "fileManagement.h"
 #include "dataset.h"
+#include "featureExtractor.h"
 
+void extractFeatures();
 void test();
 void loadDataset();
 void loadPicture();

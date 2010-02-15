@@ -8,8 +8,9 @@ DataPoint::DataPoint(string url):
   label(-1), image_url(url){
 }
 
-
-
+void DataPoint::setDescriptorURL(string url){
+  descriptor_url = url;
+}
 
 string DataPoint::getImageURL(){
   return image_url;
