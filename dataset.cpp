@@ -57,10 +57,17 @@ void Dataset::enableCategory(string str){
 }
 
 void Dataset::print(){
-  cout << "Database contains " << categories.size() << " classes\n";
+  cout << "Database contains " << categories.size() << " classes" << endl << endl;
   cout << "Enabled Classes: " << endl;
   for(size_t i = 0; i < categories.size(); ++i)
     if(mask.at(i))
       cout << categories.at(i).getName() << endl;
+  cout << endl;
 }
 
+void Dataset::train(){
+  for(size_t i = 0; i < categories.size(); ++i)
+    if(mask.at(i)){
+      
+    }
+}
