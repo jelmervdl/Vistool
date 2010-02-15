@@ -36,7 +36,6 @@ void start(int argc, char **argv){
   glutMainLoop();
 }
 
-
 void loadDataset(){
   classes = GLUI_Master.create_glui( "classes", 0, 950, 250 );
   char * location = askFile();
@@ -56,7 +55,6 @@ void loadDataset(){
       if(c%20==0)
 	classes->add_column(false);
     }
-
   }
 }
 
