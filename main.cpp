@@ -13,10 +13,17 @@ int main(int argc, char ** argv){
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
 
-  Mat m(Size(100,100),0);
-  Mat_<float> m2 = (Mat_<float>) m;
-  m2 = 1.7;
-  cout << m2(1,1) << endl;
+  Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
+  dset.enableCategory("airplanes");
+  dset.enableCategory("accordion");
+  vector<DataPoint> train;
+  vector<DataPoint> test;
+  dset.randomSplit(&train, &test, 0.7);
+  for(vector<DataPoint>::iterator dp = train.begin(); dp != train.end(); ++dp)
+    cout << dp->getImageURL() << endl;
+  cout <<endl;
+  for(vector<DataPoint>::iterator dp = test.begin(); dp != test.end(); ++dp)
+    cout << dp->getImageURL() << endl;
   //start(argc, argv);
   /*
 

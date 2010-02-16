@@ -2,7 +2,7 @@
 
 
 using namespace std;
-GLUI_StaticText *txt;
+GLUI_StaticText *busytxt;
 GLUI *glui;
 GLUI *classes;
 GLuint ctext;
@@ -63,11 +63,11 @@ void loadDataset(string location){
 }
 
 void extractFeatures(){
-  txt->set_text("extracting...");
+  busytxt->set_text("extracting...");
   glutPostRedisplay();
   FeatureExtractor f;
   f.saveDescriptorsToFile(currentdb);
-  txt->set_text("done");
+  busytxt->set_text("done");
 }
 
 void test(){
@@ -122,7 +122,7 @@ void myGlutIdle( void )
 void initGlui(){
   glui = GLUI_Master.create_glui( "Control", 0, 950, 50 );
   glui->add_statictext( "Vision Tool" ); 
-  txt = glui->add_statictext( "waiting" ); 
+  busytxt = glui->add_statictext( "waiting" ); 
   glui->add_button( "Quit", 0,(GLUI_Update_CB)exit );
   glui->add_button( "Load Picture", 0, (GLUI_Update_CB)loadPicture );
   glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)askDataset );

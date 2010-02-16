@@ -33,6 +33,8 @@ class Dataset{
   void print();
   void printEnabled();
 
+  void randomSplit(vector<DataPoint> * train, vector<DataPoint> * test, float cut);
+
   Dataset(string rt);
 };
 

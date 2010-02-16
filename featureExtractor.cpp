@@ -5,19 +5,14 @@ using namespace std;
 using namespace cv;
 using namespace boost::filesystem;
 
-vector< vector<float> >  FeatureExtractor::collectDescriptors(Dataset * ds){
-  vector<Category> points = ds->getEnabled();
+vector< vector<float> >  FeatureExtractor::collectDescriptors(vector<DataPoint> points){
   vector< vector<float> > collection;
-  for(vector<Category>::iterator ccat = points.begin();
-      ccat != points.end(); ++ccat){
-    vector<DataPoint> dps = ccat->getDataPoints();
-    for(vector<DataPoint>::iterator dp = dps.begin();
-	dp != dps.end(); ++dp){
-      renewDescriptor(&*dp);
-      vector<float> descriptor;
-      readDescriptor(&descriptor, dp->getDescriptorURL());
-      collection.push_back(descriptor);
-    }
+  for(vector<DataPoint>::iterator dp = points.begin();
+      dp != points.end(); ++dp){
+    renewDescriptor(&*dp);
+    vector<float> descriptor;
+    readDescriptor(&descriptor, dp->getDescriptorURL());
+    collection.push_back(descriptor);
   }
   return collection;
 }
