@@ -4,13 +4,14 @@
 #include <iostream>
 #include "classifier.h"
 #include "ml.h"
+#include "featureExtractor.h"
 
 using namespace std;
 
 class NNClassifier:public Classifier{
  public:
-  void train(vector<string> * files)=0;
-  int classify(vector<float>  *points);
+  void train(vector<DataPoint> *files);
+  int classify(vector<DataPoint>  *points);
 };
 
 #endif

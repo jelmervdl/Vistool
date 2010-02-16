@@ -10,6 +10,14 @@ FeatureExtractor::FeatureExtractor(){
   features.push_back(hist);
 }
 
+vector<float> FeatureExtractor::getDescriptor(DataPoint dp ){
+    renewDescriptor(&dp);
+    vector<float> descriptor;
+    readDescriptor(&descriptor, dp.getDescriptorURL());
+    return descriptor;
+}
+   
+
 vector< vector<float> >  FeatureExtractor::collectDescriptors(vector<DataPoint> points){
   vector< vector<float> > collection;
   for(vector<DataPoint>::iterator dp = points.begin();
@@ -54,4 +62,3 @@ void FeatureExtractor::renewDescriptor(DataPoint * dp){
     writeDescriptor(&descriptor,dp->getDescriptorURL());
   } 
 }
-

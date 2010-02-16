@@ -12,7 +12,17 @@ int main(int argc, char ** argv){
 
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
-  start(argc, argv);
+  //  start(argc, argv);
+
+  Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
+  dset.enableCategory("airplanes");
+  dset.enableCategory("accordion");
+
+  NNClassifier n;
+  vector<DataPoint> train, test;
+  dset.randomSplit(&train, &test, 0.7);
+
+  n.train(&train);
 
   /*
   Parameters * param = Parameters::getInstance();

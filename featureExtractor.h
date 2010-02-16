@@ -19,7 +19,6 @@
 #include "feature.h"
 #include "histogram.h"
 
-
 using namespace cv;
 using namespace Magick;
 
@@ -29,6 +28,7 @@ class FeatureExtractor{
  public:
   FeatureExtractor();
   vector< vector<float> >  collectDescriptors(vector<DataPoint> points);
+  vector<float> getDescriptor(DataPoint dp );
   void saveDescriptorsToFile(Dataset * ds);
   vector<string> createAndSaveDescriptors(vector<Category> * particip);
   void renewDescriptor(DataPoint * db);

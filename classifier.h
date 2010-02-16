@@ -10,9 +10,8 @@ using namespace std;
 
 class Classifier{
  public:
-  virtual void train(vector<string> * files)=0;
-  virtual int  classify(vector<float>  *points)=0;
-  void trainOnSet(vector<DataPoint> * data_points);
+  virtual void train(vector<DataPoint>     * files )=0;
+  virtual int  classify(vector<DataPoint>  * points)=0;
 };
 
 
