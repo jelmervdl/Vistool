@@ -78,3 +78,4 @@ vector<Category> Dataset::getEnabled(){
       enabled.push_back(categories.at(i));
   return enabled;
 }
+

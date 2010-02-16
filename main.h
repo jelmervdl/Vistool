@@ -15,6 +15,7 @@
 #include "descriptorWriter.h"
 #include "myImage.h"
 #include "dataset.h"
+#include "test.h"
 
 void printLibraries();
 #endif

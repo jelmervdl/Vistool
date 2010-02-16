@@ -63,6 +63,12 @@ run: all
 	./$(Target)
 	@echo "Program ended."
 
+#Run
+test: all
+	@echo "\nRunning: main application in test mode:"
+	./$(Target) test
+	@echo "Program ended."
+
 #Run java
 java:
 	@echo "\nRunning: Java "

@@ -5,8 +5,24 @@ using namespace std;
 using namespace cv;
 using namespace boost::filesystem;
 
+vector< vector<float> >  FeatureExtractor::collectDescriptors(Dataset * ds){
+  vector<Category> points = ds->getEnabled();
+  vector< vector<float> > collection;
+  for(vector<Category>::iterator ccat = points.begin();
+      ccat != points.end(); ++ccat){
+    vector<DataPoint> dps = ccat->getDataPoints();
+    for(vector<DataPoint>::iterator dp = dps.begin();
+	dp != dps.end(); ++dp){
+      renewDescriptor(&*dp);
+      vector<float> descriptor;
+      readDescriptor(&descriptor, dp->getDescriptorURL());
+      collection.push_back(descriptor);
+    }
+  }
+  return collection;
+}
+
 void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
-  cout << "hoi" << endl;
   vector<Category> enabled= ds->getEnabled();
   for(vector<Category>::iterator category = enabled.begin();
       category != enabled.end();
@@ -21,17 +37,6 @@ void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
       create_directory(p);
     for(vector<DataPoint>::iterator file = files.begin(); file != files.end(); ++file ){
       renewDescriptor(&*file);
-      /*
-      string imURL = root+"/"+file->getImageURL();
-      string descpath = aap+name+"/"+file->getImageURL()+".desc";
-      if(!exists(path(descpath)) || 
-	 last_write_time(parameters) < last_write_time(path(imURL))){
-	MyImage image(root+"/"+file->getImageURL());
-	vector<float> features = extractHistogram(&image);
-	writeDescriptor(&features,descpath);
-	file->setDescriptorURL(descpath);
-      } 
-      */
     }
   }
 }

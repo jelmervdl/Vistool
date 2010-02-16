@@ -14,6 +14,8 @@ Sources += nnclassifier.cpp
 Sources += category.cpp
 Sources += descriptorWriter.cpp
 Sources += myImage.cpp
+Sources += ocvConvert.cpp
+Sources += test.cpp
 #object
 Objects = $(Sources:.cpp=.o)
 Obj-c_Objects = $(Obj-c_Sources:.mm=.o)

@@ -22,6 +22,7 @@ using namespace Magick;
 
 class FeatureExtractor{
  public:
+  vector< vector<float> >  collectDescriptors(Dataset * ds);
   void saveDescriptorsToFile(Dataset * ds);
   vector<string> createAndSaveDescriptors(vector<Category> * particip);
   vector<float> extractHistogram(MyImage *image);

@@ -2,10 +2,22 @@
 
 using namespace xercesc;
 int main(int argc, char ** argv){
+  if(argc > 1){
+    string aap = argv[1];
+    if(aap == "test"){
+      testing::testAll();
+      return 0;
+    }
+  }
+
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
 
-  start(argc, argv);
+  Mat m(Size(100,100),0);
+  Mat_<float> m2 = (Mat_<float>) m;
+  m2 = 1.7;
+  cout << m2(1,1) << endl;
+  //start(argc, argv);
   /*
 
   Parameters * param = Parameters::getInstance();
