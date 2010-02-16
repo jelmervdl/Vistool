@@ -17,6 +17,7 @@
 #include "dataset.h"
 #include "test.h"
 
-void printLibraries();
+
+void printLibraries ();
 #endif
 

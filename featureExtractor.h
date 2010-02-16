@@ -16,16 +16,21 @@
 #include <boost/filesystem/fstream.hpp>
 #include "descriptorWriter.h"
 #include "dataset.h"
+#include "feature.h"
+#include "histogram.h"
+
 
 using namespace cv;
 using namespace Magick;
 
 class FeatureExtractor{
+ private:
+  vector<Feature*> features;
  public:
+  FeatureExtractor();
   vector< vector<float> >  collectDescriptors(vector<DataPoint> points);
   void saveDescriptorsToFile(Dataset * ds);
   vector<string> createAndSaveDescriptors(vector<Category> * particip);
-  vector<float> extractHistogram(MyImage *image);
   void renewDescriptor(DataPoint * db);
 };
 

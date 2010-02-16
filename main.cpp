@@ -12,21 +12,9 @@ int main(int argc, char ** argv){
 
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
+  start(argc, argv);
 
-  Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
-  dset.enableCategory("airplanes");
-  dset.enableCategory("accordion");
-  vector<DataPoint> train;
-  vector<DataPoint> test;
-  dset.randomSplit(&train, &test, 0.7);
-  for(vector<DataPoint>::iterator dp = train.begin(); dp != train.end(); ++dp)
-    cout << dp->getImageURL() << endl;
-  cout <<endl;
-  for(vector<DataPoint>::iterator dp = test.begin(); dp != test.end(); ++dp)
-    cout << dp->getImageURL() << endl;
-  //start(argc, argv);
   /*
-
   Parameters * param = Parameters::getInstance();
   param->readFile((char *)"parameters.xml");
   Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
