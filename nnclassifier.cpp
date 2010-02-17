@@ -2,16 +2,18 @@
 
 using namespace std;
 
-void NNClassifier::train(vector<DataPoint> * dps){
-  FeatureExtractor f;
-  vector< vector<float> > descriptors;
-  vector< vector<int>   > labels;
-  for(vector<DataPoint>::iterator dp = dps->begin(); dp != dps->end(); ++dp){
-    descriptors.push_back(f.getDescriptor(*dp));
-    vector<int> n;
-    n.push_back(dp->getLabel());
-    labels.push_back(n);
+void NNClassifier::train(vector<DataPoint> dps){
+  FeatureExtractor  f;
+  vector<vector <float> > featureMatrix;
+  vector<vector <int> > labels;
+  for(vector<DataPoint>::iterator dp = dps.begin(); dp != dps.end(); ++dp){
+    vector<float> a;
+    readDescriptor(&a, dp->getDescriptorURL());
+    featureMatrix.push_back(a);
+    vector<int> labels;
+    labels.push_back(dp->getLabel());
   }
+  Mat_<float> matrix = OCV_Convert::dataset2Mat(&featureMatrix);
 }
 
 int  NNClassifier::classify(vector<DataPoint> * datapoints){

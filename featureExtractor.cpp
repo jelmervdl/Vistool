@@ -10,11 +10,15 @@ FeatureExtractor::FeatureExtractor(){
   features.push_back(hist);
 }
 
-vector<float> FeatureExtractor::getDescriptor(DataPoint dp ){
-    renewDescriptor(&dp);
-    vector<float> descriptor;
-    readDescriptor(&descriptor, dp.getDescriptorURL());
-    return descriptor;
+vector<float> FeatureExtractor::getDescriptor(DataPoint * dp ){
+  cout << "I'm renewing " << dp->getFileName() << endl;
+  renewDescriptor(dp);
+  cout << "1" << endl;
+  vector<float>  descriptor;
+  cout << "3" << endl;
+  readDescriptor(&descriptor, dp->getDescriptorURL());
+  cout << "4" << endl;
+  return descriptor;
 }
    
 
@@ -51,12 +55,13 @@ void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
 
 void FeatureExtractor::renewDescriptor(DataPoint * dp){
   path parameters = complete(path(Parameters::getInstance()->getFile()));
-  if(!exists(path(dp->getDescriptorURL())) || 
+  if(!exists(path(dp->getDescriptorURL())) 
+     ||
      last_write_time(parameters) < last_write_time(path(dp->getImageURL()))){
     MyImage image(dp->getImageURL());
     vector<float> descriptor;
     for(vector<Feature*>::iterator feature = features.begin(); feature != features.end(); ++feature){
-            (*feature)->extractTo(&descriptor, &image);
+      (*feature)->extractTo(&descriptor, &image);
     }
     ((Histogram*)Histogram::getInstance())->extractTo(&descriptor, &image);
     writeDescriptor(&descriptor,dp->getDescriptorURL());
