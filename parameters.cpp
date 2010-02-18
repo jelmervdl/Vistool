@@ -2,23 +2,10 @@
 
 XERCES_CPP_NAMESPACE_USE
 
-
-bool Parameters::instanceFlag = false;
-Parameters * Parameters::singleton = NULL;
-
 Parameters::Parameters(){
 }
 
 Parameters::~Parameters(){
-  instanceFlag = false;
-}
-
-Parameters * Parameters::getInstance(){
-  if(!instanceFlag){
-    singleton = new Parameters();
-    instanceFlag = true;
-  }
-  return singleton;
 }
 
 void Parameters::saveReal(string str, float f){
@@ -84,7 +71,7 @@ void Parameters::readFile(char * str){
     getElementsByTagName(XMLString::transcode("real"))->item(0);
   DOMElement* child = floatRoot->getFirstElementChild();
   do{
-    singleton->saveReal(XMLString::transcode(child->getNodeName()),  
+    saveReal(XMLString::transcode(child->getNodeName()),  
 		    atof(XMLString::transcode(child->getTextContent())));
     child = child->getNextElementSibling();
   }while(child != NULL);
@@ -93,7 +80,7 @@ void Parameters::readFile(char * str){
   DOMElement* intRoot = (DOMElement *) elementRoot->getElementsByTagName(XMLString::transcode("integer"))->item(0);
   child = intRoot->getFirstElementChild();
   do{
-    singleton->saveInteger(
+    saveInteger(
 		    XMLString::transcode(child->getNodeName()),  
 		    atoi(XMLString::transcode(child->getTextContent())));
     child = child->getNextElementSibling();

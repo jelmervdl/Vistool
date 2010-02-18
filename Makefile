@@ -19,7 +19,7 @@ Linker = $(Cpp_Comp)
 
 .SUFFIXES: .cpp
 
-all: $(Target) 
+all: TAGS $(Target) 
 
 #C++ objects
 %.o: %.cpp %.h
@@ -78,3 +78,7 @@ check-syntax:
 	$(MAKE) syntax-target SYNTAX="-fsyntax-only"
 
 syntax-target: $(Objects)
+
+TAGS: $(Sources) $(Cpp_Headers)
+	rm TAGS
+	etags *.h *.cpp

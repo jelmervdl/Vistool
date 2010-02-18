@@ -65,8 +65,8 @@ void loadDataset(string location){
 void extractFeatures(){
   busytxt->set_text("extracting...");
   glutPostRedisplay();
-  FeatureExtractor f;
-  f.saveDescriptorsToFile(currentdb);
+  FeatureExtractor * f = FeatureExtractor::getInstance();
+  f->saveDescriptorsToFile(currentdb);
   busytxt->set_text("done");
 }
 

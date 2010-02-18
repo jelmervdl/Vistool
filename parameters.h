@@ -3,6 +3,7 @@
 
 #define NO_PARAMETERS 100
 
+#include "singleton.h"
 #include <iostream>
 #include <map>
 #include <string>
@@ -12,20 +13,20 @@
 #include <xercesc/sax/HandlerBase.hpp>
 #include <xercesc/util/XMLString.hpp>
 
+
 using namespace std;
 
-class Parameters{
+class Parameters:public Singleton <Parameters>{
+  friend class Singleton<Parameters>;
+ protected:
+  Parameters();
  private:
-  static bool instanceFlag;
-  static Parameters * singleton; 
   map<string, float> floatParameters;
   map<string, int> intParameters;
-  Parameters();
   string file;
  public:
   void readFile(char * str);
   string getFile();
-  static Parameters * getInstance();
   void saveReal(string str, float f);
   void saveInteger(string str, int f);
   float getfParameter(string str);

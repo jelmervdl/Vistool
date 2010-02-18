@@ -18,15 +18,17 @@
 #include "dataset.h"
 #include "feature.h"
 #include "histogram.h"
+#include "singleton.h"
 
 using namespace cv;
 using namespace Magick;
 
-class FeatureExtractor{
+class FeatureExtractor:public Singleton<FeatureExtractor>{
+  friend class Singleton<FeatureExtractor>;
  private:
   vector<Feature*> features;
- public:
   FeatureExtractor();
+ public:
   vector< vector<float> >  collectDescriptors(vector<DataPoint> points);
   vector<float>  getDescriptor(DataPoint * dp );
   void saveDescriptorsToFile(Dataset * ds);

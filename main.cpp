@@ -1,5 +1,5 @@
 #include "main.h"
-
+   
 using namespace xercesc;
 int main(int argc, char ** argv){
   if(argc > 1){
@@ -10,7 +10,6 @@ int main(int argc, char ** argv){
     }
   }
 
-
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
   //  start(argc, argv);
@@ -19,11 +18,11 @@ int main(int argc, char ** argv){
   dset.enableCategory("airplanes");
   //  dset.enableCategory("accordion");
 
-  FeatureExtractor f;
+  FeatureExtractor * f = FeatureExtractor::getInstance();
   NNClassifier n;
   vector<DataPoint> train, test;
   dset.randomSplit(&train, &test, 0.7);
-  f.saveDescriptorsToFile(&dset);
+  f->saveDescriptorsToFile(&dset);
   n.train(train);
 
   /*

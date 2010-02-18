@@ -31,7 +31,7 @@ namespace testing{
     z.push_back(b);
     z.push_back(c);
     z.push_back(d);
-    Mat_<float> ocv = OCV_Convert::dataset2Mat(&z);
+    Mat_<float> ocv = OCV_Convert::dataset2Mat<float>(&z);
     assert(ocv(0,0) == 1.1f);
     assert(ocv(3,0) == 4.4f);
     assert(ocv(0,1) == 11.11f);

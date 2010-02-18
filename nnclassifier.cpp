@@ -3,7 +3,6 @@
 using namespace std;
 
 void NNClassifier::train(vector<DataPoint> dps){
-  FeatureExtractor  f;
   vector<vector <float> > featureMatrix;
   vector<vector <int> > labels;
   for(vector<DataPoint>::iterator dp = dps.begin(); dp != dps.end(); ++dp){
@@ -13,7 +12,7 @@ void NNClassifier::train(vector<DataPoint> dps){
     vector<int> labels;
     labels.push_back(dp->getLabel());
   }
-  Mat_<float> matrix = OCV_Convert::dataset2Mat(&featureMatrix);
+  Mat_<float> matrix = OCV_Convert::dataset2Mat<float>(&featureMatrix);
 }
 
 int  NNClassifier::classify(vector<DataPoint> * datapoints){

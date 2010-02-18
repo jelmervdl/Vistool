@@ -18,8 +18,10 @@ Sources += ocvConvert.cpp
 Sources += test.cpp
 Sources += feature.cpp
 Sources += histogram.cpp
+Sources += singleton.cpp
 #object
 Objects = $(Sources:.cpp=.o)
+Cpp_Headers = $(Sources:.cpp=.h)
 Obj-c_Objects = $(Obj-c_Sources:.mm=.o)
 
 #executable
