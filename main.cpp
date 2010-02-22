@@ -16,12 +16,12 @@ int main(int argc, char ** argv){
 
   Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
   dset.enableCategory("airplanes");
-  //  dset.enableCategory("accordion");
+  dset.enableCategory("accordion");
 
   FeatureExtractor * f = FeatureExtractor::getInstance();
   NNClassifier n;
   vector<DataPoint> train, test;
-  dset.randomSplit(&train, &test, 0.7);
+  dset.rSplit(&train, &test, 0.7);
   f->saveDescriptorsToFile(&dset);
   n.train(train);
 

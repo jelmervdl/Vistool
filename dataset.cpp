@@ -79,11 +79,18 @@ vector<Category> Dataset::getEnabled(){
   return enabled;
 }
 
-void Dataset::randomSplit(vector<DataPoint> * train, vector<DataPoint> * test, float cut){
+void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test, float cut, bool eqrep){
   vector<Category> enabled = getEnabled();
+  size_t max = 0;
+  if(eqrep)
+    for(vector<Category>::iterator cat = enabled.begin();
+	cat != enabled.end(); ++cat)
+      if(max < cat->getDataPoints().size())
+	max = cat->getDataPoints().size();
   for(vector<Category>::iterator cat = enabled.begin();
       cat != enabled.end(); ++cat){
     vector<DataPoint> dps = cat->getDataPoints();
+    if(eqrep) 
     size_t int_cut = cut * dps.size();
     random_shuffle(dps.begin(), dps.end());
     for(size_t i = 0; i < int_cut; ++i)
@@ -91,4 +98,6 @@ void Dataset::randomSplit(vector<DataPoint> * train, vector<DataPoint> * test, f
     for(size_t i = (size_t) int_cut; i < dps.size(); ++i)
       test->push_back(dps.at(i));
   }
-}
+
+
+
