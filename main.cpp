@@ -1,5 +1,5 @@
 #include "main.h"
-   
+
 using namespace xercesc;
 int main(int argc, char ** argv){
   if(argc > 1){

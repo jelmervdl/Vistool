@@ -16,7 +16,6 @@ void NNClassifier::train(vector<DataPoint> dps){
     vector<float> desc;
     readDescriptor(&desc, dps[row].getDescriptorURL());
     labels.at<int>(row,0) = dps[row].getLabel();
-    cout << "label is: " << dps[row].getLabel() << endl;
     for(size_t col = 0; col < cols; ++col ){
       tmatrix.at<float>(row,col) = desc[col];
 

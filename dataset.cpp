@@ -79,25 +79,32 @@ vector<Category> Dataset::getEnabled(){
   return enabled;
 }
 
-void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test, float cut, bool eqrep){
+void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test, 
+		     float cut, bool eqrep){
+  cout << "eqrep is: " << eqrep << endl;
   vector<Category> enabled = getEnabled();
-  size_t max = 0;
+  size_t min = 0;
   if(eqrep)
     for(vector<Category>::iterator cat = enabled.begin();
 	cat != enabled.end(); ++cat)
-      if(max < cat->getDataPoints().size())
-	max = cat->getDataPoints().size();
+      if(min > cat->getDataPoints().size() || min == 0)
+	min = cat->getDataPoints().size();
+  cout << "minimum is " << min << endl;
   for(vector<Category>::iterator cat = enabled.begin();
       cat != enabled.end(); ++cat){
     vector<DataPoint> dps = cat->getDataPoints();
-    if(eqrep) 
-    size_t int_cut = cut * dps.size();
+    cout << "dps has " << dps.size() << endl;
     random_shuffle(dps.begin(), dps.end());
+    if(eqrep) {
+      dps = vector<DataPoint>(dps.begin(), dps.begin() + min);
+    }
+    cout << "dps has " << dps.size() << "after resize" << endl ;
+    size_t int_cut = cut * dps.size();
     for(size_t i = 0; i < int_cut; ++i)
       train->push_back(dps.at(i));
     for(size_t i = (size_t) int_cut; i < dps.size(); ++i)
       test->push_back(dps.at(i));
   }
-
+}
 
 
