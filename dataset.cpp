@@ -81,7 +81,6 @@ vector<Category> Dataset::getEnabled(){
 
 void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test, 
 		     float cut, bool eqrep){
-  cout << "eqrep is: " << eqrep << endl;
   vector<Category> enabled = getEnabled();
   size_t min = 0;
   if(eqrep)
@@ -89,16 +88,13 @@ void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test,
 	cat != enabled.end(); ++cat)
       if(min > cat->getDataPoints().size() || min == 0)
 	min = cat->getDataPoints().size();
-  cout << "minimum is " << min << endl;
   for(vector<Category>::iterator cat = enabled.begin();
       cat != enabled.end(); ++cat){
     vector<DataPoint> dps = cat->getDataPoints();
-    cout << "dps has " << dps.size() << endl;
     random_shuffle(dps.begin(), dps.end());
     if(eqrep) {
       dps = vector<DataPoint>(dps.begin(), dps.begin() + min);
     }
-    cout << "dps has " << dps.size() << "after resize" << endl ;
     size_t int_cut = cut * dps.size();
     for(size_t i = 0; i < int_cut; ++i)
       train->push_back(dps.at(i));

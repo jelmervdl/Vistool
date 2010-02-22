@@ -11,8 +11,9 @@ using namespace std;
 
 class Classifier{
  public:
-  virtual void train(vector<DataPoint>     files )=0;
-  virtual int  classify(vector<DataPoint>  *  points)=0;
+  virtual void         train(vector<DataPoint> * files )=0;
+  virtual vector<int>  classify(vector<DataPoint> * points)=0;
+  virtual int          classify(DataPoint * point) = 0;
 };
 
 

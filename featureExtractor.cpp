@@ -11,29 +11,12 @@ FeatureExtractor::FeatureExtractor(){
 }
 
 vector<float> FeatureExtractor::getDescriptor(DataPoint * dp ){
-  cout << "I'm renewing " << dp->getFileName() << endl;
   renewDescriptor(dp);
-  cout << "1" << endl;
   vector<float>  descriptor;
-  cout << "3" << endl;
   readDescriptor(&descriptor, dp->getDescriptorURL());
-  cout << "4" << endl;
   return descriptor;
 }
    
-
-vector< vector<float> >  FeatureExtractor::collectDescriptors(vector<DataPoint> points){
-  vector< vector<float> > collection;
-  for(vector<DataPoint>::iterator dp = points.begin();
-      dp != points.end(); ++dp){
-    renewDescriptor(&*dp);
-    vector<float> descriptor;
-    readDescriptor(&descriptor, dp->getDescriptorURL());
-    collection.push_back(descriptor);
-  }
-  return collection;
-}
-
 void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
   vector<Category> enabled= ds->getEnabled();
   for(vector<Category>::iterator category = enabled.begin();
@@ -66,4 +49,18 @@ void FeatureExtractor::renewDescriptor(DataPoint * dp){
     ((Histogram*)Histogram::getInstance())->extractTo(&descriptor, &image);
     writeDescriptor(&descriptor,dp->getDescriptorURL());
   } 
+}
+
+void FeatureExtractor::getCVMatrices(vector <DataPoint> * dps, CvMat * training,
+				     CvMat *  labs){
+  Mat labels(labs, 0);
+  Mat tmatrix(training, 0);
+  for(size_t row = 0; row < dps->size(); ++row){
+    vector<float> desc;
+    readDescriptor(&desc, dps->at(row).getDescriptorURL());
+    labels.at<int>(row,0) = dps->at(row).getLabel();
+    for(size_t col = 0; col < desc.size(); ++col ){
+      tmatrix.at<float>(row,col) = desc[col];
+    }
+  }
 }

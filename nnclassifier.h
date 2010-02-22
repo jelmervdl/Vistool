@@ -10,9 +10,16 @@
 using namespace std;
 
 class NNClassifier:public Classifier{
+ private:
+  CvKNearest * knn;
+  size_t k;
  public:
-  void train(vector<DataPoint> files);
-  int classify(vector<DataPoint>  *points);
+  NNClassifier(size_t n);
+  void clean();
+  void        train   (vector<DataPoint> * files);
+  int         classify(DataPoint* point);
+  vector<int> classify(vector<DataPoint> * point);
+  ~NNClassifier();
 };
 
 #endif

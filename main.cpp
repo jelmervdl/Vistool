@@ -19,36 +19,15 @@ int main(int argc, char ** argv){
   dset.enableCategory("accordion");
 
   FeatureExtractor * f = FeatureExtractor::getInstance();
-  NNClassifier n;
+  NNClassifier n(1);
   vector<DataPoint> train, test;
   dset.rSplit(&train, &test, 0.7);
   f->saveDescriptorsToFile(&dset);
-  n.train(train);
-
-  /*
-  Parameters * param = Parameters::getInstance();
-  param->readFile((char *)"parameters.xml");
-  Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
-  dset.enableCategory("airplanes");
-  dset.enableCategory("accordion");
-  dset.print();
-
-  Image image("/Users/mauricemulder/workspace/datasets/caltech101/BACKGROUND_Google/image_0005.jpg");
-  Blob blob;
-  image.magick("BGR");
-  image.write(&blob);
-  cout << "image's depth is: " << image.depth() << endl;
-  Mat orig, hsv; 
-  orig = Mat(image.size().height(),
-	     image.size().width(), 
-	     CV_8UC3, 
-	    (void *) blob.data());
-  cvtColor(orig, hsv, CV_BGR2HSV);
-  vector<float> a = f->extractHistogram(&hsv);
-  free(f);
-  free(param);
-  */
-    
+  n.train(&train);
+  vector<int> rob = n.classify(&test);
+  for(vector<int>::iterator it = rob.begin(); it != rob.end(); ++it)
+      cout << *it;
+  cout << endl;    
 }
 
 void printLibraries(){
