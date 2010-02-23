@@ -21,6 +21,7 @@ void initTextures();
 void initGlui();
 void setupWindow();
 void setupOpenGL();
+void nextPage();
 
 //glut functions
 void display(void);
@@ -39,6 +40,6 @@ void quitf();
 
 void viewDataset();
 void setViewSelection();
-void refreshTexture();
-
+void refreshTexture(size_t a =0);
+void nextPage();
 #endif

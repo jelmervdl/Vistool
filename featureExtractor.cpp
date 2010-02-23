@@ -18,13 +18,13 @@ vector<float> FeatureExtractor::getDescriptor(DataPoint * dp ){
 }
    
 void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
-  vector<Category> enabled= ds->getEnabled();
-  for(vector<Category>::iterator category = enabled.begin();
+  vector<Category*> enabled= ds->getEnabled();
+  for(vector<Category*>::iterator category = enabled.begin();
       category != enabled.end();
       ++category){
-    string name = category->getName();
-    vector<DataPoint> * files = category->getDataPoints();
-    string root = category->getRoot();
+    string name = (*category)->getName();
+    vector<DataPoint> * files = (*category)->getDataPoints();
+    string root = (*category)->getRoot();
     string aap = DESCRIPTOR_LOCATION;
     path p = complete(path(aap+name, native));
     path parameters = complete(path(Parameters::getInstance()->getFile()));

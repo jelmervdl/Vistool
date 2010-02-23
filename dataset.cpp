@@ -71,26 +71,26 @@ void Dataset::print(){
   cout << endl;
 }
 
-vector<Category> Dataset::getEnabled(){
-  vector<Category> enabled;
+vector<Category*> Dataset::getEnabled(){
+  vector<Category*> enabled;
   for(size_t i = 0; i < categories.size(); ++i)
     if(*categories.at(i).getEnabled())
-      enabled.push_back(categories.at(i));
+      enabled.push_back(&categories.at(i));
   return enabled;
 }
 
 void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test, 
 		     float cut, bool eqrep){
-  vector<Category> enabled = getEnabled();
+  vector<Category*> enabled = getEnabled();
   size_t min = 0;
   if(eqrep)
-    for(vector<Category>::iterator cat = enabled.begin();
+    for(vector<Category*>::iterator cat = enabled.begin();
 	cat != enabled.end(); ++cat)
-      if(min > cat->getDataPoints()->size() || min == 0)
-	min = cat->getDataPoints()->size();
-  for(vector<Category>::iterator cat = enabled.begin();
+      if(min > (*cat)->getDataPoints()->size() || min == 0)
+	min = (*cat)->getDataPoints()->size();
+  for(vector<Category*>::iterator cat = enabled.begin();
       cat != enabled.end(); ++cat){
-    vector<DataPoint> * dps = cat->getDataPoints();
+    vector<DataPoint> * dps = (*cat)->getDataPoints();
     random_shuffle(dps->begin(), dps->end());
     if(eqrep) {
       dps = new vector<DataPoint>(dps->begin(), dps->begin() + min);

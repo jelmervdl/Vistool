@@ -28,7 +28,7 @@ class Dataset{
 
   vector<Category> * getCategories();
   string getRoot();
-  vector<Category> getEnabled();
+  vector<Category*> getEnabled();
 
   void print();
   void printEnabled();

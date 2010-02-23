@@ -17,6 +17,8 @@ GLUI * classes;
 int ims_per_page = 10;
 Texture * singleIm;
 
+size_t page = 0;
+
 Dataset * currentdb;
 DataPoint * singleDp;
 
@@ -176,6 +178,7 @@ void initGlui(){
   glui->add_button( "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
   glui->add_button( "View Dataset", 0, (GLUI_Update_CB)viewDataset );
   glui->add_spinner("images per page", GLUI_SPINNER_INT, &ims_per_page);
+  glui->add_button( "Next Page", 0, (GLUI_Update_CB)nextPage );
   glui->set_main_gfx_window(main_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
@@ -190,25 +193,40 @@ void viewDataset(){
     dm = Show_Dataset;
     display();
   }
+  page = 0;
 }
 
 void setViewSelection(){
   viewed.clear();
-  vector<Category> enabs = currentdb->getEnabled();
-  for(vector<Category>::iterator cat = enabs.begin(); cat != enabs.end(); ++cat){
-    vector<DataPoint> * dps = cat->getDataPoints();
-    for(vector<DataPoint>::iterator dp = dps->begin(); dp != dps->end(); ++dp)
-      viewed.push_back(&*dp);
+  size_t j = 0;
+  vector<Category*> enabs = currentdb->getEnabled();
+  for(vector<Category*>::iterator cat = enabs.begin(); cat != enabs.end(); ++cat){
+    vector<DataPoint> * dps = (*cat)->getDataPoints();
+    for(size_t i = 0; i < dps->size(); ++i){
+      viewed.push_back(&dps->at(i));
+      cout << viewed.at(j)->getImageURL() << endl;
+      j++;
+    }
   }
   image_width  = window_width / ims_per_page;
   image_height = window_height / ims_per_page;
   refreshTexture();
 }
 
-void refreshTexture(){
+void refreshTexture(size_t p){
   textures.clear();
-  for(size_t i = 0; i < (size_t) ims_per_page && i < (size_t) viewed.size(); ++i){
-    textures.push_back(*new Texture(viewed.at(i), main_window));
+  for(size_t i = p; i < (size_t) ims_per_page + p && i < (size_t) viewed.size() ; ++i){
+    cout << i << endl;
+    cout << i << " " << viewed.size() << viewed.at(i)->getImageURL() << endl;
+    textures.push_back( *new Texture (viewed.at(i), main_window));
   }
+  display();
+}
+
+void nextPage(){
+  page += ims_per_page;
+  if(page > viewed.size())
+    page = 0;
+  refreshTexture(page);
   display();
 }
