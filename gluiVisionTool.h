@@ -18,6 +18,8 @@
 void start(int argc, char ** argv);
 void initTextures();
 void initGlui();
+void setupWindow();
+void setupOpenGL();
 
 //glut functions
 void display(void);
@@ -32,6 +34,6 @@ void loadCaltech();
 void test();
 void extractFeatures();
 void askDataset();
-
+void quitf();
 
 #endif

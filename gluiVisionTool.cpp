@@ -1,34 +1,51 @@
 #include "gluiVisionTool.h"
 
 using namespace std;
-GLUI_StaticText *busytxt;
-GLUI *glui;
+
+GLUI_StaticText * busytxt;
+GLUI * glui;
 GLUI *classes;
+
 Dataset * currentdb;
-GLuint ctext;
-size_t ct_width;
-size_t ct_height;
+Texture * singleIm;
+DataPoint * singleDp;
+
 size_t window_width;
 size_t window_height;
 int main_window;
-Texture * t;
+
+
+void quitf(){
+  delete currentdb;
+  delete singleIm;
+  delete singleDp;
+  delete busytxt;
+  delete glui;
+  delete classes;
+  exit(0);
+}
 
 void start(int argc, char **argv){
   glutInit(&argc, argv); // obligatory glut call
   printf("Starting up glut...\n"); 
   glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
+  setupWindow();
+  glutDisplayFunc(display);
+  setupOpenGL();
+  display();
+  initGlui();
+  glutMainLoop();
+}
 
+void setupWindow(){
   glutInitWindowPosition( 50, 50 );
   window_height = 800;
   window_width = 800;
   glutInitWindowSize( window_width, window_height );
   main_window = glutCreateWindow( "Image Viewer" );
+}
 
-  glutDisplayFunc(display);
-
-  glGenTextures(1, &ctext);
-
-  // gl settings
+void setupOpenGL(){
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   glOrtho(0, window_height, window_width, 0, 0, 1); // we want 2d projection mode!                                                                                       
@@ -37,10 +54,6 @@ void start(int argc, char **argv){
   glDisable( GL_LIGHTING ); // 2d, no light  
   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
-
-  display();
-  initGlui();
-  glutMainLoop();
 }
 
 void askDataset(){
@@ -49,6 +62,7 @@ void askDataset(){
 
 void loadDataset(string location){
   classes = GLUI_Master.create_glui( "classes", 0, 950, 250 );
+  delete currentdb;
   currentdb = new Dataset(location);
   vector<Category> * cats = currentdb->getCategories();
   size_t c = 0;
@@ -82,38 +96,19 @@ void test(){
 
 void loadPicture(){
   glutSetWindow(main_window);
-  delete t;
+  delete singleIm;
+  delete singleDp;
   string url  = askFile();
-  DataPoint * d = new DataPoint(0, "", url, ""); 
-  t = new Texture(d, main_window);
+  singleDp = new DataPoint(0, "", url, ""); 
+  singleIm = new Texture(singleDp, main_window);
 }
-
-void initTextures(){
-  char *location; 
-  location =  askFile();
-  initTexture(main_window, &ctext, location, &ct_width, &ct_height);
-}
-
 
 void display(void){
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW); // bring us back to model mode                                                                                          
   glLoadIdentity();
-  size_t height, width;
-  if(ct_height > window_height){
-    height = window_height;
-    width = ct_width * (window_height / (double) ct_height);
-  } else{
-    height = ct_height;
-    width = ct_width;
-  }
-  if (width > window_width){
-    height = window_width * (height / width);
-    width = window_width;
-  }
-  if(t!=NULL)
-    t->draw();
-  //  drawTexture(ctext, width, height );
+  if(singleIm!=NULL)
+    singleIm->draw();
   glutSwapBuffers();
 }
 
@@ -130,7 +125,7 @@ void initGlui(){
   glui = GLUI_Master.create_glui( "Control", 0, 950, 50 );
   glui->add_statictext( "Vision Tool" ); 
   busytxt = glui->add_statictext( "waiting" ); 
-  glui->add_button( "Quit", 0,(GLUI_Update_CB)exit );
+  glui->add_button( "Quit", 0,(GLUI_Update_CB)quitf );
   glui->add_button( "Load Picture", 0, (GLUI_Update_CB)loadPicture );
   glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)askDataset );
   glui->add_button( "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
@@ -141,3 +136,4 @@ void initGlui(){
 void loadCaltech(){
   loadDataset("/Users/mauricemulder/workspace/datasets/caltech101/");
 }
+

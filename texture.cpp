@@ -22,5 +22,6 @@ void Texture::draw(){
 }
 
 Texture::~Texture(){
+  using namespace std;
   glDeleteTextures(1, &txt);
 }
