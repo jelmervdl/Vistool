@@ -2,17 +2,32 @@
 
 using namespace std;
 
-GLUI_StaticText * busytxt;
-GLUI * glui;
-GLUI *classes;
+enum DisplayMode {
+  Nothing,
+  Single_Image,
+  Show_Dataset
+};
 
 Dataset * currentdb;
+
+DisplayMode dm = Single_Image;
+
+GLUI_StaticText * busytxt;
+GLUI * glui;
+GLUI * classes;
+
+
+int * ims_per_page;
+
+
 Texture * singleIm;
 DataPoint * singleDp;
 
 size_t window_width;
 size_t window_height;
 int main_window;
+
+vector <DataPoint*> viewed; 
 
 void quitf(){
   delete currentdb;
@@ -94,6 +109,7 @@ void test(){
 }
 
 void loadPicture(){
+  dm = Single_Image;
   glutSetWindow(main_window);
   delete singleIm;
   delete singleDp;
@@ -104,10 +120,19 @@ void loadPicture(){
 
 void display(void){
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glMatrixMode(GL_MODELVIEW); // bring us back to model mode                                                                                          
+  glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  if(singleIm!=NULL)
-    singleIm->draw();
+  switch(dm){
+  case Single_Image:
+    if(singleIm!=NULL)
+      singleIm->draw();
+    break;
+  case Show_Dataset:
+    if(currentdb != NULL)
+    break;
+  default:
+    break;
+  }
   glutSwapBuffers();
 }
 
@@ -128,6 +153,8 @@ void initGlui(){
   glui->add_button( "Load Picture", 0, (GLUI_Update_CB)loadPicture );
   glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)askDataset );
   glui->add_button( "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
+  glui->add_button( "View Dataset", 0, (GLUI_Update_CB)viewDataset );
+  glui->add_edittext("images per page", GLUI_EDITTEXT_TEXT, &ims_per_page);
   glui->set_main_gfx_window(main_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
@@ -136,3 +163,21 @@ void loadCaltech(){
   loadDataset("/Users/mauricemulder/workspace/datasets/caltech101/");
 }
 
+void viewDataset(){
+  if(currentdb != NULL){
+    setViewSelection();
+    dm = Show_Dataset;
+  }
+}
+
+void setViewSelection(){
+  viewed.clear();
+  vector<Category> enabs = currentdb->getEnabled();
+  for(vector<Category>::iterator cat = enabs.begin(); cat != enabs.end(); ++cat){
+    vector<DataPoint> * dps = cat->getDataPoints();
+    for(vector<DataPoint>::iterator dp = dps->begin(); dp != dps->end(); ++dp)
+      viewed.push_back(&*dp);
+  }
+  for(size_t i = 0; i < viewed.size(); ++i)
+    cout << viewed.at(i)->getImageURL() << endl;
+}

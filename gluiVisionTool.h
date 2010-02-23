@@ -36,4 +36,7 @@ void extractFeatures();
 void askDataset();
 void quitf();
 
+void viewDataset();
+void setViewSelection();
+
 #endif

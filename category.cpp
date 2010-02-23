@@ -8,8 +8,8 @@ Category::Category(string give_name, string rt, size_t lab):
   name(give_name), root(rt), enabled(0), label(lab){
 }
 
-vector <DataPoint> Category::getDataPoints(){
-  return data_points;
+vector <DataPoint> * Category::getDataPoints(){
+  return &data_points;
 }
 
 string Category::getName(){

@@ -23,14 +23,14 @@ void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
       category != enabled.end();
       ++category){
     string name = category->getName();
-    vector<DataPoint> files = category->getDataPoints();
+    vector<DataPoint> * files = category->getDataPoints();
     string root = category->getRoot();
     string aap = DESCRIPTOR_LOCATION;
     path p = complete(path(aap+name, native));
     path parameters = complete(path(Parameters::getInstance()->getFile()));
     if(!is_directory(p))
       create_directory(p);
-    for(vector<DataPoint>::iterator file = files.begin(); file != files.end(); ++file ){
+    for(vector<DataPoint>::iterator file = files->begin(); file != files->end(); ++file ){
       renewDescriptor(&*file);
     }
   }

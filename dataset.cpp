@@ -86,20 +86,22 @@ void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test,
   if(eqrep)
     for(vector<Category>::iterator cat = enabled.begin();
 	cat != enabled.end(); ++cat)
-      if(min > cat->getDataPoints().size() || min == 0)
-	min = cat->getDataPoints().size();
+      if(min > cat->getDataPoints()->size() || min == 0)
+	min = cat->getDataPoints()->size();
   for(vector<Category>::iterator cat = enabled.begin();
       cat != enabled.end(); ++cat){
-    vector<DataPoint> dps = cat->getDataPoints();
-    random_shuffle(dps.begin(), dps.end());
+    vector<DataPoint> * dps = cat->getDataPoints();
+    random_shuffle(dps->begin(), dps->end());
     if(eqrep) {
-      dps = vector<DataPoint>(dps.begin(), dps.begin() + min);
+      dps = new vector<DataPoint>(dps->begin(), dps->begin() + min);
     }
-    size_t int_cut = cut * dps.size();
+    size_t int_cut = cut * dps->size();
     for(size_t i = 0; i < int_cut; ++i)
-      train->push_back(dps.at(i));
-    for(size_t i = (size_t) int_cut; i < dps.size(); ++i)
-      test->push_back(dps.at(i));
+      train->push_back(dps->at(i));
+    for(size_t i = (size_t) int_cut; i < dps->size(); ++i)
+      test->push_back(dps->at(i));
+    if(eqrep)
+      delete dps;
   }
 }
 
