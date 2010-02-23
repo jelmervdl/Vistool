@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string> 
 
+#include <math.h>
 #include "glui.h"
 #include "fd.h"
 #include "glTexture.h"
@@ -38,5 +39,6 @@ void quitf();
 
 void viewDataset();
 void setViewSelection();
+void refreshTexture();
 
 #endif

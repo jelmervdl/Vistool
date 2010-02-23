@@ -18,7 +18,7 @@ class Texture{
   int getTXT();
   size_t getHeight();
   size_t getWidth();
-  void draw();
+  void draw(size_t window_size);
 };
 
 #endif

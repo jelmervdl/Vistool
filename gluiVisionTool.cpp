@@ -8,25 +8,26 @@ enum DisplayMode {
   Show_Dataset
 };
 
-Dataset * currentdb;
-
 DisplayMode dm = Single_Image;
 
 GLUI_StaticText * busytxt;
 GLUI * glui;
 GLUI * classes;
 
-
-int * ims_per_page;
-
-
+int ims_per_page = 10;
 Texture * singleIm;
+
+Dataset * currentdb;
 DataPoint * singleDp;
 
-size_t window_width;
-size_t window_height;
+size_t window_width = 100;
+size_t window_height = 100;
 int main_window;
 
+ size_t image_width  = window_width / ims_per_page;
+size_t image_height = window_height / ims_per_page;
+
+vector <Texture> textures;
 vector <DataPoint*> viewed; 
 
 void quitf(){
@@ -125,10 +126,30 @@ void display(void){
   switch(dm){
   case Single_Image:
     if(singleIm!=NULL)
-      singleIm->draw();
+      singleIm->draw(window_height);
     break;
   case Show_Dataset:
-    if(currentdb != NULL)
+    if(currentdb != NULL){
+      size_t grid = ceil(sqrt(ims_per_page));
+      float scale = 1.0/grid;
+      glScalef(scale, scale, 0);
+      size_t count  = 0;
+      glPushMatrix();
+      for(vector<Texture>::iterator it = textures.begin();
+	  it != textures.end();
+	  ++it){
+	it->draw(window_height);
+	glTranslatef(800, 0, 0);
+	count++;
+	if(count == grid){
+	  count = 0;
+	  glPopMatrix();
+	  glTranslatef(0, 800, 0);
+	  glPushMatrix();
+	}
+      }
+      glPopMatrix();
+    }
     break;
   default:
     break;
@@ -154,7 +175,7 @@ void initGlui(){
   glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)askDataset );
   glui->add_button( "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
   glui->add_button( "View Dataset", 0, (GLUI_Update_CB)viewDataset );
-  glui->add_edittext("images per page", GLUI_EDITTEXT_TEXT, &ims_per_page);
+  glui->add_spinner("images per page", GLUI_SPINNER_INT, &ims_per_page);
   glui->set_main_gfx_window(main_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
@@ -167,6 +188,7 @@ void viewDataset(){
   if(currentdb != NULL){
     setViewSelection();
     dm = Show_Dataset;
+    display();
   }
 }
 
@@ -178,6 +200,15 @@ void setViewSelection(){
     for(vector<DataPoint>::iterator dp = dps->begin(); dp != dps->end(); ++dp)
       viewed.push_back(&*dp);
   }
-  for(size_t i = 0; i < viewed.size(); ++i)
-    cout << viewed.at(i)->getImageURL() << endl;
+  image_width  = window_width / ims_per_page;
+  image_height = window_height / ims_per_page;
+  refreshTexture();
+}
+
+void refreshTexture(){
+  textures.clear();
+  for(size_t i = 0; i < (size_t) ims_per_page && i < (size_t) viewed.size(); ++i){
+    textures.push_back(*new Texture(viewed.at(i), main_window));
+  }
+  display();
 }

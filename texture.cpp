@@ -17,8 +17,16 @@ size_t Texture::getWidth(){
   return width;
 }
 
-void Texture::draw(){
-  drawTexture(txt, (int) width, (int) height);
+void Texture::draw(size_t window_size){
+  size_t nheight, nwidth;
+
+  nheight = window_size;
+  nwidth = width * ((double) window_size / (double) height);
+  if (nwidth > window_size){
+    nheight = window_size * (nheight / (double) nwidth);
+    nwidth = window_size;
+  }
+  drawTexture(txt, (int) nwidth, (int) nheight);
 }
 
 Texture::~Texture(){
