@@ -1,5 +1,10 @@
 #include "gluiVisionTool.h"
 
+
+
+
+
+
 using namespace std;
 
 GLUI_StaticText * busytxt;
