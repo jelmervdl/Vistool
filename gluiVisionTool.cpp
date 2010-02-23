@@ -14,7 +14,6 @@ size_t window_width;
 size_t window_height;
 int main_window;
 
-
 void quitf(){
   delete currentdb;
   delete singleIm;
