@@ -12,18 +12,26 @@
 #include "fileManagement.h"
 #include "dataset.h"
 #include "featureExtractor.h"
+#include "texture.h"
 
-void extractFeatures();
-void test();
-void askDataset();
-void loadPicture();
+//start the gui app:
+void start(int argc, char ** argv);
 void initTextures();
 void initGlui();
+
+//glut functions
 void display(void);
-void start(int argc, char ** argv);
 void myGlutIdle( void );
+
+// buttons functions for image and dset loading
+void loadPicture();
 void loadDataset(string location);
 void loadCaltech();
+
+// more button functions
+void test();
+void extractFeatures();
+void askDataset();
 
 
 #endif

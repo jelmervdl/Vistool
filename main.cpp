@@ -9,10 +9,9 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
-
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
-  //  start(argc, argv);
+  start(argc, argv);
 
   Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
   dset.enableCategory("airplanes");

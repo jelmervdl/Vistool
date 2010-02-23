@@ -1,6 +1,7 @@
 #ifndef DATAPOINT_H
 #define DATAPOINT_H
 
+#include <GLUT/glut.h>
 #include <string>
 
 using namespace std;

@@ -1,29 +1,34 @@
 #include "gluiVisionTool.h"
 
-
 using namespace std;
 GLUI_StaticText *busytxt;
 GLUI *glui;
 GLUI *classes;
+Dataset * currentdb;
 GLuint ctext;
 size_t ct_width;
 size_t ct_height;
 size_t window_width;
 size_t window_height;
 int main_window;
-Dataset * currentdb;
+Texture * t;
 
 void start(int argc, char **argv){
-  glutInit(&argc, argv);
-  printf("Starting up glut...\n");
+  glutInit(&argc, argv); // obligatory glut call
+  printf("Starting up glut...\n"); 
   glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
+
   glutInitWindowPosition( 50, 50 );
   window_height = 800;
   window_width = 800;
   glutInitWindowSize( window_width, window_height );
   main_window = glutCreateWindow( "Image Viewer" );
+
   glutDisplayFunc(display);
+
   glGenTextures(1, &ctext);
+
+  // gl settings
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   glOrtho(0, window_height, window_width, 0, 0, 1); // we want 2d projection mode!                                                                                       
@@ -32,6 +37,7 @@ void start(int argc, char **argv){
   glDisable( GL_LIGHTING ); // 2d, no light  
   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
+
   display();
   initGlui();
   glutMainLoop();
@@ -76,11 +82,10 @@ void test(){
 
 void loadPicture(){
   glutSetWindow(main_window);
-  GLuint a;
-  glGenTextures(1,&a);
-  char *location =  askFile();
-  initTexture(main_window, &a, location, &ct_width, &ct_height);
-  ctext = a;
+  delete t;
+  string url  = askFile();
+  DataPoint * d = new DataPoint(0, "", url, ""); 
+  t = new Texture(d, main_window);
 }
 
 void initTextures(){
@@ -106,7 +111,9 @@ void display(void){
     height = window_width * (height / width);
     width = window_width;
   }
-  drawTexture(ctext, width, height );
+  if(t!=NULL)
+    t->draw();
+  //  drawTexture(ctext, width, height );
   glutSwapBuffers();
 }
 

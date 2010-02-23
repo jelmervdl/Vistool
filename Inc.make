@@ -1,6 +1,7 @@
 # main
 Sources = main.cpp 
 Obj-c_Sources = fd.mm
+Sources += texture.cpp
 Sources += dataPoint.cpp
 Sources += dataset.cpp
 Sources += glTexture.cpp

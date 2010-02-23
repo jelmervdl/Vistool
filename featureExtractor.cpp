@@ -64,3 +64,4 @@ void FeatureExtractor::getCVMatrices(vector <DataPoint> * dps, CvMat * training,
     }
   }
 }
+
