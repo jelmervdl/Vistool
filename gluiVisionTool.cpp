@@ -10,27 +10,32 @@ enum DisplayMode {
 
 DisplayMode dm = Single_Image;
 
+Dataset * currentdb;
+size_t page = 0;
+vector <Texture> textures;
+vector <DataPoint*> viewed; 
+vector <DataPoint> train_data;
+vector <DataPoint> test_data;
+Classifier * current_classifier;
+
+//Global Glui Objects 
 GLUI_StaticText * busytxt;
 GLUI * glui;
 GLUI * classes;
-
 int ims_per_page = 10;
-Texture * singleIm;
 
-size_t page = 0;
-
-Dataset * currentdb;
-DataPoint * singleDp;
-
-size_t window_width = 100;
-size_t window_height = 100;
+// main window
+size_t window_width;
+size_t window_height;
 int main_window;
 
- size_t image_width  = window_width / ims_per_page;
-size_t image_height = window_height / ims_per_page;
 
-vector <Texture> textures;
-vector <DataPoint*> viewed; 
+// Single Image parameters
+Texture * singleIm;
+size_t image_width; 
+size_t image_height;
+DataPoint * singleDp;
+
 
 void quitf(){
   delete currentdb;
@@ -85,6 +90,7 @@ void loadDataset(string location){
   size_t c = 0;
   classes->add_button( "Print Enabled", 0, (GLUI_Update_CB)test );
   classes->add_button( "Extract Descriptors", 0, (GLUI_Update_CB)extractFeatures );
+  classes->add_button( "Train", 0, (GLUI_Update_CB)train);
   classes->add_column(true);
   if(currentdb != NULL){
     for(size_t i = 0; i < cats->size(); ++i){
@@ -229,4 +235,11 @@ void nextPage(){
     page = 0;
   refreshTexture(page);
   display();
+}
+
+void train(){
+  currentdb->rSplit(&train_data, &test_data, 0.5, true);
+  delete current_classifier;
+  current_classifier = new NNClassifier(1);
+  current_classifier->train(&train_data);
 }

@@ -5,6 +5,7 @@
 #include <GLUT/glut.h>
 #include <iostream>
 #include <string> 
+#include "nnclassifier.h"
 
 #include <math.h>
 #include "glui.h"
@@ -42,4 +43,7 @@ void viewDataset();
 void setViewSelection();
 void refreshTexture(size_t a =0);
 void nextPage();
+void train();
+
+
 #endif
