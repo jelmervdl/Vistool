@@ -96,8 +96,9 @@ void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test,
       dps = new vector<DataPoint>(dps->begin(), dps->begin() + min);
     }
     size_t int_cut = cut * dps->size();
-    for(size_t i = 0; i < int_cut; ++i)
+    for(size_t i = 0; i < int_cut; ++i){
       train->push_back(dps->at(i));
+    }
     for(size_t i = (size_t) int_cut; i < dps->size(); ++i)
       test->push_back(dps->at(i));
     if(eqrep)

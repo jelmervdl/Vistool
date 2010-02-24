@@ -2,40 +2,36 @@
 
 using namespace std;
 
-enum DisplayMode {
-  Nothing,
-  Single_Image,
-  Show_Dataset
-};
-
-DisplayMode dm = Single_Image;
-
+states::DisplayMode dm = states::Single_Image;
+states::DatasetOnDisplay ds = states::Enabled_Datasets;
 Dataset * currentdb;
 size_t page = 0;
 vector <Texture> textures;
 vector <DataPoint*> viewed; 
 vector <DataPoint> train_data;
 vector <DataPoint> test_data;
+vector <int> test_result;
 Classifier * current_classifier;
+Evaluation * cur_eval;
+
 
 //Global Glui Objects 
 GLUI_StaticText * busytxt;
 GLUI * glui;
 GLUI * classes;
-int ims_per_page = 10;
+int ims_per_page = 16;
 
 // main window
 size_t window_width;
 size_t window_height;
 int main_window;
-
-
+  
+  
 // Single Image parameters
 Texture * singleIm;
 size_t image_width; 
 size_t image_height;
 DataPoint * singleDp;
-
 
 void quitf(){
   delete currentdb;
@@ -44,6 +40,7 @@ void quitf(){
   delete busytxt;
   delete glui;
   delete classes;
+  delete cur_eval;
   exit(0);
 }
 
@@ -91,6 +88,7 @@ void loadDataset(string location){
   classes->add_button( "Print Enabled", 0, (GLUI_Update_CB)test );
   classes->add_button( "Extract Descriptors", 0, (GLUI_Update_CB)extractFeatures );
   classes->add_button( "Train", 0, (GLUI_Update_CB)train);
+  classes->add_button( "Classify", 0, (GLUI_Update_CB)classify);
   classes->add_column(true);
   if(currentdb != NULL){
     for(size_t i = 0; i < cats->size(); ++i){
@@ -99,18 +97,10 @@ void loadDataset(string location){
 			    cats->at(i).getEnabled(),
 			    1, (GLUI_Update_CB) NULL);
       c++;
-      if(c%20==0)
+      if(c%34==0)
 	classes->add_column(false);
     }
   }
-}
-
-void extractFeatures(){
-  busytxt->set_text("extracting...");
-  glutPostRedisplay();
-  FeatureExtractor * f = FeatureExtractor::getInstance();
-  f->saveDescriptorsToFile(currentdb);
-  busytxt->set_text("done");
 }
 
 void test(){
@@ -118,7 +108,7 @@ void test(){
 }
 
 void loadPicture(){
-  dm = Single_Image;
+  dm = states::Single_Image;
   glutSetWindow(main_window);
   delete singleIm;
   delete singleDp;
@@ -128,6 +118,7 @@ void loadPicture(){
 }
 
 void display(void){
+  using namespace states;
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -176,15 +167,23 @@ void myGlutIdle( void )
 
 void initGlui(){
   glui = GLUI_Master.create_glui( "Control", 0, 950, 50 );
-  glui->add_statictext( "Vision Tool" ); 
   busytxt = glui->add_statictext( "waiting" ); 
   glui->add_button( "Quit", 0,(GLUI_Update_CB)quitf );
   glui->add_button( "Load Picture", 0, (GLUI_Update_CB)loadPicture );
   glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)askDataset );
   glui->add_button( "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
+  glui->add_column(true);
   glui->add_button( "View Dataset", 0, (GLUI_Update_CB)viewDataset );
-  glui->add_spinner("images per page", GLUI_SPINNER_INT, &ims_per_page);
+  glui->add_statictext( "Images Per Page:" ); 
+  glui->add_spinner("", GLUI_SPINNER_INT, &ims_per_page);
   glui->add_button( "Next Page", 0, (GLUI_Update_CB)nextPage );
+  GLUI_Listbox * aap = glui->add_listbox("view:", (int*) &ds);
+  aap->add_item(states::Enabled_Datasets, "Enabled");
+  aap->add_item(states::Training_DataPoints, "Training Set");
+  aap->add_item(states::Testing_DataPoints, "Test set");
+  aap->add_item(states::Correct, "Correct");
+  aap->add_item(states::Incorrect, "Incorr.");
+  aap->add_item(states::Particular_Category, "Sel. Cat.");
   glui->set_main_gfx_window(main_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
@@ -195,8 +194,9 @@ void loadCaltech(){
 
 void viewDataset(){
   if(currentdb != NULL){
+    dm = states::Show_Dataset;
     setViewSelection();
-    dm = Show_Dataset;
+    refreshTexture(); 
     display();
   }
   page = 0;
@@ -204,16 +204,25 @@ void viewDataset(){
 
 void setViewSelection(){
   viewed.clear();
-  size_t j = 0;
-  vector<Category*> enabs = currentdb->getEnabled();
-  for(vector<Category*>::iterator cat = enabs.begin(); cat != enabs.end(); ++cat){
-    vector<DataPoint> * dps = (*cat)->getDataPoints();
-    for(size_t i = 0; i < dps->size(); ++i){
-      viewed.push_back(&dps->at(i));
-      cout << viewed.at(j)->getImageURL() << endl;
-      j++;
-    }
+
+  using namespace states;
+  if(ds == Enabled_Datasets){
+      vector<Category*> enabs = currentdb->getEnabled();
+      for(vector<Category*>::iterator cat = enabs.begin(); cat != enabs.end(); ++cat){
+	vector<DataPoint> * dps = (*cat)->getDataPoints();
+	for(size_t i = 0; i < dps->size(); ++i)
+	  viewed.push_back(&dps->at(i));
+      }
   }
+  if(ds == Training_DataPoints){
+    viewed = VisionCore::ptrDeMorgan<DataPoint>(&train_data);
+  }
+
+  if(ds == Testing_DataPoints){
+    viewed = VisionCore::ptrDeMorgan<DataPoint>(&test_data);
+  }
+  
+
   image_width  = window_width / ims_per_page;
   image_height = window_height / ims_per_page;
   refreshTexture();
@@ -222,8 +231,6 @@ void setViewSelection(){
 void refreshTexture(size_t p){
   textures.clear();
   for(size_t i = p; i < (size_t) ims_per_page + p && i < (size_t) viewed.size() ; ++i){
-    cout << i << endl;
-    cout << i << " " << viewed.size() << viewed.at(i)->getImageURL() << endl;
     textures.push_back( *new Texture (viewed.at(i), main_window));
   }
   display();
@@ -238,8 +245,27 @@ void nextPage(){
 }
 
 void train(){
+  extractFeatures();
+  train_data.clear();
+  test_data.clear();
   currentdb->rSplit(&train_data, &test_data, 0.5, true);
   delete current_classifier;
   current_classifier = new NNClassifier(1);
   current_classifier->train(&train_data);
+}
+
+void classify(){
+  if(current_classifier == NULL)
+    train();
+  test_result = current_classifier->classify(&test_data);
+  delete cur_eval;
+  cur_eval = new Evaluation(&test_data, &test_result);
+}
+
+void extractFeatures(){
+  busytxt->set_text("extracting...");
+  glutPostRedisplay();
+  FeatureExtractor * f = FeatureExtractor::getInstance();
+  f->saveDescriptorsToFile(currentdb);
+  busytxt->set_text("done");
 }

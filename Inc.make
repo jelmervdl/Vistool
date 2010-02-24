@@ -20,6 +20,8 @@ Sources += test.cpp
 Sources += feature.cpp
 Sources += histogram.cpp
 Sources += singleton.cpp
+Sources += core.cpp
+Sources += evaluation.cpp
 #object
 Objects = $(Sources:.cpp=.o)
 Cpp_Headers = $(Sources:.cpp=.h)

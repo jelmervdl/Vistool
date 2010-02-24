@@ -15,6 +15,8 @@
 #include "dataset.h"
 #include "featureExtractor.h"
 #include "texture.h"
+#include "core.h"
+#include "evaluation.h"
 
 //start the gui app:
 void start(int argc, char ** argv);
@@ -44,6 +46,6 @@ void setViewSelection();
 void refreshTexture(size_t a =0);
 void nextPage();
 void train();
-
+void classify();
 
 #endif
