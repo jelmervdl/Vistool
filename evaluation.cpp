@@ -2,9 +2,11 @@
 using namespace std;
 
 Evaluation::Evaluation(vector<DataPoint> * dps, vector<int> * cls){
+  cout << "hoi";
   if(dps->size() != cls->size())
     throw 1;
-  for(size_t i; i < dps->size(); ++i){
+  for(size_t i = 0; i < dps->size(); ++i){
+    cout << dps->at(i).getLabel() << "?=?" << cls->at(i);
     instances++;
     if((int) dps->at(i).getLabel() == cls->at(i))
       correct++;
@@ -30,4 +32,8 @@ float Evaluation::getTval(){
 
 vector<DataPoint *> Evaluation::getInstancesClassifiedAs(int cl){
   return classificationmap[cl];
+}
+void Evaluation::print(){
+  cout << "correct: " << correct << endl;
+  cout << "total  : " << instances << endl;
 }

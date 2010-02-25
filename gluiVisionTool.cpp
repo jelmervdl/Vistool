@@ -12,8 +12,13 @@ vector <DataPoint> train_data;
 vector <DataPoint> test_data;
 vector <int> test_result;
 Classifier * current_classifier;
-Evaluation * cur_eval;
 
+
+// class view selection
+int selected_class;
+Evaluation * cur_eval;
+GLUI_Listbox * selected_class_listbox;
+vector<int> c_classes;
 
 //Global Glui Objects 
 GLUI_StaticText * busytxt;
@@ -168,22 +173,26 @@ void myGlutIdle( void )
 void initGlui(){
   glui = GLUI_Master.create_glui( "Control", 0, 950, 50 );
   busytxt = glui->add_statictext( "waiting" ); 
-  glui->add_button( "Quit", 0,(GLUI_Update_CB)quitf );
-  glui->add_button( "Load Picture", 0, (GLUI_Update_CB)loadPicture );
-  glui->add_button( "Load Dataset", 0, (GLUI_Update_CB)askDataset );
-  glui->add_button( "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
+  GLUI_Panel * load_panel = glui->add_panel("load");
+  glui->add_button_to_panel(load_panel, "Quit", 0,(GLUI_Update_CB)quitf );
+  glui->add_button_to_panel(load_panel, "Load Picture", 0, (GLUI_Update_CB)loadPicture );
+  glui->add_button_to_panel(load_panel, "Load Dataset", 0, (GLUI_Update_CB)askDataset );
+  glui->add_button_to_panel(load_panel, "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
   glui->add_column(true);
-  glui->add_button( "View Dataset", 0, (GLUI_Update_CB)viewDataset );
-  glui->add_statictext( "Images Per Page:" ); 
-  glui->add_spinner("", GLUI_SPINNER_INT, &ims_per_page);
-  glui->add_button( "Next Page", 0, (GLUI_Update_CB)nextPage );
-  GLUI_Listbox * aap = glui->add_listbox("view:", (int*) &ds);
+  GLUI_Panel * view_panel = glui->add_panel("view");
+  glui->add_button_to_panel(view_panel, "Refresh", 0, (GLUI_Update_CB)viewDataset );
+  glui->add_statictext_to_panel(view_panel, "Images Per Page:" ); 
+  glui->add_spinner_to_panel(view_panel, "", GLUI_SPINNER_INT, &ims_per_page);
+  glui->add_button_to_panel(view_panel, "Next Page", 0, (GLUI_Update_CB)nextPage );
+  GLUI_Listbox * aap = glui->add_listbox_to_panel(view_panel, "view:", (int*) &ds, 0, 
+					 (GLUI_Update_CB)viewDataset);
   aap->add_item(states::Enabled_Datasets, "Enabled");
   aap->add_item(states::Training_DataPoints, "Training Set");
   aap->add_item(states::Testing_DataPoints, "Test set");
   aap->add_item(states::Correct, "Correct");
   aap->add_item(states::Incorrect, "Incorr.");
   aap->add_item(states::Particular_Category, "Sel. Cat.");
+  selected_class_listbox = glui->add_listbox_to_panel(view_panel, "part. class:", &selected_class, 0, (GLUI_Update_CB)viewDataset);
   glui->set_main_gfx_window(main_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
@@ -221,8 +230,12 @@ void setViewSelection(){
   if(ds == Testing_DataPoints){
     viewed = VisionCore::ptrDeMorgan<DataPoint>(&test_data);
   }
-  
-
+  if(ds == Particular_Category){
+    cur_eval->print();
+    viewed.clear();
+    if(cur_eval != NULL)
+      viewed = cur_eval->getInstancesClassifiedAs(selected_class);
+  }
   image_width  = window_width / ims_per_page;
   image_height = window_height / ims_per_page;
   refreshTexture();
@@ -252,12 +265,24 @@ void train(){
   delete current_classifier;
   current_classifier = new NNClassifier(1);
   current_classifier->train(&train_data);
+  for(vector<int>::iterator cl = c_classes.begin(); 
+      cl != c_classes.end(); 
+      cl++)
+    selected_class_listbox->delete_item(*cl);
+  c_classes.clear();
+  vector<Category*> enabs = currentdb->getEnabled();
+  for(size_t i = 0; i <  enabs.size(); ++i){
+	selected_class_listbox->add_item(enabs[i]->getLabel(), 
+					 enabs[i]->getName().c_str());
+	c_classes.push_back(enabs[i]->getLabel());
+    }
 }
 
 void classify(){
   if(current_classifier == NULL)
     train();
   test_result = current_classifier->classify(&test_data);
+  cout << "im here, " << test_data.size() << "vs" << test_result.size();
   delete cur_eval;
   cur_eval = new Evaluation(&test_data, &test_result);
 }
@@ -269,3 +294,4 @@ void extractFeatures(){
   f->saveDescriptorsToFile(currentdb);
   busytxt->set_text("done");
 }
+

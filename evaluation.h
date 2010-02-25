@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include "dataPoint.h"
+#include <iostream>
 
 class Evaluation{
  private:
@@ -15,7 +16,7 @@ class Evaluation{
   map< int, vector<DataPoint*> > classificationmap;
  public:
   Evaluation(vector<DataPoint> * dps, vector<int> * classification);
-
+  void print();
   size_t getCorrect();
   size_t getInstances();
   float getRecall();
