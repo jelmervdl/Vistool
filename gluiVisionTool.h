@@ -2,6 +2,7 @@
 #define GLUIVISIONTOOL_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <GLUT/glut.h>
 #include <iostream>
 #include <string> 
@@ -46,6 +47,7 @@ void setViewSelection();
 void refreshTexture(size_t a =0);
 void nextPage();
 void train();
+void selectAndShow();
 void classify();
-
+void showStatistics();
 #endif

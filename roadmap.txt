@@ -1,11 +1,11 @@
 Histogram Featuresdone
 Fix da buttons! done
 Fix da display. done
+loading from file done
+KNN  done
 
-
-loading from file
-KNN 
-LibSVN
-Fix error handling.
+Evaluation display
+LibSVN 
+Fix error handling
 Sift features
 

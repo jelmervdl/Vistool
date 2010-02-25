@@ -13,7 +13,6 @@ vector <DataPoint> test_data;
 vector <int> test_result;
 Classifier * current_classifier;
 
-
 // class view selection
 int selected_class;
 Evaluation * cur_eval;
@@ -24,6 +23,7 @@ vector<int> c_classes;
 GLUI_StaticText * busytxt;
 GLUI * glui;
 GLUI * classes;
+GLUI * stats;
 int ims_per_page = 16;
 
 // main window
@@ -62,7 +62,7 @@ void start(int argc, char **argv){
 }
 
 void setupWindow(){
-  glutInitWindowPosition( 50, 50 );
+  glutInitWindowPosition( 0, 0 );
   window_height = 800;
   window_width = 800;
   glutInitWindowSize( window_width, window_height );
@@ -85,25 +85,24 @@ void askDataset(){
 }
 
 void loadDataset(string location){
-  classes = GLUI_Master.create_glui( "classes", 0, 950, 250 );
+  if(classes != 0)
+    classes->close();
+  classes = GLUI_Master.create_glui( "classes", 0, 800, 250 );
   delete currentdb;
   currentdb = new Dataset(location);
   vector<Category> * cats = currentdb->getCategories();
   size_t c = 0;
-  classes->add_button( "Print Enabled", 0, (GLUI_Update_CB)test );
-  classes->add_button( "Extract Descriptors", 0, (GLUI_Update_CB)extractFeatures );
-  classes->add_button( "Train", 0, (GLUI_Update_CB)train);
-  classes->add_button( "Classify", 0, (GLUI_Update_CB)classify);
-  classes->add_column(true);
+  //  classes->add_column(true);
+  GLUI_Panel * pan = classes->add_panel("categories");
   if(currentdb != NULL){
     for(size_t i = 0; i < cats->size(); ++i){
-      classes->add_checkbox(
-			    (const char *)cats->at(i).getName().c_str(),
-			    cats->at(i).getEnabled(),
-			    1, (GLUI_Update_CB) NULL);
+      classes->add_checkbox_to_panel( pan,
+				      (const char *)cats->at(i).getName().c_str(),
+				      cats->at(i).getEnabled(),
+				      1, (GLUI_Update_CB) viewDataset);
       c++;
       if(c%34==0)
-	classes->add_column(false);
+	classes->add_column_to_panel(pan, false);
     }
   }
 }
@@ -171,14 +170,14 @@ void myGlutIdle( void )
 }
 
 void initGlui(){
-  glui = GLUI_Master.create_glui( "Control", 0, 950, 50 );
+  glui = GLUI_Master.create_glui( "Control", 0, 800, 0 );
   busytxt = glui->add_statictext( "waiting" ); 
   GLUI_Panel * load_panel = glui->add_panel("load");
   glui->add_button_to_panel(load_panel, "Quit", 0,(GLUI_Update_CB)quitf );
   glui->add_button_to_panel(load_panel, "Load Picture", 0, (GLUI_Update_CB)loadPicture );
   glui->add_button_to_panel(load_panel, "Load Dataset", 0, (GLUI_Update_CB)askDataset );
   glui->add_button_to_panel(load_panel, "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
-  glui->add_column(true);
+  glui->add_column(false);
   GLUI_Panel * view_panel = glui->add_panel("view");
   glui->add_button_to_panel(view_panel, "Refresh", 0, (GLUI_Update_CB)viewDataset );
   glui->add_statictext_to_panel(view_panel, "Images Per Page:" ); 
@@ -192,7 +191,13 @@ void initGlui(){
   aap->add_item(states::Correct, "Correct");
   aap->add_item(states::Incorrect, "Incorr.");
   aap->add_item(states::Particular_Category, "Sel. Cat.");
-  selected_class_listbox = glui->add_listbox_to_panel(view_panel, "part. class:", &selected_class, 0, (GLUI_Update_CB)viewDataset);
+  selected_class_listbox = glui->add_listbox_to_panel(view_panel, "part. class:", &selected_class, 0, (GLUI_Update_CB)selectAndShow);
+  glui->add_column(false);
+  GLUI_Panel * ml_panel = glui->add_panel("ML");
+  glui->add_button_to_panel(ml_panel, "Print Enabled", 0, (GLUI_Update_CB)test );
+  glui->add_button_to_panel(ml_panel, "Extract Descriptors", 0, (GLUI_Update_CB)extractFeatures );
+  glui->add_button_to_panel(ml_panel, "Train", 0, (GLUI_Update_CB)train);
+  glui->add_button_to_panel(ml_panel, "Classify", 0, (GLUI_Update_CB)classify);
   glui->set_main_gfx_window(main_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
@@ -285,6 +290,8 @@ void classify(){
   cout << "im here, " << test_data.size() << "vs" << test_result.size();
   delete cur_eval;
   cur_eval = new Evaluation(&test_data, &test_result);
+  viewDataset();
+  showStatistics();
 }
 
 void extractFeatures(){
@@ -295,3 +302,24 @@ void extractFeatures(){
   busytxt->set_text("done");
 }
 
+void selectAndShow(){
+  ds = states::Particular_Category;
+  viewDataset();
+}
+ 
+ void showStatistics(){
+   if(stats != NULL)
+     stats->close();
+   stats = GLUI_Master.create_glui("statistics", 0, 1125, 0);
+   {
+     stringstream strstr;
+     strstr  << "Instances: " << cur_eval->getInstances() << endl;
+     stats->add_statictext(strstr.str().c_str());
+   }
+   {
+     stringstream strstr;
+     strstr  << "Correct: " << cur_eval->getCorrect() << endl;
+     stats->add_statictext(strstr.str().c_str());
+   }
+
+ }

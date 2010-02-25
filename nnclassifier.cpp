@@ -1,7 +1,6 @@
 #include "nnclassifier.h"
 
 #define PrepareMatrices(dps)						\
-  cout << "arma" << endl;						\
   size_t rows, cols;							\
   vector<float> sample;							\
   readDescriptor(&sample, dps->at(0).getDescriptorURL());		\
