@@ -13,6 +13,7 @@ Evaluation::Evaluation(vector<DataPoint> * dps, vector<int> * cls){
       correct++;
     classificationmap[cls->at(i)].push_back(&dps->at(i));
   }
+  precision = (float) correct  / (float ) instances ;
   cout << instances << endl;
 }
 

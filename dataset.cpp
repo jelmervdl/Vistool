@@ -79,15 +79,23 @@ vector<Category*> Dataset::getEnabled(){
   return enabled;
 }
 
+size_t Dataset::smallestCategory(){
+  vector<Category*> enabled = getEnabled();
+  size_t min = 0;
+  for(vector<Category*>::iterator cat = enabled.begin();
+      cat != enabled.end(); ++cat)
+    if(min > (*cat)->getDataPoints()->size() || min == 0)
+      min = (*cat)->getDataPoints()->size();
+  return min;
+}
+
+
 void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test, 
 		     float cut, bool eqrep){
   vector<Category*> enabled = getEnabled();
   size_t min = 0;
   if(eqrep)
-    for(vector<Category*>::iterator cat = enabled.begin();
-	cat != enabled.end(); ++cat)
-      if(min > (*cat)->getDataPoints()->size() || min == 0)
-	min = (*cat)->getDataPoints()->size();
+    min = smallestCategory();
   for(vector<Category*>::iterator cat = enabled.begin();
       cat != enabled.end(); ++cat){
     vector<DataPoint> * dps = (*cat)->getDataPoints();
@@ -106,4 +114,20 @@ void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test,
   }
 }
 
+vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
+  size_t min = smallestCategory();
+  vector<Category*> enabled = getEnabled();
+  vector<DataPoint*> result;
+  for(size_t i = 0; i < enabled.size(); ++ i){
+    Category * ccat = enabled[i];
+    vector<DataPoint*> dps = VisionCore::ptrDeMorgan(ccat->getDataPoints());  
+    random_shuffle(dps.begin(), dps.end());
+    size_t max = min;
+    if(!eqrep)
+      max = dps.size();
+    for(size_t i = 0; i < max; ++i)
+      result.push_back(dps[i]);
+  }
+  return result;
+}
 

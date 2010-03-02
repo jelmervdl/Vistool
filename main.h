@@ -17,6 +17,11 @@
 #include "dataset.h"
 #include "test.h"
 
+// c libraries 
+extern "C" {
+   #include "sift.h"
+}
+
 void printLibraries ();
 #endif
 

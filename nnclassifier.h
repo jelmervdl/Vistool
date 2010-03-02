@@ -16,9 +16,9 @@ class NNClassifier:public Classifier{
  public:
   NNClassifier(size_t n);
   void clean();
-  void        train   (vector<DataPoint> * files);
+  void train(vector<DataPoint*> dps);
   int         classify(DataPoint* point);
-  vector<int> classify(vector<DataPoint> * point);
+  vector<int> classify(vector<DataPoint*> point);
   ~NNClassifier();
 };
 

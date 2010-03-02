@@ -1,6 +1,7 @@
 #ifndef DATASET_H
 #define DATASET_H
 
+#include "core.h"
 #include "category.h"
 #include <vector>
 #include <string>
@@ -27,11 +28,15 @@ class Dataset{
   void enableCategory(string str);
 
   vector<Category> * getCategories();
-  string getRoot();
   vector<Category*> getEnabled();
+
+  string getRoot();
+  size_t smallestCategory();
 
   void print();
   void printEnabled();
+
+  vector<DataPoint*> enabledDataPoints(bool eqrep= true);
   void rSplit(vector<DataPoint> * train, vector<DataPoint> * test, float cut, bool eqrep = true);
 
   Dataset(string rt);

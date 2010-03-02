@@ -50,4 +50,6 @@ void train();
 void selectAndShow();
 void classify();
 void showStatistics();
+void evaluateClassifier();
+
 #endif

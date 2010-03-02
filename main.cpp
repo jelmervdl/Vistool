@@ -9,27 +9,15 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
+  VlSiftFilt * a =  vl_sift_new(10,10,5,5,0);
+  //vl_sift_calc_raw_descriptor();
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
   start(argc, argv);
 
-  Dataset dset ("/Users/mauricemulder/workspace/datasets/caltech101/");
-  dset.enableCategory("airplanes");
-  dset.enableCategory("accordion");
-
-  FeatureExtractor * f = FeatureExtractor::getInstance();
-  NNClassifier n(1);
-  vector<DataPoint> train, test;
-  dset.rSplit(&train, &test, 0.7);
-  f->saveDescriptorsToFile(&dset);
-  n.train(&train);
-  vector<int> rob = n.classify(&test);
-  for(vector<int>::iterator it = rob.begin(); it != rob.end(); ++it)
-      cout << *it;
-  cout << endl;    
 }
 
-void printLibraries(){
+void Libraries(){
   printf("Using Library: %s %d\n", "boost", 1);
   printf("Using Library: %s %d\n", "glui", 1);
   printf("Using Library: %s %d\n", "glut", 1);

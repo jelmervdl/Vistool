@@ -3,8 +3,8 @@
 #define PrepareMatrices(dps)						\
   size_t rows, cols;							\
   vector<float> sample;							\
-  readDescriptor(&sample, dps->at(0).getDescriptorURL());		\
-  rows = dps->size();							\
+  readDescriptor(&sample, dps.at(0)->getDescriptorURL());		\
+  rows = dps.size();							\
   cols = sample.size();							\
   CvMat * tmat = cvCreateMat(rows, cols, CV_32FC1);			\
   CvMat * labs = cvCreateMat(rows, 1, CV_32FC1);			\
@@ -24,15 +24,15 @@ void NNClassifier::clean(){
 
 NNClassifier::NNClassifier(size_t n): k(n) {}
 
-void NNClassifier::train(vector<DataPoint> * dps){
+void NNClassifier::train(vector<DataPoint*> dps){
   PrepareMatrices(dps);
   knn = new CvKNearest(tmat, labs);  
 }
 
-vector<int>  NNClassifier::classify(vector<DataPoint> * datapoints){
+vector<int>  NNClassifier::classify(vector<DataPoint*> datapoints){
   vector<int> classes;
   PrepareMatrices(datapoints);
-  CvMat * results = cvCreateMat(datapoints->size(),1,CV_32FC1);
+  CvMat * results = cvCreateMat(datapoints.size(),1,CV_32FC1);
   knn->find_nearest(tmat, 1, results);
   Mat  res(results, 0);
   classes.resize(results->rows);
@@ -47,7 +47,7 @@ int  NNClassifier::classify(DataPoint * datapoint){
     cout << "trying to classify without training at all" << endl;
     return 0;
   }
-  vector<DataPoint> dv;
-  dv.push_back(*datapoint);
-  return classify(&dv)[0];
+  vector<DataPoint*> dv;
+  dv.push_back(datapoint);
+  return classify(dv)[0];
 }

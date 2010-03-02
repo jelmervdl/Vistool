@@ -51,14 +51,14 @@ void FeatureExtractor::renewDescriptor(DataPoint * dp){
   } 
 }
 
-void FeatureExtractor::getCVMatrices(vector <DataPoint> * dps, CvMat * training,
+void FeatureExtractor::getCVMatrices(vector <DataPoint*>  dps, CvMat * training,
 				     CvMat *  labs){
   Mat labels(labs, 0);
   Mat tmatrix(training, 0);
-  for(size_t row = 0; row < dps->size(); ++row){
+  for(size_t row = 0; row < dps.size(); ++row){
     vector<float> desc;
-    readDescriptor(&desc, dps->at(row).getDescriptorURL());
-    labels.at<int>(row,0) = dps->at(row).getLabel();
+    readDescriptor(&desc, dps.at(row)->getDescriptorURL());
+    labels.at<int>(row,0) = dps.at(row)->getLabel();
     for(size_t col = 0; col < desc.size(); ++col ){
       tmatrix.at<float>(row,col) = desc[col];
     }

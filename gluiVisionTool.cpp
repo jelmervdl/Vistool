@@ -107,10 +107,6 @@ void loadDataset(string location){
   }
 }
 
-void test(){
-  currentdb->print();
-}
-
 void loadPicture(){
   dm = states::Single_Image;
   glutSetWindow(main_window);
@@ -194,10 +190,10 @@ void initGlui(){
   selected_class_listbox = glui->add_listbox_to_panel(view_panel, "part. class:", &selected_class, 0, (GLUI_Update_CB)selectAndShow);
   glui->add_column(false);
   GLUI_Panel * ml_panel = glui->add_panel("ML");
-  glui->add_button_to_panel(ml_panel, "Print Enabled", 0, (GLUI_Update_CB)test );
-  glui->add_button_to_panel(ml_panel, "Extract Descriptors", 0, (GLUI_Update_CB)extractFeatures );
-  glui->add_button_to_panel(ml_panel, "Train", 0, (GLUI_Update_CB)train);
-  glui->add_button_to_panel(ml_panel, "Classify", 0, (GLUI_Update_CB)classify);
+  glui->add_button_to_panel(ml_panel, "Get Descriptors", 0, (GLUI_Update_CB)extractFeatures );
+  glui->add_button_to_panel(ml_panel, "Evaluate", 0, (GLUI_Update_CB)evaluateClassifier);
+  //glui->add_button_to_panel(ml_panel, "Train", 0, (GLUI_Update_CB)train);
+  //glui->add_button_to_panel(ml_panel, "Classify", 0, (GLUI_Update_CB)classify);
   glui->set_main_gfx_window(main_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
@@ -262,6 +258,12 @@ void nextPage(){
   display();
 }
 
+void evaluateClassifier(){
+  extractFeatures();
+  train();
+  classify();
+}
+
 void train(){
   extractFeatures();
   train_data.clear();
@@ -287,7 +289,6 @@ void classify(){
   if(current_classifier == NULL)
     train();
   test_result = current_classifier->classify(&test_data);
-  cout << "im here, " << test_data.size() << "vs" << test_result.size();
   delete cur_eval;
   cur_eval = new Evaluation(&test_data, &test_result);
   viewDataset();
@@ -319,6 +320,11 @@ void selectAndShow(){
    {
      stringstream strstr;
      strstr  << "Correct: " << cur_eval->getCorrect() << endl;
+     stats->add_statictext(strstr.str().c_str());
+   }
+   {
+     stringstream strstr;
+     strstr  << "Performance: " << cur_eval->getPrecision() << endl;
      stats->add_statictext(strstr.str().c_str());
    }
 

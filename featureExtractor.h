@@ -34,7 +34,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   void saveDescriptorsToFile(Dataset * ds);
   vector<string> createAndSaveDescriptors(vector<Category> * particip);
   void renewDescriptor(DataPoint * db);
-  void getCVMatrices(vector<DataPoint> * dos, CvMat * training, CvMat *  labels);
+  void getCVMatrices(vector<DataPoint*> dps, CvMat * training, CvMat *  labels);
 };
 
 #endif

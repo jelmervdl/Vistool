@@ -3,8 +3,10 @@
 
 #include <vector>
 #include <map>
-#include "dataPoint.h"
 #include <iostream>
+#include <algorithm>
+#include "dataPoint.h"
+#include "dataset.h"
 
 class Evaluation{
  private:
@@ -24,6 +26,8 @@ class Evaluation{
   float getTval();
 
   vector<DataPoint*> getInstancesClassifiedAs(int cl);
+
+  static Evaluation kCrossFoldValidation(size_t times, Dataset * ds, bool eqrep = true);
 };
 
 
