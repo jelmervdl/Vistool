@@ -15,6 +15,8 @@ class Evaluation{
   float recall;
   float precision;
   float tval;
+  map<int, int> map_correct_to_label;
+  map<int, int> map_total_to_label;
   map< int, vector<DataPoint*> > classificationmap;
  public:
   Evaluation(vector<DataPoint> * dps, vector<int> * classification);
@@ -26,6 +28,9 @@ class Evaluation{
   float getTval();
 
   vector<DataPoint*> getInstancesClassifiedAs(int cl);
+
+  map<int, int> getCorrectMap();
+  map<int, int> getTotalMap();
 
   static Evaluation kCrossFoldValidation(size_t times, Dataset * ds, bool eqrep = true);
 };

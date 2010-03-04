@@ -27,6 +27,7 @@ Dataset::Dataset(string str): root(str){
 	  root = (string) itr->path().file_string().c_str();
 	  catname = (string) itr->path().filename().c_str();
 	  Category newcat(catname, root, label);
+	  names[label] = catname;
 	  for ( directory_iterator sitr(itr->path()); sitr != end_itr; ++sitr){
 	    if(is_image((string)sitr->path().extension())){
 	      string filename = (string) sitr->path().filename().c_str();
@@ -131,3 +132,6 @@ vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
   return result;
 }
 
+string Dataset::getCatName(size_t cat){
+  return names[cat];
+}

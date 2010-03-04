@@ -13,11 +13,13 @@
 #include <iterator>
 #include "dataPoint.h"
 #include "fileManagement.h"
+#include <map>
 
 using namespace std;
 
 class Dataset{
  private:
+  map<size_t, string> names;
   vector<Category> categories;
   string root;
  public:
@@ -29,6 +31,8 @@ class Dataset{
 
   vector<Category> * getCategories();
   vector<Category*> getEnabled();
+
+  string getCatName(size_t cat);
 
   string getRoot();
   size_t smallestCategory();

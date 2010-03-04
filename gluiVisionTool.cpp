@@ -327,5 +327,15 @@ void selectAndShow(){
      strstr  << "Performance: " << cur_eval->getPrecision() << endl;
      stats->add_statictext(strstr.str().c_str());
    }
+   // show confusion info
+   map<int,int> cormap = cur_eval->getCorrectMap();
+   map<int, int> totmap = cur_eval->getTotalMap();
+   for(map<int, int>::iterator it = cormap.begin();
+       it!= cormap.end(); ++it){
+     stringstream strstr;
+     strstr  << (*it).first << "." <<  currentdb->getCatName((*it).first) 
+	     << " " << (*it).second <<  "/" << totmap[(*it).first] << endl;
+     stats->add_statictext(strstr.str().c_str());
+   }
 
  }

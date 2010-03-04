@@ -19,7 +19,9 @@ Histogram::Histogram(){
   cout << "making histogram" << endl;
 }
 
-vector<float> Histogram::extract(MyImage * image){
+vector<float> Histogram::extract(MyImage * image, 
+				 bool saveVisualRepresentation,
+				 string vis_rep_loc){
   Mat * hsv = image->getOpenCVMat();
   Parameters * p = Parameters::getInstance();
   if(!p->hasHistogram()){
@@ -50,11 +52,15 @@ vector<float> Histogram::extract(MyImage * image){
       {
 	float binVal = hist.at<float>(h, s);
 	data.push_back(binVal);
-	int intensity = cvRound(binVal*255/maxVal);
-	rectangle( histImg, Point(h*scale, s*scale),
+	if(saveVisualRepresentation){
+	  int intensity = cvRound(binVal*255/maxVal);
+	  rectangle( histImg, Point(h*scale, s*scale),
 		     Point( (h+1)*scale - 1, (s+1)*scale - 1),
 		     Scalar::all(intensity),
 		     CV_FILLED );
+	}
       }
+  if(saveVisualRepresentation)
+    imwrite(vis_rep_loc, histImg);
   return data;
 }

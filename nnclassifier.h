@@ -9,7 +9,7 @@
 
 using namespace std;
 
-jkdjksadclass NNClassifier:public Classifier{
+class NNClassifier:public Classifier{
  private:
   CvKNearest * knn;
   size_t k;
