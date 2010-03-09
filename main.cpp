@@ -12,14 +12,20 @@ int main(int argc, char ** argv){
   //InitializeMagick(*argv);
   MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");
   Image image = *im.getMagickImage();
+  size_t width, height;
+  height = image.baseRows();
+  width = image.baseColumns();
   image.type(Magick::GrayscaleType);
-  Blob blb;
-  image.write(&blb);
-  cout << image.baseColumns() <<  " " << image.baseRows() << endl;
-  cout << blb[0] <<  blb.length() << endl;
-
-  image.write( "red_pixel.png" );
-  
+  Pixels view(image);
+  PixelPacket * pixel = view.get(0, 0, width, height);
+  int max = 0;
+  for(size_t y = 0; y < height; ++y){
+    for(size_t x = 0; x < width; ++x){
+      PixelPacket * p = pixel + x + y * width;
+      if(p->red > max) max = p->red;
+    }      
+  }
+  cout << max << endl; 
   return 0;
    
 

@@ -27,7 +27,7 @@ Dataset::Dataset(string str): root(str){
 	  root = (string) itr->path().file_string().c_str();
 	  catname = (string) itr->path().filename().c_str();
 	  Category newcat(catname, root, label);
-	  names[label] = catname;
+	  category_names[label] = catname;
 	  for ( directory_iterator sitr(itr->path()); sitr != end_itr; ++sitr){
 	    if(is_image((string)sitr->path().extension())){
 	      string filename = (string) sitr->path().filename().c_str();
@@ -91,7 +91,7 @@ size_t Dataset::smallestCategory(){
 }
 
 
-void Dataset::rSplit(vector<DataPoint> * train, vector<DataPoint> * test, 
+void Dataset::randomDataSplit(vector<DataPoint> * train, vector<DataPoint> * test, 
 		     float cut, bool eqrep){
   vector<Category*> enabled = getEnabled();
   size_t min = 0;
@@ -133,5 +133,5 @@ vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
 }
 
 string Dataset::getCatName(size_t cat){
-  return names[cat];
+  return category_names[cat];
 }

@@ -32,12 +32,12 @@ all: TAGS $(Target)
 	$(Cpp_Comp) $(Global) -c $(Cpp_Flags) -o $@ $< $(Head_Path)
 
 #Java objects
-src/compiled/%.class: src/%.java
+$(Java_objdir)%.class: $(Java_srcdir)%.java
 	@echo "\nCompiling: Java Class $@"
 	javac -classpath $(CLASSPATH) -d $(Java_objdir) $<
 
 #Java headers
-src/%.h: src/%.java 
+$(Java_srcdir)%.h:$(Java_srcdir)%.java 
 	@echo "\nCompiling: Java Header $*"
 	javah -classpath $(CLASSPATH2) -jni -o  $@ $(Java_Target)
 

@@ -19,7 +19,7 @@ using namespace std;
 
 class Dataset{
  private:
-  map<size_t, string> names;
+  map<size_t, string> category_names;
   vector<Category> categories;
   string root;
  public:
@@ -41,7 +41,7 @@ class Dataset{
   void printEnabled();
 
   vector<DataPoint*> enabledDataPoints(bool eqrep= true);
-  void rSplit(vector<DataPoint> * train, vector<DataPoint> * test, float cut, bool eqrep = true);
+  void randomDataSplit(vector<DataPoint> * train, vector<DataPoint> * test, float cut, bool eqrep = true);
 
   Dataset(string rt);
 };
