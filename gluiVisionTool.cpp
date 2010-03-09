@@ -307,35 +307,33 @@ void selectAndShow(){
   ds = states::Particular_Category;
   viewDataset();
 }
- 
- void showStatistics(){
-   if(stats != NULL)
-     stats->close();
-   stats = GLUI_Master.create_glui("statistics", 0, 1125, 0);
-   {
-     stringstream strstr;
-     strstr  << "Instances: " << cur_eval->getInstances() << endl;
-     stats->add_statictext(strstr.str().c_str());
-   }
-   {
-     stringstream strstr;
-     strstr  << "Correct: " << cur_eval->getCorrect() << endl;
-     stats->add_statictext(strstr.str().c_str());
-   }
-   {
+
+void showStatistics(){
+  if(stats != NULL)
+    stats->close();
+  stats = GLUI_Master.create_glui("statistics", 0, 1125, 0);
+  {
+    stringstream strstr;
+    strstr  << "Instances: " << cur_eval->getInstances() << endl;
+    stats->add_statictext(strstr.str().c_str());
+  } {
+    stringstream strstr;
+    strstr  << "Correct: " << cur_eval->getCorrect() << endl;
+    stats->add_statictext(strstr.str().c_str());
+  } {
      stringstream strstr;
      strstr  << "Performance: " << cur_eval->getPrecision() << endl;
      stats->add_statictext(strstr.str().c_str());
-   }
+  }
    // show confusion info
-   map<int,int> cormap = cur_eval->getCorrectMap();
-   map<int, int> totmap = cur_eval->getTotalMap();
-   for(map<int, int>::iterator it = cormap.begin();
-       it!= cormap.end(); ++it){
-     stringstream strstr;
+  map<int,int> cormap = cur_eval->getCorrectMap();
+  map<int, int> totmap = cur_eval->getTotalMap();
+  for(map<int, int>::iterator it = cormap.begin();
+      it!= cormap.end(); ++it){
+    stringstream strstr;
      strstr  << (*it).first << "." <<  currentdb->getCatName((*it).first) 
 	     << " " << (*it).second <<  "/" << totmap[(*it).first] << endl;
      stats->add_statictext(strstr.str().c_str());
-   }
-
+  }
+  
  }

@@ -13,6 +13,7 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_VL       = -lvl
 
 #Configed Libs
+	#Lib_Magickpp = `GraphicsMagick-config --cppflags --cflags --ldflags --libs`
 	Lib_Magickpp = `Magick++-config --cppflags --cxxflags --ldflags --libs`
 
 #Libraries
@@ -22,7 +23,8 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_Xerces   = -lxerces-c
 
 #Header include path
-	Head_Path += -I/usr/local/include 
+	Head_Path += -I/usr/local/include
+	Head_Path += -I/usr/local/include/ImageMagick/
 	Head_Path += -I/opt/local/include 
 	Head_Path += -I./sift/include
 	Head_Path += -I/System/Library/Frameworks/Carbon.framework/Headers
@@ -34,12 +36,9 @@ ifeq ("$(shell uname)", "Darwin")
 
 #Library paths
 	Lib_Path  +=  -L/opt/local/lib 
+	Lib_Path  +=  -L/usr/local/lib 
 #	Lib_Path  +=  -L/Users/mauricemulder/Downloads/vlfeat/bin/maci64
 #	Head_Path  += -I/Users/mauricemulder/Downloads/vlfeat/vl
 
 endif
 ##################################################################
-
-
-
-

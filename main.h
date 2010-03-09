@@ -16,6 +16,7 @@
 #include "myImage.h"
 #include "dataset.h"
 #include "test.h"
+#include <Magick++.h>
 
 // c libraries 
 extern "C" {
