@@ -1,27 +1,7 @@
 # main
 Sources = main.cpp 
 Obj-c_Sources = fd.mm
-Sources += texture.cpp
-Sources += dataPoint.cpp
-Sources += dataset.cpp
-Sources += glTexture.cpp
-Sources += gluiVisionTool.cpp
-Sources += jniKalooga.cpp
-Sources += fileManagement.cpp
-Sources += parameters.cpp
-Sources += featureExtractor.cpp
-Sources += classifier.cpp
-Sources += nnclassifier.cpp
-Sources += category.cpp
-Sources += descriptorWriter.cpp
-Sources += myImage.cpp
-Sources += ocvConvert.cpp
-Sources += test.cpp
-Sources += feature.cpp
-Sources += histogram.cpp
-Sources += singleton.cpp
-Sources += core.cpp
-Sources += evaluation.cpp
+Sources = $(wildcard *.cpp)
 #object
 Objects = $(Sources:.cpp=.o)
 Cpp_Headers = $(Sources:.cpp=.h)

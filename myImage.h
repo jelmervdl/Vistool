@@ -6,7 +6,7 @@
 #include "parameters.h"
 #include "cv.h"
 #include "highgui.h"
-
+#include "matrix.h"
 
 #include <string>
 
@@ -14,19 +14,19 @@ using namespace std;
 using namespace cv;
 using namespace Magick;
 
-
-
 class MyImage{
  private:
   string location;
   Image * magick;
   Blob * blob;
   Mat * mat;
+  Matrix <float> * grayscale;
  public:
   Image  *getMagickImage();
   string getLocation();
-  Mat *getOpenCVMat();
   Blob *getBlob();
+  Mat * getOpenCVMat();
+  Matrix<float> * getGrayscaleMatrix();
   MyImage(string loc);
   ~MyImage();
 };
