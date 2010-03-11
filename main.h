@@ -18,7 +18,7 @@
 #include "test.h"
 #include <Magick++.h>
 #include "sift.h"
-
+#include "gradient.h"
 void printLibraries ();
 #endif
 

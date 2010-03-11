@@ -1,5 +1,5 @@
 #include "main.h"
-
+ 
 using namespace xercesc;
 int main(int argc, char ** argv){
   if(argc > 1){
@@ -9,27 +9,16 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
-  Matrix<float> matrix(3,3);
-  *matrix.at(0, 0) = 1.0;
-  *matrix.at(0, 1) = 2.0;
-  *matrix.at(0, 2) = 3.0;
-  *matrix.at(1, 0) = 1.0;
-  *matrix.at(1, 1) = 2.0;
-  *matrix.at(1, 2) = 3.0;
-  *matrix.at(2, 0) = 1.0;
-  *matrix.at(2, 1) = 2.0;
-  *matrix.at(2, 2) = 3.0;
-
-  matrix.print();
+  Matrix<float> matrix(10,10);
+  for(size_t x = 0 ; x < 10; ++x)
+    for(size_t y = 0; y < 10; ++ y)
+      *matrix.at(x, y) = x / 9.0 + y / 18.0;
+ matrix.print();
+ Matrix<Gradient> gradient = imageGradient(&matrix);
+ gradient.print();
 
 
-  SiftDescriptor sif;
-  float magnitude, orientation;
-  sif.calculateGradient(matrix, 1,1, &magnitude, &orientation);
-  cout << "magnitude: " << magnitude << 
-    " orientation: " << orientation / 3.14 << endl;
-
-
+  
   //MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");
   //Matrix<float> * gray =  im.getGrayscaleMatrix();
   /*
