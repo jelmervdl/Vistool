@@ -17,11 +17,7 @@
 #include "dataset.h"
 #include "test.h"
 #include <Magick++.h>
-
-// c libraries 
-extern "C" {
-   #include "sift.h"
-}
+#include "sift.h"
 
 void printLibraries ();
 #endif

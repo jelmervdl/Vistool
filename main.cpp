@@ -9,8 +9,29 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
-  MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");
-  Matrix<float> * gray =  im.getGrayscaleMatrix();
+  Matrix<float> matrix(3,3);
+  *matrix.at(0, 0) = 1.0;
+  *matrix.at(0, 1) = 2.0;
+  *matrix.at(0, 2) = 3.0;
+  *matrix.at(1, 0) = 1.0;
+  *matrix.at(1, 1) = 2.0;
+  *matrix.at(1, 2) = 3.0;
+  *matrix.at(2, 0) = 1.0;
+  *matrix.at(2, 1) = 2.0;
+  *matrix.at(2, 2) = 3.0;
+
+  matrix.print();
+
+
+  SiftDescriptor sif;
+  float magnitude, orientation;
+  sif.calculateGradient(matrix, 1,1, &magnitude, &orientation);
+  cout << "magnitude: " << magnitude << 
+    " orientation: " << orientation / 3.14 << endl;
+
+
+  //MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");
+  //Matrix<float> * gray =  im.getGrayscaleMatrix();
   /*
   Image image = *im.getMagickImage();
   size_t width, height;

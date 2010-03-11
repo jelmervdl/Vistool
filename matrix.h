@@ -10,6 +10,8 @@ template<class Type> class Matrix{
   Type * values;
   size_t width, height;
  public:
+  size_t get_width();
+  size_t get_height();
   Matrix(size_t width_, size_t height_);
   Type * at(size_t x, size_t y);
   void print(); 
@@ -26,11 +28,18 @@ template <class Type> Type * Matrix<Type>::at(size_t x, size_t y){
 template <class Type> void Matrix<Type>::print(){
   for(size_t x = 0; x < width; ++x){
     for (size_t y = 0; y < height; ++y){
-      cout << (values[x + y * width] > 0.5);
+      cout << values[x + y * width];
       }
     cout << endl;
   }
 }
 
+template <class Type> size_t Matrix<Type>::get_width(){
+  return width;
+}
+
+template <class Type> size_t Matrix<Type>::get_height(){
+  return height;
+}
 
 #endif
