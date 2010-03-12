@@ -20,13 +20,12 @@ class MyImage{
   Image * magick;
   Blob * blob;
   Mat * mat;
-  Matrix <float> * grayscale;
  public:
   Image  *getMagickImage();
   string getLocation();
   Blob *getBlob();
   Mat * getOpenCVMat();
-  Matrix<float> * getGrayscaleMatrix();
+  Matrix<float> getGrayscaleMatrix();
   MyImage(string loc);
   ~MyImage();
 };

@@ -42,7 +42,9 @@ Gradient singleGradient(Matrix<float> * image,
 }
 
 Matrix<Gradient> imageGradient(Matrix<float> * image ){
+  cout << "hello" << endl;
   size_t width = image->get_width(), height = image->get_height();
+  cout << "width " << width << " height " << height << endl;
   Matrix<Gradient> gradient_image(width-2, height-2);
   for(size_t x = 1; x < image->get_width() - 1; ++x)
     for(size_t y = 1; y < image->get_height() - 1; ++y)

@@ -9,14 +9,31 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
+  /*
   Matrix<float> matrix(10,10);
   for(size_t x = 0 ; x < 10; ++x)
     for(size_t y = 0; y < 10; ++ y)
       *matrix.at(x, y) = x / 9.0 + y / 18.0;
- matrix.print();
+      */
+  MyImage im ("../datasets/caltech101/schooner/image_0025.jpg");
+  Matrix<float>  matrix =  im.getGrayscaleMatrix();
+  cout << matrix.get_height() << endl;
+  cout << "1" << endl;
  Matrix<Gradient> gradient = imageGradient(&matrix);
- gradient.print();
-
+  cout << "2" << endl;
+ Image drawGradients(
+		     Geometry(gradient.get_width(), gradient.get_height()),
+		     Color("black"));
+ for(size_t x = 0; x < gradient.get_width(); ++x){
+   for(size_t y = 0; y < gradient.get_height(); ++y){
+     float magn = gradient.at(x,y)->get_magnitude();
+     //cout << magn << endl;
+     ColorGray set_color(magn);
+     drawGradients.pixelColor(x, y, set_color);
+   }
+ }
+ 
+ drawGradients.write("grads.jpg");
 
   
   //MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");

@@ -17,7 +17,7 @@ class Gradient{
   float magnitude;
   float orientation;
   friend std::ostream& operator<<(std::ostream& os, const Gradient& p){
-    return os << "ma: " << p.magnitude << ", or: " << p.orientation;
+    return os << p.magnitude;
   }
  public:
   float get_magnitude();

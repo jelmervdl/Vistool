@@ -61,20 +61,18 @@ MyImage::~MyImage(){
 }
 
 
-Matrix<float> * MyImage::getGrayscaleMatrix(){
-  if(grayscale == NULL){
-    Image * magick_image = getMagickImage();
-    size_t width, height;
-    width = magick_image->columns();
-    height = magick_image->rows();
-    cout << "width: " << width << " height: " << height << endl;
-    grayscale = new Matrix<float>(width, height);
-    for(size_t x = 0; x < width; ++x){
-      for(size_t y = 0; y < height; ++y){
-	*grayscale->at(x,y) = ((ColorGray) magick_image->pixelColor(x,y)).shade();
+Matrix<float> MyImage::getGrayscaleMatrix(){
+  Image * magick_image = getMagickImage();
+  size_t width, height;
+  cout << "width " << width << " height " << height << endl;
+  width = magick_image->columns();
+  height = magick_image->rows();
+  cout << "width: " << width << " height: " << height << endl;
+  Matrix<float> grayscale (width, height);
+  for(size_t x = 0; x < width; ++x){
+    for(size_t y = 0; y < height; ++y){
+      *grayscale.at(x,y) = ((ColorGray) magick_image->pixelColor(x,y)).shade();
       }
-    }
-    grayscale->print();
   }
   return grayscale;
 }
