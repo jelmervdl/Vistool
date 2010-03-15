@@ -30,6 +30,6 @@ class Gradient{
 Gradient singleGradient(Matrix<float> * image, 
 			size_t center_pixel_x, size_t center_pixel_y); 
 Matrix<Gradient> imageGradient(Matrix<float> * image);
-
+void bin(Gradient * gradient, vector<float> * bins);
 
 #endif

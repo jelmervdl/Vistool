@@ -9,13 +9,15 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
+
+
   /*
   Matrix<float> matrix(10,10);
   for(size_t x = 0 ; x < 10; ++x)
     for(size_t y = 0; y < 10; ++ y)
       *matrix.at(x, y) = x / 9.0 + y / 18.0;
       */
-  MyImage im ("../datasets/caltech101/schooner/image_0025.jpg");
+  MyImage im ("../datasets/caltech101/airplanes/image_0025.jpg");
   Matrix<float>  matrix =  im.getGrayscaleMatrix();
   cout << matrix.get_height() << endl;
   cout << "1" << endl;
@@ -24,10 +26,12 @@ int main(int argc, char ** argv){
  Image drawGradients(
 		     Geometry(gradient.get_width(), gradient.get_height()),
 		     Color("black"));
+ vector<float> b;
+ b.resize(12);
  for(size_t x = 0; x < gradient.get_width(); ++x){
    for(size_t y = 0; y < gradient.get_height(); ++y){
+     bin(gradient.at(x,y), &b);
      float magn = gradient.at(x,y)->get_magnitude();
-     //cout << magn << endl;
      ColorGray set_color(magn);
      drawGradients.pixelColor(x, y, set_color);
    }
@@ -35,7 +39,10 @@ int main(int argc, char ** argv){
  
  drawGradients.write("grads.jpg");
 
-  
+ //binning algorithm
+
+ for(size_t i = 0; i < b.size(); ++i)
+   cout << "i:" << b[i] << endl;
   //MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");
   //Matrix<float> * gray =  im.getGrayscaleMatrix();
   /*

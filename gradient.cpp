@@ -1,5 +1,6 @@
 #include "gradient.h"
 
+#define PI 3.14159265
 
 Gradient::Gradient(float magnitude_, float orientation_)
   :magnitude(magnitude_), orientation(orientation_){
@@ -50,4 +51,33 @@ Matrix<Gradient> imageGradient(Matrix<float> * image ){
     for(size_t y = 1; y < image->get_height() - 1; ++y)
       *gradient_image.at(x - 1, y - 1) = singleGradient(image, x, y);
   return gradient_image;
+}
+
+void bin(Gradient * gradient, vector<float> * bin_values){
+  float angle = gradient->get_orientation() / PI;
+  size_t bins = bin_values->size();
+  float bin_size = 2.0 / bins;
+  float angle_min = angle - (0.5 * bin_size);
+  float angle_max = angle + (0.5 * bin_size);
+
+  if(angle_min > 1.0)
+    angle_min -= 2.0;
+ if(angle_min < -1.0)
+   angle_min += 2.0;
+
+ if(angle_max > 1.0)
+   angle_max -= 2.0;
+ if(angle_max < -1.0)
+   angle_max += 2.0;
+
+ for(size_t bin = 0; bin < bins; ++bin){
+   float bin_max = 1.0 - bin * bin_size;
+   float bin_min = 1.0 - (bin + 1) * bin_size;
+   float share = 0.0;
+   if(angle_min >= bin_min && angle_min <= bin_max)
+     share = ((bin_max - angle_min) / bin_size) * gradient->get_magnitude();
+   else if(angle_max >= bin_min && angle_max <= bin_max)
+     share = ((angle_max - bin_min) / bin_size) * gradient->get_magnitude();
+   bin_values->at(bin) += share;   
+ }
 }
