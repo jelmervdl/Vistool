@@ -41,8 +41,10 @@ class Dataset{
   void printEnabled();
 
   vector<DataPoint*> enabledDataPoints(bool eqrep= true);
-  void randomDataSplit(vector<DataPoint> * train, vector<DataPoint> * test, float cut, bool eqrep = true);
-
+  void randomDataSplit(vector<DataPoint> * train, 
+		       vector<DataPoint> * test, 
+		       float cut, 
+		       bool eqrep = true);
   Dataset(string rt);
 };
 
