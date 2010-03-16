@@ -32,7 +32,7 @@ int main(int argc, char ** argv){
   vector< vector<float> > descriptors(keypoints.size());
   Image magick_image = *im.getMagickImage();
   int orientations = 16;
-  int window = 20;
+  int window = 10;
   for(size_t i = 0 ; i < keypoints.size(); ++i){
     descriptors[i] = sift.getKeyPointDescriptor(&gradient, &keypoints[i], window, orientations);
     float bin_size = ((2 * PI) / orientations);
@@ -49,9 +49,9 @@ int main(int argc, char ** argv){
 	       angle / PI, sin(angle), cos(angle), descriptors[i][ori]);
 	magick_image.draw( DrawableLine(keypoints[i].get_center_x(),
 					keypoints[i].get_center_y(),
-					keypoints[i].get_center_x() + descriptors[i][ori] * 2 * sin(angle),
-					keypoints[i].get_center_y() - descriptors[i][ori] * 2 * cos(angle)));
-      }
+					keypoints[i].get_center_x() + descriptors[i][ori] * 1 * sin(angle),
+					keypoints[i].get_center_y() - descriptors[i][ori] * 1 * cos(angle)));
+      } 
     cout << endl;
   }
 
