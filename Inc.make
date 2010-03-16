@@ -1,11 +1,10 @@
 # main
-Sources = main.cpp 
-Obj-c_Sources = fd.mm
-Sources = $(wildcard *.cpp)
-#object
-Objects = $(Sources:.cpp=.o)
+Sources = $(wildcard $(SOURCE_DIRECTORY)/*.cpp)
 Cpp_Headers = $(Sources:.cpp=.h)
-Obj-c_Objects = $(Obj-c_Sources:.mm=.o)
+Objects = $(subst $(SOURCE_DIRECTORY), $(OBJECT_DIRECTORY), $(Sources:.cpp=.o))
+
+Obj-c_Sources = $(wildcard $(SOURCE_DIRECTORY)/*.mm)
+Obj-c_Objects = $(subst $(SOURCE_DIRECTORY), $(OBJECT_DIRECTORY), $(Obj-c_Sources:.mm=.o))
 
 #executable
 Target = machineVisionTool
@@ -26,6 +25,6 @@ Java_Objs = $(Java_Libs) $(Java_objdir)
 CLASSPATH = $(subst $(space),:, $(Java_Libs))
 CLASSPATH2 = $(subst $(space),:, $(Java_Objs))
 
-Java_Headers = $(Java_srcdir)imageHandling.h
+Java_Headers = $(SOURCE_DIRECTORY)/imageHandling.h
 
 DescriptorLocation = desc/

@@ -1,3 +1,7 @@
+SOURCE_DIRECTORY = src
+OBJECT_DIRECTORY = obj
+VPATH = $(SOURCE_DIRECTORY)
+
 include Lib.make
 include Inc.make
 
@@ -22,12 +26,12 @@ Linker = $(Cpp_Comp)
 all: TAGS $(Target) 
 
 #C++ objects
-%.o: %.cpp %.h
+$(Objects): $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.cpp $(SOURCE_DIRECTORY)/%.h
 	@echo "\nCompiling: c++ object $@"
 	$(Cpp_Comp) $(Global) -c $(Cpp_Flags) -o $@ $< $(Head_Path)
 
 #Objective-c objects
-%.o: %.mm %.h
+$(Obj-c_Objects): $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.mm $(SOURCE_DIRECTORY)/%.h
 	@echo "\nCompiling: objective-c object $@"
 	$(Cpp_Comp) $(Global) -c $(Cpp_Flags) -o $@ $< $(Head_Path)
 
@@ -37,13 +41,13 @@ $(Java_objdir)%.class: $(Java_srcdir)%.java
 	javac -classpath $(CLASSPATH) -d $(Java_objdir) $<
 
 #Java headers
-$(Java_srcdir)%.h:$(Java_srcdir)%.java 
+$(SOURCE_DIRECTORY)/%.h:$(Java_srcdir)%.java 
 	@echo "\nCompiling: Java Header $*"
 	javah -classpath $(CLASSPATH2) -jni -o  $@ $(Java_Target)
 
 #Target
 $(Target): $(Java_Objects) $(Java_Headers) $(Objects) $(Obj-c_Objects)
-	@echo "\nLinking: objects to $@"
+	@echo "\nLinking: objects to $@ $(Objects)"
 	 $(Linker) $(Global) $(Libraries) -o $(Target) $(Objects) $(Obj-c_Objects) $(Head_Path) $(Lib_Path)
 
 #Clean
@@ -52,10 +56,10 @@ clean:
 	rm -f $(Objects) 
 
 cleanall: clean
-	@echo "\nRemoving: descriptors "
-	rm -r $(DescriptorLocation)*
 	@echo "\nRemoving: support files "
 	rm $(Obj-c_Objects) $(Java_Headers) $(Java_Objects)
+	@echo "\nRemoving: descriptors "
+	rm $(DescriptorLocation)*
 
 #Run
 run: all
