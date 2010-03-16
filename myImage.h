@@ -16,11 +16,14 @@ using namespace Magick;
 
 class MyImage{
  private:
+  size_t width, height;
   string location;
   Image * magick;
   Blob * blob;
   Mat * mat;
  public:
+  size_t get_width();
+  size_t get_height();
   Image  *getMagickImage();
   string getLocation();
   Blob *getBlob();

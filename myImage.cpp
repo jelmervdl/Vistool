@@ -4,6 +4,14 @@ using namespace std;
 using namespace Magick;
 using namespace cv;
 
+size_t MyImage::get_width(){
+  return width;
+}
+
+size_t MyImage::get_height(){
+  return height;
+}
+
 Image* MyImage::getMagickImage(){
   if(magick==NULL){
     magick = new Image(location);
@@ -49,6 +57,8 @@ MyImage::MyImage(string loc){
   magick = 0;
   blob = 0;
   mat = 0;
+  width = getMagickImage()->columns();
+  height = getMagickImage()->rows();
 }
 
 MyImage::~MyImage(){
@@ -64,10 +74,8 @@ MyImage::~MyImage(){
 Matrix<float> MyImage::getGrayscaleMatrix(){
   Image * magick_image = getMagickImage();
   size_t width, height;
-  cout << "width " << width << " height " << height << endl;
   width = magick_image->columns();
   height = magick_image->rows();
-  cout << "width: " << width << " height: " << height << endl;
   Matrix<float> grayscale (width, height);
   for(size_t x = 0; x < width; ++x){
     for(size_t y = 0; y < height; ++y){

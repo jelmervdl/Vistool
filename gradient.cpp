@@ -38,7 +38,7 @@ Gradient singleGradient(Matrix<float> * image,
        *image->at(center_pixel_x-1, center_pixel_y);
   dy = *image->at(center_pixel_x, center_pixel_y-1) - 
        *image->at(center_pixel_x, center_pixel_y+1);
-  return Gradient (sqrt(dx * dx + dy * dy), atan2( dy, dx));
+  return Gradient (sqrt(dx * dx + dy * dy), atan2( dx, dy));
 }
 
 Matrix<Gradient> imageGradient(Matrix<float> * image ){
@@ -59,17 +59,22 @@ void bin(Gradient * gradient, vector<float> * bin_values, float multiplier){
 
   angle_min = wrap(angle_min);
   angle_max = wrap(angle_max);
-
+  int a, b;
  for(size_t bin = 0; bin < bins; ++bin){
-   float bin_max = 1.0 - bin * bin_size;
-   float bin_min = 1.0 - (bin + 1) * bin_size;
+   float bin_min = bin * bin_size;
+   float bin_max = (bin + 1) * bin_size;
    float share = 0.0;
-   if(angle_min >= bin_min && angle_min <= bin_max)
+   if(angle_min >= bin_min && angle_min <= bin_max){
      share = ((bin_max - angle_min) / bin_size);
-   else if(angle_max >= bin_min && angle_max <= bin_max)
+     a = bin;
+   }
+   else if(angle_max >= bin_min && angle_max <= bin_max){
      share = ((angle_max - bin_min) / bin_size);
+     b = bin;
+   }
    bin_values->at(bin) += share * multiplier * gradient->get_magnitude();   
  }
+ // cout << "angle: " << angle << "at " << a <<  "and " << b << endl;
 }
 
 float wrap(float angle, float min, float max){

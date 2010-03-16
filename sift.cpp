@@ -14,15 +14,16 @@ vector<float> SiftDescriptor::extract(MyImage * my_image,
 
 
 
-vector<float> getKeyPointDescriptor(MyImage * my_image,
-				    sift::KeyPoint * keypoint){
-  size_t window_size = 10;
+vector<float> SiftDescriptor::getKeyPointDescriptor(MyImage * my_image,
+						    sift::KeyPoint * keypoint,
+						    size_t window_size,
+						    const int kOrientations){
   int 
     left  = keypoint->get_center_x() - window_size, 
     right = keypoint->get_center_x() + window_size, 
     up    = keypoint->get_center_y() - window_size,
     down  = keypoint->get_center_y() + window_size;
-  vector<float> bins(10);
+  vector<float> bins( kOrientations );
   Matrix<float> grayscale = my_image->getGrayscaleMatrix();
   Matrix<Gradient> gradient = imageGradient(&grayscale);
 

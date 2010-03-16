@@ -1,4 +1,6 @@
 #include "main.h"
+#define PI 3.14159265
+
 
 using namespace gradient;
  
@@ -11,7 +13,45 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
-  MyImage im ("../datasets/caltech101/airplanes/image_0005.jpg");
+ 
+  /* Radial guide:
+     0.0    -> ( 0,  1)
+     0.5 PI -> ( 1,  0)
+     1.0 PI -> ( 0, -1)   
+     1.5 PI -> (-1, -1)
+  */
+
+  MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");  
+  SiftDescriptor sift;
+  vector<sift::KeyPoint> keypoints 
+    = sift::divideIntoKeypoints( im.get_width(),
+				 im.get_height(),
+				 10, 10);
+  vector< vector<float> > descriptors(keypoints.size());
+  Image magick_image = *im.getMagickImage();
+  int orientations = 16;
+  for(size_t i = 0 ; i < keypoints.size(); ++i){
+    descriptors[i] = sift.getKeyPointDescriptor(&im, &keypoints[i], 10, orientations);
+    float bin_size = ((2 * PI) / orientations);
+    magick_image.strokeColor("red");
+    magick_image.strokeWidth(1);
+    for(int ori = 0; ori < orientations; ++ori)
+      {
+	float angle = (bin_size * (ori + 1)) - (0.5 * bin_size);
+
+	printf("angle: %.2f \t dx: %.2f dy %.2f \tbin val: %.2f\n", 
+	       angle / PI, sin(angle), cos(angle), descriptors[i][ori]);
+	magick_image.draw( DrawableLine(keypoints[i].get_center_x(),
+					keypoints[i].get_center_y(),
+					keypoints[i].get_center_x() + descriptors[i][ori] * 2 * sin(angle),
+					keypoints[i].get_center_y() - descriptors[i][ori] * 2 * cos(angle)));
+      }
+    cout << endl;
+  }
+
+  magick_image.write("output.png");
+  /*
+
   Matrix<float>  matrix =  im.getGrayscaleMatrix();
   cout << matrix.get_height() << endl;
   cout << "1" << endl;
@@ -35,19 +75,20 @@ int main(int argc, char ** argv){
    = sift::divideIntoKeypoints(gradient.get_width(),
 			       gradient.get_height(),
 			        10, 10);
+
+
  for(vector<sift::KeyPoint>::iterator kp = keypoints.begin();
      kp != keypoints.end();
      ++kp)
    size_t descriptor_window = 15;
-
-
+ 
  drawGradients.write("grads.jpg");
 
  //binning algorithm
 
  for(size_t i = 0; i < b.size(); ++i)
    cout << "i:" << b[i] << endl;
-
+  */
   return 0;
 }
 
