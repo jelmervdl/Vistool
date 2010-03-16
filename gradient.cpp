@@ -56,25 +56,25 @@ void bin(Gradient * gradient, vector<float> * bin_values, float multiplier){
   float bin_size = 2.0 / bins;
   float angle_min = angle - (0.5 * bin_size);
   float angle_max = angle + (0.5 * bin_size);
-
+  
   angle_min = wrap(angle_min);
   angle_max = wrap(angle_max);
-  int a, b;
- for(size_t bin = 0; bin < bins; ++bin){
-   float bin_min = bin * bin_size;
-   float bin_max = (bin + 1) * bin_size;
-   float share = 0.0;
-   if(angle_min >= bin_min && angle_min <= bin_max){
-     share = ((bin_max - angle_min) / bin_size);
-     a = bin;
-   }
-   else if(angle_max >= bin_min && angle_max <= bin_max){
-     share = ((angle_max - bin_min) / bin_size);
-     b = bin;
-   }
-   bin_values->at(bin) += share * multiplier * gradient->get_magnitude();   
- }
- // cout << "angle: " << angle << "at " << a <<  "and " << b << endl;
+
+  float bin_min;
+  float bin_max;
+  for(size_t bin = 0; bin < bins; ++bin){
+    bin_min = bin_max;
+    bin_max = (bin + 1) * bin_size;    
+    float share;
+    if(angle_min >= bin_min && angle_min <= bin_max){
+      share = ((bin_max - angle_min) / bin_size);
+      bin_values->at(bin) += share * multiplier * gradient->get_magnitude();   
+    }
+    else if(angle_max >= bin_min && angle_max <= bin_max){
+      share = ((angle_max - bin_min) / bin_size);
+      bin_values->at(bin) += share * multiplier * gradient->get_magnitude();   
+    }
+  }
 }
 
 float wrap(float angle, float min, float max){
@@ -82,7 +82,7 @@ float wrap(float angle, float min, float max){
   while(angle < min || angle > max){
     if(angle > max)
       angle -= period;
-    if(angle < min)
+    else if(angle < min)
       angle += period;
   }
   return angle;

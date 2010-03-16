@@ -21,7 +21,9 @@ int main(int argc, char ** argv){
      1.5 PI -> (-1, -1)
   */
 
-  MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");  
+  MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");
+  Matrix<float> grayscale = im.getGrayscaleMatrix();
+  Matrix<Gradient> gradient = imageGradient(&grayscale);  
   SiftDescriptor sift;
   vector<sift::KeyPoint> keypoints 
     = sift::divideIntoKeypoints( im.get_width(),
@@ -30,15 +32,19 @@ int main(int argc, char ** argv){
   vector< vector<float> > descriptors(keypoints.size());
   Image magick_image = *im.getMagickImage();
   int orientations = 16;
+  int window = 20;
   for(size_t i = 0 ; i < keypoints.size(); ++i){
-    descriptors[i] = sift.getKeyPointDescriptor(&im, &keypoints[i], 10, orientations);
+    descriptors[i] = sift.getKeyPointDescriptor(&gradient, &keypoints[i], window, orientations);
     float bin_size = ((2 * PI) / orientations);
+    magick_image.strokeColor("green");
+    magick_image.fillColor(Color());
+    magick_image.draw( DrawableCircle(keypoints[i].get_center_x(), keypoints[i].get_center_y(),
+				      keypoints[i].get_center_x() + window, keypoints[i].get_center_y() + window));
     magick_image.strokeColor("red");
     magick_image.strokeWidth(1);
     for(int ori = 0; ori < orientations; ++ori)
       {
 	float angle = (bin_size * (ori + 1)) - (0.5 * bin_size);
-
 	printf("angle: %.2f \t dx: %.2f dy %.2f \tbin val: %.2f\n", 
 	       angle / PI, sin(angle), cos(angle), descriptors[i][ori]);
 	magick_image.draw( DrawableLine(keypoints[i].get_center_x(),

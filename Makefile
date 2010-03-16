@@ -82,3 +82,8 @@ syntax-target: $(Objects)
 TAGS: $(Sources) $(Cpp_Headers)
 	rm TAGS
 	etags *.h *.cpp
+
+time: all
+	@echo "\nTiming: main application"
+	time ./$(Target)
+	@echo "Program ended."	

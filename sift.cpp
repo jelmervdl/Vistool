@@ -14,7 +14,7 @@ vector<float> SiftDescriptor::extract(MyImage * my_image,
 
 
 
-vector<float> SiftDescriptor::getKeyPointDescriptor(MyImage * my_image,
+vector<float> SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
 						    sift::KeyPoint * keypoint,
 						    size_t window_size,
 						    const int kOrientations){
@@ -24,17 +24,16 @@ vector<float> SiftDescriptor::getKeyPointDescriptor(MyImage * my_image,
     up    = keypoint->get_center_y() - window_size,
     down  = keypoint->get_center_y() + window_size;
   vector<float> bins( kOrientations );
-  Matrix<float> grayscale = my_image->getGrayscaleMatrix();
-  Matrix<Gradient> gradient = imageGradient(&grayscale);
 
-  if(left < 0 || right > (int) gradient.get_width() ||
-     up  < 0 || down > (int) gradient.get_height()){
+  if(left < 0 || right > (int) gradient->get_width() ||
+     up  < 0 || down > (int) gradient->get_height()){
     cout << "PROBLEM! keypoint out of bounds!" << endl;
     return bins;
   }
+  printf( "window: %d left: %d right %d\n", window_size, left, right);
   for(size_t x = left; x < (size_t) right; ++x){
     for(size_t y = up; y < (size_t) down; ++y){
-      gradient::bin(gradient.at(x,y),&bins, 1.0);
+      gradient::bin(gradient->at(x,y),&bins, 1.0);
     }
   }
 
