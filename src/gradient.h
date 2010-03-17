@@ -8,6 +8,7 @@
 #include <ostream>
 #include <iostream>
 #include <string>
+#include "descriptor.h"
 
 using namespace std;
 namespace gradient{
@@ -30,7 +31,7 @@ class Gradient{
 Gradient singleGradient(Matrix<float> * image, 
 			size_t center_pixel_x, size_t center_pixel_y); 
  Matrix<Gradient> imageGradient(Matrix<float> * image);
- void bin(Gradient * gradient, vector<float> * bins, float multiplier);
+ void bin(Gradient * gradient, vector<Descriptor> * bins, float multiplier);
  float wrap(float angle, float min = 0.0, float max = 2.0);
 }
 #endif

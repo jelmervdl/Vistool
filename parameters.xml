@@ -3,9 +3,22 @@
   <real>
     <hbins>30.5</hbins>
     <sbins>30.5</sbins>
+    <sift_blur_std> 2.0 </sift_blur_std>
   </real>
   <integer>
-    <sift_orientation_directions> 4 </sift_orientation_directions>
+
+  <!-- Sift variables :-->
+    <sift_blur_toggle> 0 </sift_blur_toggle>
+      <!-- wether pixels are blurred or not -->
+    <sift_orientation_directions> 8 </sift_orientation_directions>
+    <sift_number_of_keypoints_x> 10 </sift_number_of_keypoints_x>
+    <sift_number_of_keypoints_y> 10 </sift_number_of_keypoints_y>
+    <sift_histograms_per_keypoint> 2 </sift_histograms_per_keypoint>
+    <sift_keypoint_pixel_window> -1  </sift_keypoint_pixel_window> 
+      <!-- if -1 pixel window is -1 it will be determined automatically-->
+    <sift_blur_window> 10 </sift_blur_window>
+
+  <!-- histogram variables -->
     <hbins> 10 </hbins>
     <sbins> 10 </sbins>
   </integer>

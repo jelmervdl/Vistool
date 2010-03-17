@@ -19,6 +19,7 @@
 #include <Magick++.h>
 #include "sift.h"
 #include "gradient.h"
+#include "descriptor.h"
 void printLibraries ();
 #endif
 

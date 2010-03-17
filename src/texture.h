@@ -2,9 +2,10 @@
 #define TEXTURE_H
 
 #include <iostream>
-
+#include "matrix.h"
 #include "dataPoint.h"
 #include "glTexture.h"
+#include "gradient.h"
 
 class Texture{
  private:
@@ -15,6 +16,8 @@ class Texture{
  public:
   ~Texture();
   Texture(DataPoint * d, int window);
+  Texture(Matrix<float> * m, int window);
+  Texture(Matrix<gradient::Gradient> * m, int window);
   int getTXT();
   size_t getHeight();
   size_t getWidth();

@@ -13,14 +13,17 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
- 
+
+  //Parameters * p = Parameters::getInstance();
+  //p->readFile((char *) "parameters.xml");
+  // start(argc, argv);
   /* Radial guide:
      0.0    -> ( 0,  1)
      0.5 PI -> ( 1,  0)
      1.0 PI -> ( 0, -1)   
      1.5 PI -> (-1, -1)
   */
-
+  /*
   MyImage im ("../datasets/caltech101/accordion/image_0001.jpg");
   Matrix<float> grayscale = im.getGrayscaleMatrix();
   Matrix<Gradient> gradient = imageGradient(&grayscale);  
@@ -29,7 +32,7 @@ int main(int argc, char ** argv){
     = sift::divideIntoKeypoints( im.get_width(),
 				 im.get_height(),
 				 10, 10);
-  vector< vector<float> > descriptors(keypoints.size());
+  vector<  > descriptors(keypoints.size());
   Image magick_image = *im.getMagickImage();
   int orientations = 16;
   int window = 10;
@@ -56,6 +59,7 @@ int main(int argc, char ** argv){
   }
 
   magick_image.write("output.png");
+  */
   /*
 
   Matrix<float>  matrix =  im.getGrayscaleMatrix();

@@ -84,8 +84,9 @@ check-syntax:
 syntax-target: $(Objects)
 
 TAGS: $(Sources) $(Cpp_Headers)
-	rm TAGS
-	etags *.h *.cpp
+	rm $(SOURCE_DIRECTORY)/TAGS
+	etags $(SOURCE_DIRECTORY)/*.h $(SOURCE_DIRECTORY)/*.cpp -o $(SOURCE_DIRECTORY)/TAGS
+
 
 time: all
 	@echo "\nTiming: main application"

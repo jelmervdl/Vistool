@@ -5,6 +5,16 @@ Texture::Texture(DataPoint * d, int window): dp(d){
   initTexture(window, &txt, d->getImageURL(), &width, &height);
 }
 
+Texture::Texture(Matrix<float> * m, int window){
+  glGenTextures(1, &txt);
+  initTexture(window, &txt, m, &width, &height);
+}
+
+Texture::Texture(Matrix<gradient::Gradient> * m, int window){
+  glGenTextures(1, &txt);
+  initTexture(window, &txt, m, &width, &height);
+}
+
 int Texture::getTXT(){
   return txt;
 }
@@ -31,5 +41,6 @@ void Texture::draw(size_t window_size){
 
 Texture::~Texture(){
   using namespace std;
+  cout << "kileld a text" << endl;
   glDeleteTextures(1, &txt);
 }

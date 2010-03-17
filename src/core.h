@@ -6,6 +6,10 @@
 using namespace std;
 
 namespace states {
+  enum DisplayModifier{
+    No_Modifier,
+    Show_Gradient
+  };
   enum DatasetOnDisplay {
     Enabled_Datasets,
     Training_DataPoints,

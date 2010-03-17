@@ -4,10 +4,11 @@ using namespace std;
 
 states::DisplayMode      dm = states::Single_Image;
 states::DatasetOnDisplay ds = states::Enabled_Datasets;
+states::DisplayModifier display_modifier = states::No_Modifier;
 
 Dataset *           current_db;
 size_t              current_image_page = 0;
-vector <Texture>    textures;
+vector <Texture *>    textures;
 vector <DataPoint*> currently_view_datapoints; 
 vector <DataPoint>  train_data, test_data;
 vector <int>        test_result;
@@ -133,10 +134,10 @@ void display(void){
       glScalef(scale, scale, 0);
       size_t count  = 0;
       glPushMatrix();
-      for(vector<Texture>::iterator it = textures.begin();
+      for(vector<Texture *>::iterator it = textures.begin();
 	  it != textures.end();
 	  ++it){
-	it->draw(window_height);
+	(*it)->draw(window_height);
 	glTranslatef(800, 0, 0);
 	count++;
 	if(count == grid){
@@ -178,6 +179,9 @@ void initGlui(){
   main_gui->add_statictext_to_panel(view_panel, "Images Per Page:" ); 
   main_gui->add_spinner_to_panel(view_panel, "", GLUI_SPINNER_INT, &ims_per_page);
   main_gui->add_button_to_panel(view_panel, "Next Page", 0, (GLUI_Update_CB)nextPage );
+  GLUI_Listbox * image_mod = main_gui->add_listbox_to_panel(view_panel, "show:", (int*) &display_modifier);
+  image_mod->add_item(states::No_Modifier, "image");
+  image_mod->add_item(states::Show_Gradient, "gradient");
   GLUI_Listbox * aap = main_gui->add_listbox_to_panel(view_panel, "view:", (int*) &ds, 0, 
 					 (GLUI_Update_CB)viewDataset);
   aap->add_item(states::Enabled_Datasets, "Enabled");
@@ -242,10 +246,22 @@ void setViewSelection(){
 }
 
 void refreshTexture(size_t p){
+  using namespace gradient;
+  for(size_t i = 0; i < textures.size(); ++i)
+    delete textures[i];
   textures.clear();
-  for(size_t i = p; i < (size_t) ims_per_page + p && i < (size_t) currently_view_datapoints.size() ; ++i){
-    textures.push_back( *new Texture (currently_view_datapoints.at(i), image_display_window));
-  }
+  if(display_modifier == states::No_Modifier)
+    for(size_t i = p; i < (size_t) ims_per_page + p && i < (size_t) currently_view_datapoints.size() ; ++i)
+      textures.push_back(  new Texture (currently_view_datapoints.at(i), image_display_window));
+  if(display_modifier == states::Show_Gradient)
+    for(size_t i = p; i < (size_t) ims_per_page + p && i < (size_t) currently_view_datapoints.size() ; ++i){
+      MyImage im (currently_view_datapoints.at(i)->getImageURL());
+      Matrix<float> gray_image = im.getGrayscaleMatrix();
+      Matrix<Gradient> image_gradient = imageGradient(&gray_image);
+      cout << "in" << endl;
+      textures.push_back( new Texture(&image_gradient, image_display_window));
+      cout << "out" << endl;
+    }
   display();
 }
 
