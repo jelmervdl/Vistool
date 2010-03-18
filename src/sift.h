@@ -14,11 +14,12 @@ class SiftDescriptor:public Feature{
   vector<float> extract(MyImage * Image,
 			bool save_visual_representation = false,
 			string visual_representation_location = "rep.jpg");
-  vector<Descriptor> getKeyPointDescriptor(Matrix<gradient::Gradient> * gradient,
+  Descriptor getKeyPointDescriptor(Matrix<gradient::Gradient> * gradient,
 				    sift::KeyPoint * keypoint,
 				    const size_t window_size,
 				    const int kOrientations);
   vector<float> getSiftDescriptor(MyImage * my_image);
+  void drawKeyPoint(Image * draw_me, const int orientations, sift::KeyPoint * keypoint, Descriptor * descriptor, const int window);
 };
 
 

@@ -50,7 +50,7 @@ Matrix<Gradient> imageGradient(Matrix<float> * image ){
   return gradient_image;
 }
 
-void bin(Gradient * gradient, vector<Descriptor> * bin_values, float multiplier){
+void bin(Gradient * gradient, Descriptor * bin_values, float multiplier){
   float angle = gradient->get_orientation() / PI;
   size_t bins = bin_values->size();
   float bin_size = 2.0 / bins;

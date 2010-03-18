@@ -21,6 +21,7 @@ KeyPoint::KeyPoint(size_t x, size_t y, float s):
 
 vector<KeyPoint> sift::divideIntoKeypoints(size_t width, size_t height, 
 					   size_t x_points, size_t y_points){
+  printf("width %d height %d, \t xpoints: %d ypoints %d\n", (int) width, (int) height, (int) x_points, (int) y_points);
   float x_spacing = width / (float) (x_points);
   float y_spacing = height / (float) (y_points);
   vector<KeyPoint> keypoints;

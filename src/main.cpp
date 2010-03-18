@@ -13,10 +13,12 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
-
-  //Parameters * p = Parameters::getInstance();
-  //p->readFile((char *) "parameters.xml");
-  // start(argc, argv);
+Parameters * p = Parameters::getInstance();
+  p->readFile((char *) "parameters.xml");
+  SiftDescriptor f;
+  MyImage image("../datasets/caltech101/accordion/image_0001.jpg");
+  f.extract(&image, true, "out.jpg");
+    // start(argc, argv);
   /* Radial guide:
      0.0    -> ( 0,  1)
      0.5 PI -> ( 1,  0)
