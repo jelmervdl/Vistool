@@ -3,15 +3,15 @@
 using namespace std;
 using namespace sift;
 
-size_t KeyPoint::get_center_x(){
+size_t KeyPoint::get_center_x() const {
   return center_x;
 }
 
-size_t KeyPoint::get_center_y(){
+size_t KeyPoint::get_center_y() const{
   return center_y;
 }
 
-float KeyPoint::get_scale(){
+float KeyPoint::get_scale() const{
   return scale;
 }
 

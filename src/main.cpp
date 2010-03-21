@@ -2,8 +2,7 @@
 #define PI 3.14159265
 
 
-using namespace gradient;
- 
+using namespace gradient; 
 using namespace xercesc;
 int main(int argc, char ** argv){
   if(argc > 1){
@@ -13,7 +12,7 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
-Parameters * p = Parameters::getInstance();
+  Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
   SiftDescriptor f;
   MyImage image("../datasets/caltech101/accordion/image_0001.jpg");

@@ -11,7 +11,7 @@ vector<float> SiftDescriptor::extract(MyImage * my_image,
   Descriptor descriptor;
   Parameters * parameters = Parameters::getInstance();
   Matrix<float> grayscale = my_image->getGrayscaleMatrix();
-  Matrix<Gradient> gradient = imageGradient(&grayscale);
+  Matrix<Gradient> gradient = imageGradient(grayscale);
 
   //get Parameters
   const int orientations = parameters->getiParameter("sift_orientation_directions");
@@ -38,10 +38,11 @@ vector<float> SiftDescriptor::extract(MyImage * my_image,
   for(vector<sift::KeyPoint>::iterator keypoint = keypoints.begin();
       keypoint != keypoints.end(); ++keypoint){ 
     Descriptor new_descriptor = getKeyPointDescriptor( &gradient, &(*keypoint),  window, 
-						      orientations);
+						       orientations);
+    
     descriptor = descriptor + new_descriptor;
     if(save_visual_representation){
-      this->drawKeyPoint(&draw_me, orientations, &*keypoint, &new_descriptor, window);
+      this->drawKeyPoint(draw_me, orientations, *keypoint, new_descriptor, window);
     }
   }
   draw_me.write(visual_representation_location); 
@@ -50,24 +51,24 @@ vector<float> SiftDescriptor::extract(MyImage * my_image,
 
 
 
-void SiftDescriptor::drawKeyPoint(Image * draw_me, const int orientations,
-				   sift::KeyPoint * keypoint, Descriptor * descriptor, const int window){
-  draw_me->strokeColor("green");
-  draw_me->draw( DrawableCircle(keypoint->get_center_x(), 
-			       keypoint->get_center_y(),
-			       keypoint->get_center_x() + window, 
-			       keypoint->get_center_y() ));
+void SiftDescriptor::drawKeyPoint(Image &draw_me, const int &orientations,
+				  const sift::KeyPoint &keypoint, 
+				  const Descriptor &descriptor, 
+				  const int &window){
+  draw_me.strokeColor("green");
+  int origin_x = keypoint.get_center_x();
+  int origin_y = keypoint.get_center_y();
+  draw_me.draw( DrawableCircle(origin_x, origin_y, origin_x + window, origin_y ));
   float bin_size = ((2 * PI) / orientations);
-  draw_me->strokeColor("red");
+  draw_me.strokeColor("red");
   for(int ori = 0; ori < orientations; ++ori){
     float angle = (bin_size * (ori + 1)) - (0.5 * bin_size);
-    draw_me->draw( DrawableLine(keypoint->get_center_x(), keypoint->get_center_y(),
-			       keypoint->get_center_x() + descriptor->at(ori) / window * 5 * sin(angle),
-			       keypoint->get_center_y() - descriptor->at(ori) / window * 5 * cos(angle)));
+    int end_x = origin_x + descriptor.at(ori) / window * 5 * sin(angle);
+    int end_y = origin_y - descriptor.at(ori) / window * 5 * cos(angle);
+    draw_me.draw( DrawableLine( origin_x, origin_y, end_x, end_y));
   }
-}
-  
 
+}
 
 Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
 						    sift::KeyPoint * keypoint,
@@ -85,7 +86,8 @@ Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
   }
   for(size_t x = left; x < (size_t) right; ++x){
     for(size_t y = up; y < (size_t) down; ++y){
-      gradient::bin(gradient->at(x,y),&bins, 1.0);
+      gradient::bin(*gradient->at(x,y), 
+		    bins, 1.0);
     }
   }
   return bins;

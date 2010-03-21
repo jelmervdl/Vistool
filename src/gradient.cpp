@@ -11,18 +11,19 @@ Gradient::Gradient(){
 };
 
 
-float Gradient::get_magnitude(){
+float Gradient::get_magnitude() const{
   return magnitude;
 }
 
-float Gradient::get_orientation(){
+float Gradient::get_orientation() const{
   return orientation;
 }
 
-Gradient singleGradient(Matrix<float> * image, 
-		    size_t center_pixel_x, size_t center_pixel_y){
+Gradient singleGradient(const Matrix<float>& image, 
+			const size_t &center_pixel_x,
+			const size_t &center_pixel_y){
   //Parameters * parameters = Parameters::getInstance();
-  size_t width = image->get_width(), height = image->get_height();
+  size_t width = image.get_width(), height = image.get_height();
 
   if(center_pixel_x > width - 1 || center_pixel_x < 1 
      || center_pixel_y > height - 1 || center_pixel_y < 1){
@@ -34,25 +35,27 @@ Gradient singleGradient(Matrix<float> * image,
   }
 
   float dx,dy; // dx is the gradient to the right, dy is the gradient to the bottom.
-  dx = *image->at(center_pixel_x+1, center_pixel_y) - 
-       *image->at(center_pixel_x-1, center_pixel_y);
-  dy = *image->at(center_pixel_x, center_pixel_y-1) - 
-       *image->at(center_pixel_x, center_pixel_y+1);
+  dx = image.valueAt(center_pixel_x+1, center_pixel_y) - 
+       image.valueAt(center_pixel_x-1, center_pixel_y);
+  dy = image.valueAt(center_pixel_x, center_pixel_y-1) - 
+       image.valueAt(center_pixel_x, center_pixel_y+1);
   return Gradient (sqrt(dx * dx + dy * dy), atan2( dx, dy));
 }
 
-Matrix<Gradient> imageGradient(Matrix<float> * image ){
-  size_t width = image->get_width(), height = image->get_height();
+Matrix<Gradient> imageGradient(const Matrix<float> &image ){
+  size_t width = image.get_width(), height = image.get_height();
   Matrix<Gradient> gradient_image(width-2, height-2);
-  for(size_t x = 1; x < image->get_width() - 1; ++x)
-    for(size_t y = 1; y < image->get_height() - 1; ++y)
+  for(size_t x = 1; x < image.get_width() - 1; ++x)
+    for(size_t y = 1; y < image.get_height() - 1; ++y){
+      Gradient grad = singleGradient(image, x, y);
       *gradient_image.at(x - 1, y - 1) = singleGradient(image, x, y);
+    }
   return gradient_image;
 }
 
-void bin(Gradient * gradient, Descriptor * bin_values, float multiplier){
-  float angle = gradient->get_orientation() / PI;
-  size_t bins = bin_values->size();
+void bin(Gradient &gradient, Descriptor &bin_values, const float &multiplier){
+  float angle = gradient.get_orientation() / PI;
+  size_t bins = bin_values.size();
   float bin_size = 2.0 / bins;
   float angle_min = angle - (0.5 * bin_size);
   float angle_max = angle + (0.5 * bin_size);
@@ -68,16 +71,16 @@ void bin(Gradient * gradient, Descriptor * bin_values, float multiplier){
     float share;
     if(angle_min >= bin_min && angle_min <= bin_max){
       share = ((bin_max - angle_min) / bin_size);
-      bin_values->at(bin) += share * multiplier * gradient->get_magnitude();   
+      bin_values.at(bin) += share * multiplier * gradient.get_magnitude();
     }
     else if(angle_max >= bin_min && angle_max <= bin_max){
       share = ((angle_max - bin_min) / bin_size);
-      bin_values->at(bin) += share * multiplier * gradient->get_magnitude();   
+      bin_values.at(bin) += share * multiplier * gradient.get_magnitude();   
     }
   }
 }
 
-float wrap(float angle, float min, float max){
+float wrap(float angle, const float &min, const float &max){
   float period = max - min;
   while(angle < min || angle > max){
     if(angle > max)

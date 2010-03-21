@@ -21,18 +21,19 @@ class Gradient{
     return os << p.magnitude;
   }
  public:
-  float get_magnitude();
-  float get_orientation();
+  float get_magnitude() const;
+  float get_orientation() const;
   Gradient();
   Gradient(float magnitude_, float orientation_);
 
 };
 
-Gradient singleGradient(Matrix<float> * image, 
-			size_t center_pixel_x, size_t center_pixel_y); 
- Matrix<Gradient> imageGradient(Matrix<float> * image);
- void bin(Gradient * gradient, Descriptor * bins, float multiplier);
- float wrap(float angle, float min = 0.0, float max = 2.0);
+ Gradient singleGradient(const Matrix<float> &image, 
+			 const size_t &center_pixel_x,
+			 const size_t &center_pixel_y); 
+ Matrix<Gradient> imageGradient(const Matrix<float>  &image);
+ void bin(Gradient &gradient, Descriptor  &bins, const float &multiplier);
+ float wrap(float angle, const float &min = 0.0, const float &max = 2.0);
 }
 #endif
 

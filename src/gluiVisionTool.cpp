@@ -257,7 +257,7 @@ void refreshTexture(size_t p){
     for(size_t i = p; i < (size_t) ims_per_page + p && i < (size_t) currently_view_datapoints.size() ; ++i){
       MyImage im (currently_view_datapoints.at(i)->getImageURL());
       Matrix<float> gray_image = im.getGrayscaleMatrix();
-      Matrix<Gradient> image_gradient = imageGradient(&gray_image);
+      Matrix<Gradient> image_gradient = imageGradient(gray_image);
       cout << "in" << endl;
       textures.push_back( new Texture(&image_gradient, image_display_window));
       cout << "out" << endl;

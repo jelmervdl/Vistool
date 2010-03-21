@@ -17,9 +17,9 @@ class KeyPoint{
   float angle;
  public:
   KeyPoint(size_t x, size_t y, float scale);
-  size_t get_center_x();
-  size_t get_center_y();
-  float get_scale();
+  size_t get_center_x() const;
+  size_t get_center_y() const;
+  float get_scale() const;
 };
 
 
