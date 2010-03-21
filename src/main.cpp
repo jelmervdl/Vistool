@@ -1,22 +1,6 @@
 #include "main.h"
 #define PI 3.14159265
 
-class Test{
-private:
-  int value;
-public:
-  int& get() {
-    return value;
-  };
-  int get() const{
-    return value;
-  };
-};
-
-void funcy(const Test &tst){
-  cout << tst.get() << endl;
-};
-
 using namespace gradient; 
 using namespace xercesc;
 int main(int argc, char ** argv){
@@ -27,17 +11,12 @@ int main(int argc, char ** argv){
       return 0;
     }
   }
- Test aap;
- aap.get() = 5;
- cout << "aap" << aap.get() << endl;
- funcy(aap);
-
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
   SiftDescriptor f;
   MyImage image("../datasets/caltech101/accordion/image_0001.jpg");
   f.extract(&image, true, "out.jpg");
-    // start(argc, argv);
+  start(argc, argv);
   /* Radial guide:
      0.0    -> ( 0,  1)
      0.5 PI -> ( 1,  0)

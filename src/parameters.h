@@ -13,11 +13,11 @@
 #include <xercesc/sax/HandlerBase.hpp>
 #include <xercesc/util/XMLString.hpp>
 
-
 using namespace std;
 
 class Parameters:public Singleton <Parameters>{
   friend class Singleton<Parameters>;
+  friend class ParameterPanel;
  protected:
   Parameters();
  private:

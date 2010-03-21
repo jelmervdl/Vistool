@@ -18,7 +18,6 @@ class SiftDescriptor:public Feature{
 				    sift::KeyPoint * keypoint,
 				    const size_t window_size,
 				    const int kOrientations);
-  //  vector<float> getSiftDescriptor(MyImage * my_void)
   void drawKeyPoint(Image &draw_me, const int &orientations,
 		    const sift::KeyPoint &keypoint, 
 		    const Descriptor &descriptor, const int &window);

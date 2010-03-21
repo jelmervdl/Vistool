@@ -6,6 +6,7 @@ states::DisplayMode      dm = states::Single_Image;
 states::DatasetOnDisplay ds = states::Enabled_Datasets;
 states::DisplayModifier display_modifier = states::No_Modifier;
 
+ParameterPanel *    parameter_panel;
 Dataset *           current_db;
 size_t              current_image_page = 0;
 vector <Texture *>    textures;
@@ -166,6 +167,7 @@ void myGlutIdle( void )
 }
 
 void initGlui(){
+  parameter_panel = new ParameterPanel();
   main_gui = GLUI_Master.create_glui( "Control", 0, 800, 0 );
   busytxt = main_gui->add_statictext( "waiting" ); 
   GLUI_Panel * load_panel = main_gui->add_panel("load");

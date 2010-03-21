@@ -6,8 +6,13 @@ using namespace cv;
 using namespace boost::filesystem;
 
 FeatureExtractor::FeatureExtractor(){
-  Histogram * hist = (Histogram *) Histogram::getInstance();
-  features.push_back(hist);
+  Parameters *parameters = Parameters::getInstance();
+  if(parameters->getiParameter("feature_histogram") > 0){
+    Histogram *hist = (Histogram *) Histogram::getInstance();
+    features.push_back(hist);
+  }
+  //if(parameters->getiParameter("feature_sift") > 0){
+  //SiftDescriptor
 }
 
 vector<float> FeatureExtractor::getDescriptor(DataPoint * dp ){

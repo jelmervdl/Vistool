@@ -18,6 +18,7 @@
 #include "texture.h"
 #include "core.h"
 #include "evaluation.h"
+#include "parameterPanel.h"
 
 //start the gui app:
 void start(int argc, char ** argv);

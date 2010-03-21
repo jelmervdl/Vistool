@@ -7,6 +7,10 @@
   </real>
   <integer>
 
+  <!-- Enabled Features: -->
+    <feature_histogram> 0 </feature_histogram>
+    <feature_sift> 1 </feature_sift>
+
   <!-- Sift variables :-->
     <sift_blur_toggle> 0 </sift_blur_toggle>
       <!-- wether pixels are blurred or not -->
