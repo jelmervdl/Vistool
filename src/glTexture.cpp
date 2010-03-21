@@ -56,7 +56,7 @@ void initTexture(int window, GLuint * texName, Matrix<float> * matrix, size_t * 
   cout << "made empty im " << endl;
   for(size_t x = 0; x < matrix->get_width(); ++x)
     for(size_t y = 0; y < matrix->get_height(); ++y)
-      draw_Image.pixelColor(x, y, ColorGray(*matrix->at(x,y)));
+      draw_Image.pixelColor(x, y, ColorGray(matrix->at(x,y)));
   cout << "done " << endl;
   Blob blob;
   draw_Image.write(&blob);
@@ -73,7 +73,7 @@ void initTexture(int window, GLuint * texName, Matrix<Gradient> * matrix, size_t
   cout << "made empty im " << endl;
   for(size_t x = 0; x < matrix->get_width(); ++x)
     for(size_t y = 0; y < matrix->get_height(); ++y)
-      draw_Image.pixelColor(x, y, ColorGray(matrix->at(x,y)->get_magnitude()));
+      draw_Image.pixelColor(x, y, ColorGray(matrix->at(x,y).get_magnitude()));
   cout << "done " << endl;
   Blob blob;
   draw_Image.write(&blob);

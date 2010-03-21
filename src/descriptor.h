@@ -14,6 +14,7 @@ class Descriptor: public vector<float>{
   Descriptor();
   Descriptor(vector<float> a);
   Descriptor(int size);
+  void print() const;
 
 };
 

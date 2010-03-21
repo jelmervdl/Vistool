@@ -79,7 +79,7 @@ Matrix<float> MyImage::getGrayscaleMatrix(){
   Matrix<float> grayscale (width, height);
   for(size_t x = 0; x < width; ++x){
     for(size_t y = 0; y < height; ++y){
-      *grayscale.at(x,y) = ((ColorGray) magick_image->pixelColor(x,y)).shade();
+      grayscale.at(x,y) = ((ColorGray) magick_image->pixelColor(x,y)).shade();
       }
   }
   return grayscale;

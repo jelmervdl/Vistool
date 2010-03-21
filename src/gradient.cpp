@@ -35,10 +35,10 @@ Gradient singleGradient(const Matrix<float>& image,
   }
 
   float dx,dy; // dx is the gradient to the right, dy is the gradient to the bottom.
-  dx = image.valueAt(center_pixel_x+1, center_pixel_y) - 
-       image.valueAt(center_pixel_x-1, center_pixel_y);
-  dy = image.valueAt(center_pixel_x, center_pixel_y-1) - 
-       image.valueAt(center_pixel_x, center_pixel_y+1);
+  dx = image.at(center_pixel_x+1, center_pixel_y) - 
+       image.at(center_pixel_x-1, center_pixel_y);
+  dy = image.at(center_pixel_x, center_pixel_y-1) - 
+       image.at(center_pixel_x, center_pixel_y+1);
   return Gradient (sqrt(dx * dx + dy * dy), atan2( dx, dy));
 }
 
@@ -48,7 +48,7 @@ Matrix<Gradient> imageGradient(const Matrix<float> &image ){
   for(size_t x = 1; x < image.get_width() - 1; ++x)
     for(size_t y = 1; y < image.get_height() - 1; ++y){
       Gradient grad = singleGradient(image, x, y);
-      *gradient_image.at(x - 1, y - 1) = singleGradient(image, x, y);
+      gradient_image.at(x - 1, y - 1) = singleGradient(image, x, y);
     }
   return gradient_image;
 }

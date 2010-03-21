@@ -13,10 +13,10 @@ template<class Type> class Matrix{
   ~Matrix();
   size_t get_width() const;
   size_t get_height() const;
-  Type valueAt(size_t x, size_t y) const;
+  Type at(size_t x, size_t y) const;
   void print() const; 
   Matrix(size_t width_, size_t height_);
-  Type * at(size_t x, size_t y);
+  Type& at(size_t x, size_t y);
 };
 
 template <class Type> Matrix<Type>::~Matrix(){
@@ -28,11 +28,11 @@ template <class Type> Matrix<Type>::Matrix(size_t width_,
   values = new Type[width * height];
 }
 
-template <class Type> Type * Matrix<Type>::at(size_t x, size_t y){
-    return &values[x + width * y];
+template <class Type> Type& Matrix<Type>::at(size_t x, size_t y){
+    return values[x + width * y];
 }
 
-template <class Type> Type Matrix<Type>::valueAt(size_t x, size_t y) const {
+template <class Type> Type Matrix<Type>::at(size_t x, size_t y) const {
     return values[x + width * y];
 }
 
