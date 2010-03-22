@@ -252,17 +252,22 @@ void refreshTexture(size_t p){
   for(size_t i = 0; i < textures.size(); ++i)
     delete textures[i];
   textures.clear();
+  // display images.
   if(display_modifier == states::No_Modifier)
     for(size_t i = p; i < (size_t) ims_per_page + p && i < (size_t) currently_view_datapoints.size() ; ++i)
       textures.push_back(  new Texture (currently_view_datapoints.at(i), image_display_window));
+  // display their gradients
   if(display_modifier == states::Show_Gradient)
     for(size_t i = p; i < (size_t) ims_per_page + p && i < (size_t) currently_view_datapoints.size() ; ++i){
       MyImage im (currently_view_datapoints.at(i)->getImageURL());
       Matrix<float> gray_image = im.getGrayscaleMatrix();
       Matrix<Gradient> image_gradient = imageGradient(gray_image);
-      cout << "in" << endl;
       textures.push_back( new Texture(&image_gradient, image_display_window));
-      cout << "out" << endl;
+    }
+  if(display_modifier == states::Show_Sift)
+    for(size_t i = p; i < (size_t) ims_per_page + p && 
+	  i < (size_t) currently_view_datapoints.size(); ++i){
+      MyImage im (currently_view_datapoints.at(i)->getImageURL());
     }
   display();
 }

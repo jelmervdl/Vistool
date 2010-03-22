@@ -1,5 +1,6 @@
 #include "parameterPanel.h"
 
+
 ParameterPanel::ParameterPanel() {
   Parameters *parameters = Parameters::getInstance();
   panel = GLUI_Master.create_glui("parameters", 0, 800, 0);
@@ -24,3 +25,4 @@ void ParameterPanel::setupIntVariables(map<string, int> &int_parameters){
 					  (void *) &it->second));
   }
 }
+

@@ -8,7 +8,8 @@ using namespace std;
 namespace states {
   enum DisplayModifier{
     No_Modifier,
-    Show_Gradient
+    Show_Gradient,
+    Show_Sift
   };
   enum DatasetOnDisplay {
     Enabled_Datasets,
