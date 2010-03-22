@@ -64,10 +64,10 @@ void bin(Gradient &gradient, Descriptor &bin_values, const float &multiplier){
   angle_max = wrap(angle_max);
 
   float bin_min;
-  float bin_max;
+  float bin_max = 0;
   for(size_t bin = 0; bin < bins; ++bin){
     bin_min = bin_max;
-    bin_max = (bin + 1) * bin_size;    
+    bin_max = (bin + 1) * bin_size;
     float share;
     if(angle_min >= bin_min && angle_min <= bin_max){
       share = ((bin_max - angle_min) / bin_size);

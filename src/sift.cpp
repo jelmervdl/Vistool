@@ -79,8 +79,8 @@ void SiftDescriptor::drawKeyPoint(Image &draw_me, const int &orientations,
       draw_me.strokeColor("red");
       for(int ori = 0; ori < orientations; ++ori){
 	float angle = (bin_size * (ori + 1)) - (0.5 * bin_size);
-	int end_x = origin_x + descriptor.at(ori) / window * 5 * sin(angle);
-	int end_y = origin_y - descriptor.at(ori) / window * 5 * cos(angle);
+	int end_x = origin_x + descriptor.at(ori) / window * 25 * sin(angle);
+	int end_y = origin_y - descriptor.at(ori) / window * 25 * cos(angle);
 	draw_me.draw( DrawableLine( origin_x, origin_y, end_x, end_y));
       }
     }
