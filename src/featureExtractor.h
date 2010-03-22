@@ -9,7 +9,7 @@
 #include "descriptorWriter.h"
 #include "dataset.h"
 #include "histogram.h"
-#include "singleton.h"
+#include "sift.h"
 
 using namespace cv;
 using namespace Magick;

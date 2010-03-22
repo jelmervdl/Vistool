@@ -7,6 +7,7 @@ using namespace gradient;
 vector<float> SiftDescriptor::extract(MyImage *my_image,
 			bool save_visual_representation,
 			Image *canvas){
+  cout << "making sift descriptor" << endl;
   //Arrange structures
   Descriptor descriptor;
   Parameters * parameters = Parameters::getInstance();

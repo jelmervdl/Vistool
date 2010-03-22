@@ -9,7 +9,8 @@
 #include "gradient.h"
 #include "descriptor.h"
 
-class SiftDescriptor:public Feature{
+class SiftDescriptor: public Feature, public Singleton<SiftDescriptor>{
+  friend class Singleton<SiftDescriptor>;
  public: 
   vector<float> extract(MyImage *Image,
 			bool save_visual_representation,

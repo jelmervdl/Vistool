@@ -1,15 +1,12 @@
 #ifndef HISTOGRAM_H
 #define HISTOGRAM_H
 
+#include "singleton.h"
 #include "feature.h"
 
-class Histogram:public Feature{
- private:
-  static bool instanceFlag;
-  static Histogram * singleton;
+class Histogram: public Singleton<Histogram>, public Feature{
+  friend class Singleton<Histogram>;
  public:
-  static Histogram * getInstance();
-  ~Histogram();
   Histogram();
   vector<float> extract(MyImage * Image,  
 			bool saveVisualRepresentation,

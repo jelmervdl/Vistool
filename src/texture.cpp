@@ -1,5 +1,10 @@
 #include "texture.h"
 
+Texture::Texture(Image *image, int window){
+  glGenTextures(1, &txt);
+  initTexture(window, &txt, image, &width, &height);
+}
+
 Texture::Texture(DataPoint * d, int window): dp(d){
   glGenTextures(1, &txt);
   initTexture(window, &txt, d->getImageURL(), &width, &height);

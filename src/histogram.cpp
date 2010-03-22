@@ -1,20 +1,5 @@
 #include "histogram.h"
 
-bool Histogram::instanceFlag= false;
-Histogram * Histogram::singleton = NULL;
-
-Histogram * Histogram::getInstance(){
-    if(!instanceFlag){
-    singleton = new Histogram();
-    instanceFlag = true;
-  }
-  return singleton;
-}
-
-Histogram::~Histogram(){
-  instanceFlag =false;
-}
-
 Histogram::Histogram(){
   cout << "making histogram" << endl;
 }
@@ -45,7 +30,8 @@ vector<float> Histogram::extract(MyImage *image,
   minMaxLoc(hist, 0, &maxVal, 0, 0);
 
   int scale = 10;
-  *canvas = Image(Geometry(sbins*scale, hbins*scale), Color("black"));
+  if(saveVisualRepresentation)
+    *canvas = Image(Geometry(sbins*scale, hbins*scale), Color("black"));
   vector<float> data;
   for( int h = 0; h < hbins; h++ )
     for( int s = 0; s < sbins; s++ )

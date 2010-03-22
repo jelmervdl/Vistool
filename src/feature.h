@@ -4,8 +4,7 @@
 #include <vector>
 #include "myImage.h"
 
-class Feature:public Singleton<Feature>{
-  friend class Singleton<Feature>;
+class Feature{
  public:
   Feature();
   virtual vector<float> extract(MyImage * Image, 

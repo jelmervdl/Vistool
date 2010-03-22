@@ -8,11 +8,12 @@ using namespace boost::filesystem;
 FeatureExtractor::FeatureExtractor(){
   Parameters *parameters = Parameters::getInstance();
   if(parameters->getiParameter("feature_histogram") > 0){
-    Histogram *hist = (Histogram *) Histogram::getInstance();
+    Histogram *hist = Histogram::getInstance();
     features.push_back(hist);
   }
-  //if(parameters->getiParameter("feature_sift") > 0){
-  //SiftDescriptor
+  if(parameters->getiParameter("feature_sift") > 0){
+    features.push_back((SiftDescriptor* ) SiftDescriptor::getInstance());
+  }
 }
 
 vector<float> FeatureExtractor::getDescriptor(DataPoint * dp ){

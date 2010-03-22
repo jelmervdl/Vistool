@@ -184,6 +184,7 @@ void initGlui(){
   GLUI_Listbox * image_mod = main_gui->add_listbox_to_panel(view_panel, "show:", (int*) &display_modifier);
   image_mod->add_item(states::No_Modifier, "image");
   image_mod->add_item(states::Show_Gradient, "gradient");
+  image_mod->add_item(states::Show_Sift, "sift");
   GLUI_Listbox * aap = main_gui->add_listbox_to_panel(view_panel, "view:", (int*) &ds, 0, 
 					 (GLUI_Update_CB)viewDataset);
   aap->add_item(states::Enabled_Datasets, "Enabled");
@@ -264,11 +265,17 @@ void refreshTexture(size_t p){
       Matrix<Gradient> image_gradient = imageGradient(gray_image);
       textures.push_back( new Texture(&image_gradient, image_display_window));
     }
+  //display sift
   if(display_modifier == states::Show_Sift)
     for(size_t i = p; i < (size_t) ims_per_page + p && 
 	  i < (size_t) currently_view_datapoints.size(); ++i){
       MyImage im (currently_view_datapoints.at(i)->getImageURL());
+      SiftDescriptor s;
+      Image canvas;
+      s.extract(&im, true, &canvas);
+      textures.push_back(new Texture(&canvas, image_display_window));
     }
+  //display histpgra,s
   display();
 }
 
