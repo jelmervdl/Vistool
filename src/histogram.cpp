@@ -19,9 +19,9 @@ Histogram::Histogram(){
   cout << "making histogram" << endl;
 }
 
-vector<float> Histogram::extract(MyImage * image, 
+vector<float> Histogram::extract(MyImage *image,  
 				 bool saveVisualRepresentation,
-				 string vis_rep_loc){
+				 Image *canvas){
   Mat * hsv = image->getOpenCVMat();
   Parameters * p = Parameters::getInstance();
   if(!p->hasHistogram()){
@@ -45,7 +45,7 @@ vector<float> Histogram::extract(MyImage * image,
   minMaxLoc(hist, 0, &maxVal, 0, 0);
 
   int scale = 10;
-  Mat histImg = Mat::zeros(sbins*scale, hbins*10, CV_8UC1);
+  *canvas = Image(Geometry(sbins*scale, hbins*scale), Color("black"));
   vector<float> data;
   for( int h = 0; h < hbins; h++ )
     for( int s = 0; s < sbins; s++ )
@@ -53,14 +53,11 @@ vector<float> Histogram::extract(MyImage * image,
 	float binVal = hist.at<float>(h, s);
 	data.push_back(binVal);
 	if(saveVisualRepresentation){
-	  int intensity = cvRound(binVal*255/maxVal);
-	  rectangle( histImg, Point(h*scale, s*scale),
-		     Point( (h+1)*scale - 1, (s+1)*scale - 1),
-		     Scalar::all(intensity),
-		     CV_FILLED );
+	  float intensity = binVal / maxVal;
+	  canvas->fillColor(ColorGray(intensity));
+	  canvas->draw( DrawableRectangle(h * scale, s * scale,
+					   (h + 1) * scale, (s + 1) * scale));
 	}
       }
-  if(saveVisualRepresentation)
-    imwrite(vis_rep_loc, histImg);
   return data;
 }

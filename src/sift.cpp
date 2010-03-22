@@ -4,9 +4,9 @@
 using namespace std;
 using namespace gradient;
 
-vector<float> SiftDescriptor::extract(MyImage * my_image,
-		      bool save_visual_representation ,
-		      string visual_representation_location ){
+vector<float> SiftDescriptor::extract(MyImage *my_image,
+			bool save_visual_representation,
+			Image *canvas){
   //Arrange structures
   Descriptor descriptor;
   Parameters * parameters = Parameters::getInstance();
@@ -29,10 +29,9 @@ vector<float> SiftDescriptor::extract(MyImage * my_image,
   vector<sift::KeyPoint> keypoints = sift::divideIntoKeypoints(gradient.get_width(), 
 							       gradient.get_height(), 
 							       kKeyPoints_x, kKeyPoints_y);
-  Image draw_me;
   if(save_visual_representation){
-    draw_me = *my_image->getMagickImage();
-    draw_me.fillColor(Color());
+    *canvas = *my_image->getMagickImage();
+    canvas->fillColor(Color());
   }
   //gather descriptors
   for(vector<sift::KeyPoint>::iterator keypoint = keypoints.begin();
@@ -42,10 +41,9 @@ vector<float> SiftDescriptor::extract(MyImage * my_image,
     
     descriptor = descriptor + new_descriptor;
     if(save_visual_representation){
-      this->drawKeyPoint(draw_me, orientations, *keypoint, new_descriptor, window);
+      this->drawKeyPoint(*canvas, orientations, *keypoint, new_descriptor, window);
     }
   }
-  draw_me.write(visual_representation_location); 
   return (vector<float>) descriptor;
 }
 

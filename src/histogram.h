@@ -11,9 +11,9 @@ class Histogram:public Feature{
   static Histogram * getInstance();
   ~Histogram();
   Histogram();
-  vector<float> extract(MyImage * Image, 
-			bool saveVisualRepresentation = false,
-			string vis_rep_loc = "rep.jpg" );
+  vector<float> extract(MyImage * Image,  
+			bool saveVisualRepresentation,
+			Image* image);
 };
 
 #endif

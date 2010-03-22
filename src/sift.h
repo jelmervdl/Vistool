@@ -12,8 +12,8 @@
 class SiftDescriptor:public Feature{
  public: 
   vector<float> extract(MyImage *Image,
-			bool save_visual_representation = false,
-			string visual_representation_location = "rep.jpg");
+			bool save_visual_representation,
+			Image *canvas);
   Descriptor getKeyPointDescriptor(Matrix<gradient::Gradient> * gradient,
 				    sift::KeyPoint * keypoint,
 				    const size_t window_size,

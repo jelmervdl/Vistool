@@ -13,9 +13,10 @@ int main(int argc, char ** argv){
   }
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
-  SiftDescriptor f;
-  MyImage image("tester2.jpg");
-  f.extract(&image, true, "out.jpg");
+  Histogram g;
+  Feature &f = g;
+  MyImage image("../datasets/caltech101/accordion/image_0001.jpg");
+  f.extract(&image, true, "raus.jpg");
   //start(argc, argv);
   /* Radial guide:
      0.0    -> ( 0,  1)
