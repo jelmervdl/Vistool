@@ -13,11 +13,13 @@ int main(int argc, char ** argv){
   }
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
-  Histogram g;
-  Feature &f = g;
-  MyImage image("../datasets/caltech101/accordion/image_0001.jpg");
-  f.extract(&image, true, "raus.jpg");
-  start(argc, argv);
+  //start(argc, argv);
+
+// is it nan? %d is it > 0? %d is it < 0? %d\n",
+	 //	 nan, nan == nan, nan > );
+
+    //svm_parameter a;
+
   /* Radial guide:
      0.0    -> ( 0,  1)
      0.5 PI -> ( 1,  0)

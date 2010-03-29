@@ -4,13 +4,16 @@
 using namespace std;
 using namespace gradient;
 
-vector<float> SiftDescriptor::extract(MyImage *my_image,
+Descriptor SiftDescriptor::extract(MyImage *my_image,
 			bool save_visual_representation,
 			Image *canvas){
-  cout << "making sift descriptor" << endl;
   //Arrange structures
   Descriptor descriptor;
   Parameters * parameters = Parameters::getInstance();
+
+
+  const int kBlurWindow = parameters->getiParameter("sift_blur_window");
+  my_image->getMagickImage()->blur(kBlurWindow, kBlurWindow / 3.0);
   Matrix<float> grayscale = my_image->getGrayscaleMatrix();
   Matrix<Gradient> gradient = imageGradient(grayscale);
 
@@ -19,10 +22,17 @@ vector<float> SiftDescriptor::extract(MyImage *my_image,
   const int kKeyPoints_x = parameters->getiParameter("sift_number_of_keypoints_x");
   const int kKeyPoints_y = parameters->getiParameter("sift_number_of_keypoints_x");
   int window_dummy;
-  if(parameters->getiParameter("sift_keypoint_pixel_window") < 0)
-    window_dummy = min((gradient.get_width() -3) / (2 * kKeyPoints_x),
-			   (gradient.get_height() -3)  / (2 * kKeyPoints_y));
-  else 
+  const int auto_window_type = parameters->getiParameter("sift_auto_window_size_type");
+  if(parameters->getiParameter("sift_keypoint_pixel_window") < 0){
+    if(auto_window_type == 0){
+      window_dummy = min((gradient.get_width() -3) / (2 * kKeyPoints_x),
+			 (gradient.get_height() -3)  / (2 * kKeyPoints_y));
+    }else if(auto_window_type == 1){
+      int window_width = gradient.get_width() / kKeyPoints_x;
+      int window_height = gradient.get_height() / kKeyPoints_y;
+      window_dummy = sqrt(window_width * window_width + window_height * window_height) / 2;
+    }
+  }  else 
     window_dummy = parameters->getiParameter("sift_keypoint_pixel_window");
   const int window = window_dummy;
 
@@ -39,13 +49,12 @@ vector<float> SiftDescriptor::extract(MyImage *my_image,
       keypoint != keypoints.end(); ++keypoint){ 
     Descriptor new_descriptor = getKeyPointDescriptor( &gradient, &(*keypoint),  window, 
 						       orientations);
-    
     descriptor = descriptor + new_descriptor;
     if(save_visual_representation){
       this->drawKeyPoint(*canvas, orientations, *keypoint, new_descriptor, window);
     }
   }
-  return (vector<float>) descriptor;
+  return descriptor;
 }
 
 
@@ -78,8 +87,8 @@ void SiftDescriptor::drawKeyPoint(Image &draw_me, const int &orientations,
       draw_me.strokeColor("red");
       for(int ori = 0; ori < orientations; ++ori){
 	float angle = (bin_size * (ori + 1)) - (0.5 * bin_size);
-	int end_x = origin_x + descriptor.at(ori) / window * 25 * sin(angle);
-	int end_y = origin_y - descriptor.at(ori) / window * 25 * cos(angle);
+	int end_x = origin_x + descriptor.at(ori) * window * 4 * sin(angle);
+	int end_y = origin_y - descriptor.at(ori) * window * 4 * cos(angle);
 	draw_me.draw( DrawableLine( origin_x, origin_y, end_x, end_y));
       }
     }
@@ -105,16 +114,27 @@ Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
 	up = window_up + histogram_range * hist_y,
 	down  = up + histogram_range;
       Descriptor bins( kOrientations );
-      if(left < 0 || right > (int) gradient->get_width() ||
-	 up  < 0 || down > (int) gradient->get_height()){
-	cout << "PROBLEMAAAAAA!!!" << endl;
-	return bins;
-      }
-      for(size_t x = left; x < (size_t) right; ++x)
-	for(size_t y = up; y < (size_t) down; ++y){
-	  gradient::bin(gradient->at(x,y), 
-			bins, 1.0);
+      for(size_t i = 0; i < bins.size(); ++i)
+	bins[i] = 0.0;
+      int pixels_used = 0;
+      for(int x = left; x < right; ++x){
+	for(int y = up; y < down; ++y){
+	  if(x < 0 || x >= (int) gradient->get_width() ||
+	     y < 0 || y >= (int) gradient->get_height()){
+	    //pixel is outside of bounds
+	  } else{
+	    pixels_used++;
+	    gradient::bin(gradient->at(x,y), 
+			  bins, 1.0);
+	  }
 	}
+      }
+      for(size_t i = 0; i < bins.size(); ++i){
+	if(pixels_used > 0)
+	  bins[i] =  bins[i] / (float) pixels_used;
+	else
+	  bins[i] = 0.0;
+      }
       total_bins = total_bins + bins;
     }
   }

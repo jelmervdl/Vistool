@@ -49,10 +49,7 @@ void FeatureExtractor::renewDescriptor(DataPoint * dp){
      last_write_time(parameters) < last_write_time(path(dp->getImageURL()))){
     MyImage image(dp->getImageURL());
     vector<float> descriptor;
-    for(vector<Feature*>::iterator feature = features.begin(); feature != features.end(); ++feature){
-      (*feature)->extractTo(&descriptor, &image);
-    }
-    ((Histogram*)Histogram::getInstance())->extractTo(&descriptor, &image);
+    descriptor = SiftDescriptor::getInstance()->extract(&image , false, NULL);
     writeDescriptor(&descriptor,dp->getDescriptorURL());
   } 
 }

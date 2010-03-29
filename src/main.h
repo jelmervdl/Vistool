@@ -20,6 +20,8 @@
 #include "sift.h"
 #include "gradient.h"
 #include "descriptor.h"
+#include "svm.h"
+
 void printLibraries ();
 #endif
 

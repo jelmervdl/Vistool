@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding='UTF-8'?>
 <parameters>
   <real>
-    <hbins>30.5</hbins>
-    <sbins>30.5</sbins>
     <sift_blur_std> 2.0 </sift_blur_std>
   </real>
   <integer>
+
+  <!-- Classifier Parameters -->
+    <knn_classifier_k> 1 </knn_classifier_k>
 
   <!-- Enabled Features: -->
     <feature_histogram> 0 </feature_histogram>
     <feature_sift> 1 </feature_sift>
 
   <!-- Sift variables :-->
+    <sift_blur_window> 3 </sift_blur_window>
     <sift_blur_toggle> 0 </sift_blur_toggle>
       <!-- wether pixels are blurred or not -->
+      <sift_auto_window_size_type> 1 </sift_auto_window_size_type>
+      <!-- 0 = smallest window
+	   1 = all pixels are used -->
     <sift_orientation_directions> 8 </sift_orientation_directions>
-    <sift_number_of_keypoints_x> 2 </sift_number_of_keypoints_x>
-    <sift_number_of_keypoints_y> 2 </sift_number_of_keypoints_y>
-    <sift_histograms_per_keypoint> 2 </sift_histograms_per_keypoint>
+    <sift_number_of_keypoints_x> 5 </sift_number_of_keypoints_x>
+    <sift_number_of_keypoints_y> 5 </sift_number_of_keypoints_y>
+    <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
       <!-- this variable is squared later on -->
     <sift_keypoint_pixel_window> -1  </sift_keypoint_pixel_window> 
       <!-- if -1 pixel window is -1 it will be determined automatically-->

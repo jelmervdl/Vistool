@@ -46,6 +46,5 @@ void Texture::draw(size_t window_size){
 
 Texture::~Texture(){
   using namespace std;
-  cout << "kileld a text" << endl;
   glDeleteTextures(1, &txt);
 }

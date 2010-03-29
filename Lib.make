@@ -11,6 +11,7 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_GLUI     = -framework GLUI
 	Lib_JNI      = -framework JavaVM
 	Lib_VL       = -lvl
+	Lib_SVM      = -lsvm
 
 #Configed Libs
 	#Lib_Magickpp = `GraphicsMagick-config --cppflags --cflags --ldflags --libs`

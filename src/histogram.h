@@ -8,7 +8,7 @@ class Histogram: public Singleton<Histogram>, public Feature{
   friend class Singleton<Histogram>;
  public:
   Histogram();
-  vector<float> extract(MyImage * Image,  
+  Descriptor extract(MyImage * Image,  
 			bool saveVisualRepresentation,
 			Image* image);
 };

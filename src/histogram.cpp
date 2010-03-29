@@ -4,7 +4,7 @@ Histogram::Histogram(){
   cout << "making histogram" << endl;
 }
 
-vector<float> Histogram::extract(MyImage *image,  
+Descriptor Histogram::extract(MyImage *image,  
 				 bool saveVisualRepresentation,
 				 Image *canvas){
   Mat * hsv = image->getOpenCVMat();

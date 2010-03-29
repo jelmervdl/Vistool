@@ -3,11 +3,13 @@
 
 #include <vector>
 #include "myImage.h"
+#include "descriptor.h"
+
 
 class Feature{
  public:
   Feature();
-  virtual vector<float> extract(MyImage * Image, 
+  virtual Descriptor extract(MyImage * Image, 
 				bool makeVisualRepresentation, 
 				Image * representation) = 0; 
   vector<float>         extract(MyImage * Image, 

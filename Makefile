@@ -88,7 +88,7 @@ TAGS: $(Sources) $(Cpp_Headers)
 	etags $(SOURCE_DIRECTORY)/*.h $(SOURCE_DIRECTORY)/*.cpp -o $(SOURCE_DIRECTORY)/TAGS
 
 
-time: all
+time: $(TARGET)
 	@echo "\nTiming: main application"
 	time ./$(Target)
 	@echo "Program ended."	

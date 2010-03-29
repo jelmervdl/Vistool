@@ -8,26 +8,29 @@ void writeDescriptor(vector<float> * datapoints, string destination){
   file.write(reinterpret_cast<char *>
 	     (&elements),
 	     sizeof(elements));
-  for(size_t i = 0; i < elements; ++i)
+  for(size_t i = 0; i < elements; ++i){
+    assert(!isnan(datapoints->at(i)));
     file.write(reinterpret_cast<char *>
 	       (&datapoints->at(i)),
 	       sizeof(float));
+  }
   file.close();
 }
 
 void readDescriptor(vector<float> * datapoints, string location){
-  
   size_t elements;
+
   ifstream file (location.c_str(), ios::in | ios::binary); 
   file.read(reinterpret_cast<char *>
 	    (&elements),
 	    sizeof(elements));
   datapoints->resize(elements);  
-  
-  for(size_t i = 0; i < elements; ++i)
+  for(size_t i = 0; i < elements; ++i){
     file.read(reinterpret_cast<char *>
 	      (&datapoints->at(i)),
 	      sizeof(float));
+    assert(!isnan(datapoints->at(i)));
+  }
   file.close();
 }
 
