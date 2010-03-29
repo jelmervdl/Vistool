@@ -21,7 +21,7 @@ class Category{
   string getRoot();
   size_t size();
   string getName();
-  size_t getLabel();
+  size_t getLabel() const;
   vector <DataPoint> * getDataPoints();
   void addDataPoint(DataPoint dp);
 };

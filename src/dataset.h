@@ -23,19 +23,23 @@ class Dataset{
   vector<Category> categories;
   string root;
  public:
+  //constructor:
+  Dataset(string rt);
+
+  // getters:
+  vector<Category> * getCategories();
+  vector<Category*> getEnabled();
+  string getCatName(size_t cat);
+  string getRoot();
+  size_t smallestCategory();
+
+
   void setRoot(string str);
   void addCategory(Category cat);
 
   void enableCategory(size_t i);
   void enableCategory(string str);
 
-  vector<Category> * getCategories();
-  vector<Category*> getEnabled();
-
-  string getCatName(size_t cat);
-
-  string getRoot();
-  size_t smallestCategory();
 
   void print();
   void printEnabled();
@@ -45,7 +49,6 @@ class Dataset{
 		       vector<DataPoint> * test, 
 		       float cut, 
 		       bool eqrep = true);
-  Dataset(string rt);
 };
 
 

@@ -9,19 +9,19 @@ void DataPoint::setDescriptorURL(string url){
   descriptor_url = url;
 }
 
-string DataPoint::getImageURL(){
+string DataPoint::getImageURL() const {
   return image_url;
 }
 
-string DataPoint::getDescriptorURL(){
+string DataPoint::getDescriptorURL() const {
   return descriptor_url;
 }
 
 
-size_t DataPoint::getLabel(){
+size_t DataPoint::getLabel() const {
   return label;
 }
 
-string DataPoint::getFileName(){
+string DataPoint::getFileName() const {
   return filename;
 }

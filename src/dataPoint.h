@@ -15,10 +15,10 @@ class DataPoint{
  public:
   DataPoint(size_t lab, string filename, string url, string descriptor);
   void setDescriptorURL(string url);
-  string getFileName();
-  string getDescriptorURL();
-  string getImageURL();
-  size_t getLabel();
+  string getFileName() const;
+  string getDescriptorURL() const;
+  string getImageURL() const ;
+  size_t getLabel() const;
 };
 
 #endif

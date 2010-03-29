@@ -3,6 +3,7 @@
 
 using namespace gradient; 
 using namespace xercesc;
+
 int main(int argc, char ** argv){
   if(argc > 1){
     string aap = argv[1];
@@ -14,11 +15,13 @@ int main(int argc, char ** argv){
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
   //start(argc, argv);
+  
+
 
 // is it nan? %d is it > 0? %d is it < 0? %d\n",
 	 //	 nan, nan == nan, nan > );
 
-    //svm_parameter a;
+
 
   /* Radial guide:
      0.0    -> ( 0,  1)

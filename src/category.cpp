@@ -26,6 +26,6 @@ size_t Category::size(){
 string Category::getRoot(){
   return root;
 }
-size_t Category::getLabel(){
+size_t Category::getLabel() const {
   return label;
 }
