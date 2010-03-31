@@ -6,6 +6,7 @@
   <integer>
 
   <!-- Classifier Parameters -->
+    <cross_validation_k> 10 </cross_validation_k>
     <knn_classifier_k> 1 </knn_classifier_k>
 
   <!-- Enabled Features: -->

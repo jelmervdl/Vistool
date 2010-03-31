@@ -1,6 +1,33 @@
 #include "evaluation.h"
 using namespace std;
 
+Evaluation::Evaluation(vector<DataPoint*> &dps, 
+		       vector<int> &cls){
+  instances = 0;
+  correct = 0;
+  for(size_t dp_idx = 0; dp_idx < dps.size(); ++dp_idx){
+    DataPoint*&dp = dps[dp_idx];
+    map_total_to_label[dp->getLabel()] = 0;
+    map_correct_to_label[dp->getLabel()] = 0;
+  }
+  if(dps.size() != cls.size())
+    throw 1;
+  for(size_t i = 0; i < dps.size(); ++i){
+    instances++;
+    map_total_to_label[dps[i]->getLabel()]++;
+    cout << ".";
+    if((int) dps[i]->getLabel() == cls[i]){
+      correct++;
+      map_correct_to_label[dps[i]->getLabel()]++;
+    }
+    classificationmap[ cls[i] ].push_back(dps[i]);
+  }
+  precision = (float) correct  / (float ) instances ;
+  cout << instances << endl;
+
+}
+
+
 Evaluation::Evaluation(vector<DataPoint> * dps, vector<int> * cls){
   instances = 0;
   correct = 0;
@@ -9,8 +36,6 @@ Evaluation::Evaluation(vector<DataPoint> * dps, vector<int> * cls){
     map_total_to_label[dp->getLabel()] = 0;
     map_correct_to_label[dp->getLabel()] = 0;
   }
-
-
   if(dps->size() != cls->size())
     throw 1;
   for(size_t i = 0; i < dps->size(); ++i){
@@ -49,6 +74,7 @@ vector<DataPoint *> Evaluation::getInstancesClassifiedAs(int cl){
 void Evaluation::print(){
   cout << "correct: " << correct << endl;
   cout << "total  : " << instances << endl;
+  cout << "precision: " << precision << endl;
 }
 
 map<int, int> Evaluation::getCorrectMap(){

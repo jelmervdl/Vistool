@@ -6,6 +6,11 @@
 using namespace std;
 
 namespace states {
+  enum EnabledClassifier{
+    NearestNeighbor,
+    SupportVectorMachine
+  };
+
   enum DisplayModifier{
     No_Modifier,
     Show_Gradient,

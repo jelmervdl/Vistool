@@ -19,6 +19,7 @@
 #include "core.h"
 #include "evaluation.h"
 #include "parameterPanel.h"
+#include "svmclassifier.h"
 
 //start the gui app:
 void start(int argc, char ** argv);
@@ -47,6 +48,7 @@ void viewDataset();
 void setViewSelection();
 void refreshTexture(size_t a =0);
 void nextPage();
+void crossValidate();
 void train();
 void selectAndShow();
 void classify();

@@ -4,7 +4,7 @@
 #include <vector>
 
 using namespace std;
-class Descriptor: public vector<float>{
+class Descriptor : public vector<float>{
  private:
   friend Descriptor& operator+(Descriptor& left, const Descriptor& right){
     left.insert(left.end(), right.begin(), right.end());

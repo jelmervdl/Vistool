@@ -14,6 +14,7 @@ vector <DataPoint*> currently_view_datapoints;
 vector <DataPoint>  train_data, test_data;
 vector <int>        test_result;
 Classifier *        current_classifier;
+states::EnabledClassifier   enabled_classifier = states::NearestNeighbor;
 
 // class view selection
 int            selected_class;
@@ -197,11 +198,41 @@ void initGlui(){
   main_gui->add_column(false);
   GLUI_Panel * ml_panel = main_gui->add_panel("ML");
   main_gui->add_button_to_panel(ml_panel, "Get Descriptors", 0, (GLUI_Update_CB)extractFeatures );
-  main_gui->add_button_to_panel(ml_panel, "Evaluate", 0, (GLUI_Update_CB)evaluateClassifier);
-  //main_gui->add_button_to_panel(ml_panel, "Train", 0, (GLUI_Update_CB)train);
+  main_gui->add_button_to_panel(ml_panel, "Divide/Evaluate", 0, (GLUI_Update_CB)evaluateClassifier);
+  main_gui->add_button_to_panel(ml_panel, "Cross-Validate", 0, (GLUI_Update_CB)crossValidate);
+  GLUI_Listbox * classif_sel = main_gui->add_listbox("classif.:", (int*) &enabled_classifier);
+  classif_sel->add_item(states::NearestNeighbor, "KNN");
+  classif_sel->add_item(states::SupportVectorMachine, "SVM");
   //main_gui->add_button_to_panel(ml_panel, "Classify", 0, (GLUI_Update_CB)classify);
   main_gui->set_main_gfx_window(image_display_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
+}
+
+void crossValidate(){
+  extractFeatures();
+  delete current_classifier;
+  cout << "val: " << enabled_classifier << " svm: " << states::SupportVectorMachine << endl;
+  if(enabled_classifier == states::NearestNeighbor)
+    current_classifier = new NNClassifier();
+  if(enabled_classifier == states::SupportVectorMachine)
+    current_classifier = new SVMClassifier();
+  vector<DataPoint> enabsp = current_db->enabledPoints();
+  test_result = current_classifier->crossvalidation(&enabsp);
+  for(vector<int>::iterator cl = current_classes.begin(); 
+      cl != current_classes.end(); 
+      cl++)
+    selected_class_listbox->delete_item(*cl);
+  current_classes.clear();
+  vector<Category*> enabs = current_db->getEnabled();
+  for(size_t i = 0; i <  enabs.size(); ++i){
+    selected_class_listbox->add_item(enabs[i]->getLabel(), 
+				     enabs[i]->getName().c_str());
+    current_classes.push_back(enabs[i]->getLabel());
+  }
+  delete current_evaluation ;
+  current_evaluation = new Evaluation(&enabsp, &test_result);
+  viewDataset();
+  showStatistics();
 }
 
 void loadCaltech(){
@@ -299,7 +330,7 @@ void train(){
   test_data.clear();
   current_db->randomDataSplit(&train_data, &test_data, 0.5, true);
   delete current_classifier;
-  current_classifier = new NNClassifier(1);
+  current_classifier = new NNClassifier();
   current_classifier->train(&train_data);
   for(vector<int>::iterator cl = current_classes.begin(); 
       cl != current_classes.end(); 

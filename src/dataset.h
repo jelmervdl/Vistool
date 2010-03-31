@@ -31,7 +31,7 @@ class Dataset{
   vector<Category*> getEnabled();
   string getCatName(size_t cat);
   string getRoot();
-  size_t smallestCategory();
+  size_t smallestCategory() ;
 
 
   void setRoot(string str);
@@ -44,10 +44,12 @@ class Dataset{
   void print();
   void printEnabled();
 
+  vector<DataPoint> enabledPoints(bool eqrep = true) ;
   vector<DataPoint*> enabledDataPoints(bool eqrep= true);
+
   void randomDataSplit(vector<DataPoint> * train, 
 		       vector<DataPoint> * test, 
-		       float cut, 
+		       float cut = 0.5, 
 		       bool eqrep = true);
 };
 

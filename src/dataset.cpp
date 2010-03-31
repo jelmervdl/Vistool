@@ -80,7 +80,7 @@ vector<Category*> Dataset::getEnabled(){
   return enabled;
 }
 
-size_t Dataset::smallestCategory(){
+size_t Dataset::smallestCategory()  {
   vector<Category*> enabled = getEnabled();
   size_t min = 0;
   for(vector<Category*>::iterator cat = enabled.begin();
@@ -126,8 +126,24 @@ vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
     size_t max = min;
     if(!eqrep)
       max = dps.size();
-    for(size_t i = 0; i < max; ++i)
-      result.push_back(dps[i]);
+    for(size_t j = 0; j < max; ++j)
+      result.push_back(dps[j]);
+  }
+  return result;
+}
+
+vector<DataPoint> Dataset::enabledPoints(bool eqrep) {
+  int min = smallestCategory();
+  vector<Category*> enabled_categories = getEnabled();
+  vector<DataPoint> result;
+  for(size_t i = 0; i < enabled_categories.size(); ++i){
+    vector<DataPoint> * data_points = enabled_categories[i]->getDataPoints();
+    if(!eqrep){
+      random_shuffle(data_points->begin(), data_points->end());
+      result.insert(result.end(), data_points->begin(), data_points->end());
+    }else{
+      result.insert(result.end(), data_points->begin(), data_points->begin() + min);
+    }
   }
   return result;
 }

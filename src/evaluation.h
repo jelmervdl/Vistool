@@ -19,6 +19,7 @@ class Evaluation{
   map<int, int> map_total_to_label;
   map< int, vector<DataPoint*> > classificationmap;
  public:
+  Evaluation(vector<DataPoint*> &dps, vector<int> &cls);
   Evaluation(vector<DataPoint> * dps, vector<int> * classification);
   void print();
   size_t getCorrect();

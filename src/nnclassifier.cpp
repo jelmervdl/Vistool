@@ -14,20 +14,25 @@
 using namespace cv;
 using namespace std;
 
+NNClassifier::NNClassifier() : knn(0){
+}
+
 NNClassifier::~NNClassifier(){
   delete knn;
 }
 
 void NNClassifier::clean(){
-  delete knn;
-  knn = 0;
+  if(knn != 0){
+    delete knn;
+    knn = 0;
+  }
 }
-
-NNClassifier::NNClassifier(size_t n): k(n) {}
 
 void NNClassifier::train(vector<DataPoint*> dps){
   cout << "training" << endl;
   PrepareMatrices(dps);
+  cout << knn << endl;
+  clean();
   knn = new CvKNearest(tmat, labs);  
 }
 

@@ -21,7 +21,7 @@
 #include "gradient.h"
 #include "descriptor.h"
 #include "svm.h"
-
+#include "svmclassifier.h"
 void printLibraries ();
 #endif
 

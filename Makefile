@@ -8,7 +8,7 @@ include Inc.make
 #Global += -m32
 
 #Libaries
-Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_JNI) $(Lib_Boost) $(Lib_OpenCV) $(Lib_Magickpp) $(Lib_Xerces) $(Lib_VL)
+Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_JNI) $(Lib_Boost) $(Lib_OpenCV) $(Lib_Magickpp) $(Lib_Xerces) $(Lib_VL) $(Lib_SVM)
 
 D_loc = -D 'DESCRIPTOR_LOCATION="$(DescriptorLocation)"'
 Java_Include = -D 'USER_CLASSPATH="$(CLASSPATH2)"'

@@ -12,9 +12,8 @@ using namespace std;
 class NNClassifier:public Classifier{
  private:
   CvKNearest * knn;
-  size_t k;
  public:
-  NNClassifier(size_t n);
+  NNClassifier();
   void clean();
   void train(vector<DataPoint*> dps);
   int         classify(DataPoint* point);
