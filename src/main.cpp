@@ -17,30 +17,7 @@ int main(int argc, char ** argv){
   
   start(argc, argv);
 
-  Dataset dataset ("../datasets/caltech101/");
-  dataset.enableCategory("accordion");
-  dataset.enableCategory("emu");
-  //dataset.enableCategory("brain");
-  //dataset.enableCategory("buddha");
-  //dataset.enableCategory("bass");
-  //dataset.enableCategory("butterfly");
-  //dataset.enableCategory("beaver");
-  //dataset.enableCategory("bonsai");
-  //dataset.enableCategory("cannon");
-  //dataset.enableCategory("chair");
-  //dataset.enableCategory("wild_cat");
-  //dataset.enableCategory("ying_yang");
-  FeatureExtractor::getInstance()->saveDescriptorsToFile(&dataset);
 
-  vector<DataPoint> training_set;
-  vector<DataPoint> test_set;
-  //  dataset.randomDataSplit(&training_set, &test_set);
-  vector<DataPoint> all_data = dataset.enabledPoints();
-  NNClassifier nn;
-  vector<int> results = nn.crossvalidation(&all_data);
-  cout << "aap" << results.size() << endl;
-  for(size_t i = 0; i < results.size(); ++i)
-    cout << "aap" << results[i] << endl;
   //  printf("at %d it's %d\n", i, i);// results[i]);
   
 // is it nan? %d is it > 0? %d is it < 0? %d\n",
