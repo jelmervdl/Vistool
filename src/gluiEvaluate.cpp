@@ -9,13 +9,16 @@ void evaluateClassifier(){
 void crossValidate(){
   ToolState &state = *ToolState::getInstance();
   extractFeatures();
+  state.train_data.clear();
+  state.test_data.clear();
   delete state.current_classifier;
-  cout << "val: " << state.enabled_classifier << " svm: " << states::SupportVectorMachine << endl;
   if(state.enabled_classifier == states::NearestNeighbor)
     state.current_classifier = new NNClassifier();
   if(state.enabled_classifier == states::SupportVectorMachine)
     state.current_classifier = new SVMClassifier();
   vector<DataPoint> enabsp = state.current_db->enabledPoints();
+  state.train_data = enabsp;
+  state.test_data = enabsp;
   state.test_result = state.current_classifier->crossvalidation(&enabsp);
   for(vector<int>::iterator cl = state.current_classes.begin(); 
       cl != state.current_classes.end(); 
@@ -28,10 +31,12 @@ void crossValidate(){
 				     enabs[i]->getName().c_str());
     state.current_classes.push_back(enabs[i]->getLabel());
   }
-  delete state.current_evaluation ;
-  state.current_evaluation = new Evaluation(&enabsp, &state.test_result);
-  state.train_data = enabsp;
-  state.test_data = enabsp;
+  delete state.current_evaluation;
+
+  printf("making eval out of %d points and %d evaluations", enabsp.size(), state.test_result.size());
+  for(size_t i = 0 ; i < state.train_data.size(); i ++)
+    printf("at %d, should %d, is %d\n ", i, state.train_data[i].getLabel(),state.test_result[i]);
+  state.current_evaluation = new Evaluation(&state.train_data, &state.test_result);
   viewDataset();
   showStatistics();
 }

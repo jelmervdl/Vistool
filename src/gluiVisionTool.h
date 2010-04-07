@@ -9,8 +9,6 @@
 #include "gluiControl.h"
 #include "gluiFeatures.h"
 
-//start the gui app:
 void start(int argc, char ** argv);
-void initTextures();
 
 #endif

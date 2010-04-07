@@ -4,10 +4,10 @@ void setupOpenGL(){
   ToolState &state = *ToolState::getInstance();
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(0, state.window_height, state.window_width, 0, 0, 1); // we want 2d projection mode!                                                                                       
-  glMatrixMode(GL_MODELVIEW); // bring us back to model mode                                                                                          
-  glDisable( GL_DEPTH_TEST); //2d, no depth                                                                                                           
-  glDisable( GL_LIGHTING ); // 2d, no light  
+  glOrtho(0, state.window_height, state.window_width, 0, 0, 1); // we want 2d projection mode! 
+  glMatrixMode(GL_MODELVIEW); // bring us back to model mode 
+  glDisable( GL_DEPTH_TEST); //2d, no depth 
+  glDisable( GL_LIGHTING ); // 2d, no light 
   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
 }
@@ -69,4 +69,3 @@ void setupWindow(){
   glutInitWindowSize( state.window_width, state.window_height );
   state.image_display_window = glutCreateWindow( "Image Viewer" );
 }
-
