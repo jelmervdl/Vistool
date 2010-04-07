@@ -15,7 +15,7 @@ class Classifier{
  public:
   virtual void train(vector<DataPoint*> files )=0;
   void train(vector<DataPoint> * files );
-  vector<int> crossvalidation(vector<DataPoint> * files);
+  virtual vector<int> crossvalidation(vector<DataPoint> * files) = 0 ;
   virtual vector<int> classify(vector<DataPoint*>  points)=0;
   vector<int> classify(vector<DataPoint> * points);
   virtual int classify(DataPoint * point) = 0;

@@ -14,6 +14,7 @@ class NNClassifier:public Classifier{
   CvKNearest * knn;
  public:
   NNClassifier();
+  vector<int> crossvalidation(vector<DataPoint> * files);
   void clean();
   void train(vector<DataPoint*> dps);
   int         classify(DataPoint* point);

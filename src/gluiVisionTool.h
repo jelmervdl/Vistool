@@ -1,58 +1,16 @@
 #ifndef GLUIVISIONTOOL_H
 #define GLUIVISIONTOOL_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <GLUT/glut.h>
-#include <iostream>
-#include <string> 
-#include "nnclassifier.h"
-
-#include <math.h>
-#include "glui.h"
-#include "fd.h"
-#include "glTexture.h"
-#include "fileManagement.h"
-#include "dataset.h"
-#include "featureExtractor.h"
-#include "texture.h"
-#include "core.h"
-#include "evaluation.h"
-#include "parameterPanel.h"
-#include "svmclassifier.h"
+#include "toolState.h"
+#include "gluiLoad.h"
+#include "gluiView.h"
+#include "gluiTextures.h"
+#include "gluiGL.h"
+#include "gluiControl.h"
+#include "gluiFeatures.h"
 
 //start the gui app:
 void start(int argc, char ** argv);
 void initTextures();
-void initGlui();
-void setupWindow();
-void setupOpenGL();
-void nextPage();
-
-//glut functions
-void display(void);
-void myGlutIdle( void );
-
-// buttons functions for image and dset loading
-void loadPicture();
-void loadDataset(string location);
-void loadCaltech();
-
-// more button functions
-void test();
-void extractFeatures();
-void askDataset();
-void quitf();
-
-void viewDataset();
-void setViewSelection();
-void refreshTexture(size_t a =0);
-void nextPage();
-void crossValidate();
-void train();
-void selectAndShow();
-void classify();
-void showStatistics();
-void evaluateClassifier();
 
 #endif

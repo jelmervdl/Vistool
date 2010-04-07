@@ -11,6 +11,7 @@ class SVMClassifier : public Classifier{
   svm_parameter *getSVMParameters();
  public:
   using Classifier::train;
+  using Classifier::crossvalidation;
   vector<int> crossvalidation(vector<DataPoint> * files);
   vector<int> crossvalidation(vector<DataPoint*> files);
   void train(vector<DataPoint*> files);

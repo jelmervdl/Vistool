@@ -14,6 +14,10 @@
 using namespace cv;
 using namespace std;
 
+vector<int> NNClassifier::crossvalidation(vector<DataPoint> * files){
+  return Classifier::crossvalidation(files);
+}
+
 NNClassifier::NNClassifier() : knn(0){
 }
 
