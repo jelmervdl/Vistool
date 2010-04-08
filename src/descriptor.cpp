@@ -1,4 +1,7 @@
 #include "descriptor.h"
+
+using std::vector;
+
 Descriptor::Descriptor(vector<float> vec): vector<float>(vec){
 }
 Descriptor::Descriptor(int size): vector<float>(size){

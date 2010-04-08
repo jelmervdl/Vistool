@@ -10,7 +10,6 @@
 #include <string>
 #include "descriptor.h"
 
-using namespace std;
 namespace gradient{
 
 class Gradient{

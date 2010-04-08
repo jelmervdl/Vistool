@@ -1,5 +1,7 @@
 #include "parameterPanel.h"
 
+using std::map;
+using std::string;
 
 ParameterPanel::ParameterPanel() {
   Parameters *parameters = Parameters::getInstance();

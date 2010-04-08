@@ -11,13 +11,6 @@
 #include "dataPoint.h"
 #include "category.h"
 
-using namespace std;
-
-//void printDatabase(vector<Category> * db);
-bool is_image (string  str);
-//bool isDataset(string dir, vector<Category> * classes);
-//void createTrainAndTestSet(vector<Category> * cats, vector<DataPoint> * samples, float cut);
-
-
+bool is_image (std::string  str);
 
 #endif

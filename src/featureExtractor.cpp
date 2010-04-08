@@ -1,9 +1,12 @@
 #include "featureExtractor.h"
 
-using namespace Magick;
-using namespace std;
-using namespace cv;
-using namespace boost::filesystem;
+using std::string;
+using std::vector;
+using cv::Mat;
+
+using boost::filesystem::path;
+using boost::filesystem::native;
+using boost::filesystem::complete;
 
 FeatureExtractor::FeatureExtractor(){
   Parameters *parameters = Parameters::getInstance();

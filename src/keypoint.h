@@ -4,9 +4,6 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
-
-
 namespace sift{
 
 class KeyPoint{
@@ -23,7 +20,7 @@ class KeyPoint{
 };
 
 
-vector<KeyPoint> divideIntoKeypoints(size_t width, size_t height, 
+ std::vector<KeyPoint> divideIntoKeypoints(size_t width, size_t height, 
 				     size_t x_points, size_t y_points);
 }
 #endif

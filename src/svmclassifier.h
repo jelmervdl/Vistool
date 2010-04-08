@@ -4,18 +4,19 @@
 #include "classifier.h"
 #include "svm.h"
 
-class SVMClassifier : public Classifier{
 
- private:
-  svm_problem *compileProblem(vector<DataPoint*> files);
-  svm_parameter *getSVMParameters();
- public:
+
+class SVMClassifier : public Classifier{
   using Classifier::train;
   using Classifier::crossvalidation;
-  vector<int> crossvalidation(vector<DataPoint> * files);
-  vector<int> crossvalidation(vector<DataPoint*> files);
-  void train(vector<DataPoint*> files);
-  vector<int> classify(vector<DataPoint*> data_points);
+ private:
+  svm_problem *compileProblem(std::vector<DataPoint*> files);
+  svm_parameter *getSVMParameters();
+ public:
+  std::vector<int> crossvalidation(std::vector<DataPoint> * files);
+  std::vector<int> crossvalidation(std::vector<DataPoint*> files);
+  void train(std::vector<DataPoint*> files);
+  std::vector<int> classify(std::vector<DataPoint*> data_points);
   int classify(DataPoint * data_point);
 }; 
 

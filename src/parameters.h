@@ -13,27 +13,25 @@
 #include <xercesc/sax/HandlerBase.hpp>
 #include <xercesc/util/XMLString.hpp>
 
-using namespace std;
-
 class Parameters:public Singleton <Parameters>{
   friend class Singleton<Parameters>;
   friend class ParameterPanel;
  protected:
   Parameters();
  private:
-  map<string, float> floatParameters;
-  map<string, int> intParameters;
-  string file;
+  std::map<std::string, float> floatParameters;
+  std::map<std::string, int> intParameters;
+  std::string file;
  public:
   void readFile(char * str);
-  string getFile();
-  void saveReal(string str, float f);
-  void saveInteger(string str, int f);
-  float getfParameter(string str);
-  int  getiParameter(string str);
+  std::string getFile();
+  void saveReal(std::string str, float f);
+  void saveInteger(std::string str, int f);
+  float getfParameter(std::string str);
+  int  getiParameter(std::string str);
   ~Parameters();
   bool hasHistogram();
-  bool hasParameters(string * reqParams, size_t n);
+  bool hasParameters(std::string * reqParams, size_t n);
   void printParameters();
 };
 

@@ -6,10 +6,10 @@
 
 class ParameterPanel{
  private:
-  vector<GLUI_EditText*> fields;
+  std::vector<GLUI_EditText*> fields;
   GLUI *panel;
-  void setupFloatVariables(map<string, float> &float_parameters);
-  void setupIntVariables(map<string, int>   &int_parameters);
+  void setupFloatVariables(std::map<std::string, float> &float_parameters);
+  void setupIntVariables(std::map<std::string, int>   &int_parameters);
  public:
   ParameterPanel();
 };

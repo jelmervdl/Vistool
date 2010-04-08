@@ -13,13 +13,13 @@ class SiftDescriptor: public Feature, public Singleton<SiftDescriptor>{
   friend class Singleton<SiftDescriptor>;
  public: 
   Descriptor extract(MyImage *Image,
-			bool save_visual_representation,
-			Image *canvas);
+		     bool save_visual_representation,
+		     Magick::Image *canvas);
   Descriptor getKeyPointDescriptor(Matrix<gradient::Gradient> * gradient,
 				    sift::KeyPoint * keypoint,
 				    const size_t window_size,
 				    const int kOrientations);
-  void drawKeyPoint(Image &draw_me, const int &orientations,
+  void drawKeyPoint(Magick::Image &draw_me, const int &orientations,
 		    const sift::KeyPoint &keypoint, 
 		    const Descriptor &descriptor, const int &window);
 

@@ -1,5 +1,8 @@
 #include "category.h"
 
+using std::string;
+using std::vector;
+
 int * Category::getEnabled(){
   return &enabled;
 }

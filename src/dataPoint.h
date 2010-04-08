@@ -4,20 +4,18 @@
 #include <GLUT/glut.h>
 #include <string>
 
-using namespace std;
-
 class DataPoint{
  private:
   int label;
-  string image_url;
-  string filename;
-  string descriptor_url;
+  std::string image_url;
+  std::string filename;
+  std::string descriptor_url;
  public:
-  DataPoint(size_t lab, string filename, string url, string descriptor);
-  void setDescriptorURL(string url);
-  string getFileName() const;
-  string getDescriptorURL() const;
-  string getImageURL() const ;
+  DataPoint(size_t lab, std::string filename, std::string url, std::string descriptor);
+  void setDescriptorURL(std::string url);
+  std::string getFileName() const;
+  std::string getDescriptorURL() const;
+  std::string getImageURL() const ;
   size_t getLabel() const;
 };
 

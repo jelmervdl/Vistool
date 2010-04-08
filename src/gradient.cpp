@@ -1,5 +1,8 @@
 #include "gradient.h"
 
+using std::cout;
+using std::endl;
+
 #define PI 3.14159265
 
 namespace gradient {

@@ -3,8 +3,7 @@
 
 #include <vector>
 
-using namespace std;
-class Descriptor : public vector<float>{
+class Descriptor : public std::vector<float>{
  private:
   friend Descriptor& operator+(Descriptor& left, const Descriptor& right){
     left.insert(left.end(), right.begin(), right.end());
@@ -12,7 +11,7 @@ class Descriptor : public vector<float>{
   }
  public:
   Descriptor();
-  Descriptor(vector<float> a);
+  Descriptor(std::vector<float> a);
   Descriptor(int size);
   void print() const;
 

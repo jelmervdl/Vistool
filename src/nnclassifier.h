@@ -6,19 +6,18 @@
 #include "ml.h"
 #include "featureExtractor.h"
 #include "ocvConvert.h"
-
-using namespace std;
+#include "tools.h"
 
 class NNClassifier:public Classifier{
  private:
   CvKNearest * knn;
  public:
   NNClassifier();
-  vector<int> crossvalidation(vector<DataPoint> * files);
+  std::vector<int> crossvalidation(std::vector<DataPoint> * files);
   void clean();
-  void train(vector<DataPoint*> dps);
+  void train(std::vector<DataPoint*> dps);
   int         classify(DataPoint* point);
-  vector<int> classify(vector<DataPoint*> point);
+  std::vector<int> classify(std::vector<DataPoint*> point);
   ~NNClassifier();
 };
 

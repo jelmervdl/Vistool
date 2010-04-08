@@ -1,5 +1,7 @@
 #include "gluiTextures.h"
 
+using Magick::Image;
+
 void refreshTexture(size_t p){
   ToolState &state = *ToolState::getInstance();
   using namespace gradient;

@@ -8,10 +8,8 @@
 #include <assert.h>
 #include <math.h>
 
-using namespace std;
-
-void writeDescriptor(vector<float> * datapoints, string destination);
-void readDescriptor(vector<float> * datapoints, string location);
-vector<float> readDescriptor(string location);
+void writeDescriptor(std::vector<float> * datapoints, std::string destination);
+void readDescriptor(std::vector<float> * datapoints, std::string location);
+std::vector<float> readDescriptor(std::string location);
 
 #endif

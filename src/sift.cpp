@@ -1,8 +1,17 @@
 #include "sift.h"
 #define PI 3.14159265
 
-using namespace std;
-using namespace gradient;
+using std::min;
+using std::vector;
+
+using Magick::Image;
+using Magick::Color;
+using Magick::DrawableCircle;
+using Magick::DrawableLine;
+
+using gradient::Gradient;
+using gradient::imageGradient;
+
 
 Descriptor SiftDescriptor::extract(MyImage *my_image,
 			bool save_visual_representation,

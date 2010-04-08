@@ -6,7 +6,7 @@
 #include "gluiView.h"
 
 void loadPicture();
-void loadDataset(string location);
+void loadDataset(std::string location);
 void loadCaltech();
 void askDataset();
 

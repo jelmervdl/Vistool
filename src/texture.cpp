@@ -1,5 +1,7 @@
 #include "texture.h"
 
+using Magick::Image;
+
 Texture::Texture(Image *image, int window){
   glGenTextures(1, &txt);
   initTexture(window, &txt, image, &width, &height);

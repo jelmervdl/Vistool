@@ -1,5 +1,7 @@
 #include "gluiGL.h"
 
+using std::vector;
+
 void setupOpenGL(){
   ToolState &state = *ToolState::getInstance();
   glMatrixMode(GL_PROJECTION);

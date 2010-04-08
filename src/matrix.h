@@ -1,9 +1,6 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 #include <iostream>
-#include <string>
-
-using namespace std;
 
 template<class Type> class Matrix{
  private:
@@ -40,9 +37,9 @@ template <class Type> Type Matrix<Type>::at(size_t x, size_t y) const {
 template <class Type> void Matrix<Type>::print() const {
   for(size_t x = 0; x < width; ++x){
     for (size_t y = 0; y < height; ++y){
-      cout << values[x + y * width] << " ";
+      std::cout << values[x + y * width] << " ";
       }
-    cout << endl;
+    std::cout << std::endl;
   }
 }
 

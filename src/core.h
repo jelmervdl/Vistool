@@ -3,8 +3,6 @@
 
 #include <vector>
 
-using namespace std;
-
 namespace states {
   enum EnabledClassifier{
     NearestNeighbor,
@@ -35,8 +33,8 @@ namespace states {
 
 namespace VisionCore{
 
-  template <typename T>  vector<T*> ptrDeMorgan(vector <T> * vec){
-    vector<T*> ret;
+  template <typename T>  std::vector<T*> ptrDeMorgan(std::vector <T> * vec){
+    std::vector<T*> ret;
     for(size_t i = 0; i < vec->size(); ++i)
       ret.push_back(&(vec->at(i)));
     return ret;

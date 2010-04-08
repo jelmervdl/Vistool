@@ -32,10 +32,6 @@ void crossValidate(){
     state.current_classes.push_back(enabs[i]->getLabel());
   }
   delete state.current_evaluation;
-
-  printf("making eval out of %d points and %d evaluations", enabsp.size(), state.test_result.size());
-  for(size_t i = 0 ; i < state.train_data.size(); i ++)
-    printf("at %d, should %d, is %d\n ", i, state.train_data[i].getLabel(),state.test_result[i]);
   state.current_evaluation = new Evaluation(&state.train_data, &state.test_result);
   viewDataset();
   showStatistics();

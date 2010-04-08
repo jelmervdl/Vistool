@@ -5,24 +5,28 @@
 #include <vector>
 #include"dataPoint.h"
 
-using namespace std;
-
 class Category{
  private:
   
-  string name;
-  vector <DataPoint> data_points;
-  string root; 
+  std::string name;
+  std::string root; 
+
+  std::vector <DataPoint> data_points;
+
   int enabled; 
   size_t label;
  public:
-  int * getEnabled();
-  Category(string give_name, string root, size_t lab);
-  string getRoot();
+  Category(std::string give_name, std::string root, size_t lab);
+
   size_t size();
-  string getName();
   size_t getLabel() const;
-  vector <DataPoint> * getDataPoints();
+
+  std::string getName();
+  std::string getRoot();
+
+  int * getEnabled();
+  std::vector <DataPoint> * getDataPoints();
+
   void addDataPoint(DataPoint dp);
 };
 #endif

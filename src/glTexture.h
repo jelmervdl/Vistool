@@ -10,9 +10,7 @@
 #include "texture.h"
 #include "gradient.h"
 
-using namespace std;
-
-void initTexture(int window, GLuint * texName, string          filename,  size_t * twidth, size_t * theight);
+void initTexture(int window, GLuint * texName, std::string          filename,  size_t * twidth, size_t * theight);
 void initTexture(int window, GLuint * texName, Magick::Image *    im,     size_t * twidth, size_t * theight);
 void initTexture(int window, GLuint * texName, Magick::Blob  *    blob,   size_t * twidth, size_t * theight);
 void initTexture(int window, GLuint * texName, Matrix<float> *    im,     size_t * twidth, size_t * theight);

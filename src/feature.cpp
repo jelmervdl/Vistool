@@ -1,5 +1,9 @@
 #include "feature.h"
 
+using Magick::Image;
+using std::vector;
+using std::string;
+
 Feature::Feature(){
   
 }

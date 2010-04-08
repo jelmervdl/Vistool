@@ -1,5 +1,10 @@
 #include "parameters.h"
 
+using std::string;
+using std::map;
+using std::cout;
+using std::endl;
+
 XERCES_CPP_NAMESPACE_USE
 
 Parameters::Parameters(){

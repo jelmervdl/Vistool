@@ -1,5 +1,9 @@
 #include "svmclassifier.h"
 
+using std::vector;
+using std::cout;
+using std::endl;
+
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint> * files){
   cout << " joer dan? " << endl;

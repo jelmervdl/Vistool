@@ -1,5 +1,7 @@
 #include "dataPoint.h"
 
+using std::string;
+
 DataPoint::DataPoint(size_t lab, string fname, string url, string descriptor):
   label(lab),image_url(url),filename(fname),descriptor_url(descriptor){
 }

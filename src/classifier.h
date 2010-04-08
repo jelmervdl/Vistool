@@ -9,15 +9,13 @@
 #include "core.h"
 #include "evaluation.h"
 
-using namespace std;
-
 class Classifier{
  public:
-  virtual void train(vector<DataPoint*> files )=0;
-  void train(vector<DataPoint> * files );
-  virtual vector<int> crossvalidation(vector<DataPoint> * files) = 0 ;
-  virtual vector<int> classify(vector<DataPoint*>  points)=0;
-  vector<int> classify(vector<DataPoint> * points);
+  virtual void train(std::vector<DataPoint*> files )=0;
+  void train(std::vector<DataPoint> * files );
+  virtual std::vector<int> crossvalidation(std::vector<DataPoint> * files) = 0 ;
+  virtual std::vector<int> classify(std::vector<DataPoint*>  points)=0;
+  std::vector<int> classify(std::vector<DataPoint> * points);
   virtual int classify(DataPoint * point) = 0;
 };
 

@@ -1,5 +1,8 @@
 #include "gluiLoad.h"
 
+using std::string;
+using std::vector;
+
 void loadDataset(string location){
   ToolState &state = *ToolState::getInstance();
   if(state.classes != 0)

@@ -5,9 +5,6 @@
 #include "cv.h"
 #include <iostream>
 
-using namespace cv;
-using namespace std;
-
 namespace OCV_Convert{
 
 

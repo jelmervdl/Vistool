@@ -1,5 +1,6 @@
 #include "nnclassifier.h"
-#include "tools.h"
+
+using Magick::Image;
 
 #define PrepareMatrices(dps)						\
   size_t rows, cols;							\

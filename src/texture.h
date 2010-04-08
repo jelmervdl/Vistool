@@ -15,7 +15,7 @@ class Texture{
   DataPoint * dp;
  public:
   ~Texture();
-  Texture(Image *image, int window);
+  Texture(Magick::Image *image, int window);
   Texture(DataPoint * d, int window);
   Texture(Matrix<float> * m, int window);
   Texture(Matrix<gradient::Gradient> * m, int window);

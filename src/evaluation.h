@@ -15,12 +15,12 @@ class Evaluation{
   float recall;
   float precision;
   float tval;
-  map<int, int> map_correct_to_label;
-  map<int, int> map_total_to_label;
-  map< int, vector<DataPoint*> > classificationmap;
+  std::map<int, int> map_correct_to_label;
+  std::map<int, int> map_total_to_label;
+  std::map< int, std::vector<DataPoint*> > classificationmap;
  public:
-  Evaluation(vector<DataPoint*> &dps, vector<int> &cls);
-  Evaluation(vector<DataPoint> * dps, vector<int> * classification);
+  Evaluation(std::vector<DataPoint*> &dps, std::vector<int> &cls);
+  Evaluation(std::vector<DataPoint> * dps, std::vector<int> * classification);
   void print();
   size_t getCorrect();
   size_t getInstances();
@@ -28,10 +28,10 @@ class Evaluation{
   float getPrecision();
   float getTval();
 
-  vector<DataPoint*> getInstancesClassifiedAs(int cl);
+  std::vector<DataPoint*> getInstancesClassifiedAs(int cl);
 
-  map<int, int> getCorrectMap();
-  map<int, int> getTotalMap();
+  std::map<int, int> getCorrectMap();
+  std::map<int, int> getTotalMap();
 
   static Evaluation kCrossFoldValidation(size_t times, Dataset * ds, bool eqrep = true);
 };

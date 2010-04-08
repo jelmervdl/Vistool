@@ -15,40 +15,38 @@
 #include "fileManagement.h"
 #include <map>
 
-using namespace std;
-
 class Dataset{
  private:
-  map<size_t, string> category_names;
-  vector<Category> categories;
-  string root;
+  std::map<size_t, std::string> category_names;
+  std::vector<Category> categories;
+  std::string root;
  public:
   //constructor:
-  Dataset(string rt);
+  Dataset(std::string rt);
 
   // getters:
-  vector<Category> * getCategories();
-  vector<Category*> getEnabled();
-  string getCatName(size_t cat);
-  string getRoot();
+  std::vector<Category> * getCategories();
+  std::vector<Category*> getEnabled();
+  std::string getCatName(size_t cat);
+  std::string getRoot();
   size_t smallestCategory() ;
 
 
-  void setRoot(string str);
+  void setRoot(std::string str);
   void addCategory(Category cat);
 
   void enableCategory(size_t i);
-  void enableCategory(string str);
+  void enableCategory(std::string str);
 
 
   void print();
   void printEnabled();
 
-  vector<DataPoint> enabledPoints(bool eqrep = true) ;
-  vector<DataPoint*> enabledDataPoints(bool eqrep= true);
+  std::vector<DataPoint> enabledPoints(bool eqrep = true) ;
+  std::vector<DataPoint*> enabledDataPoints(bool eqrep= true);
 
-  void randomDataSplit(vector<DataPoint> * train, 
-		       vector<DataPoint> * test, 
+  void randomDataSplit(std::vector<DataPoint> * train, 
+		       std::vector<DataPoint> * test, 
 		       float cut = 0.5, 
 		       bool eqrep = true);
 };

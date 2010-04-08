@@ -16,10 +16,10 @@ struct tool_state{
   ParameterPanel *    parameter_panel;
   Dataset *           current_db;
   size_t              current_image_page;
-  vector <Texture *>    textures;
-  vector <DataPoint*> currently_view_datapoints; 
-  vector <DataPoint>  train_data, test_data;
-  vector <int>        test_result;
+  std::vector <Texture *>    textures;
+  std::vector <DataPoint*> currently_view_datapoints; 
+  std::vector <DataPoint>  train_data, test_data;
+  std::vector <int>        test_result;
   Classifier *        current_classifier;
   states::EnabledClassifier   enabled_classifier;
 
@@ -27,7 +27,7 @@ struct tool_state{
   int            selected_class;
   Evaluation *   current_evaluation;
   GLUI_Listbox * selected_class_listbox;
-  vector<int>    current_classes;
+  std::vector<int>    current_classes;
 
   //Global Glui Objects 
   GLUI_StaticText * busytxt;

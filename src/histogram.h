@@ -9,8 +9,8 @@ class Histogram: public Singleton<Histogram>, public Feature{
  public:
   Histogram();
   Descriptor extract(MyImage * Image,  
-			bool saveVisualRepresentation,
-			Image* image);
+		     bool saveVisualRepresentation,
+		     Magick::Image* image);
 };
 
 #endif

@@ -11,21 +11,18 @@
 #include "histogram.h"
 #include "sift.h"
 
-using namespace cv;
-using namespace Magick;
-
 class FeatureExtractor:public Singleton<FeatureExtractor>{
   friend class Singleton<FeatureExtractor>;
  private:
-  vector<Feature*> features;
+  std::vector<Feature*> features;
   FeatureExtractor();
  public:
-  vector< vector<float> >  collectDescriptors(vector<DataPoint> points);
-  vector<float>  getDescriptor(DataPoint * dp );
+  std::vector< std::vector<float> >  collectDescriptors(std::vector<DataPoint> points);
+  std::vector<float>  getDescriptor(DataPoint * dp );
   void saveDescriptorsToFile(Dataset * ds);
-  vector<string> createAndSaveDescriptors(vector<Category> * particip);
+  std::vector<std::string> createAndSaveDescriptors(std::vector<Category> * particip);
   void renewDescriptor(DataPoint * db);
-  void getCVMatrices(vector<DataPoint*> dps, CvMat * training, CvMat *  labels);
+  void getCVMatrices(std::vector<DataPoint*> dps, CvMat * training, CvMat *  labels);
 };
 
 #endif

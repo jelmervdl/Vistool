@@ -1,5 +1,18 @@
 #include "histogram.h"
 
+using std::cout;
+using std::endl;
+using std::vector;
+
+using cv::Mat;
+using cv::MatND;
+
+using Magick::Image;
+using Magick::Geometry;
+using Magick::Color;
+using Magick::ColorGray;
+using Magick::DrawableRectangle;
+
 Histogram::Histogram(){
   cout << "making histogram" << endl;
 }

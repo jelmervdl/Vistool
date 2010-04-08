@@ -1,5 +1,7 @@
 #include "gluiView.h"
 
+using std::vector;
+
 void viewDataset(){
   ToolState &state = *ToolState::getInstance();
   if(state.current_db != NULL){
