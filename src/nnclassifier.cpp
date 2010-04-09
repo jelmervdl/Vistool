@@ -1,5 +1,6 @@
 #include "nnclassifier.h"
 
+using VisionToolFeatures::FeatureExtractor;
 using Magick::Image;
 
 #define PrepareMatrices(dps)						\
@@ -14,6 +15,8 @@ using Magick::Image;
 
 using namespace cv;
 using namespace std;
+
+namespace VisionToolClassification{
 
 vector<int> NNClassifier::crossvalidation(vector<DataPoint> * files){
   return Classifier::crossvalidation(files);
@@ -63,4 +66,6 @@ int  NNClassifier::classify(DataPoint * datapoint){
   vector<DataPoint*> dv;
   dv.push_back(datapoint);
   return classify(dv)[0];
+}
+
 }

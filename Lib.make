@@ -34,6 +34,7 @@ ifeq ("$(shell uname)", "Darwin")
 	Head_Path += -I/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers/
 	Head_Path += -I/opt/local/include/opencv/
 	Head_Path += -I/opt/local/include/vl/
+	Head_Path += -I/opt/local/include/OPT++/
 
 #Library paths
 	Lib_Path  +=  -L/opt/local/lib 

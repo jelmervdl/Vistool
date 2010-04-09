@@ -1,10 +1,17 @@
 #include "gluiTextures.h"
 
 using Magick::Image;
+using VisionToolCore::Matrix;
+using VisionToolFeatures::SiftDescriptor;
+using VisionToolFeatures::Histogram;
+using VisionToolFeatures::Feature;
+using VisionToolFeatures::Gradient;
+using VisionToolFeatures::imageGradient;
+
+namespace VisionToolGUI{
 
 void refreshTexture(size_t p){
   ToolState &state = *ToolState::getInstance();
-  using namespace gradient;
   for(size_t i = 0; i < state.textures.size(); ++i)
     delete state.textures[i];
   state.textures.clear();
@@ -37,4 +44,6 @@ void refreshTexture(size_t p){
     }
   //display histpgra,s
   display();
+}
+
 }

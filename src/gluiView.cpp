@@ -2,6 +2,8 @@
 
 using std::vector;
 
+namespace VisionToolGUI{
+
 void viewDataset(){
   ToolState &state = *ToolState::getInstance();
   if(state.current_db != NULL){
@@ -44,4 +46,5 @@ void setViewSelection(){
   state.image_width  = state.window_width / state.ims_per_page;
   state.image_height = state.window_height / state.ims_per_page;
   refreshTexture();
+}
 }

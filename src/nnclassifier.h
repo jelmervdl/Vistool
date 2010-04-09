@@ -8,6 +8,8 @@
 #include "ocvConvert.h"
 #include "tools.h"
 
+namespace VisionToolClassification{
+
 class NNClassifier:public Classifier{
  private:
   CvKNearest * knn;
@@ -20,5 +22,7 @@ class NNClassifier:public Classifier{
   std::vector<int> classify(std::vector<DataPoint*> point);
   ~NNClassifier();
 };
+
+}
 
 #endif

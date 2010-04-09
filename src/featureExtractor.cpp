@@ -8,6 +8,8 @@ using boost::filesystem::path;
 using boost::filesystem::native;
 using boost::filesystem::complete;
 
+namespace VisionToolFeatures{
+
 FeatureExtractor::FeatureExtractor(){
   Parameters *parameters = Parameters::getInstance();
   if(parameters->getiParameter("feature_histogram") > 0){
@@ -71,3 +73,4 @@ void FeatureExtractor::getCVMatrices(vector <DataPoint*>  dps, CvMat * training,
   }
 }
 
+}

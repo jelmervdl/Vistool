@@ -4,7 +4,7 @@
 #include "classifier.h"
 #include "svm.h"
 
-
+namespace VisionToolClassification{
 
 class SVMClassifier : public Classifier{
   using Classifier::train;
@@ -19,5 +19,7 @@ class SVMClassifier : public Classifier{
   std::vector<int> classify(std::vector<DataPoint*> data_points);
   int classify(DataPoint * data_point);
 }; 
+
+}
 
 #endif

@@ -2,6 +2,8 @@
 
 using std::vector;
 
+namespace VisionToolGUI{
+
 void setupOpenGL(){
   ToolState &state = *ToolState::getInstance();
   glMatrixMode(GL_PROJECTION);
@@ -70,4 +72,5 @@ void setupWindow(){
   state.window_width = 800;
   glutInitWindowSize( state.window_width, state.window_height );
   state.image_display_window = glutCreateWindow( "Image Viewer" );
+}
 }

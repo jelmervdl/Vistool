@@ -1,5 +1,11 @@
 #include "gluiEvaluate.h"
 
+using VisionToolClassification::NNClassifier;
+using VisionToolClassification::SVMClassifier;
+using VisionToolClassification::Classifier;
+
+namespace VisionToolGUI{
+
 void evaluateClassifier(){
   extractFeatures();
   train();
@@ -70,3 +76,4 @@ void showStatistics(){
   }
   
  }
+}

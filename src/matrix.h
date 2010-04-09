@@ -2,6 +2,8 @@
 #define MATRIX_H
 #include <iostream>
 
+namespace VisionToolCore{
+
 template<class Type> class Matrix{
  private:
   Type * values;
@@ -50,6 +52,5 @@ template <class Type> size_t Matrix<Type>::get_width() const {
 template <class Type> size_t Matrix<Type>::get_height() const{
   return height;
 }
-
-
+}
 #endif

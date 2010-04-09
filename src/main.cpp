@@ -1,8 +1,6 @@
 #include "main.h"
-#define PI 3.14159265
 
-using namespace gradient; 
-using namespace xercesc;
+using VisionToolGUI::start;
 
 int main(int argc, char ** argv){
   if(argc > 1){
@@ -14,7 +12,7 @@ int main(int argc, char ** argv){
   }
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
-  start(argc, argv);
+  //start(argc, argv);
   return 0;
 }
 

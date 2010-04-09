@@ -4,6 +4,8 @@
 #include "singleton.h"
 #include "feature.h"
 
+namespace VisionToolFeatures{
+
 class Histogram: public Singleton<Histogram>, public Feature{
   friend class Singleton<Histogram>;
  public:
@@ -12,5 +14,7 @@ class Histogram: public Singleton<Histogram>, public Feature{
 		     bool saveVisualRepresentation,
 		     Magick::Image* image);
 };
+
+}
 
 #endif

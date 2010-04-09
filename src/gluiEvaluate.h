@@ -5,8 +5,11 @@
 #include "gluiFeatures.h"
 #include "gluiClassify.h"
 
+namespace VisionToolGUI {
+
 void evaluateClassifier();
 void crossValidate();
 void showStatistics();
 
+}
 #endif

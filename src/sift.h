@@ -9,13 +9,15 @@
 #include "gradient.h"
 #include "descriptor.h"
 
+namespace VisionToolFeatures{
+
 class SiftDescriptor: public Feature, public Singleton<SiftDescriptor>{
   friend class Singleton<SiftDescriptor>;
  public: 
   Descriptor extract(MyImage *Image,
 		     bool save_visual_representation,
 		     Magick::Image *canvas);
-  Descriptor getKeyPointDescriptor(Matrix<gradient::Gradient> * gradient,
+  Descriptor getKeyPointDescriptor(VisionToolCore::Matrix<Gradient> * gradient,
 				    sift::KeyPoint * keypoint,
 				    const size_t window_size,
 				    const int kOrientations);
@@ -25,6 +27,6 @@ class SiftDescriptor: public Feature, public Singleton<SiftDescriptor>{
 
 };
 
-
+}
 
 #endif

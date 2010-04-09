@@ -1,6 +1,9 @@
 #include "classifier.h"
 
-using namespace std;
+using VisionToolFeatures::Descriptor;
+using std::vector;
+
+namespace VisionToolClassification{
 
 vector<int> Classifier::classify(vector<DataPoint> * points){
   vector<DataPoint*> ps = VisionCore::ptrDeMorgan<DataPoint>(points);
@@ -47,4 +50,6 @@ vector<int> Classifier::crossvalidation(vector<DataPoint> * _files)
 
   }
   return results;
+}
+
 }

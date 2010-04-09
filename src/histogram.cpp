@@ -13,6 +13,8 @@ using Magick::Color;
 using Magick::ColorGray;
 using Magick::DrawableRectangle;
 
+namespace VisionToolFeatures{
+
 Histogram::Histogram(){
   cout << "making histogram" << endl;
 }
@@ -59,4 +61,6 @@ Descriptor Histogram::extract(MyImage *image,
 	}
       }
   return data;
+}
+
 }

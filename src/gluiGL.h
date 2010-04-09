@@ -3,9 +3,13 @@
 
 #include "toolState.h"
 
+namespace VisionToolGUI{
+
 void display(void);
 void setupOpenGL();
 void myGlutIdle( void );
 void setupWindow();
+
+}
 
 #endif

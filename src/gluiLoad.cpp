@@ -3,6 +3,8 @@
 using std::string;
 using std::vector;
 
+namespace VisionToolGUI{
+
 void loadDataset(string location){
   ToolState &state = *ToolState::getInstance();
   if(state.classes != 0)
@@ -44,4 +46,6 @@ void loadCaltech(){
 
 void askDataset(){
   loadDataset(askFile());
+}
+
 }

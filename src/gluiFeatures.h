@@ -3,6 +3,10 @@
 
 #include "toolState.h"
 
+namespace VisionToolGUI{
+
 void extractFeatures();
+
+}
 
 #endif

@@ -1,5 +1,7 @@
 #include "gluiControl.h"
 
+namespace VisionToolGUI{
+
 void initGlui(){
   ToolState &state = *ToolState::getInstance();
   state.parameter_panel = new ParameterPanel();
@@ -55,4 +57,5 @@ void selectAndShow(){
   ToolState &state = *ToolState::getInstance();
   state.ds = states::Particular_Category;
   viewDataset();
+}
 }

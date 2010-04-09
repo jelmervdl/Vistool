@@ -9,6 +9,10 @@
 #include "gluiControl.h"
 #include "gluiFeatures.h"
 
+namespace VisionToolGUI{
+
 void start(int argc, char ** argv);
+
+}
 
 #endif

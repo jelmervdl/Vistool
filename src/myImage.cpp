@@ -1,8 +1,12 @@
 #include "myImage.h"
 
-using namespace std;
-using namespace Magick;
-using namespace cv;
+using VisionToolCore::Matrix;
+using Magick::Image;
+using Magick::Blob;
+using Magick::ColorGray;
+using std::string;
+using cv::Mat;
+
 
 size_t MyImage::get_width(){
   return width;

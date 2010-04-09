@@ -22,7 +22,7 @@ class MyImage{
   std::string getLocation();
   Magick::Blob *getBlob();
   cv::Mat * getOpenCVMat();
-  Matrix<float> getGrayscaleMatrix();
+  VisionToolCore::Matrix<float> getGrayscaleMatrix();
   MyImage(std::string loc);
   ~MyImage();
 };

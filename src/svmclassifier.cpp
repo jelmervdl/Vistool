@@ -4,6 +4,7 @@ using std::vector;
 using std::cout;
 using std::endl;
 
+namespace VisionToolClassification{
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint> * files){
   cout << " joer dan? " << endl;
@@ -107,4 +108,6 @@ vector<int> SVMClassifier::classify(vector<DataPoint*> data_points){
 int SVMClassifier::classify(DataPoint * data_point){
   //STUB
   return 0;
+}
+
 }

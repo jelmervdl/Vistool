@@ -6,8 +6,12 @@
 #include "gluiFeatures.h"
 #include "gluiEvaluate.h"
 
-void initGlui();
-void nextPage();
-void selectAndShow();
+namespace VisionToolGUI{
+
+  void initGlui();
+  void nextPage();
+  void selectAndShow();
+
+}
 
 #endif

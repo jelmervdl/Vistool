@@ -4,6 +4,8 @@ using namespace std;
 
 ToolState &state = *ToolState::getInstance();
 
+namespace VisionToolGUI{
+
 void start(int argc, char **argv){
   glutInit(&argc, argv); // obligatory glut call
   printf("Starting up glut...\n"); 
@@ -14,4 +16,6 @@ void start(int argc, char **argv){
   display();
   initGlui();
   glutMainLoop();
+}
+
 }

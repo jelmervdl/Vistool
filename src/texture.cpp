@@ -1,5 +1,7 @@
 #include "texture.h"
 
+using VisionToolFeatures::Gradient;
+using VisionToolCore::Matrix;
 using Magick::Image;
 
 Texture::Texture(Image *image, int window){
@@ -17,7 +19,7 @@ Texture::Texture(Matrix<float> * m, int window){
   initTexture(window, &txt, m, &width, &height);
 }
 
-Texture::Texture(Matrix<gradient::Gradient> * m, int window){
+Texture::Texture(Matrix<Gradient> * m, int window){
   glGenTextures(1, &txt);
   initTexture(window, &txt, m, &width, &height);
 }

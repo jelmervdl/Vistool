@@ -1,11 +1,11 @@
 #include "gradient.h"
-
+using VisionToolCore::Matrix;
 using std::cout;
 using std::endl;
 
 #define PI 3.14159265
 
-namespace gradient {
+namespace VisionToolFeatures {
 Gradient::Gradient(float magnitude_, float orientation_)
   :magnitude(magnitude_), orientation(orientation_){
 }

@@ -9,6 +9,8 @@
 #include "core.h"
 #include "evaluation.h"
 
+namespace VisionToolClassification{
+
 class Classifier{
  public:
   virtual void train(std::vector<DataPoint*> files )=0;
@@ -19,5 +21,6 @@ class Classifier{
   virtual int classify(DataPoint * point) = 0;
 };
 
+}
 
 #endif

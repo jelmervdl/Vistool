@@ -3,6 +3,8 @@
 
 #include <vector>
 
+namespace VisionToolFeatures{
+
 class Descriptor : public std::vector<float>{
  private:
   friend Descriptor& operator+(Descriptor& left, const Descriptor& right){
@@ -17,4 +19,5 @@ class Descriptor : public std::vector<float>{
 
 };
 
+}
 #endif

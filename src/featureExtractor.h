@@ -11,6 +11,8 @@
 #include "histogram.h"
 #include "sift.h"
 
+namespace VisionToolFeatures{
+
 class FeatureExtractor:public Singleton<FeatureExtractor>{
   friend class Singleton<FeatureExtractor>;
  private:
@@ -24,5 +26,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   void renewDescriptor(DataPoint * db);
   void getCVMatrices(std::vector<DataPoint*> dps, CvMat * training, CvMat *  labels);
 };
+
+}
 
 #endif

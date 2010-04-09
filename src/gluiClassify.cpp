@@ -1,5 +1,10 @@
 #include "gluiClassify.h"
 
+using VisionToolClassification::Classifier;
+using VisionToolClassification::NNClassifier;
+using VisionToolClassification::SVMClassifier;
+
+namespace VisionToolGUI{
 
 
 void train(){
@@ -33,4 +38,6 @@ void classify(){
   state.current_evaluation = new Evaluation(&state.test_data, &state.test_result);
   viewDataset();
   showStatistics();
+}
+
 }

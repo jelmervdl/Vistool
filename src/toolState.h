@@ -8,6 +8,7 @@
 #include "texture.h"
 #include "classifier.h"
 
+
 struct tool_state{
   states::DisplayMode      dm;
   states::DatasetOnDisplay ds;
@@ -20,7 +21,7 @@ struct tool_state{
   std::vector <DataPoint*> currently_view_datapoints; 
   std::vector <DataPoint>  train_data, test_data;
   std::vector <int>        test_result;
-  Classifier *        current_classifier;
+  VisionToolClassification::Classifier * current_classifier;
   states::EnabledClassifier   enabled_classifier;
 
   // class view selection

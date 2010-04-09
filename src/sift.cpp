@@ -9,9 +9,9 @@ using Magick::Color;
 using Magick::DrawableCircle;
 using Magick::DrawableLine;
 
-using gradient::Gradient;
-using gradient::imageGradient;
+using VisionToolCore::Matrix;
 
+namespace VisionToolFeatures{
 
 Descriptor SiftDescriptor::extract(MyImage *my_image,
 			bool save_visual_representation,
@@ -133,7 +133,7 @@ Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
 	    //pixel is outside of bounds
 	  } else{
 	    pixels_used++;
-	    gradient::bin(gradient->at(x,y), 
+	    bin(gradient->at(x,y), 
 			  bins, 1.0);
 	  }
 	}
@@ -148,4 +148,5 @@ Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
     }
   }
   return total_bins;
+}
 }

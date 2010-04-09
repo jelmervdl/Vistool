@@ -4,6 +4,8 @@ using Magick::Image;
 using std::vector;
 using std::string;
 
+namespace VisionToolFeatures{
+
 Feature::Feature(){
   
 }
@@ -23,3 +25,4 @@ void Feature::extractTo(vector<float> * vec, MyImage * im){
   vec->insert(vec->end(), extr.begin(), extr.end()); 
 }
 
+}

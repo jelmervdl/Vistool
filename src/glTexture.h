@@ -10,11 +10,19 @@
 #include "texture.h"
 #include "gradient.h"
 
-void initTexture(int window, GLuint * texName, std::string          filename,  size_t * twidth, size_t * theight);
-void initTexture(int window, GLuint * texName, Magick::Image *    im,     size_t * twidth, size_t * theight);
-void initTexture(int window, GLuint * texName, Magick::Blob  *    blob,   size_t * twidth, size_t * theight);
-void initTexture(int window, GLuint * texName, Matrix<float> *    im,     size_t * twidth, size_t * theight);
-void initTexture(int window, GLuint * texName, Matrix<gradient::Gradient> * matrix, size_t * width, size_t * height);
+void initTexture(int window, GLuint *texName,
+		 std::string filename, 
+		 size_t *twidth, size_t *theight);
+void initTexture(int window, GLuint *texName,
+		 Magick::Image *im,
+		 size_t *twidth, size_t *theight);
+void initTexture(int window, GLuint *texName,
+		 Magick::Blob  *blob,   size_t *twidth, size_t *theight);
+void initTexture(int window, GLuint *texName, VisionToolCore::Matrix<float> * im,
+		 size_t *twidth, size_t *theight);
+void initTexture(int window, GLuint *texName, 
+		 VisionToolCore::Matrix<VisionToolFeatures::Gradient> *matrix,
+		 size_t *width, size_t *height);
 void drawTexture(GLuint texName, int twidth, int theight);
 
 #endif
