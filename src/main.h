@@ -22,6 +22,8 @@
 #include "descriptor.h"
 #include "svm.h"
 #include "svmclassifier.h"
+#include "parameterOptimization.h"
+
 void printLibraries ();
 #endif
 

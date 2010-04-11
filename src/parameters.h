@@ -1,3 +1,7 @@
+/* Stores all experiment and gui parameters, including feature
+   extraction, classification and display. Parameters is static but
+   can be changed during an experiment.*/
+
 #ifndef PARAMETERS_H
 #define PARAMETERS_H
 
@@ -7,15 +11,21 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include "parameterOptimization.h"
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/dom/DOM.hpp>
 #include <xercesc/sax/HandlerBase.hpp>
 #include <xercesc/util/XMLString.hpp>
 
+namespace parameter_optimization{
+  class ParameterOptimization;
+};
+
 class Parameters:public Singleton <Parameters>{
   friend class Singleton<Parameters>;
   friend class ParameterPanel;
+  friend class parameter_optimization::ParameterOptimization;
  protected:
   Parameters();
  private:
@@ -27,7 +37,7 @@ class Parameters:public Singleton <Parameters>{
   std::string getFile();
   void saveReal(std::string str, float f);
   void saveInteger(std::string str, int f);
-  float getfParameter(std::string str);
+  float getfParameter(std::string str) ;
   int  getiParameter(std::string str);
   ~Parameters();
   bool hasHistogram();

@@ -1,6 +1,11 @@
 #include "main.h"
 
 using VisionToolGUI::start;
+using parameter_optimization::ParameterOptimization;
+
+float trick(){
+  return 0.0;
+}
 
 int main(int argc, char ** argv){
   if(argc > 1){
@@ -12,15 +17,12 @@ int main(int argc, char ** argv){
   }
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
+  ParameterOptimization opt(&trick);
+  opt.optimize();
   //start(argc, argv);
   return 0;
 }
 
-void Libraries(){
-  printf("Using Library: %s %d\n", "boost", 1);
-  printf("Using Library: %s %d\n", "glui", 1);
-  printf("Using Library: %s %d\n", "glut", 1);
-  printf("Using Library: %s %d\n", "opengl", 1);
-  printf("Using Library: %s %d\n", "magick++", 1);
-  printf("Using Library: %s %d\n", "opencv", 1);  
+void printLibraries(){
+  cout << "hi" << endl;
 }
