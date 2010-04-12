@@ -1,4 +1,6 @@
 #include "main.h"
+#include <map>
+
 
 using VisionToolGUI::start;
 using parameter_optimization::ParameterOptimization;
@@ -18,7 +20,7 @@ int main(int argc, char ** argv){
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
   ParameterOptimization opt(&trick);
-  opt.optimize();
+  //opt.optimize();
   //start(argc, argv);
   return 0;
 }
