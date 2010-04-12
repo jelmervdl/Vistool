@@ -43,6 +43,11 @@ namespace parameter_optimization{
     void set_to_best(){
       *live_value = best;
     }
+    void zoom(const float zoom_factor){
+      const Type margin = (max - min) * 0.5 / zoom_factor;
+      min = best - margin;
+      max = best + margin;
+    }
   };
 
   class ParameterSet{

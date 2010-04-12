@@ -7,9 +7,9 @@
 
 namespace parameter_optimization{
  
-  const int iterations  = 5;
-  const float zoom  = 1.5;
-  const int resolution = 5;
+  const int kIterations  = 5;
+  const float kZoom= 1.5;
+  const int kResolution = 5;
   
   class ParameterOptimization {
   private:
@@ -43,7 +43,9 @@ namespace parameter_optimization{
   template<class Type> void set_current_as_best(Parameter<Type> *parameter){
     parameter->set_current_as_best();
   }
-
+  template<class Type> void zoom(Parameter<Type> *parameter){
+    parameter->zoom(kZoom);
+  }
 }
 
 #endif

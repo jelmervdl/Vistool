@@ -52,7 +52,7 @@ void ParameterOptimization::printCurrentParameters(){
 void ParameterOptimization::optimize(){
   const int total_parameters = 
     int_parameters.size() + float_parameters.size();
-  for(int epoch = 0; epoch < iterations; epoch++){
+  for(int epoch = 0; epoch < kIterations; epoch++){
     for(int parameter_index = 0; 
 	parameter_index < total_parameters;
 	++parameter_index){
@@ -68,7 +68,7 @@ void ParameterOptimization::optimize(){
 	printf("Parameter name is %s\n", parameter.get_name().c_str());
       }
     }
-    //zoom();
+    apply_to_all_parameters(zoom<int>, zoom<float>);
   }
 }
 
@@ -77,8 +77,8 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
   apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
   const int min = parameter.get_min();
   const int max = parameter.get_max();
-  float step_size = (max - min) / resolution;
-  for(int res_step = 0; res_step < resolution; ++res_step){
+  float step_size = (max - min) / kResolution;
+  for(int res_step = 0; res_step < kResolution; ++res_step){
     const int current_value = (int) (0.5 + min + res_step * step_size);
     //printf("cur val is %d \n step size: %f", current_value, step_size);
     parameter.set_value(current_value);
@@ -104,8 +104,8 @@ void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter
   apply_to_all_parameters(&set_to_best<int>, &set_to_best<float>);
   const float min = parameter.get_min();
   const float max = parameter.get_max();
-  float step_size = (max - min) / (float)resolution;
-  for(int res_step = 0; res_step < resolution; ++res_step){
+  float step_size = (max - min) / (float)kResolution;
+  for(int res_step = 0; res_step < kResolution; ++res_step){
     const float current_value = min + res_step * step_size;
     parameter.set_value(current_value);
     const ParameterSet handle = get_current_parameter_handle();
