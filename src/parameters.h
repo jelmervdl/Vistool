@@ -7,7 +7,9 @@
 
 #define NO_PARAMETERS 100
 
+#include <stdio.h>
 #include "singleton.h"
+#include <time.h>
 #include <iostream>
 #include <fstream>
 #include <map>

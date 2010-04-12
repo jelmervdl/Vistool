@@ -98,6 +98,16 @@ void Parameters::readFile(char * str){
 void Parameters::saveXML(string str){
   ofstream of(str.c_str());
   of << "<?xml version = \"1.0\" encoding=\'UTF-8\'?>" << endl;
+  {
+    char timeStr[40];
+    time_t rawtime;
+    struct tm * timeinfo;
+    time( &rawtime );
+    timeinfo = localtime( &rawtime );
+    strftime(timeStr, 40, "%c", timeinfo);
+    of << "<!-- " << timeStr  << " -->" << endl;
+  }
+  of << "<!-- " << str << " -->" << endl << endl;
   of << "<parameters>" << endl << endl;
   of << "<integer>" << endl;
   { // write paramters
@@ -119,4 +129,5 @@ void Parameters::saveXML(string str){
 
   of << "</real>" << endl << endl;
   of << "</parameters>" << endl;
+  of.close();
  }
