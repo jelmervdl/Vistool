@@ -1,5 +1,4 @@
 #include "main.h"
-#include <map>
 
 
 using VisionToolGUI::start;
@@ -19,6 +18,7 @@ int main(int argc, char ** argv){
   }
   Parameters * p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
+  p->saveXML("hond.xml");
   ParameterOptimization opt(&trick);
   //opt.optimize();
   //start(argc, argv);

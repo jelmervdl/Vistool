@@ -9,6 +9,7 @@
 
 #include "singleton.h"
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <string>
 #include "parameterOptimization.h"
@@ -39,6 +40,7 @@ class Parameters:public Singleton <Parameters>{
   void saveInteger(std::string str, int f);
   float getfParameter(std::string str) ;
   int  getiParameter(std::string str);
+  void saveXML(std::string str);
   ~Parameters();
   bool hasHistogram();
   bool hasParameters(std::string * reqParams, size_t n);

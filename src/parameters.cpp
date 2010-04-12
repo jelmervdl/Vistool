@@ -4,6 +4,7 @@ using std::string;
 using std::map;
 using std::cout;
 using std::endl;
+using std::ofstream;
 
 XERCES_CPP_NAMESPACE_USE
 
@@ -93,3 +94,29 @@ void Parameters::readFile(char * str){
 
   XMLPlatformUtils::Terminate();
 }
+
+void Parameters::saveXML(string str){
+  ofstream of(str.c_str());
+  of << "<?xml version = \"1.0\" encoding=\'UTF-8\'?>" << endl;
+  of << "<parameters>" << endl << endl;
+  of << "<integer>" << endl;
+  { // write paramters
+    typedef map<string,int>::iterator intMapIterator;
+    for(intMapIterator map_it = intParameters.begin();
+	map_it !=  intParameters.end(); ++ map_it)
+      of << "<" << map_it->first << "> " << map_it->second 
+	 << " </" << map_it->first << ">" << endl;
+  }
+  of << "</integer>" << endl << endl;
+  of << "<real>" << endl;
+  { // write parameters
+    typedef map<string,float>::iterator floatMapIterator;
+    for(floatMapIterator map_it = floatParameters.begin();
+	map_it !=  floatParameters.end(); ++ map_it)
+      of << "<" << map_it->first << "> " << map_it->second 
+	 << " </" << map_it->first << ">" << endl;
+  }
+
+  of << "</real>" << endl << endl;
+  of << "</parameters>" << endl;
+ }
