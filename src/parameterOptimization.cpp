@@ -4,10 +4,13 @@ using namespace parameter_optimization;
 using std::string;
 using std::vector;
 
+// Parameter Optimization Functions:
+
 ParameterOptimization::ParameterOptimization(float (*func) ())
-  : evaluation_function(func){
-  add_float_parameter("test", 0.0, 5.0);
-  
+  : evaluation_function(func), best(-9999999.0){
+  add_float_parameter("test", 0.0, 10.0);
+  add_int_parameter("test2", 0, 20);
+  add_int_parameter("test3", 0, 20);
 }
 
 void ParameterOptimization::add_int_parameter(string name, const int min, 
@@ -36,6 +39,16 @@ ParameterSet ParameterOptimization::get_current_parameter_handle(){
   return ParameterSet(int_values, float_values);
 }
 
+void ParameterOptimization::printCurrentParameters(){
+  printf("using the following parameters:\n");
+  for(size_t i = 0; i < int_parameters.size(); ++i)
+    printf("\t %s at value %d\n", int_parameters[i].get_name().c_str(),
+	   int_parameters[i].get_value());
+  for(size_t i = 0; i < float_parameters.size(); ++i)
+    printf("\t %s at value %.2f\n", float_parameters[i].get_name().c_str(),
+	   float_parameters[i].get_value());
+}
+
 void ParameterOptimization::optimize(){
   const int total_parameters = 
     int_parameters.size() + float_parameters.size();
@@ -45,29 +58,69 @@ void ParameterOptimization::optimize(){
 	++parameter_index){
 
       if(parameter_index < (int) int_parameters.size()){
-	Parameter<int> &parameter = 
-	  int_parameters[parameter_index];
-	printf("Parameter name is %s\n", parameter.get_name().c_str());
-	const int min = parameter.get_min();
-	const int max = parameter.get_max();
-	float step_size = (max - min) / resolution;
-	for(int res_step = 0; res_step < resolution; ++res_step){
-	  const int current_value = (int) (0.5 + min + res_step * step_size);
-	  const ParameterSet handle= get_current_parameter_handle();
-	  if(!known(handle)){
-	    parameter.set_value(current_value);
-	    float result = evaluation_function();
-	    TestResult res( handle, result);
-	    current_results.push_back(res);
-	  }
-	}
+	optimize_int_parameter(int_parameters[parameter_index]);
       } 
       else{
+	optimize_float_parameter( float_parameters[parameter_index - 
+						   int_parameters.size()]);
 	Parameter<float> &parameter = 
 	  float_parameters[parameter_index - int_parameters.size()];
 	printf("Parameter name is %s\n", parameter.get_name().c_str());
       }
+    }
+    //zoom();
+  }
+}
 
+void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
+  printf("Altering %s\n", parameter.get_name().c_str());
+  apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
+  const int min = parameter.get_min();
+  const int max = parameter.get_max();
+  float step_size = (max - min) / resolution;
+  for(int res_step = 0; res_step < resolution; ++res_step){
+    const int current_value = (int) (0.5 + min + res_step * step_size);
+    //printf("cur val is %d \n step size: %f", current_value, step_size);
+    parameter.set_value(current_value);
+    const ParameterSet handle = get_current_parameter_handle();
+    if(!known(handle)){
+      float result = evaluation_function();
+      printCurrentParameters();
+      printf("result: %.2f\n\n", result);
+      TestResult res( handle, result);
+      current_results.push_back(res);
+      if(result > best){
+	printf("improvement: %f -> %f\n", best, result);
+	best = result;
+	apply_to_all_parameters(&set_current_as_best<int>, 
+				&set_current_as_best<float> );
+      }
+    }
+  }
+}
+
+void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter){
+  printf("Altering %s\n", parameter.get_name().c_str());
+  apply_to_all_parameters(&set_to_best<int>, &set_to_best<float>);
+  const float min = parameter.get_min();
+  const float max = parameter.get_max();
+  float step_size = (max - min) / (float)resolution;
+  for(int res_step = 0; res_step < resolution; ++res_step){
+    const float current_value = min + res_step * step_size;
+    parameter.set_value(current_value);
+    const ParameterSet handle = get_current_parameter_handle();
+    if(!known(handle)){
+      float result = evaluation_function();
+      printCurrentParameters();
+      printf("result: %.2f\n\n", result);
+      TestResult res( handle, result);
+      current_results.push_back(res);
+      if(result > best){
+	printf("improvement: %f -> %f\n", best, result);
+	best = result;
+	apply_to_all_parameters(&set_current_as_best<int>, 
+				&set_current_as_best<float> );
+      }
     }
   }
 }
@@ -82,14 +135,19 @@ bool ParameterOptimization::known(const ParameterSet &handle){
   return false;
 }
 
-bool ParameterSet::equals(const ParameterSet &other) const{
-  if(ints.size() != other.ints.size() || floats.size() != other.floats.size())
-    return false;
-  for(size_t i = 0; i <  ints.size(); ++i)
-    if(ints[i] != other.ints[i])
-	return false;
-  for(size_t i = 0; i <  floats.size(); ++i)
-    if(floats[i] != other.floats[i])
-	return false;
-  return true;
+void ParameterOptimization::apply_to_all_parameters(void (*int_func)
+						    (Parameter<int>*),
+						    void (*fl_func)
+						    (Parameter<float>*) ){
+  {
+    typedef vector<Parameter<int> >::iterator par_it;
+    for(par_it it = int_parameters.begin(); 
+	it != int_parameters.end(); ++it)
+      int_func(&*it);
+  } {
+    typedef vector<Parameter<float> >::iterator par_fl;
+    for(par_fl it = float_parameters.begin(); 
+	it != float_parameters.end(); ++it)
+      fl_func(&*it);
+  }
 }

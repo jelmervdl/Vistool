@@ -1,11 +1,18 @@
 #include "main.h"
 
-
 using VisionToolGUI::start;
 using parameter_optimization::ParameterOptimization;
 
 float trick(){
-  return 0.0;
+  Parameters *parameters = Parameters::getInstance();
+  float result = 0;
+  float diff = 3.9 - parameters->getfParameter("test");
+  result -= diff * diff;
+  diff = 4 - parameters->getiParameter("test2");
+  result -= diff * diff;
+  diff = 11 - parameters->getiParameter("test3");
+  result -= diff * diff;
+  return result;
 }
 
 int main(int argc, char ** argv){
@@ -20,7 +27,7 @@ int main(int argc, char ** argv){
   p->readFile((char *) "parameters.xml");
   p->saveXML("hond.xml");
   ParameterOptimization opt(&trick);
-  //opt.optimize();
+  opt.optimize();
   //start(argc, argv);
   return 0;
 }
