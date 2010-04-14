@@ -7,7 +7,7 @@
 #include "parameterPanel.h"
 #include "texture.h"
 #include "classifier.h"
-
+#include "evaluation.h"
 
 struct tool_state{
   states::DisplayMode      dm;

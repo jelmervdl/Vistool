@@ -24,7 +24,7 @@ FeatureExtractor::FeatureExtractor(){
 vector<float> FeatureExtractor::getDescriptor(DataPoint * dp ){
   renewDescriptor(dp);
   vector<float>  descriptor;
-  readDescriptor(&descriptor, dp->getDescriptorURL());
+  readDescriptor(&descriptor, dp->get_descriptor_url());
   return descriptor;
 }
    
@@ -33,9 +33,9 @@ void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
   for(vector<Category*>::iterator category = enabled.begin();
       category != enabled.end();
       ++category){
-    string name = (*category)->getName();
-    vector<DataPoint> * files = (*category)->getDataPoints();
-    string root = (*category)->getRoot();
+    string name = (*category)->get_name();
+    vector<DataPoint> * files = (*category)->get_data_points();
+    string root = (*category)->get_root();
     string aap = DESCRIPTOR_LOCATION;
     path p = complete(path(aap+name, native));
     path parameters = complete(path(Parameters::getInstance()->getFile()));
@@ -49,13 +49,13 @@ void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
 
 void FeatureExtractor::renewDescriptor(DataPoint * dp){
   path parameters = complete(path(Parameters::getInstance()->getFile()));
-  if(!exists(path(dp->getDescriptorURL())) 
+  if(!exists(path(dp->get_descriptor_url())) 
      ||
-     last_write_time(parameters) < last_write_time(path(dp->getImageURL()))){
-    MyImage image(dp->getImageURL());
+     last_write_time(parameters) < last_write_time(path(dp->get_image_url()))){
+    MyImage image(dp->get_image_url());
     vector<float> descriptor;
     descriptor = SiftDescriptor::getInstance()->extract(&image , false, NULL);
-    writeDescriptor(&descriptor,dp->getDescriptorURL());
+    writeDescriptor(&descriptor,dp->get_descriptor_url());
   } 
 }
 
@@ -65,8 +65,8 @@ void FeatureExtractor::getCVMatrices(vector <DataPoint*>  dps, CvMat * training,
   Mat tmatrix(training, 0);
   for(size_t row = 0; row < dps.size(); ++row){
     vector<float> desc;
-    readDescriptor(&desc, dps.at(row)->getDescriptorURL());
-    labels.at<int>(row,0) = dps.at(row)->getLabel();
+    readDescriptor(&desc, dps.at(row)->get_descriptor_url());
+    labels.at<int>(row,0) = dps.at(row)->get_label();
     for(size_t col = 0; col < desc.size(); ++col ){
       tmatrix.at<float>(row,col) = desc[col];
     }

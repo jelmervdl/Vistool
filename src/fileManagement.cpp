@@ -38,10 +38,10 @@ void printDatabase(vector<Category> * db){
   cout << "Database contains " << db->size() << " classes, including:\n";
   for(vector<Category>::iterator it = db->begin(); 
       it!=db->end(); ++it){
-    cout << "\t" << it->getName() << endl;
-    vector<DataPoint> f = it->getDataPoints();
+    cout << "\t" << it->get_name() << endl;
+    vector<DataPoint> f = it->get_data_points();
     for(vector<DataPoint>::iterator it2 = f.begin(); it2!=f.end(); ++it2)
-      cout << "\t\t" << it2->getImageURL() << endl;
+      cout << "\t\t" << it2->get_image_url() << endl;
   }
 }
 

@@ -21,8 +21,8 @@ class Singleton{
   };
 }; 
 
-template <class T> T* Singleton<T>::singleton = 0;
-template <class T> bool Singleton<T>::instanceFlag = false;
+template <class T> T* Singleton<T>::singleton;
+template <class T> bool Singleton<T>::instanceFlag;
 
 #endif
 

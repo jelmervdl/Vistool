@@ -14,19 +14,25 @@ namespace parameter_optimization{
     Type        min;
     Type        max;
     Type        *live_value;
+    bool positive;
 
   public:  
-    Parameter(std::string _name, Type _min, Type _max, Type *live): 
-      name(_name), min(_min), max(_max), live_value(live){
+    Parameter(std::string _name, Type _min, Type _max, Type *live,
+	      bool force_positive): 
+      name(_name), min(_min), max(_max), live_value(live), positive(force_positive){
       best = min;
     }    
     std::string get_name() const {
       return name;
     }
     Type        get_min() const {
+      if(positive && min < 0)
+	return 0;
       return min;
     }
     Type        get_max() const {
+      if(positive && max < 0)
+	return 0;
       return max;
     }
     Type get_value() const {
@@ -36,9 +42,7 @@ namespace parameter_optimization{
       *live_value = new_value;
     }
     void set_current_as_best(){
-      std::cout << "yeah... " << best << std::endl;
       best = *live_value;
-      std::cout << "yeah... " << best << std::endl;
     }
     void set_to_best(){
       *live_value = best;

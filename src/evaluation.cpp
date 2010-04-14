@@ -7,18 +7,18 @@ Evaluation::Evaluation(vector<DataPoint*> &dps,
   correct = 0;
   for(size_t dp_idx = 0; dp_idx < dps.size(); ++dp_idx){
     DataPoint*&dp = dps[dp_idx];
-    map_total_to_label[dp->getLabel()] = 0;
-    map_correct_to_label[dp->getLabel()] = 0;
+    map_total_to_label[dp->get_label()] = 0;
+    map_correct_to_label[dp->get_label()] = 0;
   }
   if(dps.size() != cls.size())
     throw 1;
   for(size_t i = 0; i < dps.size(); ++i){
     instances++;
-    map_total_to_label[dps[i]->getLabel()]++;
+    map_total_to_label[dps[i]->get_label()]++;
     cout << ".";
-    if((int) dps[i]->getLabel() == cls[i]){
+    if((int) dps[i]->get_label() == cls[i]){
       correct++;
-      map_correct_to_label[dps[i]->getLabel()]++;
+      map_correct_to_label[dps[i]->get_label()]++;
     }
     classificationmap[ cls[i] ].push_back(dps[i]);
   }
@@ -33,18 +33,18 @@ Evaluation::Evaluation(vector<DataPoint> * dps, vector<int> * cls){
   correct = 0;
   for(vector<DataPoint>::iterator dp = dps->begin();
       dp != dps->end(); ++dp){
-    map_total_to_label[dp->getLabel()] = 0;
-    map_correct_to_label[dp->getLabel()] = 0;
+    map_total_to_label[dp->get_label()] = 0;
+    map_correct_to_label[dp->get_label()] = 0;
   }
   if(dps->size() != cls->size())
     throw 1;
   for(size_t i = 0; i < dps->size(); ++i){
     instances++;
-    map_total_to_label[dps->at(i).getLabel()]++;
+    map_total_to_label[dps->at(i).get_label()]++;
     cout << ".";
-    if((int) dps->at(i).getLabel() == cls->at(i)){
+    if((int) dps->at(i).get_label() == cls->at(i)){
       correct++;
-      map_correct_to_label[dps->at(i).getLabel()]++;
+      map_correct_to_label[dps->at(i).get_label()]++;
     }
     classificationmap[cls->at(i)].push_back(&dps->at(i));
   }

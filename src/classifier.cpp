@@ -19,9 +19,7 @@ void Classifier::train(vector<DataPoint> *  files ){
 
 vector<int> Classifier::crossvalidation(vector<DataPoint> * _files)
 {
-  printf("crossvalidation called\n");
   vector<DataPoint> &files = *_files;
-  random_shuffle(files.begin(), files.end());
   const int kFolds = Parameters::getInstance()->getiParameter("cross_validation_k");
   const int kFiles = files.size();
  

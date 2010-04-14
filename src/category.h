@@ -1,32 +1,34 @@
 #ifndef CATEGORY_H
 #define CATEGORY_H
 
-#include <string>
+/* Contains all relevant information regarding a single class/category
+   of images. This include the class name, it's integer label, the
+   location of the images on disk and a vector of these images
+   themselves.*/
+
 #include <vector>
 #include"dataPoint.h"
 
 class Category{
  private:
-  
-  std::string name;
-  std::string root; 
+  std::string            name;
+  std::string            root; 
+  std::vector<DataPoint> data_points;
+  int                    enabled; 
+  size_t                 label;
 
-  std::vector <DataPoint> data_points;
-
-  int enabled; 
-  size_t label;
  public:
-  Category(std::string give_name, std::string root, size_t lab);
+  Category(std::string give_name,
+	   std::string root, 
+	   size_t lab);
+  size_t                   size()      const;
+  size_t                   get_label() const;
+  std::string              get_name()  const;
+  std::string              get_root()  const;
 
-  size_t size();
-  size_t getLabel() const;
+  int *                    enabledLiveVar();
+  std::vector<DataPoint> * get_data_points();
 
-  std::string getName();
-  std::string getRoot();
-
-  int * getEnabled();
-  std::vector <DataPoint> * getDataPoints();
-
-  void addDataPoint(DataPoint dp);
+  void                     addDataPoint(DataPoint dp);
 };
 #endif

@@ -23,9 +23,9 @@ void train(){
   state.current_classes.clear();
   vector<Category*> enabs = state.current_db->getEnabled();
   for(size_t i = 0; i <  enabs.size(); ++i){
-	state.selected_class_listbox->add_item(enabs[i]->getLabel(), 
-					 enabs[i]->getName().c_str());
-	state.current_classes.push_back(enabs[i]->getLabel());
+	state.selected_class_listbox->add_item(enabs[i]->get_label(), 
+					 enabs[i]->get_name().c_str());
+	state.current_classes.push_back(enabs[i]->get_label());
     }
 }
 

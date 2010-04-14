@@ -5,11 +5,12 @@
 #include "parameters.h"
 #include "singleton.h"
 
+
 namespace parameter_optimization{
  
-  const int kIterations  = 5;
+  const int kIterations  = 20;
   const float kZoom= 1.5;
-  const int kResolution = 5;
+  const int kResolution = 6;
   
   class ParameterOptimization {
   private:
@@ -21,8 +22,10 @@ namespace parameter_optimization{
     std::vector<Parameter<int> > int_parameters;
     std::vector<Parameter<float> > float_parameters;
 
-    void add_int_parameter(std::string name, const int min, const int max);
-    void add_float_parameter(std::string name, const float min, const float max);
+    void add_int_parameter(std::string name, const int min, const int max,
+			   const bool positive = false);
+    void add_float_parameter(std::string name, const float min, const float max, 
+			     const bool positive = false);
     void printCurrentParameters();
     void set_all_to_best();
     void set_best_to_current();

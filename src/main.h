@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+
+#include "evaluation.h"
 #include <stdio.h>
 #include "gluiVisionTool.h"
 #include "cv.h"

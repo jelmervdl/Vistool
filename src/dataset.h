@@ -1,6 +1,7 @@
 #ifndef DATASET_H
 #define DATASET_H
 
+#include <math.h>
 #include "core.h"
 #include "category.h"
 #include <vector>
@@ -28,19 +29,18 @@ class Dataset{
   std::vector<Category> * getCategories();
   std::vector<Category*> getEnabled();
   std::string getCatName(size_t cat);
-  std::string getRoot();
+  std::string get_root();
   size_t smallestCategory() ;
 
-
+  //setters
   void setRoot(std::string str);
   void addCategory(Category cat);
 
   void enableCategory(size_t i);
   void enableCategory(std::string str);
-
+  void enableRandom(const int number);
 
   void print();
-  void printEnabled();
 
   std::vector<DataPoint> enabledPoints(bool eqrep = true) ;
   std::vector<DataPoint*> enabledDataPoints(bool eqrep= true);

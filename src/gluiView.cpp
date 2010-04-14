@@ -23,7 +23,7 @@ void setViewSelection(){
   if(state.ds == Enabled_Datasets){
       vector<Category*> enabs = state.current_db->getEnabled();
       for(vector<Category*>::iterator cat = enabs.begin(); cat != enabs.end(); ++cat){
-	vector<DataPoint> * dps = (*cat)->getDataPoints();
+	vector<DataPoint> * dps = (*cat)->get_data_points();
 	for(size_t i = 0; i < dps->size(); ++i){
 	  state.currently_view_datapoints.push_back(&dps->at(i));
 	}

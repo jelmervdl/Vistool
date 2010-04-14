@@ -11,7 +11,7 @@ Texture::Texture(Image *image, int window){
 
 Texture::Texture(DataPoint * d, int window): dp(d){
   glGenTextures(1, &txt);
-  initTexture(window, &txt, d->getImageURL(), &width, &height);
+  initTexture(window, &txt, d->get_image_url(), &width, &height);
 }
 
 Texture::Texture(Matrix<float> * m, int window){

@@ -1,22 +1,30 @@
 #ifndef DATAPOINT_H
 #define DATAPOINT_H
 
-#include <GLUT/glut.h>
 #include <string>
+
+/* Contains all relevant information regarding a single
+DataPoints. This include the file names of it's original image and the
+descriptor that describes it. */
 
 class DataPoint{
  private:
-  int label;
+  int         label;
   std::string image_url;
-  std::string filename;
+  std::string file_name;
   std::string descriptor_url;
+
  public:
-  DataPoint(size_t lab, std::string filename, std::string url, std::string descriptor);
-  void setDescriptorURL(std::string url);
-  std::string getFileName() const;
-  std::string getDescriptorURL() const;
-  std::string getImageURL() const ;
-  size_t getLabel() const;
+  DataPoint(size_t      lab, 
+	    std::string file_name, 
+	    std::string url, 
+	    std::string descriptor);
+
+  void        setDescriptorURL(std::string url);
+  std::string get_file_name() const;
+  std::string get_descriptor_url() const;
+  std::string get_image_url() const ;
+  size_t      get_label() const;
 };
 
 #endif

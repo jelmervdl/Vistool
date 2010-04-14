@@ -8,7 +8,7 @@
 #define NO_PARAMETERS 100
 
 #include <stdio.h>
-#include "singleton.h"
+#include "multiton.h"
 #include <time.h>
 #include <iostream>
 #include <fstream>
@@ -25,8 +25,8 @@ namespace parameter_optimization{
   class ParameterOptimization;
 };
 
-class Parameters:public Singleton <Parameters>{
-  friend class Singleton<Parameters>;
+class Parameters : public Multiton<Parameters>{
+  friend class Multiton<Parameters>;
   friend class ParameterPanel;
   friend class parameter_optimization::ParameterOptimization;
  protected:
@@ -36,17 +36,23 @@ class Parameters:public Singleton <Parameters>{
   std::map<std::string, int> intParameters;
   std::string file;
  public:
-  void readFile(char * str);
+  void        readFile(char * str);
   std::string getFile();
-  void saveReal(std::string str, float f);
-  void saveInteger(std::string str, int f);
-  float getfParameter(std::string str) ;
-  int  getiParameter(std::string str);
-  void saveXML(std::string str);
-  ~Parameters();
-  bool hasHistogram();
-  bool hasParameters(std::string * reqParams, size_t n);
-  void printParameters();
+
+  void        saveReal(std::string str, float f);
+  void        saveInteger(std::string str, int f);
+
+  float       getfParameter(std::string str) ;
+  int         getiParameter(std::string str);
+
+  void        saveXML(std::string str);
+
+             ~Parameters();
+
+  bool        hasHistogram();
+  bool        hasParameters(std::string * reqParams, size_t n);
+
+  void        printParameters();
 };
 
 #endif PARAMETERS_H

@@ -6,7 +6,7 @@ using Magick::Image;
 #define PrepareMatrices(dps)						\
   size_t rows, cols;							\
   vector<float> sample;							\
-  readDescriptor(&sample, dps.at(0)->getDescriptorURL());		\
+  readDescriptor(&sample, dps.at(0)->get_descriptor_url());		\
   rows = dps.size();							\
   cols = sample.size();							\
   CvMat * tmat = cvCreateMat(rows, cols, CV_32FC1);			\

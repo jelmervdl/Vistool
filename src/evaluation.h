@@ -9,7 +9,7 @@
 #include "dataset.h"
 
 class Evaluation{
- private:
+private:
   size_t correct;
   size_t instances;
   float recall;
@@ -18,7 +18,7 @@ class Evaluation{
   std::map<int, int> map_correct_to_label;
   std::map<int, int> map_total_to_label;
   std::map< int, std::vector<DataPoint*> > classificationmap;
- public:
+public:
   Evaluation(std::vector<DataPoint*> &dps, std::vector<int> &cls);
   Evaluation(std::vector<DataPoint> * dps, std::vector<int> * classification);
   void print();
@@ -27,13 +27,10 @@ class Evaluation{
   float getRecall();
   float getPrecision();
   float getTval();
-
+  
   std::vector<DataPoint*> getInstancesClassifiedAs(int cl);
-
   std::map<int, int> getCorrectMap();
   std::map<int, int> getTotalMap();
-
-  static Evaluation kCrossFoldValidation(size_t times, Dataset * ds, bool eqrep = true);
 };
 
 

@@ -3,32 +3,33 @@
 using std::string;
 using std::vector;
 
-int * Category::getEnabled(){
-  return &enabled;
-}
-
 Category::Category(string give_name, string rt, size_t lab): 
   name(give_name), root(rt), enabled(0), label(lab){
 }
 
-vector <DataPoint> * Category::getDataPoints(){
-  return &data_points;
+string Category::get_name() const{
+  return name;
 }
 
-string Category::getName(){
-  return name;
+size_t Category::size() const{
+  return data_points.size();
+}
+
+string Category::get_root() const{
+  return root;
+}
+size_t Category::get_label() const {
+  return label;
 }
 
 void Category::addDataPoint(DataPoint dp){
   data_points.push_back(dp);
 }
-size_t Category::size(){
-  return data_points.size();
+
+vector <DataPoint> * Category::get_data_points(){
+  return &data_points;
 }
 
-string Category::getRoot(){
-  return root;
-}
-size_t Category::getLabel() const {
-  return label;
+int * Category::enabledLiveVar(){
+  return &enabled;
 }

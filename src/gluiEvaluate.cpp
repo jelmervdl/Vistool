@@ -23,6 +23,7 @@ void crossValidate(){
   if(state.enabled_classifier == states::SupportVectorMachine)
     state.current_classifier = new SVMClassifier();
   vector<DataPoint> enabsp = state.current_db->enabledPoints();
+  random_shuffle(enabsp.begin(), enabsp.end());
   state.train_data = enabsp;
   state.test_data = enabsp;
   state.test_result = state.current_classifier->crossvalidation(&enabsp);
@@ -33,9 +34,9 @@ void crossValidate(){
   state.current_classes.clear();
   vector<Category*> enabs = state.current_db->getEnabled();
   for(size_t i = 0; i <  enabs.size(); ++i){
-    state.selected_class_listbox->add_item(enabs[i]->getLabel(), 
-				     enabs[i]->getName().c_str());
-    state.current_classes.push_back(enabs[i]->getLabel());
+    state.selected_class_listbox->add_item(enabs[i]->get_label(), 
+				     enabs[i]->get_name().c_str());
+    state.current_classes.push_back(enabs[i]->get_label());
   }
   delete state.current_evaluation;
   state.current_evaluation = new Evaluation(&state.train_data, &state.test_result);
@@ -67,12 +68,16 @@ void showStatistics(){
    // show confusion info
   map<int,int> cormap = current_evaluation->getCorrectMap();
   map<int, int> totmap = current_evaluation->getTotalMap();
+  int count = 0;
   for(map<int, int>::iterator it = cormap.begin();
       it!= cormap.end(); ++it){
     stringstream strstr;
      strstr  << (*it).first << "." <<  current_db->getCatName((*it).first) 
 	     << " " << (*it).second <<  "/" << totmap[(*it).first] << endl;
      stats->add_statictext(strstr.str().c_str());
+     count ++;
+     if(count > 10)
+       stats->add_column();
   }
   
  }

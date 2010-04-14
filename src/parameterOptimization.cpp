@@ -8,23 +8,30 @@ using std::vector;
 
 ParameterOptimization::ParameterOptimization(float (*func) ())
   : evaluation_function(func), best(-9999999.0){
-  add_float_parameter("test", 0.0, 10.0);
-  add_int_parameter("test2", 0, 20);
-  add_int_parameter("test3", 0, 20);
+
+  add_float_parameter("svm_C", 0.0, 100.0);
+  add_float_parameter("svm_coef0", 0.0, 30.0);  
+  add_float_parameter("svm_eps", 0.0003, 1.5);
+  add_float_parameter("svm_gamma", 5.0, 100.0, true);
+  add_int_parameter("svm_degree", 5, 30, true);
+
+  //  add_int_parameter("svm_shrinking", 0, 10);
+  //add_int_parameter("svm_probabiity", -1, 1, false);
+
 }
 
 void ParameterOptimization::add_int_parameter(string name, const int min, 
-					      const int max){
+					      const int max, const bool positive){
   Parameters *pars = Parameters::getInstance();
   int *live = &pars->intParameters[name];
-  int_parameters.push_back(Parameter<int>(name, min, max, live));
+  int_parameters.push_back(Parameter<int>(name, min, max, live, positive));
 }
 
 void ParameterOptimization::add_float_parameter(string name, const float min, 
-					      const float max){
+						const float max, const bool positive){
   Parameters *pars = Parameters::getInstance();
   float *live = &pars->floatParameters[name];
-  float_parameters.push_back(Parameter<float>(name, min, max, live));
+  float_parameters.push_back(Parameter<float>(name, min, max, live, positive));
 }
 
 ParameterSet ParameterOptimization::get_current_parameter_handle(){
@@ -78,12 +85,11 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
   const int min = parameter.get_min();
   const int max = parameter.get_max();
   float step_size = (max - min) / kResolution;
-  for(int res_step = 0; res_step < kResolution; ++res_step){
+  for(int res_step = 0; res_step < kResolution + 1; ++res_step){
     const int current_value = (int) (0.5 + min + res_step * step_size);
-    //printf("cur val is %d \n step size: %f", current_value, step_size);
     parameter.set_value(current_value);
     const ParameterSet handle = get_current_parameter_handle();
-    if(!known(handle)){
+    if(true || !known(handle)){
       float result = evaluation_function();
       printCurrentParameters();
       printf("result: %.2f\n\n", result);
@@ -105,11 +111,11 @@ void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter
   const float min = parameter.get_min();
   const float max = parameter.get_max();
   float step_size = (max - min) / (float)kResolution;
-  for(int res_step = 0; res_step < kResolution; ++res_step){
+  for(int res_step = 0; res_step < kResolution + 1; ++res_step){
     const float current_value = min + res_step * step_size;
     parameter.set_value(current_value);
     const ParameterSet handle = get_current_parameter_handle();
-    if(!known(handle)){
+    if(true || !known(handle)){
       float result = evaluation_function();
       printCurrentParameters();
       printf("result: %.2f\n\n", result);
@@ -139,7 +145,7 @@ void ParameterOptimization::apply_to_all_parameters(void (*int_func)
 						    (Parameter<int>*),
 						    void (*fl_func)
 						    (Parameter<float>*) ){
-  {
+  { 
     typedef vector<Parameter<int> >::iterator par_it;
     for(par_it it = int_parameters.begin(); 
 	it != int_parameters.end(); ++it)

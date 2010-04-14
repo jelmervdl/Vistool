@@ -17,11 +17,13 @@ void loadDataset(string location){
   //  classes->add_column(true);
   GLUI_Panel * pan = state.classes->add_panel("categories");
   if(state.current_db != NULL){
+    vector<int*> live_vars;
     for(size_t i = 0; i < cats->size(); ++i){
       state.classes->add_checkbox_to_panel( pan,
-				      (const char *)cats->at(i).getName().c_str(),
-				      cats->at(i).getEnabled(),
+				      (const char *)cats->at(i).get_name().c_str(),
+				      cats->at(i).enabledLiveVar(),
 				      1, (GLUI_Update_CB) viewDataset);
+      live_vars.push_back(cats->at(i).enabledLiveVar());
       c++;
       if(c%34==0)
 	state.classes->add_column_to_panel(pan, false);
