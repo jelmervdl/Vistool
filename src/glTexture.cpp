@@ -8,8 +8,11 @@ using Magick::Blob;
 using Magick::Color;
 using Magick::Geometry;
 using Magick::ColorGray;
-using VisionToolFeatures::Gradient;
-using VisionToolCore::Matrix;
+
+namespace vito{
+namespace gui{
+
+using features::Gradient;
 
 void initTexture(int window, GLuint * texName, string filename, size_t * twidth, size_t * theight){
   Image im(filename);
@@ -87,3 +90,5 @@ void initTexture(int window, GLuint * texName, Matrix<Gradient> * matrix, size_t
   *height = draw_Image.rows();
   initTexture(window, texName, &blob, width, height);
 }
+
+}}

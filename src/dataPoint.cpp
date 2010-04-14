@@ -1,6 +1,9 @@
 #include "dataPoint.h"
 
+
 using std::string;
+
+namespace vito{
 
 DataPoint::DataPoint(size_t lab, string fname, string url, string descriptor):
   label(lab),image_url(url),file_name(fname),descriptor_url(descriptor){
@@ -24,4 +27,6 @@ size_t DataPoint::get_label() const {
 
 string DataPoint::get_file_name() const {
   return file_name;
+}
+
 }

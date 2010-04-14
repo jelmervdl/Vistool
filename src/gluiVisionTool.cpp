@@ -2,9 +2,10 @@
 
 using namespace std;
 
-ToolState &state = *ToolState::getInstance();
 
-namespace VisionToolGUI{
+
+namespace vito{
+namespace gui{
 
 void start(int argc, char **argv){
   glutInit(&argc, argv); // obligatory glut call
@@ -18,4 +19,4 @@ void start(int argc, char **argv){
   glutMainLoop();
 }
 
-}
+}}

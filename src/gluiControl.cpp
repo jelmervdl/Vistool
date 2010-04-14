@@ -1,6 +1,7 @@
 #include "gluiControl.h"
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
 void initGlui(){
   ToolState &state = *ToolState::getInstance();
@@ -58,4 +59,4 @@ void selectAndShow(){
   state.ds = states::Particular_Category;
   viewDataset();
 }
-}
+}}

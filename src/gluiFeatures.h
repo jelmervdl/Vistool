@@ -3,10 +3,11 @@
 
 #include "toolState.h"
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
 void extractFeatures();
 
-}
+}}
 
 #endif

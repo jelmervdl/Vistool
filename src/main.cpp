@@ -1,10 +1,12 @@
 #include "main.h"
 #include "multiton.h"
  
-using VisionToolGUI::start;
-using parameter_optimization::ParameterOptimization;
-using VisionToolClassification::SVMClassifier;
 
+using namespace vito;
+using gui::start;
+using classification::SVMClassifier;
+using parameter_optimization::ParameterOptimization;
+using evaluation::Evaluation;
 
 float trick(){
    

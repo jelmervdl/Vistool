@@ -7,6 +7,7 @@
 #include "highgui.h"
 #include "matrix.h"
 
+namespace vito{
 
 class MyImage{
  private:
@@ -22,9 +23,11 @@ class MyImage{
   std::string getLocation();
   Magick::Blob *getBlob();
   cv::Mat * getOpenCVMat();
-  VisionToolCore::Matrix<float> getGrayscaleMatrix();
+  Matrix<float> getGrayscaleMatrix();
   MyImage(std::string loc);
   ~MyImage();
 };
+
+}
 
 #endif

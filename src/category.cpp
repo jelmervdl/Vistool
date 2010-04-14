@@ -1,5 +1,7 @@
 #include "category.h"
 
+namespace vito{
+
 using std::string;
 using std::vector;
 
@@ -32,4 +34,6 @@ vector <DataPoint> * Category::get_data_points(){
 
 int * Category::enabledLiveVar(){
   return &enabled;
+}
+
 }

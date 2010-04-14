@@ -4,11 +4,12 @@
 #include "toolState.h"
 #include "gluiTextures.h"
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
 void viewDataset();
 void setViewSelection();
 
-}
+}}
 
 #endif

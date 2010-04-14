@@ -8,6 +8,9 @@
 #include "dataPoint.h"
 #include "dataset.h"
 
+namespace vito{
+namespace evaluation{
+
 class Evaluation{
 private:
   size_t correct;
@@ -33,5 +36,6 @@ public:
   std::map<int, int> getTotalMap();
 };
 
+}}
 
 #endif

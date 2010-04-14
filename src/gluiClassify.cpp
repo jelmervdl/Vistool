@@ -1,10 +1,12 @@
 #include "gluiClassify.h"
 
-using VisionToolClassification::Classifier;
-using VisionToolClassification::NNClassifier;
-using VisionToolClassification::SVMClassifier;
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
+
+using classification::Classifier;
+using classification::NNClassifier;
+using classification::SVMClassifier;
 
 
 void train(){
@@ -40,4 +42,4 @@ void classify(){
   showStatistics();
 }
 
-}
+}}

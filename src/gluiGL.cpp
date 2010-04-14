@@ -2,7 +2,8 @@
 
 using std::vector;
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
 void setupOpenGL(){
   ToolState &state = *ToolState::getInstance();
@@ -73,4 +74,4 @@ void setupWindow(){
   glutInitWindowSize( state.window_width, state.window_height );
   state.image_display_window = glutCreateWindow( "Image Viewer" );
 }
-}
+}}

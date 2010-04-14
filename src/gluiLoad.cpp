@@ -3,7 +3,8 @@
 using std::string;
 using std::vector;
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
 void loadDataset(string location){
   ToolState &state = *ToolState::getInstance();
@@ -50,4 +51,4 @@ void askDataset(){
   loadDataset(askFile());
 }
 
-}
+}}

@@ -4,7 +4,9 @@
 #include "classifier.h"
 #include "svm.h"
 
-namespace VisionToolClassification{
+namespace vito{
+namespace classification{
+
 
 class SVMClassifier : public Classifier{
   using Classifier::train;
@@ -20,6 +22,6 @@ class SVMClassifier : public Classifier{
   int classify(DataPoint * data_point);
 }; 
 
-}
+}}
 
 #endif

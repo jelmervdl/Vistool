@@ -1,10 +1,13 @@
 #include "gluiEvaluate.h"
 
-using VisionToolClassification::NNClassifier;
-using VisionToolClassification::SVMClassifier;
-using VisionToolClassification::Classifier;
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
+
+using classification::NNClassifier;
+using classification::SVMClassifier;
+using classification::Classifier;
+
 
 void evaluateClassifier(){
   extractFeatures();
@@ -81,4 +84,4 @@ void showStatistics(){
   }
   
  }
-}
+}}

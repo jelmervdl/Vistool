@@ -8,7 +8,11 @@ using boost::filesystem::path;
 using boost::filesystem::native;
 using boost::filesystem::complete;
 
-namespace VisionToolFeatures{
+namespace vito{
+namespace features{
+
+using write::readDescriptor;
+using write::writeDescriptor;
 
 FeatureExtractor::FeatureExtractor(){
   Parameters *parameters = Parameters::getInstance();
@@ -73,4 +77,4 @@ void FeatureExtractor::getCVMatrices(vector <DataPoint*>  dps, CvMat * training,
   }
 }
 
-}
+}}

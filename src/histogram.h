@@ -4,7 +4,8 @@
 #include "singleton.h"
 #include "feature.h"
 
-namespace VisionToolFeatures{
+namespace vito{
+namespace features{
 
 class Histogram: public Singleton<Histogram>, public Feature{
   friend class Singleton<Histogram>;
@@ -15,6 +16,6 @@ class Histogram: public Singleton<Histogram>, public Feature{
 		     Magick::Image* image);
 };
 
-}
+}}
 
 #endif

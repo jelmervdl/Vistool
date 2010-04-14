@@ -7,6 +7,8 @@
 DataPoints. This include the file names of it's original image and the
 descriptor that describes it. */
 
+namespace vito{
+
 class DataPoint{
  private:
   int         label;
@@ -26,5 +28,7 @@ class DataPoint{
   std::string get_image_url() const ;
   size_t      get_label() const;
 };
+
+}
 
 #endif

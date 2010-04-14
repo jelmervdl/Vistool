@@ -1,5 +1,8 @@
 #include "toolState.h"
 
+namespace vito{
+namespace gui{
+
 ToolState::ToolState(){
   dm = states::Single_Image;
   ds = states:: Enabled_Datasets;
@@ -10,3 +13,4 @@ ToolState::ToolState(){
 
   ims_per_page = 16;
 }
+}}

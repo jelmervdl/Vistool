@@ -20,9 +20,9 @@ namespace testing{
       float value = i * -10.00200010000200025;
       descriptor[i] = value;
     }
-    writeDescriptor(&descriptor, "test.desc");
+    vito::write::writeDescriptor(&descriptor, "test.desc");
     vector<float> read_descriptor;
-    readDescriptor(&read_descriptor, "test.desc");
+    vito::write::readDescriptor(&read_descriptor, "test.desc");
     for(int i = 0; i < (int) read_descriptor.size(); ++i){
       cout << read_descriptor[i] << " ";
       assert(read_descriptor[i] == descriptor[i]);

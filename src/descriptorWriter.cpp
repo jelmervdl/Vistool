@@ -2,6 +2,9 @@
 
 using namespace std;
 
+namespace vito{
+namespace write{
+
 void writeDescriptor(vector<float> * datapoints, string destination){
   size_t elements = datapoints->size();
   ofstream file (destination.c_str(), ios::out | ios::binary); 
@@ -50,3 +53,5 @@ vector<float> readDescriptor(string location){
   file.close();
   return datapoints;
 }
+
+}}

@@ -2,7 +2,7 @@
 #define MATRIX_H
 #include <iostream>
 
-namespace VisionToolCore{
+namespace vito{
 
 template<class Type> class Matrix{
  private:

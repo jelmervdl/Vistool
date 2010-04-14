@@ -5,7 +5,8 @@
 #include "myImage.h"
 #include "descriptor.h"
 
-namespace VisionToolFeatures{
+namespace vito{
+namespace features{
 
 class Feature{
  public:
@@ -19,6 +20,6 @@ class Feature{
   void extractTo(std::vector<float> * vec, MyImage * im);
 };
 
-}
+}}
 
 #endif 

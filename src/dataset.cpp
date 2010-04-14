@@ -3,6 +3,8 @@
 using namespace std;
 using namespace boost::filesystem;
 
+namespace vito{
+
 string Dataset::get_root(){
   return root;
 }
@@ -121,7 +123,7 @@ vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
   vector<DataPoint*> result;
   for(size_t i = 0; i < enabled.size(); ++ i){
     Category * ccat = enabled[i];
-    vector<DataPoint*> dps = VisionCore::ptrDeMorgan(ccat->get_data_points());  
+    vector<DataPoint*> dps = ptr::ptrDeMorgan(ccat->get_data_points());  
     random_shuffle(dps.begin(), dps.end());
     size_t max = min;
     if(!eqrep)
@@ -159,4 +161,5 @@ void Dataset::enableRandom(const int number){
   random_shuffle(enabled.begin(), enabled.end());
   for(size_t i = 0; i < categories.size(); ++i)
     *categories[i].enabledLiveVar() =  enabled[i];
+}
 }

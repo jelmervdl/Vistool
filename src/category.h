@@ -9,6 +9,8 @@
 #include <vector>
 #include"dataPoint.h"
 
+namespace vito{ 
+
 class Category{
  private:
   std::string            name;
@@ -31,4 +33,7 @@ class Category{
 
   void                     addDataPoint(DataPoint dp);
 };
+
+}
+
 #endif

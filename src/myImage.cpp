@@ -1,6 +1,7 @@
 #include "myImage.h"
 
-using VisionToolCore::Matrix;
+namespace vito{
+
 using Magick::Image;
 using Magick::Blob;
 using Magick::ColorGray;
@@ -87,4 +88,5 @@ Matrix<float> MyImage::getGrayscaleMatrix(){
       }
   }
   return grayscale;
+}
 }

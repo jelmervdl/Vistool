@@ -4,11 +4,14 @@ using std::vector;
 using std::cout;
 using std::endl;
 
-namespace VisionToolClassification{
+namespace vito{
+namespace classification{
+
+using write::readDescriptor;
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint> * files){
   cout << " joer dan? " << endl;
-  return crossvalidation( VisionCore::ptrDeMorgan<DataPoint>(files) );
+  return crossvalidation( ptr::ptrDeMorgan<DataPoint>(files) );
 }
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint*> files){
@@ -112,4 +115,4 @@ int SVMClassifier::classify(DataPoint * data_point){
   return 0;
 }
 
-}
+}}

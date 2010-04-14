@@ -8,7 +8,8 @@
 #include "ocvConvert.h"
 #include "tools.h"
 
-namespace VisionToolClassification{
+namespace vito{
+namespace classification{
 
 class NNClassifier:public Classifier{
  private:
@@ -23,6 +24,6 @@ class NNClassifier:public Classifier{
   ~NNClassifier();
 };
 
-}
+}}
 
 #endif

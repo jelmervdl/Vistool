@@ -1,8 +1,12 @@
 #include "texture.h"
 
-using VisionToolFeatures::Gradient;
-using VisionToolCore::Matrix;
 using Magick::Image;
+
+namespace vito{
+namespace gui{
+
+using features::Gradient;
+
 
 Texture::Texture(Image *image, int window){
   glGenTextures(1, &txt);
@@ -52,3 +56,5 @@ Texture::~Texture(){
   using namespace std;
   glDeleteTextures(1, &txt);
 }
+
+}}

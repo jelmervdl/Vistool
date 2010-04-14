@@ -3,7 +3,7 @@
 
 #include <vector>
 
-namespace VisionToolFeatures{
+namespace vito{
 
 class Descriptor : public std::vector<float>{
  private:

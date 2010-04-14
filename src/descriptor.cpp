@@ -2,7 +2,7 @@
 
 using std::vector;
 
-namespace VisionToolFeatures{
+namespace vito{
 
 Descriptor::Descriptor(vector<float> vec): vector<float>(vec){
 }

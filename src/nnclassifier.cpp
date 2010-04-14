@@ -1,8 +1,5 @@
 #include "nnclassifier.h"
 
-using VisionToolFeatures::FeatureExtractor;
-using Magick::Image;
-
 #define PrepareMatrices(dps)						\
   size_t rows, cols;							\
   vector<float> sample;							\
@@ -13,10 +10,14 @@ using Magick::Image;
   CvMat * labs = cvCreateMat(rows, 1, CV_32FC1);			\
   FeatureExtractor::getInstance()->getCVMatrices(dps, tmat, labs);	
 
-using namespace cv;
-using namespace std;
+using Magick::Image;
+using cv::Mat;
 
-namespace VisionToolClassification{
+namespace vito{
+namespace classification{
+
+using features::FeatureExtractor;
+using write::readDescriptor;
 
 vector<int> NNClassifier::crossvalidation(vector<DataPoint> * files){
   return Classifier::crossvalidation(files);
@@ -68,4 +69,4 @@ int  NNClassifier::classify(DataPoint * datapoint){
   return classify(dv)[0];
 }
 
-}
+}}

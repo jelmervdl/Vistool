@@ -2,7 +2,8 @@
 
 using std::vector;
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
 void viewDataset(){
   ToolState &state = *ToolState::getInstance();
@@ -30,11 +31,11 @@ void setViewSelection(){
       }
   }
   if(state.ds == Training_DataPoints){
-    state.currently_view_datapoints = VisionCore::ptrDeMorgan<DataPoint>(&state.train_data);
+    state.currently_view_datapoints = ptr::ptrDeMorgan<DataPoint>(&state.train_data);
   }
 
   if(state.ds == Testing_DataPoints){
-    state.currently_view_datapoints = VisionCore::ptrDeMorgan<DataPoint>(&state.test_data);
+    state.currently_view_datapoints = ptr::ptrDeMorgan<DataPoint>(&state.test_data);
   }
   if(state.ds == Particular_Category){
     state.current_evaluation->print();
@@ -47,4 +48,4 @@ void setViewSelection(){
   state.image_height = state.window_height / state.ims_per_page;
   refreshTexture();
 }
-}
+}}

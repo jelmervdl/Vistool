@@ -9,10 +9,11 @@
 #include "gluiControl.h"
 #include "gluiFeatures.h"
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
 void start(int argc, char ** argv);
 
-}
+}}
 
 #endif

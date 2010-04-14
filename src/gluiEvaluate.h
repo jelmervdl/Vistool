@@ -5,11 +5,11 @@
 #include "gluiFeatures.h"
 #include "gluiClassify.h"
 
-namespace VisionToolGUI {
-
+namespace vito {
+namespace gui{
 void evaluateClassifier();
 void crossValidate();
 void showStatistics();
 
-}
+}}
 #endif

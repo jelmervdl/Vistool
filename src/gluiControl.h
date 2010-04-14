@@ -6,12 +6,13 @@
 #include "gluiFeatures.h"
 #include "gluiEvaluate.h"
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
   void initGlui();
   void nextPage();
   void selectAndShow();
 
-}
+}}
 
 #endif

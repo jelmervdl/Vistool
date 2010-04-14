@@ -1,6 +1,9 @@
 #include "evaluation.h"
 using namespace std;
 
+namespace vito{
+namespace evaluation{
+
 Evaluation::Evaluation(vector<DataPoint*> &dps, 
 		       vector<int> &cls){
   instances = 0;
@@ -83,3 +86,5 @@ map<int, int> Evaluation::getCorrectMap(){
 map<int, int> Evaluation::getTotalMap(){
   return map_total_to_label;
 }
+
+}}

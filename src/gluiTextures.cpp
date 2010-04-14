@@ -1,14 +1,16 @@
 #include "gluiTextures.h"
 
 using Magick::Image;
-using VisionToolCore::Matrix;
-using VisionToolFeatures::SiftDescriptor;
-using VisionToolFeatures::Histogram;
-using VisionToolFeatures::Feature;
-using VisionToolFeatures::Gradient;
-using VisionToolFeatures::imageGradient;
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
+
+using features::SiftDescriptor;
+using features::Histogram;
+using features::Feature;
+using features::Gradient;
+using features::imageGradient;
+
 
 void refreshTexture(size_t p){
   ToolState &state = *ToolState::getInstance();
@@ -46,4 +48,4 @@ void refreshTexture(size_t p){
   display();
 }
 
-}
+}}

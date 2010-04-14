@@ -9,11 +9,12 @@
 #include "gluiEvaluate.h"
 
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
 void train();
 void classify();
 
-}
+}}
 
 #endif

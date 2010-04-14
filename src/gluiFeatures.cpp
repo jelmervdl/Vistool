@@ -1,8 +1,9 @@
 #include "gluiFeatures.h"
 
-using VisionToolFeatures::FeatureExtractor;
+namespace vito{
+namespace gui{
 
-namespace VisionToolGUI{
+using features::FeatureExtractor;
 
 void extractFeatures(){
   ToolState &state = *ToolState::getInstance();
@@ -13,4 +14,4 @@ void extractFeatures(){
   state.busytxt->set_text("done");
 }
 
-}
+}}

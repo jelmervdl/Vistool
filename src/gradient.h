@@ -10,7 +10,8 @@
 #include <string>
 #include "descriptor.h"
 
-namespace VisionToolFeatures{
+namespace vito{
+namespace features{
 
 class Gradient{
  private:
@@ -27,12 +28,13 @@ class Gradient{
 
 };
 
-  Gradient singleGradient(const VisionToolCore::Matrix<float> &image, 
+  Gradient singleGradient(const Matrix<float> &image, 
 			 const size_t &center_pixel_x,
 			 const size_t &center_pixel_y); 
-  VisionToolCore::Matrix<Gradient> imageGradient(const VisionToolCore::Matrix<float>  &image);
+  Matrix<Gradient> imageGradient(const Matrix<float>  &image);
   void bin(Gradient &gradient, Descriptor  &bins, const float &multiplier);
   float wrap(float angle, const float &min = 0.0, const float &max = 2.0);
+}
 }
 #endif
 

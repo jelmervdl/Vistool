@@ -3,13 +3,14 @@
 
 #include "toolState.h"
 
-namespace VisionToolGUI{
+namespace vito{
+namespace gui{
 
 void display(void);
 void setupOpenGL();
 void myGlutIdle( void );
 void setupWindow();
 
-}
+}}
 
 #endif

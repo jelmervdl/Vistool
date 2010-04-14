@@ -16,6 +16,8 @@
 #include "fileManagement.h"
 #include <map>
 
+namespace vito{
+
 class Dataset{
  private:
   std::map<size_t, std::string> category_names;
@@ -50,7 +52,6 @@ class Dataset{
 		       float cut = 0.5, 
 		       bool eqrep = true);
 };
-
-
+}
 
 #endif

@@ -9,9 +9,8 @@ using Magick::Color;
 using Magick::DrawableCircle;
 using Magick::DrawableLine;
 
-using VisionToolCore::Matrix;
-
-namespace VisionToolFeatures{
+namespace vito{
+namespace features{
 
 Descriptor SiftDescriptor::extract(MyImage *my_image,
 			bool save_visual_representation,
@@ -149,4 +148,4 @@ Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
   }
   return total_bins;
 }
-}
+}}

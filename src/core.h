@@ -3,6 +3,8 @@
 
 #include <vector>
 
+namespace vito{
+
 namespace states {
   enum EnabledClassifier{
     NearestNeighbor,
@@ -31,7 +33,7 @@ namespace states {
 };
 
 
-namespace VisionCore{
+namespace ptr{
 
   template <typename T>  std::vector<T*> ptrDeMorgan(std::vector <T> * vec){
     std::vector<T*> ret;
@@ -41,5 +43,5 @@ namespace VisionCore{
   };
 
 };
-
+}
 #endif

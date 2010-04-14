@@ -1,18 +1,18 @@
 #include "classifier.h"
 
-using VisionToolFeatures::Descriptor;
 using std::vector;
 
-namespace VisionToolClassification{
+namespace vito{
+namespace classification{
 
 vector<int> Classifier::classify(vector<DataPoint> * points){
-  vector<DataPoint*> ps = VisionCore::ptrDeMorgan<DataPoint>(points);
+  vector<DataPoint*> ps = ptr::ptrDeMorgan<DataPoint>(points);
   return classify( ps );
 }
 
 
 void Classifier::train(vector<DataPoint> *  files ){
-  vector<DataPoint*> ps = VisionCore::ptrDeMorgan<DataPoint>(files);
+  vector<DataPoint*> ps = ptr::ptrDeMorgan<DataPoint>(files);
   return train(ps);
 }
 
@@ -50,4 +50,4 @@ vector<int> Classifier::crossvalidation(vector<DataPoint> * _files)
   return results;
 }
 
-}
+}}

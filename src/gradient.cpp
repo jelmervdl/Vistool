@@ -1,11 +1,12 @@
 #include "gradient.h"
-using VisionToolCore::Matrix;
+
 using std::cout;
 using std::endl;
 
 #define PI 3.14159265
 
-namespace VisionToolFeatures {
+namespace vito {
+namespace features {
 Gradient::Gradient(float magnitude_, float orientation_)
   :magnitude(magnitude_), orientation(orientation_){
 }
@@ -93,4 +94,4 @@ float wrap(float angle, const float &min, const float &max){
   }
   return angle;
 }
-}
+}}
