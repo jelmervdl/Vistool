@@ -1,7 +1,6 @@
 #include "optimizationSupport.h"
 
-namespace vito{
-namespace optimization{
+using namespace parameter_optimization;
 
 bool ParameterSet::equals(const ParameterSet &other) const{
   if(ints.size() != other.ints.size() || floats.size() != other.floats.size())
@@ -23,5 +22,3 @@ void ParameterSet::print() const{
     printf("%f, ", floats[i]);
   printf("\n");
 }
-
-}}

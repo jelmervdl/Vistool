@@ -73,16 +73,6 @@ test: all
 	./$(Target) test
 	@echo "Program ended."
 
-gui: all
-	@echo "\nRunning: main application in gui mode:"
-	./$(Target) gui
-	@echo "Program ended."
-
-optimize: all
-	@echo "\nRunning: main application in optimize mode:"
-	./$(Target) optimize
-	@echo "Program ended."
-
 #Run java
 java:
 	@echo "\nRunning: Java "

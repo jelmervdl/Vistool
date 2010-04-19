@@ -5,8 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace vito{
-namespace optimization{
+namespace parameter_optimization{
 
   template <class Type> class Parameter{
   private:
@@ -73,6 +72,6 @@ namespace optimization{
       parameter_set(_set), result(_result) {};
   };
 
-}}
+}
 
 #endif
