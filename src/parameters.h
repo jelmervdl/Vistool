@@ -8,6 +8,7 @@
 #define NO_PARAMETERS 100
 
 #include <stdio.h>
+#include "singleton.h"
 #include "multiton.h"
 #include <time.h>
 #include <iostream>
@@ -21,14 +22,15 @@
 #include <xercesc/sax/HandlerBase.hpp>
 #include <xercesc/util/XMLString.hpp>
 
-namespace parameter_optimization{
+namespace vito{
+  namespace optimization{
   class ParameterOptimization;
-};
+}}
 
-class Parameters : public Multiton<Parameters>{
-  friend class Multiton<Parameters>;
+class Parameters : public Singleton<Parameters>{
+  friend class Singleton<Parameters>;
   friend class ParameterPanel;
-  friend class parameter_optimization::ParameterOptimization;
+  friend class vito::optimization::ParameterOptimization;
  protected:
   Parameters();
  private:

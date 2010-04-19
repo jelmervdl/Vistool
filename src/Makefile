@@ -9,3 +9,9 @@ clean:
 
 test: 
 	$(MAKE) test -C ..
+
+gui:
+	$(MAKE) gui -C ..
+
+optimize:
+	$(MAKE) optimize -C ..
