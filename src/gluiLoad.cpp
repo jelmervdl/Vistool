@@ -11,7 +11,10 @@ void loadDataset(string location){
   if(state.classes != 0)
     state.classes->close();
   state.classes = GLUI_Master.create_glui( "classes", 0, 800, 250 );
-  delete state.current_db;
+  if(state.current_db != 0){
+    delete state.current_db;
+    state.current_db = 0;
+  }
   state.current_db = new Dataset(location);
   vector<Category> * cats = state.current_db->getCategories();
   size_t c = 0;

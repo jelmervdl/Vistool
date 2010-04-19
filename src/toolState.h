@@ -19,28 +19,28 @@ struct tool_state{
   states::DatasetOnDisplay ds;
   states::DisplayModifier display_modifier;
 
-  ParameterPanel *    parameter_panel;
-  Dataset *           current_db;
+  ParameterPanel *parameter_panel;
+  Dataset *current_db;
   size_t              current_image_page;
   std::vector <Texture *>    textures;
   std::vector <DataPoint*> currently_view_datapoints; 
   std::vector <DataPoint>  train_data, test_data;
   std::vector <int>        test_result;
-  classification::Classifier * current_classifier;
+  classification::Classifier *current_classifier;
   states::EnabledClassifier   enabled_classifier;
 
   // class view selection
   int            selected_class;
-  Evaluation *   current_evaluation;
-  GLUI_Listbox * selected_class_listbox;
+  Evaluation *current_evaluation;
+  GLUI_Listbox *selected_class_listbox;
   std::vector<int>    current_classes;
 
   //Global Glui Objects 
-  GLUI_StaticText * busytxt;
-  GLUI *            main_gui;
-  GLUI *            classes;
-  GLUI *            stats;
-  int               ims_per_page;
+  GLUI_StaticText *busytxt;
+  GLUI *main_gui;
+  GLUI *classes;
+  GLUI *stats;
+  int ims_per_page;
 
   // main window
   size_t window_width;
@@ -48,10 +48,10 @@ struct tool_state{
   int    image_display_window;
   
   // Single Image parameters
-  Texture * current_single_image_texture;
+  Texture *current_single_image_texture;
   size_t image_width; 
   size_t image_height;
-  DataPoint * singleDp;
+  DataPoint *singleDp;
   
 };
 

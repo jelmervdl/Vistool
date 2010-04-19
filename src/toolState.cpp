@@ -12,5 +12,15 @@ ToolState::ToolState(){
   enabled_classifier = states::NearestNeighbor;
 
   ims_per_page = 16;
+  parameter_panel = 0;
+  current_db = 0;
+  current_classifier = 0;
+  current_evaluation = 0;
+  selected_class_listbox = 0;
+  main_gui = 0;
+  classes = 0;
+  stats = 0;
+  current_single_image_texture = 0;
+  singleDp = 0;
 }
 }}
