@@ -1,10 +1,13 @@
 #include "parameterOptimization.h"
 
-using namespace parameter_optimization;
+
 using std::string;
 using std::vector;
 
 // Parameter Optimization Functions:
+
+namespace vito{
+namespace optimization{
 
 ParameterOptimization::ParameterOptimization(float (*func) ())
   : evaluation_function(func), best(-9999999.0){
@@ -157,3 +160,4 @@ void ParameterOptimization::apply_to_all_parameters(void (*int_func)
       fl_func(&*it);
   }
 }
+}}

@@ -5,8 +5,8 @@
 #include "parameters.h"
 #include "singleton.h"
 
-
-namespace parameter_optimization{
+namespace vito{
+namespace optimization{
  
   const int kIterations  = 20;
   const float kZoom= 1.5;
@@ -49,6 +49,6 @@ namespace parameter_optimization{
   template<class Type> void zoom(Parameter<Type> *parameter){
     parameter->zoom(kZoom);
   }
-}
+}}
 
 #endif
