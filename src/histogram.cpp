@@ -20,9 +20,10 @@ Histogram::Histogram(){
   cout << "making histogram" << endl;
 }
 
-Descriptor Histogram::extract(MyImage *image,  
+Descriptor Histogram::extract_(MyImage *image,  
 				 bool saveVisualRepresentation,
 				 Image *canvas){
+  cout << "making histogram" << endl;
   Mat * hsv = image->getOpenCVMat();
   Parameters * p = Parameters::getInstance();
   if(!p->hasHistogram()){
@@ -53,12 +54,14 @@ Descriptor Histogram::extract(MyImage *image,
     for( int s = 0; s < sbins; s++ )
       {
 	float binVal = hist.at<float>(h, s);
-	data.push_back(binVal);
+	binVal /= maxVal;
+	//cout << "at"  << h * sbins + s  << " is " << binVal << endl; 
+	data.push_back((float) binVal);
 	if(saveVisualRepresentation){
 	  float intensity = binVal / maxVal;
 	  canvas->fillColor(ColorGray(intensity));
 	  canvas->draw( DrawableRectangle(h * scale, s * scale,
-					   (h + 1) * scale, (s + 1) * scale));
+					  (h + 1) * scale, (s + 1) * scale));
 	}
       }
   return data;

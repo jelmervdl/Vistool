@@ -35,6 +35,7 @@ void initGlui(){
   state.main_gui->add_column(false);
   GLUI_Panel * ml_panel = state.main_gui->add_panel("ML");
   state.main_gui->add_button_to_panel(ml_panel, "Get Descriptors", 0, (GLUI_Update_CB)extractFeatures );
+  state.main_gui->add_button_to_panel(ml_panel, "Recalc Descr.", 0, (GLUI_Update_CB)recalculateFeatures );
   state.main_gui->add_button_to_panel(ml_panel, "Divide/Evaluate", 0, (GLUI_Update_CB)evaluateClassifier);
   state.main_gui->add_button_to_panel(ml_panel, "Cross-Validate", 0, (GLUI_Update_CB)crossValidate);
   GLUI_Listbox * classif_sel = state.main_gui->add_listbox("classif.:", (int*) &state.enabled_classifier);

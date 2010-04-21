@@ -69,7 +69,7 @@ void showStatistics(){
      stats->add_statictext(strstr.str().c_str());
   }
    // show confusion info
-  map<int,int> cormap = current_evaluation->getCorrectMap();
+  map<int, int> cormap = current_evaluation->getCorrectMap();
   map<int, int> totmap = current_evaluation->getTotalMap();
   int count = 0;
   for(map<int, int>::iterator it = cormap.begin();
@@ -79,7 +79,7 @@ void showStatistics(){
 	     << " " << (*it).second <<  "/" << totmap[(*it).first] << endl;
      stats->add_statictext(strstr.str().c_str());
      count ++;
-     if(count > 10)
+     if(count % 10 == 0)
        stats->add_column();
   }
   

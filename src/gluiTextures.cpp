@@ -21,7 +21,6 @@ void refreshTexture(size_t p){
   if(state.display_modifier == states::No_Modifier)
     for(size_t i = p; i < (size_t) state.ims_per_page + p && 
 	  i < (size_t) state.currently_view_datapoints.size() ; ++i){
-      printf("here's a file called \n");//,  currently_view_datapoints.at(i)->get_file_name());
       state.textures.push_back(  new Texture (state.currently_view_datapoints.at(i), 
 					      state.image_display_window));
     }
@@ -41,7 +40,7 @@ void refreshTexture(size_t p){
       MyImage im (state.currently_view_datapoints.at(i)->get_image_url());
       SiftDescriptor s;
       Image canvas;
-      s.extract(&im, true, &canvas);
+      s.extract_(&im, true, &canvas);
       state.textures.push_back(new Texture(&canvas, state.image_display_window));
     }
   //display histpgra,s

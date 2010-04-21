@@ -14,13 +14,15 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   friend class Singleton<FeatureExtractor>;
  private:
   std::vector<Feature*> features;
+  std::vector<Feature*> usedFeatureKinds();
   FeatureExtractor();
  public:
   std::vector< std::vector<float> >  collectDescriptors(std::vector<DataPoint> points);
-  std::vector<float>  getDescriptor(DataPoint * dp );
-  void saveDescriptorsToFile(Dataset * ds);
-  std::vector<std::string> createAndSaveDescriptors(std::vector<Category> * particip);
-  void renewDescriptor(DataPoint * db);
+
+  std::vector<float>  getDescriptor(DataPoint * dp, const bool force = false);
+  void saveDescriptorsToFile(Dataset * ds, const bool force = false);
+
+  void renewDescriptor(DataPoint * db, const bool force);
   void getCVMatrices(std::vector<DataPoint*> dps, CvMat * training, CvMat *  labels);
 };
 

@@ -23,6 +23,7 @@ class Dataset{
   std::map<size_t, std::string> category_names;
   std::vector<Category> categories;
   std::string root;
+
  public:
   //constructor:
   Dataset(std::string rt);
@@ -35,6 +36,8 @@ class Dataset{
   size_t smallestCategory() ;
 
   //setters
+  void subsample(const int n);
+
   void setRoot(std::string str);
   void addCategory(Category cat);
 

@@ -11,7 +11,7 @@ namespace features{
 class Feature{
  public:
   Feature();
-  virtual Descriptor extract(MyImage *Image, 
+  virtual Descriptor extract_(MyImage *Image, 
 			     bool makeVisualRepresentation, 
 			     Magick::Image * representation) = 0; 
   std::vector<float> extract(MyImage *Image, 

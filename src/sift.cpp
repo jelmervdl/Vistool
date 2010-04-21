@@ -3,6 +3,8 @@
 
 using std::min;
 using std::vector;
+using std::cout;
+using std::endl;
 
 using Magick::Image;
 using Magick::Color;
@@ -12,9 +14,10 @@ using Magick::DrawableLine;
 namespace vito{
 namespace features{
 
-Descriptor SiftDescriptor::extract(MyImage *my_image,
+Descriptor SiftDescriptor::extract_(MyImage *my_image,
 			bool save_visual_representation,
 			Image *canvas){
+  cout << "making sift" << endl;
   //Arrange structures
   Descriptor descriptor;
   Parameters * parameters = Parameters::getInstance();

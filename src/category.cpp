@@ -2,6 +2,7 @@
 
 namespace vito{
 
+using std::random_shuffle;
 using std::string;
 using std::vector;
 
@@ -36,4 +37,7 @@ int * Category::enabledLiveVar(){
   return &enabled;
 }
 
+void Category::subsample(const int n){
+  random_shuffle(data_points.begin(),data_points.end());
+}
 }

@@ -14,6 +14,19 @@ namespace features{
 using write::readDescriptor;
 using write::writeDescriptor;
 
+vector<Feature*> FeatureExtractor::usedFeatureKinds(){
+  vector<Feature*> feats;
+  Parameters *parameters = Parameters::getInstance();
+  if(parameters->getiParameter("feature_histogram") > 0){
+    Histogram *hist = Histogram::getInstance();
+    feats.push_back(hist);
+  }
+  if(parameters->getiParameter("feature_sift") > 0){
+    feats.push_back((SiftDescriptor* ) SiftDescriptor::getInstance());
+  }
+  return feats;
+}
+
 FeatureExtractor::FeatureExtractor(){
   Parameters *parameters = Parameters::getInstance();
   if(parameters->getiParameter("feature_histogram") > 0){
@@ -25,14 +38,14 @@ FeatureExtractor::FeatureExtractor(){
   }
 }
 
-vector<float> FeatureExtractor::getDescriptor(DataPoint * dp ){
-  renewDescriptor(dp);
+  vector<float> FeatureExtractor::getDescriptor(DataPoint * dp, const bool force){
+  renewDescriptor(dp, force);
   vector<float>  descriptor;
   readDescriptor(&descriptor, dp->get_descriptor_url());
   return descriptor;
 }
    
-void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
+  void FeatureExtractor::saveDescriptorsToFile(Dataset * ds, const bool force){
   vector<Category*> enabled= ds->getEnabled();
   for(vector<Category*>::iterator category = enabled.begin();
       category != enabled.end();
@@ -43,23 +56,40 @@ void FeatureExtractor::saveDescriptorsToFile(Dataset * ds){
     string aap = DESCRIPTOR_LOCATION;
     path p = complete(path(aap+name, native));
     path parameters = complete(path(Parameters::getInstance()->getFile()));
-    if(!is_directory(p))
+    if(!is_directory(p)){
+      printf("creating directory %s\n", name.c_str());
       create_directory(p);
+    }
     for(vector<DataPoint>::iterator file = files->begin(); file != files->end(); ++file ){
-      renewDescriptor(&*file);
+      renewDescriptor(&*file, force);
     }
   }
 }
 
-void FeatureExtractor::renewDescriptor(DataPoint * dp){
+  void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
   path parameters = complete(path(Parameters::getInstance()->getFile()));
-  if(!exists(path(dp->get_descriptor_url())) 
+  Parameters *pars = Parameters::getInstance();
+  if(force
+     ||
+     !exists(path(dp->get_descriptor_url())) 
      ||
      last_write_time(parameters) < last_write_time(path(dp->get_image_url()))){
     MyImage image(dp->get_image_url());
     vector<float> descriptor;
-    descriptor = SiftDescriptor::getInstance()->extract(&image , false, NULL);
+      //vector<float> temp_desc = (*it)->extract_(&image, false, NULL);
+      //descriptor.insert(descriptor.end(), temp_desc.begin(), temp_desc.end());
+    if(pars->getiParameter("feature_histogram") > 0){
+      Histogram *hist = Histogram::getInstance();
+      vector<float> desc = hist->extract_(&image, false, (Magick::Image*) NULL);
+      descriptor.insert(descriptor.end(), desc.begin(), desc.end());
+    }
+    if(pars->getiParameter("feature_sift") > 0){
+      SiftDescriptor *sift = SiftDescriptor::getInstance();
+      vector<float> desc = sift->extract_(&image, false, (Magick::Image*) NULL);
+      descriptor.insert(descriptor.end(), desc.begin(), desc.end());
+    }
     writeDescriptor(&descriptor,dp->get_descriptor_url());
+    printf("renewing descriptor for %s\n", dp->get_image_url().c_str());
   } 
 }
 

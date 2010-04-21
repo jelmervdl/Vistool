@@ -11,7 +11,7 @@ class Histogram: public Singleton<Histogram>, public Feature{
   friend class Singleton<Histogram>;
  public:
   Histogram();
-  Descriptor extract(MyImage * Image,  
+  Descriptor extract_(MyImage * Image,  
 		     bool saveVisualRepresentation,
 		     Magick::Image* image);
 };

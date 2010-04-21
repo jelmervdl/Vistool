@@ -27,6 +27,10 @@ public:
   static void select(std::string str){
     current = str;
   }
+
+  static std::string get_current_name() {
+    return current;
+  }
 };
 
 template<class Type> std::map<std::string, Type*> Multiton<Type>::instance_map;

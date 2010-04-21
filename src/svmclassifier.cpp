@@ -10,21 +10,16 @@ namespace classification{
 using write::readDescriptor;
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint> * files){
-  cout << " joer dan? " << endl;
   return crossvalidation( ptr::ptrDeMorgan<DataPoint>(files) );
 }
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint*> files){
-  cout << "ben ik hier? " << endl;
   svm_problem * problem = compileProblem(files);
   cout << endl;
   svm_parameter * parameter = getSVMParameters();
-  cout << "parameters created" << endl;
   //svm_model * model =  svm_train(problem, parameter);
   double result[problem->l];
-  cout << "reserved result" << endl;
   svm_cross_validation(problem, parameter, 10, result);
-  cout << "validated" << endl;
   vector<int> classification(problem->l);
   for(size_t i = 0; i < (size_t) problem->l; ++i){
     //    printf("at %d:%d\n" 
@@ -37,7 +32,6 @@ void SVMClassifier::train(vector<DataPoint*> files){
 }
 
 svm_problem *SVMClassifier::compileProblem(vector<DataPoint*> files){
-  cout << "what about here" << endl;
   const int& n_datapoints = files.size();
 
   if(n_datapoints < 1){
@@ -47,16 +41,14 @@ svm_problem *SVMClassifier::compileProblem(vector<DataPoint*> files){
   vector<float> sample;
   readDescriptor(&sample, files.at(0)->get_descriptor_url());
   const int &descriptor_length = sample.size();
-  
+  for(int i = 0; i < descriptor_length; ++i)
+    printf("svm find at place %d to be %.02f\n", i, sample[i]);
   //reserve a problem according to the sample
-  cout << "nothing has been allocated " << endl;
   svm_problem *problem_ = new svm_problem;
   svm_problem &problem = *problem_;
-  cout << "problem alloc" << endl;
   problem.l = n_datapoints;
   problem.y = new double[n_datapoints]; // labels
   problem.x = new svm_node*[n_datapoints]; // datapoints
-  cout << "here?" << endl;
   // arrange libsvm nodes
   for(size_t dp_index = 0; (int) dp_index < n_datapoints; ++dp_index){
     const DataPoint& current_datapoint = *files[dp_index];

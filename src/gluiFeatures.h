@@ -7,6 +7,8 @@ namespace vito{
 namespace gui{
 
 void extractFeatures();
+void recalculateFeatures();
+
 
 }}
 

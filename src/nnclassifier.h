@@ -10,7 +10,7 @@
 
 namespace vito{
 namespace classification{
-
+ 
 class NNClassifier:public Classifier{
  private:
   CvKNearest * knn;

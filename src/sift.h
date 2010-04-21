@@ -13,9 +13,10 @@ namespace vito{
 namespace features{
 
 class SiftDescriptor: public Feature, public Singleton<SiftDescriptor>{
+  using Feature::extract;
   friend class Singleton<SiftDescriptor>;
  public: 
-  Descriptor extract(MyImage *Image,
+  Descriptor extract_(MyImage *Image,
 		     bool save_visual_representation,
 		     Magick::Image *canvas);
   Descriptor getKeyPointDescriptor(Matrix<Gradient> * gradient,

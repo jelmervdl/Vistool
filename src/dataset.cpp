@@ -162,4 +162,13 @@ void Dataset::enableRandom(const int number){
   for(size_t i = 0; i < categories.size(); ++i)
     *categories[i].enabledLiveVar() =  enabled[i];
 }
+
+void Dataset::subsample(const int n){
+  typedef vector<Category>::iterator iter;
+  for(iter it = categories.begin(); it != categories.end(); ++it){
+    it->subsample(n);
+  }
 }
+
+}
+

@@ -30,6 +30,7 @@ class Category{
 
   int *                    enabledLiveVar();
   std::vector<DataPoint> * get_data_points();
+  void subsample(const int n);
 
   void                     addDataPoint(DataPoint dp);
 };
