@@ -81,10 +81,13 @@ void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
   Parameters *pars = Parameters::getInstance();
   string general_descriptor_dir = "desc/";
   stringstream 
+    xml_file,
     hash_descriptor_dir, 
     category_descriptor_dir, 
     final_descriptor_location;
 
+  xml_file 
+    << "settings/" << pars->getCurrentHash() << ".xml";
   hash_descriptor_dir 
     << general_descriptor_dir 
     << pars->getCurrentHash() << "/";
@@ -98,6 +101,8 @@ void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
   assertDir(hash_descriptor_dir.str());
   assertDir(category_descriptor_dir.str());
 
+  if(!exists( path(xml_file.str())))
+    pars->saveXML(xml_file.str());
   if(force || !exists(path(final_descriptor_location.str()))) {
     MyImage image(dp->get_image_url());
     vector<float> descriptor;
