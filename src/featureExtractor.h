@@ -42,6 +42,8 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   void                  renewDescriptor(DataPoint * db,
 					const bool force);
 
+  std::string getCurrentDescriptorLocation(const DataPoint &dp);
+
   // fill the openCV type matrices given a vector of datapoints
   void                  getCVMatrices(std::vector<DataPoint*> dps,
 				      CvMat * training, 

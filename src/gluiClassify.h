@@ -14,6 +14,7 @@ namespace gui{
 
 void train();
 void classify();
+void non_set_classify();
 
 }}
 

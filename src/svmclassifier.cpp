@@ -1,11 +1,14 @@
 #include "svmclassifier.h"
 
+
 using std::vector;
 using std::cout;
 using std::endl;
 
 namespace vito{
 namespace classification{
+
+using features::FeatureExtractor;
 
 using write::readDescriptor;
 
@@ -32,6 +35,7 @@ void SVMClassifier::train(vector<DataPoint*> files){
 }
 
 svm_problem *SVMClassifier::compileProblem(vector<DataPoint*> files){
+  FeatureExtractor *fe = FeatureExtractor::getInstance();
   const int& n_datapoints = files.size();
 
   if(n_datapoints < 1){
@@ -39,7 +43,7 @@ svm_problem *SVMClassifier::compileProblem(vector<DataPoint*> files){
     return NULL;
   }
   vector<float> sample;
-  readDescriptor(&sample, files.at(0)->get_descriptor_url());
+  readDescriptor(&sample, fe->getCurrentDescriptorLocation(*files.at(0)));
   const int &descriptor_length = sample.size();
   for(int i = 0; i < descriptor_length; ++i)
     printf("svm find at place %d to be %.02f\n", i, sample[i]);
@@ -59,8 +63,7 @@ svm_problem *SVMClassifier::compileProblem(vector<DataPoint*> files){
     svm_node* &current_descriptor_nodes = problem.x[dp_index];
 
     vector<float> descriptor;
-    readDescriptor(&descriptor, current_datapoint.get_descriptor_url());
-
+    readDescriptor(&descriptor,fe->getCurrentDescriptorLocation(current_datapoint));
     for(size_t descr_part = 0; (int) descr_part < descriptor_length; ++descr_part){
       svm_node &current_node = current_descriptor_nodes[descr_part];
       current_node.index = descr_part; // set the feature index

@@ -1,9 +1,10 @@
 #include "nnclassifier.h"
 
 #define PrepareMatrices(dps)						\
+  FeatureExtractor *fe = FeatureExtractor::getInstance();		\
   size_t rows, cols;							\
   vector<float> sample;							\
-  readDescriptor(&sample, dps.at(0)->get_descriptor_url());		\
+  readDescriptor(&sample, fe->getCurrentDescriptorLocation(*dps.at(0)));\
   rows = dps.size();							\
   cols = sample.size();							\
   CvMat * tmat = cvCreateMat(rows, cols, CV_32FC1);			\

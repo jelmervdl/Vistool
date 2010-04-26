@@ -38,6 +38,7 @@ void initGlui(){
   state.main_gui->add_button_to_panel(ml_panel, "Recalc Descr.", 0, (GLUI_Update_CB)recalculateFeatures );
   state.main_gui->add_button_to_panel(ml_panel, "Divide/Evaluate", 0, (GLUI_Update_CB)evaluateClassifier);
   state.main_gui->add_button_to_panel(ml_panel, "Cross-Validate", 0, (GLUI_Update_CB)crossValidate);
+  state.main_gui->add_button_to_panel(ml_panel, "Classify", 0, (GLUI_Update_CB) non_set_classify);
   GLUI_Listbox * classif_sel = state.main_gui->add_listbox("classif.:", (int*) &state.enabled_classifier);
   classif_sel->add_item(states::NearestNeighbor, "KNN");
   classif_sel->add_item(states::SupportVectorMachine, "SVM");

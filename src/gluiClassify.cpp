@@ -42,4 +42,17 @@ void classify(){
   showStatistics();
 }
 
+void non_set_classify(){
+  ToolState &state = *ToolState::getInstance();
+  if(state.current_classifier == NULL)
+    train();
+  vector<DataPoint*> points = state.current_db->enabledDataPoints(false);
+  state.test_result = state.current_classifier->classify(points);
+  delete state.current_evaluation;
+  state.current_evaluation = new Evaluation(points, state.test_result);
+  viewDataset();
+  showStatistics();
+}
+
+
 }}

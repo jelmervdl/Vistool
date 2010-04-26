@@ -44,7 +44,7 @@ FeatureExtractor::FeatureExtractor(){
   vector<float> FeatureExtractor::getDescriptor(DataPoint * dp, const bool force){
   renewDescriptor(dp, force);
   vector<float>  descriptor;
-  readDescriptor(&descriptor, dp->get_descriptor_url());
+  readDescriptor(&descriptor, getCurrentDescriptorLocation(*dp));
   return descriptor;
 }
    
@@ -77,33 +77,38 @@ void FeatureExtractor::assertDir(string str){
   }
 }
 
-void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
+string FeatureExtractor::getCurrentDescriptorLocation(const DataPoint &dp){
   Parameters *pars = Parameters::getInstance();
   string general_descriptor_dir = "desc/";
   stringstream 
-    xml_file,
     hash_descriptor_dir, 
     category_descriptor_dir, 
     final_descriptor_location;
-
+  stringstream xml_file;
   xml_file 
     << "settings/" << pars->getCurrentHash() << ".xml";
   hash_descriptor_dir 
     << general_descriptor_dir 
     << pars->getCurrentHash() << "/";
+  assertDir(hash_descriptor_dir.str());
   category_descriptor_dir 
     << hash_descriptor_dir.str() 
-    << dp->get_cat_name() << "/";
+    << dp.get_cat_name() << "/";
+  assertDir(category_descriptor_dir.str());
   final_descriptor_location 
     << category_descriptor_dir.str() 
-    << dp->get_file_name() << ".desc";
-
-  assertDir(hash_descriptor_dir.str());
-  assertDir(category_descriptor_dir.str());
-
+    << dp.get_file_name() << ".desc";
   if(!exists( path(xml_file.str())))
     pars->saveXML(xml_file.str());
-  if(force || !exists(path(final_descriptor_location.str()))) {
+  return final_descriptor_location.str();
+}
+
+void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
+  Parameters *pars = Parameters::getInstance();
+
+  string final_descriptor_location = getCurrentDescriptorLocation(*dp);
+
+  if(force || !exists(path(final_descriptor_location))) {
     MyImage image(dp->get_image_url());
     vector<float> descriptor;
     if(pars->getiParameter("feature_histogram") > 0){
@@ -116,7 +121,7 @@ void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
       vector<float> desc = sift->extract_(&image, false, (Magick::Image*) NULL);
       descriptor.insert(descriptor.end(), desc.begin(), desc.end());
     }
-    writeDescriptor(&descriptor,final_descriptor_location.str());
+    writeDescriptor(&descriptor,final_descriptor_location);
     cout << "renewing descriptor for " << dp->get_image_url() << endl;
   } 
 }
@@ -127,7 +132,7 @@ void FeatureExtractor::getCVMatrices(vector <DataPoint*>  dps, CvMat * training,
   Mat tmatrix(training, 0);
   for(size_t row = 0; row < dps.size(); ++row){
     vector<float> desc;
-    readDescriptor(&desc, dps.at(row)->get_descriptor_url());
+    readDescriptor(&desc, getCurrentDescriptorLocation(*dps.at(row)));
     labels.at<int>(row,0) = dps.at(row)->get_label();
     for(size_t col = 0; col < desc.size(); ++col ){
       tmatrix.at<float>(row,col) = desc[col];

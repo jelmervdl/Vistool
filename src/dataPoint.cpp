@@ -7,21 +7,13 @@ namespace vito{
 
 DataPoint::DataPoint(size_t lab, 
 		     string fname, string url,
-		     string descriptor, string cat):
+		     string cat):
   label(lab),image_url(url),file_name(fname),
-  descriptor_url(descriptor), cat_name(cat){
-}
-
-void DataPoint::setDescriptorURL(string url){
-  descriptor_url = url;
+  cat_name(cat){
 }
 
 string DataPoint::get_image_url() const {
   return image_url;
-}
-
-string DataPoint::get_descriptor_url() const {
-  return descriptor_url;
 }
 
 size_t DataPoint::get_label() const {
