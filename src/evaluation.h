@@ -18,20 +18,31 @@ private:
   float recall;
   float precision;
   float tval;
+
   std::map<int, int> map_correct_to_label;
   std::map<int, int> map_total_to_label;
-  std::map< int, std::vector<DataPoint*> > classificationmap;
+
+  std::map<int, std::vector<DataPoint*> > classificationmap;
+
 public:
-  Evaluation(std::vector<DataPoint*> &dps, std::vector<int> &cls);
-  Evaluation(std::vector<DataPoint> * dps, std::vector<int> * classification);
-  void print();
+  // constructors 
+  Evaluation(std::vector<DataPoint*> &dps,
+	     std::vector<int> &cls);
+  Evaluation(std::vector<DataPoint> * dps,
+	     std::vector<int> * classification);
+
+  // print a summary of this evaluation
+  void   print();
+
+  // getting certain statistical properties
   size_t getCorrect();
   size_t getInstances();
-  float getRecall();
-  float getPrecision();
-  float getTval();
+  float  getPrecision();
   
+  // returns the all points classified as a certain label
   std::vector<DataPoint*> getInstancesClassifiedAs(int cl);
+
+  // TODO
   std::map<int, int> getCorrectMap();
   std::map<int, int> getTotalMap();
 };

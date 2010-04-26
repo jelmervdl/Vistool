@@ -29,9 +29,10 @@ Descriptor SiftDescriptor::extract_(MyImage *my_image,
   Matrix<Gradient> gradient = imageGradient(grayscale);
 
   //get Parameters
-  const int orientations = parameters->getiParameter("sift_orientation_directions");
-  const int kKeyPoints_x = parameters->getiParameter("sift_number_of_keypoints_x");
-  const int kKeyPoints_y = parameters->getiParameter("sift_number_of_keypoints_x");
+  const int 
+    orientations = parameters->getiParameter("sift_orientation_directions"),
+    kKeyPoints_x = parameters->getiParameter("sift_number_of_keypoints_x"),
+    kKeyPoints_y = parameters->getiParameter("sift_number_of_keypoints_x");
   int window_dummy;
   const int auto_window_type = parameters->getiParameter("sift_auto_window_size_type");
   if(parameters->getiParameter("sift_keypoint_pixel_window") < 0){

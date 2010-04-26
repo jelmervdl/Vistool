@@ -1,5 +1,9 @@
 #include "parameters.h"
 
+using std::collate;
+using std::use_facet;
+using std::locale;
+using std::stringstream;
 using std::string;
 using std::map;
 using std::cout;
@@ -20,11 +24,6 @@ void Parameters::saveReal(string str, float f){
 
 void Parameters::saveInteger(string str, int f){
   intParameters[str] = f;
-}
-
-bool Parameters::hasHistogram(){
-  string reqParams [] = {"hbins", "sbins"};
-  return hasParameters(reqParams, 2);
 }
 
 bool Parameters::hasParameters(string reqParams[], size_t n){
@@ -61,6 +60,55 @@ string Parameters::getFile(){
   return file;
 }
 
+string Parameters::getHashableString(){
+  string sift_str = "sift_";
+  string hist_str = "histogram_";
+  const bool sift_on = intParameters["feature_sift"];
+  const bool hist_on = intParameters["feature_histogram"]; 
+  stringstream str_str;
+  typedef map<string, float>::iterator fl_map_it;
+  typedef map<string, int>::iterator i_map_it;
+  for(fl_map_it it = floatParameters.begin();
+      it != floatParameters.end();
+      ++it){
+    if( (sift_on && (it->first.find(sift_str) != string::npos) )
+	|| 
+	(hist_on && (it->first.find(hist_str) != string::npos) ) ){
+      str_str << it->first << it->second;
+    }
+  }
+  for(i_map_it it = intParameters.begin(); it != intParameters.end(); ++it)
+    if( (sift_on && (it->first.find(sift_str) != string::npos) )
+	|| 
+	(hist_on && (it->first.find(hist_str) != string::npos) ) ){
+      str_str << it->first << it->second;
+    }
+  return str_str.str();
+}
+
+
+long Parameters::getCurrentHash(){
+  string hashable = getHashableString();
+  locale loc;
+  const collate<char>& coll = use_facet<collate<char> >(loc);
+  long hash_ = coll.hash(hashable.data(),hashable.data()+hashable.length());
+  return hash_;
+}
+
+bool Parameters::compare(string str){
+  Parameters other;
+  other.readFile((char *)str.c_str());
+  typedef map<string, float>::iterator fl_map_it;
+  typedef map<string, int>::iterator i_map_it;
+  for(fl_map_it it = floatParameters.begin(); it != floatParameters.end(); ++it)
+    if(it->second != other.getfParameter(it->first))
+      return false;
+  for(i_map_it it = intParameters.begin(); it != intParameters.end(); ++it)
+    if(it->second != other.getiParameter(it->first))
+      return false;
+  return true;
+}
+
 void Parameters::readFile(char * str){
   file = str;
   XMLPlatformUtils::Initialize();
@@ -73,8 +121,8 @@ void Parameters::readFile(char * str){
   DOMElement* elementRoot = doc->getDocumentElement();
 
   // Extract floats
-  DOMElement* floatRoot = (DOMElement *) elementRoot->
-    getElementsByTagName(XMLString::transcode("real"))->item(0);
+  DOMElement* floatRoot = (DOMElement *) 
+    elementRoot->getElementsByTagName(XMLString::transcode("real"))->item(0);
   DOMElement* child = floatRoot->getFirstElementChild();
   do{
     saveReal(XMLString::transcode(child->getNodeName()),  
@@ -83,7 +131,8 @@ void Parameters::readFile(char * str){
   }while(child != NULL);
 
   // Extract integers
-  DOMElement* intRoot = (DOMElement *) elementRoot->getElementsByTagName(XMLString::transcode("integer"))->item(0);
+  DOMElement* intRoot = (DOMElement *) 
+    elementRoot->getElementsByTagName(XMLString::transcode("integer"))->item(0);
   child = intRoot->getFirstElementChild();
   do{
     saveInteger(

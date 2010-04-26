@@ -45,7 +45,7 @@
     <sift_blur_window> 10 </sift_blur_window>
 
   <!-- histogram variables -->
-    <hbins> 10 </hbins>
-    <sbins> 10 </sbins>
+    <histogram_hbins> 10 </histogram_hbins>
+    <histogram_sbins> 10 </histogram_sbins>
   </integer>
 </parameters>

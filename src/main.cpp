@@ -1,10 +1,17 @@
 #include "main.h"
+#include <locale>
+#include <iomanip>
 
+using std::sprintf;
 using vito::gui::start;
 using vito::optimization::ParameterOptimization;
 
-int main(int argc, char ** argv){
+using namespace std;
 
+int main(int argc, char ** argv){ 
+  Parameters * p = Parameters::getInstance();
+  p->readFile((char *) "parameters.xml");
+  cout << p->getHashableString() << endl;
   if(argc > 1){
     Parameters * p = Parameters::getInstance();
     p->readFile((char *) "parameters.xml");

@@ -5,8 +5,11 @@ using std::string;
 
 namespace vito{
 
-DataPoint::DataPoint(size_t lab, string fname, string url, string descriptor):
-  label(lab),image_url(url),file_name(fname),descriptor_url(descriptor){
+DataPoint::DataPoint(size_t lab, 
+		     string fname, string url,
+		     string descriptor, string cat):
+  label(lab),image_url(url),file_name(fname),
+  descriptor_url(descriptor), cat_name(cat){
 }
 
 void DataPoint::setDescriptorURL(string url){
@@ -27,6 +30,10 @@ size_t DataPoint::get_label() const {
 
 string DataPoint::get_file_name() const {
   return file_name;
+}
+
+string DataPoint::get_cat_name() const{
+  return cat_name;
 }
 
 }

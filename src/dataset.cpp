@@ -35,7 +35,7 @@ Dataset::Dataset(string str): root(str){
 	      string filename = (string) sitr->path().filename().c_str();
 	      string fileurl = (string) sitr->path().file_string().c_str();
 	      string descriptor = DESCRIPTOR_LOCATION+catname+"/"+filename+".desc";
-	      DataPoint n (label, filename, fileurl, descriptor);
+	      DataPoint n (label, filename, fileurl, descriptor, catname);
 	      newcat.addDataPoint(n);
 	    }
 	  }  

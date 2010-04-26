@@ -26,11 +26,9 @@ Descriptor Histogram::extract_(MyImage *image,
   cout << "making histogram" << endl;
   Mat * hsv = image->getOpenCVMat();
   Parameters * p = Parameters::getInstance();
-  if(!p->hasHistogram()){
-    cout << "histogram parameters not found" << endl;
-    throw NO_PARAMETERS;
-  }
-  int hbins = p->getiParameter("hbins"), sbins = p->getiParameter("sbins");
+  int 
+    hbins = p->getiParameter("histogram_hbins"), 
+    sbins = p->getiParameter("histogram_sbins");
   int histSize[] = {hbins, sbins};
 
   float hranges[] = { 0, 180 };

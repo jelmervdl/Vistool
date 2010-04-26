@@ -1,6 +1,5 @@
 #include "gluiEvaluate.h"
 
-
 namespace vito{
 namespace gui{
 

@@ -1,7 +1,10 @@
 #include "featureExtractor.h"
 
+using std::stringstream;
 using std::string;
 using std::vector;
+using std::cout;
+using std::endl;
 using cv::Mat;
 
 using boost::filesystem::path;
@@ -57,7 +60,7 @@ FeatureExtractor::FeatureExtractor(){
     path p = complete(path(aap+name, native));
     path parameters = complete(path(Parameters::getInstance()->getFile()));
     if(!is_directory(p)){
-      printf("creating directory %s\n", name.c_str());
+      cout << "creating directory " << name << endl;
       create_directory(p);
     }
     for(vector<DataPoint>::iterator file = files->begin(); file != files->end(); ++file ){
@@ -66,18 +69,38 @@ FeatureExtractor::FeatureExtractor(){
   }
 }
 
-  void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
-  path parameters = complete(path(Parameters::getInstance()->getFile()));
+void FeatureExtractor::assertDir(string str){
+  path p = complete(path(str, native));
+  if(!is_directory(p)){
+    cout << "creating directory " << str << endl;
+    create_directory(p);
+  }
+}
+
+void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
   Parameters *pars = Parameters::getInstance();
-  if(force
-     ||
-     !exists(path(dp->get_descriptor_url())) 
-     ||
-     last_write_time(parameters) < last_write_time(path(dp->get_image_url()))){
+  string general_descriptor_dir = "desc/";
+  stringstream 
+    hash_descriptor_dir, 
+    category_descriptor_dir, 
+    final_descriptor_location;
+
+  hash_descriptor_dir 
+    << general_descriptor_dir 
+    << pars->getCurrentHash() << "/";
+  category_descriptor_dir 
+    << hash_descriptor_dir.str() 
+    << dp->get_cat_name() << "/";
+  final_descriptor_location 
+    << category_descriptor_dir.str() 
+    << dp->get_file_name() << ".desc";
+
+  assertDir(hash_descriptor_dir.str());
+  assertDir(category_descriptor_dir.str());
+
+  if(force || !exists(path(final_descriptor_location.str()))) {
     MyImage image(dp->get_image_url());
     vector<float> descriptor;
-      //vector<float> temp_desc = (*it)->extract_(&image, false, NULL);
-      //descriptor.insert(descriptor.end(), temp_desc.begin(), temp_desc.end());
     if(pars->getiParameter("feature_histogram") > 0){
       Histogram *hist = Histogram::getInstance();
       vector<float> desc = hist->extract_(&image, false, (Magick::Image*) NULL);
@@ -88,8 +111,8 @@ FeatureExtractor::FeatureExtractor(){
       vector<float> desc = sift->extract_(&image, false, (Magick::Image*) NULL);
       descriptor.insert(descriptor.end(), desc.begin(), desc.end());
     }
-    writeDescriptor(&descriptor,dp->get_descriptor_url());
-    printf("renewing descriptor for %s\n", dp->get_image_url().c_str());
+    writeDescriptor(&descriptor,final_descriptor_location.str());
+    cout << "renewing descriptor for " << dp->get_image_url() << endl;
   } 
 }
 

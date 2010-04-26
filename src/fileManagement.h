@@ -11,6 +11,9 @@
 #include "dataPoint.h"
 #include "category.h"
 
+namespace vito{
+
 bool is_image (std::string  str);
 
+}
 #endif

@@ -7,6 +7,8 @@
 
 #define NO_PARAMETERS 100
 
+#include <locale>
+#include <sstream>
 #include <stdio.h>
 #include "singleton.h"
 #include "multiton.h"
@@ -37,7 +39,11 @@ class Parameters : public Singleton<Parameters>{
   std::map<std::string, float> floatParameters;
   std::map<std::string, int> intParameters;
   std::string file;
+
+
  public:
+             ~Parameters();
+
   void        readFile(char * str);
   std::string getFile();
 
@@ -49,9 +55,11 @@ class Parameters : public Singleton<Parameters>{
 
   void        saveXML(std::string str);
 
-             ~Parameters();
+  long        getCurrentHash();
+  std::string getHashableString();
 
-  bool        hasHistogram();
+  bool        compare(std::string str);
+
   bool        hasParameters(std::string * reqParams, size_t n);
 
   void        printParameters();

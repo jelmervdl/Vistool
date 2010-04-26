@@ -42,7 +42,7 @@ void loadPicture(){
   delete state.current_single_image_texture;
   delete state.singleDp;
   string url  = askFile();
-  state.singleDp = new DataPoint(0, "", url, ""); 
+  state.singleDp = new DataPoint(0, "", url, "", ""); 
   state.current_single_image_texture = new Texture(state.singleDp, state.image_display_window);
 }
 

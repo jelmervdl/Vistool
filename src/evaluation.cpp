@@ -61,14 +61,8 @@ size_t Evaluation::getCorrect(){
 size_t Evaluation::getInstances(){
   return instances;
 }
-float Evaluation::getRecall(){
-  return recall;
-}
 float Evaluation::getPrecision(){
   return precision;
-}
-float Evaluation::getTval(){
-  return tval;
 }
 
 vector<DataPoint *> Evaluation::getInstancesClassifiedAs(int cl){
