@@ -18,7 +18,6 @@ vector<int> SVMClassifier::crossvalidation(vector<DataPoint> * files){
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint*> files){
   svm_problem * problem = compileProblem(files);
-  cout << endl;
   svm_parameter * parameter = getSVMParameters();
   //svm_model * model =  svm_train(problem, parameter);
   double result[problem->l];
@@ -32,6 +31,12 @@ vector<int> SVMClassifier::crossvalidation(vector<DataPoint*> files){
 }
 
 void SVMClassifier::train(vector<DataPoint*> files){
+  svm_problem   *problem = compileProblem(files);
+  svm_parameter *parameter = getSVMParameters();
+  svm_model     *model = svm_train(problem, parameter);
+  svm_save_model("model.svm", model);
+  svm_destroy_model(model);
+  svm_destroy_param(parameter);
 }
 
 svm_problem *SVMClassifier::compileProblem(vector<DataPoint*> files){
@@ -57,14 +62,18 @@ svm_problem *SVMClassifier::compileProblem(vector<DataPoint*> files){
   for(size_t dp_index = 0; (int) dp_index < n_datapoints; ++dp_index){
     const DataPoint& current_datapoint = *files[dp_index];
 
-    problem.y[dp_index] = (double) current_datapoint.get_label(); // set the label
+    //set the label
+    problem.y[dp_index] = (double) current_datapoint.get_label();
     problem.x[dp_index] = new svm_node[descriptor_length + 1];
 
     svm_node* &current_descriptor_nodes = problem.x[dp_index];
 
     vector<float> descriptor;
-    readDescriptor(&descriptor,fe->getCurrentDescriptorLocation(current_datapoint));
-    for(size_t descr_part = 0; (int) descr_part < descriptor_length; ++descr_part){
+    readDescriptor(&descriptor,
+		   fe->getCurrentDescriptorLocation(current_datapoint));
+    for(size_t descr_part = 0;
+	(int) descr_part < descriptor_length;
+	++descr_part){
       svm_node &current_node = current_descriptor_nodes[descr_part];
       current_node.index = descr_part; // set the feature index
       current_node.value = descriptor[descr_part]; // set feature value
@@ -100,14 +109,32 @@ svm_parameter *SVMClassifier::getSVMParameters(){
 }
 
 vector<int> SVMClassifier::classify(vector<DataPoint*> data_points){
-  //STUB
+  svm_model *model = svm_load_model("model.svm");
   vector<int> results(data_points.size());
+  for(int i = 0; i < (int) data_points.size(); ++i)
+    results[i] = classify(data_points[i], model);
   return results;
 }
 
-int SVMClassifier::classify(DataPoint * data_point){
-  //STUB
-  return 0;
+int SVMClassifier::classify(DataPoint *data_point){
+  svm_model *model = svm_load_model("model.svm");
+  return classify(data_point, model);
+}
+
+int SVMClassifier::classify(DataPoint *data_point, svm_model *model){
+  FeatureExtractor *fe = FeatureExtractor::getInstance();
+  vector<float> descriptor;
+  readDescriptor(&descriptor, 
+		 fe->getCurrentDescriptorLocation(*data_point));  
+  svm_node *nodes = new svm_node[descriptor.size() + 1];
+  for(int i = 0; i < (int) descriptor.size(); ++i){
+    nodes[i].value = descriptor[i];
+    nodes[i].index = i;
+  }
+  cout << descriptor.size() << endl;
+  nodes[descriptor.size()].value = 0.0;
+  nodes[descriptor.size()].index = -1; 
+  return svm_predict(model, nodes);
 }
 
 }}

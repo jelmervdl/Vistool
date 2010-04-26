@@ -9,9 +9,6 @@ using vito::optimization::ParameterOptimization;
 using namespace std;
 
 int main(int argc, char ** argv){ 
-  Parameters * p = Parameters::getInstance();
-  p->readFile((char *) "parameters.xml");
-  cout << p->getHashableString() << endl;
   if(argc > 1){
     Parameters * p = Parameters::getInstance();
     p->readFile((char *) "parameters.xml");
