@@ -63,6 +63,8 @@ class Parameters : public Singleton<Parameters>{
   bool        hasParameters(std::string * reqParams, size_t n);
 
   void        printParameters();
+
+  void        requireOnlySift();
 };
 
 #endif PARAMETERS_H

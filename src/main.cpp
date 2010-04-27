@@ -3,9 +3,10 @@
 #include <iomanip>
 
 using std::sprintf;
-using vito::gui::start;
-using vito::optimization::ParameterOptimization;
-
+using namespace vito;
+using namespace vito::gui;
+using namespace vito::optimization;
+using namespace vito::classification;
 using namespace std;
 
 int main(int argc, char ** argv){ 
@@ -24,6 +25,14 @@ int main(int argc, char ** argv){
       opt.optimize();
     }
   }  
+  Parameters *p = Parameters::getInstance();
+  Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
+  p->readFile((char *) "parameters.xml");
+  dataset.enableCategory("accordion");
+  dataset.enableCategory("anchor");
+  SegmentSVM segsvm;
+  segsvm.train(dataset.enabledDataPoints());
+  cout << "ya done" << endl;
   return 0;
 }
 

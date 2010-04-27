@@ -7,11 +7,10 @@
 namespace vito{
 namespace classification{
 
-
 class SVMClassifier : public Classifier{
   using Classifier::train;
   using Classifier::crossvalidation;
- private:
+ protected:
   // compile a set of datapoints into a problem
   svm_problem     *compileProblem(std::vector<DataPoint*> files);
 

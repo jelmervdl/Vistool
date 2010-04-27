@@ -180,3 +180,8 @@ void Parameters::saveXML(string str){
   of << "</parameters>" << endl;
   of.close();
  }
+
+void Parameters::requireOnlySift(){
+  assert(intParameters["feature_sift"] == 1);
+  assert(floatParameters["feature_histogram"] == 0);
+};
