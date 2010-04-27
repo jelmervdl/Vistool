@@ -20,23 +20,26 @@ class SVMClassifier : public Classifier{
 
  public:
   // helper function for real crossvalidation function
-  std::vector<int> crossvalidation(std::vector<DataPoint> * files);
+  std::vector<int>    crossvalidation(std::vector<DataPoint> * files);
 
   // crossvalidation using svm's built in cross validator (saves
   // filesaving)
-  std::vector<int> crossvalidation(std::vector<DataPoint*> files);
+  std::vector<int>    crossvalidation(std::vector<DataPoint*> files);
 
   // train the svm
-  void             train(std::vector<DataPoint*> files);
+  void                train(std::vector<DataPoint*> files);
 
   // classify a set of datapoints
-  std::vector<int> classify(std::vector<DataPoint*> data_points);
+  std::vector<int>    classify(std::vector<DataPoint*> data_points);
 
   // classify a single point
-  int              classify(DataPoint * data_point);
+  int                 classify(DataPoint * data_point);
 
   // classify a single point given a model
-  int              classify(DataPoint *data_point, svm_model *model);
+  int                 classify(DataPoint *data_point, svm_model *model);
+
+  std::vector<double> getValues(svm_node *nodes, 
+				svm_model *model);
 }; 
 
 }}

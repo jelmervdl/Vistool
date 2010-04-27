@@ -1,6 +1,5 @@
 #include "svmclassifier.h"
 
-
 using std::vector;
 using std::cout;
 using std::endl;
@@ -121,6 +120,26 @@ int SVMClassifier::classify(DataPoint *data_point){
   return classify(data_point, model);
 }
 
+vector<double> SVMClassifier::getValues(svm_node *nodes,
+					svm_model *model){
+  const int nr_classes = svm_get_nr_class(model);
+  const int nr_values = (nr_classes * (nr_classes + 1) ) / 2;
+  double *values = new double[ nr_values ];
+  for(int i = 0; i < nr_values; ++i)
+    values[i] = 0.0;
+  svm_predict_values(model, nodes, values);
+  vector<double> value_per_class(nr_classes);
+  int index = 0;
+  for(int i = 0; i < nr_classes; ++i)
+    for(int j = i + 1; j < nr_classes; ++j){
+      value_per_class[i] += values[index];
+      value_per_class[j] -= values[index];
+      index++;
+    }
+  delete values;
+  return value_per_class;
+}
+
 int SVMClassifier::classify(DataPoint *data_point, svm_model *model){
   FeatureExtractor *fe = FeatureExtractor::getInstance();
   vector<float> descriptor;
@@ -134,7 +153,14 @@ int SVMClassifier::classify(DataPoint *data_point, svm_model *model){
   cout << descriptor.size() << endl;
   nodes[descriptor.size()].value = 0.0;
   nodes[descriptor.size()].index = -1; 
-  return svm_predict(model, nodes);
+  double result = svm_predict(model, nodes);
+  vector<double> value_per_class = getValues(nodes, model);
+  for(vector<double>::iterator it = value_per_class.begin();
+      it != value_per_class.end();
+      ++it)
+    cout << *it << " ";
+  cout << endl;
+  return result;
 }
 
 }}
