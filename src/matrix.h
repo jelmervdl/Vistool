@@ -12,10 +12,10 @@ template<class Type> class Matrix{
   ~Matrix();
   size_t get_width() const;
   size_t get_height() const;
-  Type at(size_t x, size_t y) const;
-  void print() const; 
-  Matrix(size_t width_, size_t height_);
-  Type& at(size_t x, size_t y);
+  Type   at(size_t x, size_t y) const;
+  Type&  at(size_t x, size_t y);
+  void   print() const; 
+         Matrix(size_t width_, size_t height_);
 };
 
 template <class Type> Matrix<Type>::~Matrix(){

@@ -4,11 +4,11 @@
     <sift_blur_std> 2.0 </sift_blur_std>
 
     <!-- SVM -->
-    <svm_gamma> 10.0 </svm_gamma>
+    <svm_gamma> 3e-1 </svm_gamma>
     <svm_coef0> 15.0 </svm_coef0>
     <svm_cache_size> 1024 </svm_cache_size>
     <svm_eps> 0.64 </svm_eps>
-    <svm_C> 50.0 </svm_C>
+    <svm_C> 0.3 </svm_C>
     <svm_nu> 0.0 </svm_nu>
     <svm_p> 0.0 </svm_p>
 
@@ -16,13 +16,18 @@
   <integer>
 
   <!-- Classifier Parameters -->
-    <cross_validation_k> 10 </cross_validation_k>
-    <knn_classifier_k> 1 </knn_classifier_k>
+    <!-- knn -->
+      <cross_validation_k> 10 </cross_validation_k>
+      <knn_classifier_k> 1 </knn_classifier_k>
     <!-- SVM -->
-    <svm_degree> 16 </svm_degree>
-    <svm_nr_weight> 0 </svm_nr_weight>
-    <svm_shrinking> 1 </svm_shrinking>
-    <svm_probability> 1 </svm_probability>
+      <svm_degree> 16 </svm_degree>
+      <svm_nr_weight> 0 </svm_nr_weight>
+      <svm_shrinking> 1 </svm_shrinking>
+      <svm_probability> 1 </svm_probability>
+    <!-- segment svm -->
+      <segmentsvm_segment_type> 0 </segmentsvm_segment_type>
+        <!-- 0 = subsquares -->
+      <segmentsvm_subsquare_hist_count> 3 </segmentsvm_subsquare_hist_count>
 
   <!-- Enabled Features: -->
     <feature_histogram> 0 </feature_histogram>

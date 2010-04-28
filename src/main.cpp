@@ -30,8 +30,11 @@ int main(int argc, char ** argv){
   p->readFile((char *) "parameters.xml");
   dataset.enableCategory("accordion");
   dataset.enableCategory("anchor");
+  vector<DataPoint> train, test;
+  dataset.randomDataSplit(&train, &test, 0.95);
   SegmentSVM segsvm;
-  segsvm.train(dataset.enabledDataPoints());
+  segsvm.train(ptr::ptrDeMorgan(&train));
+  vector<int> res = segsvm.classify(ptr::ptrDeMorgan(&test));
   cout << "ya done" << endl;
   return 0;
 }
