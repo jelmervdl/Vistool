@@ -9,7 +9,7 @@ ToolState::ToolState(){
   display_modifier = states::No_Modifier;
 
   current_image_page = 0;
-  enabled_classifier = states::NearestNeighbor;
+  enabled_classifier = 0;
 
   ims_per_page = 16;
   parameter_panel = 0;

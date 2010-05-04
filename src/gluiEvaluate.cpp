@@ -3,15 +3,20 @@
 namespace vito{
 namespace gui{
 
+using classification::getExistingClassifier;
 using classification::NNClassifier;
 using classification::SVMClassifier;
 using classification::Classifier;
 
 
 void evaluateClassifier(){
+  cout << "extracting features" << endl;
   extractFeatures();
+  cout << "done... training " << endl;
   train();
+  cout << "done .. classifying " << endl;
   classify();
+  cout << "done!" << endl;
 }
 
 void crossValidate(){
@@ -20,10 +25,7 @@ void crossValidate(){
   state.train_data.clear();
   state.test_data.clear();
   delete state.current_classifier;
-  if(state.enabled_classifier == states::NearestNeighbor)
-    state.current_classifier = new NNClassifier();
-  if(state.enabled_classifier == states::SupportVectorMachine)
-    state.current_classifier = new SVMClassifier();
+  state.current_classifier = getExistingClassifier(state.enabled_classifier);
   vector<DataPoint> enabsp = state.current_db->enabledPoints();
   random_shuffle(enabsp.begin(), enabsp.end());
   state.train_data = enabsp;

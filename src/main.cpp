@@ -4,6 +4,7 @@
 
 using std::sprintf;
 using namespace vito;
+using namespace vito::features;
 using namespace vito::gui;
 using namespace vito::optimization;
 using namespace vito::classification;
@@ -29,12 +30,25 @@ int main(int argc, char ** argv){
   Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
   p->readFile((char *) "parameters.xml");
   dataset.enableCategory("accordion");
-  dataset.enableCategory("anchor");
+  //dataset.enableCategory("anchor");
+  //dataset.enableCategory("emu");
+  dataset.enableCategory("bass");
+  dataset.enableCategory("ant");
   vector<DataPoint> train, test;
-  dataset.randomDataSplit(&train, &test, 0.95);
-  SegmentSVM segsvm;
+  dataset.randomDataSplit(&train, &test, 0.5);
+  FeatureExtractor::getInstance()->saveDescriptorsToFile(&dataset);
+  OneClassSVM segsvm;
   segsvm.train(ptr::ptrDeMorgan(&train));
   vector<int> res = segsvm.classify(ptr::ptrDeMorgan(&test));
+  int total, correct;
+  for(int i = 0; i < res.size(); i++){
+    cout << test[i].get_label() << " " << res[i]<< endl;
+    total++;
+    if(test[i].get_label() == res[i])
+      correct++;
+  }
+  cout << "total: " << total << endl << "correct: " << correct << endl
+       << "precision " << correct / (double) total << endl;
   cout << "ya done" << endl;
   return 0;
 }

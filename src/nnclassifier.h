@@ -16,6 +16,9 @@ class NNClassifier:public Classifier{
   CvKNearest * knn;
  public:
   NNClassifier();
+
+  std::string get_name();
+
   std::vector<int> crossvalidation(std::vector<DataPoint> * files);
   void clean();
   void train(std::vector<DataPoint*> dps);

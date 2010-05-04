@@ -1,5 +1,6 @@
 #include "svmclassifier.h"
 
+using std::string;
 using std::vector;
 using std::cout;
 using std::endl;
@@ -10,6 +11,10 @@ namespace classification{
 using features::FeatureExtractor;
 
 using write::readDescriptor;
+
+string SVMClassifier::get_name(){
+  return "SVM";
+}
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint> * files){
   return crossvalidation( ptr::ptrDeMorgan<DataPoint>(files) );
@@ -89,12 +94,12 @@ svm_parameter *SVMClassifier::getSVMParameters(){
   svm_parameter *newpar = new svm_parameter;
   svm_parameter &multi_svm_par = *newpar;
   multi_svm_par.svm_type =  C_SVC;
-  multi_svm_par.kernel_type = POLY;
+  multi_svm_par.kernel_type = RBF;
   multi_svm_par.degree = p.getiParameter("svm_degree");
   multi_svm_par.gamma = p.getfParameter("svm_gamma");	
   multi_svm_par.coef0 = p.getfParameter("svm_coef0");
 
-    multi_svm_par.cache_size = 1024;
+  multi_svm_par.cache_size = 1024;
   multi_svm_par.eps = p.getfParameter("svm_eps");
   multi_svm_par.C = p.getfParameter("svm_C");
   multi_svm_par.nr_weight = p.getiParameter("svm_nr_weight");
@@ -132,6 +137,7 @@ vector<double> SVMClassifier::getValues(svm_node *nodes,
   int index = 0;
   for(int i = 0; i < nr_classes; ++i)
     for(int j = i + 1; j < nr_classes; ++j){
+      //cout << "waarde van value_ " << values[index] << endl;
       value_per_class[i] += values[index];
       value_per_class[j] -= values[index];
       index++;

@@ -7,7 +7,7 @@
 #include "svmclassifier.h"
 #include "gluiView.h"
 #include "gluiEvaluate.h"
-
+#include "classification.h"
 
 namespace vito{
 namespace gui{

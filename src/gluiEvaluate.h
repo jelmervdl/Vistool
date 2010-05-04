@@ -4,6 +4,7 @@
 #include "toolState.h"
 #include "gluiFeatures.h"
 #include "gluiClassify.h"
+#include "classification.h"
 
 namespace vito {
 namespace gui{

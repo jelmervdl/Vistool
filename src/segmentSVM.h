@@ -2,7 +2,9 @@
 #define SEGMENTSVM_H
 
 #include "svmclassifier.h"
-
+#include <utility>
+#include <sstream>
+#include <algorithm>
 
 namespace vito{
 namespace classification{
@@ -15,6 +17,7 @@ public:
 					       *data_points);
   std::vector<int>        classify(std::vector<DataPoint*> data_points);
   int                     classify(DataPoint *data_points);
+  int                     classify(DataPoint *data_point, svm_model * model);
   Matrix<Descriptor>      extractKeyPoints(const Descriptor &descriptor);
   std::vector<Descriptor> getSubSquares(const Matrix<Descriptor> &keypoints);
   std::vector<Descriptor> getSubregions(const Descriptor &descriptor);

@@ -1,5 +1,7 @@
 #include "nnclassifier.h"
 
+
+
 #define PrepareMatrices(dps)						\
   FeatureExtractor *fe = FeatureExtractor::getInstance();		\
   size_t rows, cols;							\
@@ -11,6 +13,7 @@
   CvMat * labs = cvCreateMat(rows, 1, CV_32FC1);			\
   FeatureExtractor::getInstance()->getCVMatrices(dps, tmat, labs);	
 
+using std::string;
 using Magick::Image;
 using cv::Mat;
 
@@ -19,6 +22,10 @@ namespace classification{
 
 using features::FeatureExtractor;
 using write::readDescriptor;
+
+string NNClassifier::get_name(){
+  return "NNClassifier";
+}
 
 vector<int> NNClassifier::crossvalidation(vector<DataPoint> * files){
   return Classifier::crossvalidation(files);

@@ -11,11 +11,14 @@ class SVMClassifier : public Classifier{
   using Classifier::train;
   using Classifier::crossvalidation;
  protected:
+
+  std::string get_name();
+
   // compile a set of datapoints into a problem
   svm_problem     *compileProblem(std::vector<DataPoint*> files);
 
   // get the svm parameters
-  svm_parameter   *getSVMParameters();
+  virtual svm_parameter   *getSVMParameters();
 
  public:
   // helper function for real crossvalidation function

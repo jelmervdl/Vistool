@@ -5,13 +5,15 @@
 #include "gluiLoad.h"
 #include "gluiFeatures.h"
 #include "gluiEvaluate.h"
+#include "classification.h"
 
 namespace vito{
 namespace gui{
 
-  void initGlui();
-  void nextPage();
-  void selectAndShow();
+void initGlui();
+void nextPage();
+void selectAndShow();
+void createClassifierSelectButton();
 
 }}
 

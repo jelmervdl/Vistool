@@ -1,9 +1,17 @@
 #ifndef CORE_H
 #define CORE_H
 
+#include <iostream>
 #include <vector>
+#include "svm.h"
 
 namespace vito{
+
+namespace print{
+
+void print_svm_problem(svm_problem *problem);
+
+}
 
 namespace states {
   enum EnabledClassifier{
@@ -41,6 +49,8 @@ namespace ptr{
       ret.push_back(&(vec->at(i)));
     return ret;
   };
+
+
 
 };
 }

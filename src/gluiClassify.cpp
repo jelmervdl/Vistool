@@ -4,10 +4,10 @@
 namespace vito{
 namespace gui{
 
+using classification::getExistingClassifier;
 using classification::Classifier;
 using classification::NNClassifier;
 using classification::SVMClassifier;
-
 
 void train(){
   ToolState &state = *ToolState::getInstance();
@@ -16,8 +16,12 @@ void train(){
   state.test_data.clear();
   state.current_db->randomDataSplit(&state.train_data, &state.test_data, 0.5, true);
   delete state.current_classifier;
-  state.current_classifier = new SVMClassifier();
+  cout << "deleted it " << endl;
+  state.current_classifier = getExistingClassifier(state.enabled_classifier);
+  cout << "just turned the state class to : "  
+       << state.current_classifier->get_name();
   state.current_classifier->train(&state.train_data);
+  cout << "just trained" << endl;
   for(vector<int>::iterator cl = state.current_classes.begin(); 
       cl != state.current_classes.end(); 
       cl++)
@@ -32,14 +36,18 @@ void train(){
 }
 
 void classify(){
+  cout << "begin of clas" << endl;
   ToolState &state = *ToolState::getInstance();
   if(state.current_classifier == NULL)
     train();
+  vector<DataPoint> enabsp = state.current_db->enabledPoints();
+
   state.test_result = state.current_classifier->classify(&state.test_data);
   delete state.current_evaluation;
   state.current_evaluation = new Evaluation(&state.test_data, &state.test_result);
   viewDataset();
   showStatistics();
+  cout << "end of clas" << endl;
 }
 
 void non_set_classify(){

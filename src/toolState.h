@@ -27,7 +27,7 @@ struct tool_state{
   std::vector <DataPoint>  train_data, test_data;
   std::vector <int>        test_result;
   classification::Classifier *current_classifier;
-  states::EnabledClassifier   enabled_classifier;
+  int enabled_classifier;
 
   // class view selection
   int            selected_class;

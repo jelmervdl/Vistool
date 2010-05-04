@@ -4,11 +4,11 @@
     <sift_blur_std> 2.0 </sift_blur_std>
 
     <!-- SVM -->
-    <svm_gamma> 3e-1 </svm_gamma>
+    <svm_gamma> 1 </svm_gamma>
     <svm_coef0> 15.0 </svm_coef0>
     <svm_cache_size> 1024 </svm_cache_size>
     <svm_eps> 0.64 </svm_eps>
-    <svm_C> 0.3 </svm_C>
+    <svm_C> 16 </svm_C>
     <svm_nu> 0.0 </svm_nu>
     <svm_p> 0.0 </svm_p>
 
@@ -27,7 +27,7 @@
     <!-- segment svm -->
       <segmentsvm_segment_type> 0 </segmentsvm_segment_type>
         <!-- 0 = subsquares -->
-      <segmentsvm_subsquare_hist_count> 3 </segmentsvm_subsquare_hist_count>
+      <segmentsvm_subsquare_hist_count> 4 </segmentsvm_subsquare_hist_count>
 
   <!-- Enabled Features: -->
     <feature_histogram> 0 </feature_histogram>
@@ -41,8 +41,8 @@
       <!-- 0 = smallest window
 	   1 = all pixels are used -->
     <sift_orientation_directions> 8 </sift_orientation_directions>
-    <sift_number_of_keypoints_x> 5 </sift_number_of_keypoints_x>
-    <sift_number_of_keypoints_y> 5 </sift_number_of_keypoints_y>
+    <sift_number_of_keypoints_x> 8 </sift_number_of_keypoints_x>
+    <sift_number_of_keypoints_y> 8 </sift_number_of_keypoints_y>
     <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
       <!-- this variable is squared later on -->
     <sift_keypoint_pixel_window> -1  </sift_keypoint_pixel_window> 
