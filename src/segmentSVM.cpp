@@ -200,11 +200,11 @@ int SegmentSVM::classify(DataPoint *data_point, svm_model * model){
   }
   std::sort(sortem.begin(), sortem.end(), sorter); 
   cout << "totals: ";
-  for(int i = 0; i < totals.size(); ++i)
+  for(int i = 0; i < (int) totals.size(); ++i)
     cout << totals[i] << " ";
   cout << endl << endl;
   cout << "size of the sortum: " << sortem.size() << endl;
-  for(int i = 0; i < sortem.size(); ++i)
+  for(int i = 0; i < (int) sortem.size(); ++i)
     cout << "::" << sortem[i].second;
   return final_answer;
 }

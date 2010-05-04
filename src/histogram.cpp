@@ -16,8 +16,8 @@ using Magick::DrawableRectangle;
 namespace vito{
 namespace features{
 
-Histogram::Histogram(){
-  cout << "making histogram" << endl;
+bool Histogram::isActive(){
+  return (Parameters::getInstance()->getiParameter("feature_histogram") > 0);
 }
 
 Descriptor Histogram::extract_(MyImage *image,  
@@ -53,7 +53,6 @@ Descriptor Histogram::extract_(MyImage *image,
       {
 	float binVal = hist.at<float>(h, s);
 	binVal /= maxVal;
-	//cout << "at"  << h * sbins + s  << " is " << binVal << endl; 
 	data.push_back((float) binVal);
 	if(saveVisualRepresentation){
 	  float intensity = binVal / maxVal;

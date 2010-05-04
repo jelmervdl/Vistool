@@ -14,6 +14,10 @@ using Magick::DrawableLine;
 namespace vito{
 namespace features{
 
+bool SiftDescriptor::isActive(){
+  return (Parameters::getInstance()->getiParameter("feature_sift") > 0);
+}
+
 Descriptor SiftDescriptor::extract_(MyImage *my_image,
 			bool save_visual_representation,
 			Image *canvas){

@@ -13,7 +13,6 @@ using evaluation::Evaluation;
 namespace optimization{
 
 float evaluateSVM(){   
-  Parameters *parameters = Parameters::getInstance();
   float result = 0.0;
   for(int i  = 0; i < 10; ++i){
     Dataset dataset("../datasets/Caltech101/");

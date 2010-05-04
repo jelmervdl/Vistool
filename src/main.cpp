@@ -41,10 +41,10 @@ int main(int argc, char ** argv){
   segsvm.train(ptr::ptrDeMorgan(&train));
   vector<int> res = segsvm.classify(ptr::ptrDeMorgan(&test));
   int total, correct;
-  for(int i = 0; i < res.size(); i++){
+  for(int i = 0; i < (int) res.size(); i++){
     cout << test[i].get_label() << " " << res[i]<< endl;
     total++;
-    if(test[i].get_label() == res[i])
+    if((int) test[i].get_label() == res[i])
       correct++;
   }
   cout << "total: " << total << endl << "correct: " << correct << endl

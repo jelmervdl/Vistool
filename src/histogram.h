@@ -7,10 +7,13 @@
 namespace vito{
 namespace features{
 
-class Histogram: public Singleton<Histogram>, public Feature{
+class Histogram : public Feature{
   friend class Singleton<Histogram>;
  public:
-  Histogram();
+  // return activity of feature
+  bool       isActive();
+
+  // extract actual descriptor;
   Descriptor extract_(MyImage * Image,  
 		     bool saveVisualRepresentation,
 		     Magick::Image* image);

@@ -72,7 +72,7 @@ void createClassifierSelectButton(){
   GLUI_Listbox * classif_sel = 
     state.main_gui->add_listbox("classif.:", (int*) &state.enabled_classifier);
   vector<Classifier*> classifier = getExistingClassifiers();
-  for(int i = 0; i < classifier.size(); ++i){
+  for(int i = 0; i < (int) classifier.size(); ++i){
     classif_sel->add_item(i, classifier[i]->get_name().c_str());  
   }
   while(classifier.size() > 0){  

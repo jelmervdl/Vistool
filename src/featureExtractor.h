@@ -1,6 +1,7 @@
 #ifndef FEATUREEXTRACTOR_H
 #define FEATUREEXTRACTOR_H
 
+#include "features.h"
 #include <sstream>
 #include <vector>
 #include "descriptorWriter.h"
@@ -16,12 +17,6 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
 
  private:
   std::vector<Feature*> features;
-
-  // constructor
-                        FeatureExtractor();
-
-  // get active feature classes [BROKEN]
-  std::vector<Feature*> usedFeatureKinds();
 
   //create directory if it doesn't exist
   void                  assertDir(std::string str);

@@ -1,6 +1,5 @@
 #include "gluiClassify.h"
 
-
 namespace vito{
 namespace gui{
 
@@ -16,12 +15,8 @@ void train(){
   state.test_data.clear();
   state.current_db->randomDataSplit(&state.train_data, &state.test_data, 0.5, true);
   delete state.current_classifier;
-  cout << "deleted it " << endl;
   state.current_classifier = getExistingClassifier(state.enabled_classifier);
-  cout << "just turned the state class to : "  
-       << state.current_classifier->get_name();
   state.current_classifier->train(&state.train_data);
-  cout << "just trained" << endl;
   for(vector<int>::iterator cl = state.current_classes.begin(); 
       cl != state.current_classes.end(); 
       cl++)
@@ -36,7 +31,6 @@ void train(){
 }
 
 void classify(){
-  cout << "begin of clas" << endl;
   ToolState &state = *ToolState::getInstance();
   if(state.current_classifier == NULL)
     train();
@@ -47,7 +41,6 @@ void classify(){
   state.current_evaluation = new Evaluation(&state.test_data, &state.test_result);
   viewDataset();
   showStatistics();
-  cout << "end of clas" << endl;
 }
 
 void non_set_classify(){
@@ -61,6 +54,5 @@ void non_set_classify(){
   viewDataset();
   showStatistics();
 }
-
 
 }}

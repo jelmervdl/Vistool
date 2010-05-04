@@ -17,30 +17,6 @@ namespace features{
 using write::readDescriptor;
 using write::writeDescriptor;
 
-vector<Feature*> FeatureExtractor::usedFeatureKinds(){
-  vector<Feature*> feats;
-  Parameters *parameters = Parameters::getInstance();
-  if(parameters->getiParameter("feature_histogram") > 0){
-    Histogram *hist = Histogram::getInstance();
-    feats.push_back(hist);
-  }
-  if(parameters->getiParameter("feature_sift") > 0){
-    feats.push_back((SiftDescriptor* ) SiftDescriptor::getInstance());
-  }
-  return feats;
-}
-
-FeatureExtractor::FeatureExtractor(){
-  Parameters *parameters = Parameters::getInstance();
-  if(parameters->getiParameter("feature_histogram") > 0){
-    Histogram *hist = Histogram::getInstance();
-    features.push_back(hist);
-  }
-  if(parameters->getiParameter("feature_sift") > 0){
-    features.push_back((SiftDescriptor* ) SiftDescriptor::getInstance());
-  }
-}
-
   vector<float> FeatureExtractor::getDescriptor(DataPoint * dp, const bool force){
   renewDescriptor(dp, force);
   vector<float>  descriptor;
@@ -104,22 +80,14 @@ string FeatureExtractor::getCurrentDescriptorLocation(const DataPoint &dp){
 }
 
 void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
-  Parameters *pars = Parameters::getInstance();
-
   string final_descriptor_location = getCurrentDescriptorLocation(*dp);
-
   if(force || !exists(path(final_descriptor_location))) {
     MyImage image(dp->get_image_url());
     vector<float> descriptor;
-    if(pars->getiParameter("feature_histogram") > 0){
-      Histogram *hist = Histogram::getInstance();
-      vector<float> desc = hist->extract_(&image, false, (Magick::Image*) NULL);
-      descriptor.insert(descriptor.end(), desc.begin(), desc.end());
-    }
-    if(pars->getiParameter("feature_sift") > 0){
-      SiftDescriptor *sift = SiftDescriptor::getInstance();
-      vector<float> desc = sift->extract_(&image, false, (Magick::Image*) NULL);
-      descriptor.insert(descriptor.end(), desc.begin(), desc.end());
+    vector<Feature*> features = getActiveFeatures();
+    for(int i = 0; i < (int) features.size(); ++i){
+      features[i]->extractTo(&descriptor, &image);
+      delete features[i];
     }
     writeDescriptor(&descriptor,final_descriptor_location);
     cout << "renewing descriptor for " << dp->get_image_url() << endl;

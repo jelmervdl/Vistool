@@ -12,7 +12,7 @@ class SVMClassifier : public Classifier{
   using Classifier::crossvalidation;
  protected:
 
-  std::string get_name();
+  std::string         get_name();
 
   // compile a set of datapoints into a problem
   svm_problem     *compileProblem(std::vector<DataPoint*> files);
