@@ -16,8 +16,11 @@ string SVMClassifier::get_name(){
   return "SVM";
 }
 
+
+
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint> * files){
-  return crossvalidation( ptr::ptrDeMorgan<DataPoint>(files) );
+  return Classifier::crossvalidation(files);
+  //return crossvalidation( ptr::ptrDeMorgan<DataPoint>(files) );
 }
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint*> files){
@@ -33,6 +36,8 @@ vector<int> SVMClassifier::crossvalidation(vector<DataPoint*> files){
   }
   return classification;
 }
+
+
 
 void SVMClassifier::train(vector<DataPoint*> files){
   svm_problem   *problem = compileProblem(files);
@@ -54,8 +59,7 @@ svm_problem *SVMClassifier::compileProblem(vector<DataPoint*> files){
   vector<float> sample;
   readDescriptor(&sample, fe->getCurrentDescriptorLocation(*files.at(0)));
   const int &descriptor_length = sample.size();
-  for(int i = 0; i < descriptor_length; ++i)
-    printf("svm find at place %d to be %.02f\n", i, sample[i]);
+
   //reserve a problem according to the sample
   svm_problem *problem_ = new svm_problem;
   svm_problem &problem = *problem_;

@@ -39,8 +39,10 @@ Evaluation::Evaluation(vector<DataPoint> * dps, vector<int> * cls){
     map_total_to_label[dp->get_label()] = 0;
     map_correct_to_label[dp->get_label()] = 0;
   }
+  cout << "dps is of size " << dps->size() 
+       << " and cls of size " << cls->size() << endl;
   if(dps->size() != cls->size())
-    throw 1;
+    throw "bla";
   for(size_t i = 0; i < dps->size(); ++i){
     instances++;
     map_total_to_label[dps->at(i).get_label()]++;

@@ -1,6 +1,9 @@
 #include "classifier.h"
 
 using std::vector;
+using std::cout;
+using std::endl;
+
 
 namespace vito{
 namespace classification{
@@ -19,6 +22,7 @@ void Classifier::train(vector<DataPoint> *  files ){
 
 vector<int> Classifier::crossvalidation(vector<DataPoint> * _files)
 {
+  cout << "ok I'm crossvalidating in classifier.cpp" << endl;
   vector<DataPoint> &files = *_files;
   const int kFolds = Parameters::getInstance()->getiParameter("cross_validation_k");
   const int kFiles = files.size();

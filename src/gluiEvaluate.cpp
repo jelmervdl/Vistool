@@ -43,6 +43,9 @@ void crossValidate(){
     state.current_classes.push_back(enabs[i]->get_label());
   }
   delete state.current_evaluation;
+  cout << "size of enabsp " << enabsp.size() << " and train: " 
+       << state.train_data.size() << " and the test results " 
+       << state.test_result.size() << endl;
   state.current_evaluation = new Evaluation(&state.train_data, &state.test_result);
   viewDataset();
   showStatistics();

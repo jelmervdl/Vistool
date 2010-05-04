@@ -12,9 +12,8 @@ namespace classification{
 class SegmentSVM : public SVMClassifier{
 public:
   SegmentSVM();
+  std::string             get_name();
   void                    train(std::vector<DataPoint*> data_points);
-  std::vector<int>        crossvalidation(std::vector<DataPoint> 
-					       *data_points);
   std::vector<int>        classify(std::vector<DataPoint*> data_points);
   int                     classify(DataPoint *data_points);
   int                     classify(DataPoint *data_point, svm_model * model);

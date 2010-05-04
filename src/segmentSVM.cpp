@@ -13,6 +13,10 @@ namespace classification{
 using features::FeatureExtractor;
 using write::readDescriptor;
 
+string SegmentSVM::get_name(){
+  return "segmentSVM";
+}
+
 SegmentSVM::SegmentSVM(){
 }
 
@@ -140,11 +144,6 @@ void SegmentSVM::train(vector<DataPoint*> data_points){
   svm_save_model("model.svm", model);
 }
 
-vector<int> SegmentSVM::crossvalidation(vector<DataPoint> *data_points){
-  vector<int> results;
-  return results;
-}
-
 
 vector<int> SegmentSVM::classify(vector<DataPoint*> data_points){
   svm_model *model =  svm_load_model("model.svm");
@@ -164,7 +163,7 @@ bool sorter(pair<double, string> a, pair<double, string> b){
 }
 
 int SegmentSVM::classify(DataPoint *data_point, svm_model * model){
-  cout << "actual: " << data_point->get_label() << endl << endl;
+  //cout << "actual: " << data_point->get_label() << endl << endl;
   Descriptor desc;
   readDescriptor(&desc,
 		 FeatureExtractor::getInstance()->
@@ -198,14 +197,14 @@ int SegmentSVM::classify(DataPoint *data_point, svm_model * model){
       final_answer = answer;
     }
   }
-  std::sort(sortem.begin(), sortem.end(), sorter); 
-  cout << "totals: ";
-  for(int i = 0; i < (int) totals.size(); ++i)
-    cout << totals[i] << " ";
-  cout << endl << endl;
-  cout << "size of the sortum: " << sortem.size() << endl;
-  for(int i = 0; i < (int) sortem.size(); ++i)
-    cout << "::" << sortem[i].second;
+  //  std::sort(sortem.begin(), sortem.end(), sorter); 
+  //cout << "totals: ";
+  //for(int i = 0; i < (int) totals.size(); ++i)
+  //cout << totals[i] << " ";
+  //  cout << endl << endl;
+  //  cout << "size of the sortum: " << sortem.size() << endl;
+  //  for(int i = 0; i < (int) sortem.size(); ++i)
+  //cout << "::" << sortem[i].second;
   return final_answer;
 }
 

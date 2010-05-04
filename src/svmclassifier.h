@@ -10,38 +10,40 @@ namespace classification{
 class SVMClassifier : public Classifier{
   using Classifier::train;
   using Classifier::crossvalidation;
- protected:
 
-  std::string         get_name();
+ protected:
+  virtual std::string         get_name();
 
   // compile a set of datapoints into a problem
-  svm_problem     *compileProblem(std::vector<DataPoint*> files);
+  svm_problem                 *compileProblem(std::vector<DataPoint*> files);
 
   // get the svm parameters
-  virtual svm_parameter   *getSVMParameters();
+  virtual svm_parameter       *getSVMParameters();
 
  public:
   // helper function for real crossvalidation function
-  std::vector<int>    crossvalidation(std::vector<DataPoint> * files);
+  virtual std::vector<int>     crossvalidation(std::vector<DataPoint> * files);
 
   // crossvalidation using svm's built in cross validator (saves
   // filesaving)
-  std::vector<int>    crossvalidation(std::vector<DataPoint*> files);
+  virtual std::vector<int>     crossvalidation(std::vector<DataPoint*> files);
 
   // train the svm
-  void                train(std::vector<DataPoint*> files);
+  virtual void                 train(std::vector<DataPoint*> files);
 
   // classify a set of datapoints
-  std::vector<int>    classify(std::vector<DataPoint*> data_points);
+  virtual   std::vector<int>   classify(std::vector<DataPoint*> data_points);
 
   // classify a single point
-  int                 classify(DataPoint * data_point);
+  virtual int                  classify(DataPoint * data_point);
 
   // classify a single point given a model
-  int                 classify(DataPoint *data_point, svm_model *model);
+  virtual int                  classify(DataPoint *data_point, 
+					svm_model *model);
 
-  std::vector<double> getValues(svm_node *nodes, 
-				svm_model *model);
+  // get the return values
+  virtual  std::vector<double> getValues(svm_node *nodes, 
+					 svm_model *model);
 }; 
 
 }}
