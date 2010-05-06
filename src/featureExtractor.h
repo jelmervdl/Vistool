@@ -3,11 +3,8 @@
 
 #include "features.h"
 #include <sstream>
-#include <vector>
 #include "descriptorWriter.h"
 #include "dataset.h"
-#include "histogram.h"
-#include "sift.h"
 
 namespace vito{
 namespace features{
@@ -37,7 +34,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   void                  renewDescriptor(DataPoint * db,
 					const bool force);
 
-  std::string getCurrentDescriptorLocation(const DataPoint &dp);
+  std::string           getCurrentDescriptorLocation(const DataPoint &dp);
 
   // fill the openCV type matrices given a vector of datapoints
   void                  getCVMatrices(std::vector<DataPoint*> dps,

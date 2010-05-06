@@ -140,6 +140,7 @@ void SegmentSVM::train(vector<DataPoint*> data_points){
   svm_parameter *parameters = getSVMParameters();
   svm_problem *problem = compileSegmentProblem(data_points);
   //print::print_svm_problem(problem);
+  //print::print_svm_problem(problem);
   svm_model *model = svm_train(problem, parameters);
   svm_save_model("model.svm", model);
 }

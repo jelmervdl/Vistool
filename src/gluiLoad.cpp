@@ -2,6 +2,7 @@
 
 using std::string;
 using std::vector;
+using std::stringstream;
 
 namespace vito{
 namespace gui{
@@ -23,10 +24,13 @@ void loadDataset(string location){
   if(state.current_db != NULL){
     vector<int*> live_vars;
     for(size_t i = 0; i < cats->size(); ++i){
+      stringstream name;
+      name << i << " " << cats->at(i).get_name().c_str();
+
       state.classes->add_checkbox_to_panel( pan,
-				      (const char *)cats->at(i).get_name().c_str(),
-				      cats->at(i).enabledLiveVar(),
-				      1, (GLUI_Update_CB) viewDataset);
+					    name.str().c_str(),
+					    cats->at(i).enabledLiveVar(),
+					    1, (GLUI_Update_CB) viewDataset);
       live_vars.push_back(cats->at(i).enabledLiveVar());
       c++;
       if(c%34==0)

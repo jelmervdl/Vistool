@@ -1,13 +1,13 @@
 #ifndef GRADIENT_H
 #define GRADIENT_H
 
-#include <math.h>
-#include <iostream>
-#include "feature.h"
-#include "parameters.h"
 #include <ostream>
 #include <iostream>
-#include <string>
+#include <iostream>
+#include <math.h>
+
+#include "feature.h"
+#include "parameters.h"
 #include "descriptor.h"
 
 namespace vito{

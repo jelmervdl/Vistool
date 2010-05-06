@@ -4,6 +4,7 @@
 #include "fd.h"
 #include "toolState.h"
 #include "gluiView.h"
+#include <sstream>
 
 namespace vito{
 namespace gui{

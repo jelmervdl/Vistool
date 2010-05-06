@@ -2,7 +2,6 @@
 #define CLASSIFIER_H
 
 #include "featureExtractor.h"
-#include <string>
 
 namespace vito{
 namespace classification{

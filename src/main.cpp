@@ -31,14 +31,18 @@ int main(int argc, char ** argv){
   p->readFile((char *) "parameters.xml");
   dataset.enableCategory("accordion");
   //dataset.enableCategory("anchor");
-  //dataset.enableCategory("emu");
-  dataset.enableCategory("bass");
-  dataset.enableCategory("ant");
+  dataset.enableCategory("emu");
+  //dataset.enableCategory("bass");
+  //dataset.enableCategory("ant");
   vector<DataPoint> train, test;
   dataset.randomDataSplit(&train, &test, 0.5);
   FeatureExtractor::getInstance()->saveDescriptorsToFile(&dataset);
-  OneClassSVM segsvm;
+  SVMClassifier segsvm;
   segsvm.train(ptr::ptrDeMorgan(&train));
+  dataset.disableCategory("accordion");
+  dataset.enableCategory("emu");
+  vector<DataPoint> others = dataset.enabledPoints();
+  others.insert(others.end(), test.begin(), test.end());
   vector<int> res = segsvm.classify(ptr::ptrDeMorgan(&test));
   int total, correct;
   for(int i = 0; i < (int) res.size(); i++){

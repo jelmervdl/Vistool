@@ -46,6 +46,7 @@ struct tool_state{
   size_t window_width;
   size_t window_height;
   int    image_display_window;
+  int one_class_target;
   
   // Single Image parameters
   Texture *current_single_image_texture;

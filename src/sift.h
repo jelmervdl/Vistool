@@ -3,11 +3,8 @@
 
 #include <math.h>
 #include <iostream>
-#include "feature.h"
-#include "parameters.h"
 #include "keypoint.h"
 #include "gradient.h"
-#include "descriptor.h"
 
 namespace vito{
 namespace features{

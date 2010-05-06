@@ -38,6 +38,7 @@ void initGlui(){
   aap->add_item(states::Incorrect, "Incorr.");
   aap->add_item(states::Particular_Category, "Sel. Cat.");
 
+ 
   state.selected_class_listbox = state.main_gui->add_listbox_to_panel(view_panel, "part. class:", &state.selected_class, 0, (GLUI_Update_CB)selectAndShow);
   state.main_gui->add_column(false);
   GLUI_Panel * ml_panel = state.main_gui->add_panel("ML");
@@ -46,6 +47,8 @@ void initGlui(){
   state.main_gui->add_button_to_panel(ml_panel, "Divide/Evaluate", 0, (GLUI_Update_CB)evaluateClassifier);
   state.main_gui->add_button_to_panel(ml_panel, "Cross-Validate", 0, (GLUI_Update_CB)crossValidate);
   state.main_gui->add_button_to_panel(ml_panel, "Classify", 0, (GLUI_Update_CB) non_set_classify);
+state.main_gui->add_spinner_to_panel(ml_panel, "one_class_target", GLUI_SPINNER_INT, &state.one_class_target);
+
   createClassifierSelectButton();
   //main_gui->add_button_to_panel(ml_panel, "Classify", 0, (GLUI_Update_CB)classify);
   state.main_gui->set_main_gfx_window(state.image_display_window);

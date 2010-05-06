@@ -14,11 +14,15 @@ class SVMClassifier : public Classifier{
  protected:
   virtual std::string         get_name();
 
+  virtual double              dataPointLabel(const DataPoint &datapoint);
   // compile a set of datapoints into a problem
-  svm_problem                 *compileProblem(std::vector<DataPoint*> files);
+  virtual svm_problem        *compileProblem(std::vector<DataPoint*> files);
 
   // get the svm parameters
   virtual svm_parameter       *getSVMParameters();
+
+  void                         addDataPointToProblem(svm_problem &problem, 
+						     const DataPoint &dp);
 
  public:
   // helper function for real crossvalidation function

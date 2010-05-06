@@ -1,17 +1,13 @@
 #ifndef EVALUATION_H
 #define EVALUATION_H
 
-#include <vector>
-#include <map>
-#include <iostream>
-#include <algorithm>
-#include "dataPoint.h"
 #include "dataset.h"
 
 namespace vito{
 namespace evaluation{
 
 class Evaluation{
+
 private:
   size_t correct;
   size_t instances;
@@ -26,25 +22,25 @@ private:
 
 public:
   // constructors 
-  Evaluation(std::vector<DataPoint*> &dps,
-	     std::vector<int> &cls);
-  Evaluation(std::vector<DataPoint> * dps,
-	     std::vector<int> * classification);
+                          Evaluation(std::vector<DataPoint*> &dps,
+				     std::vector<int> &cls);
+                          Evaluation(std::vector<DataPoint> * dps,
+				     std::vector<int> * classification);
 
   // print a summary of this evaluation
-  void   print();
+  void                    print();
 
   // getting certain statistical properties
-  size_t getCorrect();
-  size_t getInstances();
-  float  getPrecision();
+  size_t                  getCorrect();
+  size_t                  getInstances();
+  float                   getPrecision();
   
   // returns the all points classified as a certain label
   std::vector<DataPoint*> getInstancesClassifiedAs(int cl);
 
-  // TODO
-  std::map<int, int> getCorrectMap();
-  std::map<int, int> getTotalMap();
+  // classmap getters
+  std::map<int, int>      getCorrectMap();
+  std::map<int, int>      getTotalMap();
 };
 
 }}

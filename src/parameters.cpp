@@ -56,6 +56,7 @@ int  Parameters::getiParameter(string str){
   return intParameters[str];
 }
 
+
 string Parameters::getFile(){
   return file;
 }

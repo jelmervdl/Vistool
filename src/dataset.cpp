@@ -64,9 +64,20 @@ void Dataset::enableCategory(string str){
       *categories.at(i).enabledLiveVar() = true;
 }
 
+void Dataset::disableCategory(size_t i){
+  *categories.at(i).enabledLiveVar() = 0;
+}
+
+void Dataset::disableCategory(std::string str){
+  for(size_t i = 0; i < categories.size(); ++i)
+    if(categories.at(i).get_name().compare(str)==0)
+      *categories.at(i).enabledLiveVar() = 0;
+}
+
 void Dataset::print(){
-  cout << "Database contains " << categories.size() << " classes" << endl << endl;
-  cout << "Enabled Classes: " << endl;
+  cout << "Database contains " << categories.size() 
+       << " classes" << endl << endl
+       << "Enabled Classes: " << endl;
   for(size_t i = 0; i < categories.size(); ++i)
     if(*categories.at(i).enabledLiveVar())
       cout << categories.at(i).get_name() << endl;

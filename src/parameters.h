@@ -40,17 +40,27 @@ class Parameters : public Singleton<Parameters>{
   std::map<std::string, int> intParameters;
   std::string file;
 
-
  public:
+  // constructor
              ~Parameters();
 
-  void        readFile(char * str);
+  // get the last xml file from which parameters came 
   std::string getFile();
 
-  void        saveReal(std::string str, float f);
+  // Read in a parameter file, can be done incrementally
+  void        readFile(char * str);
+
+  // save a new real parameter under a string name
+  void        saveReal(std::string str, 
+		       float f);
+
+  // save a new integer parameter under a string name 
   void        saveInteger(std::string str, int f);
 
+  // get the value of a float parameter
   float       getfParameter(std::string str) ;
+
+  // get the value of a integer parameter
   int         getiParameter(std::string str);
 
   void        saveXML(std::string str);
