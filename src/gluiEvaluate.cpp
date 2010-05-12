@@ -10,13 +10,9 @@ using classification::Classifier;
 
 
 void evaluateClassifier(){
-  cout << "extracting features" << endl;
   extractFeatures();
-  cout << "done... training " << endl;
   train();
-  cout << "done .. classifying " << endl;
   classify();
-  cout << "done!" << endl;
 }
 
 void crossValidate(){
@@ -24,6 +20,7 @@ void crossValidate(){
   extractFeatures();
   state.train_data.clear();
   state.test_data.clear();
+
   delete state.current_classifier;
   state.current_classifier = getExistingClassifier(state.enabled_classifier);
   vector<DataPoint> enabsp = state.current_db->enabledPoints();

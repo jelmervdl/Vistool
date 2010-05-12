@@ -77,12 +77,7 @@ void createClassifierSelectButton(){
   vector<Classifier*> classifier = getExistingClassifiers();
   for(int i = 0; i < (int) classifier.size(); ++i){
     classif_sel->add_item(i, classifier[i]->get_name().c_str());  
-  }
-  while(classifier.size() > 0){  
-    delete classifier.back();
-    classifier.pop_back();
-  }
-  
+  }  
 }
 
 }}

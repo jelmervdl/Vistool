@@ -11,7 +11,7 @@
 namespace vito{
 namespace classification{
  
-class NNClassifier:public Classifier{
+class NNClassifier:public Classifier, public Singleton<NNClassifier> {
  private:
   CvKNearest * knn;
  public:

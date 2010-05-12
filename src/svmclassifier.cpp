@@ -11,6 +11,19 @@ namespace classification{
 using features::FeatureExtractor;
 using write::readDescriptor;
 
+
+void svm_destroy_problem(svm_problem *problem){
+  delete [] problem->y;
+  problem->y = 0;
+  for(int i = 0; i < problem->l; ++i){
+    delete [] problem->x[i];
+    problem->x[i] = 0;
+  }
+  delete [] problem->x;
+  problem->x = 0;
+}
+
+
 string SVMClassifier::get_name(){
   return "SVM";
 }
@@ -20,10 +33,12 @@ vector<int> SVMClassifier::crossvalidation(vector<DataPoint> * files){
 }
 
 vector<int> SVMClassifier::crossvalidation(vector<DataPoint*> files){
-  svm_problem * problem = compileProblem(files);
-  svm_parameter * parameter = getSVMParameters();
+  svm_problem *problem = compileProblem(files);
+  svm_parameter *parameter = getSVMParameters();
   double result[problem->l];
   svm_cross_validation(problem, parameter, 10, result);
+  svm_destroy_problem(problem);
+  svm_destroy_param(parameter);
   vector<int> classification(problem->l);
   for(size_t i = 0; i < (size_t) problem->l; ++i){
     classification[i] = (int) result[i];
@@ -35,7 +50,9 @@ void SVMClassifier::train(vector<DataPoint*> files){
   svm_problem   *problem = compileProblem(files);
   svm_parameter *parameter = getSVMParameters();
   svm_model     *model = svm_train(problem, parameter);
+  //print::print_svm_problem(problem);
   svm_save_model("model.svm", model);
+  svm_destroy_problem(problem);
   svm_destroy_model(model);
   svm_destroy_param(parameter);
 }
@@ -133,7 +150,7 @@ vector<double> SVMClassifier::getValues(svm_node *nodes,
   int index = 0;
   for(int i = 0; i < nr_classes; ++i)
     for(int j = i + 1; j < nr_classes; ++j){
-      cout << "waarde van value_ " << values[index] << endl;
+      //cout << "waarde van value_ " << values[index] << endl;
       value_per_class[i] += values[index];
       value_per_class[j] -= values[index];
       index++;
@@ -142,7 +159,7 @@ vector<double> SVMClassifier::getValues(svm_node *nodes,
   return value_per_class;
 }
 
-int SVMClassifier::classify(DataPoint *data_point, svm_model *model){
+svm_node* SVMClassifier::constructNode(DataPoint *data_point){
   FeatureExtractor *fe = FeatureExtractor::getInstance();
   vector<float> descriptor;
   readDescriptor(&descriptor, 
@@ -154,18 +171,37 @@ int SVMClassifier::classify(DataPoint *data_point, svm_model *model){
   }
   nodes[descriptor.size()].value = 0.0;
   nodes[descriptor.size()].index = -1; 
+  delete [] nodes;
+  return nodes;
+}
+
+int SVMClassifier::classify(DataPoint *data_point, svm_model *model){
+  svm_node * nodes = constructNode(data_point);
   double result = svm_predict(model, nodes);
-  cout << "result: " << result << endl
-       << "actual: " << data_point->get_label() << endl;
   vector<double> value_per_class = getValues(nodes, model);
-  
-  for(vector<double>::iterator it = value_per_class.begin();
-      it != value_per_class.end();
-      ++it)
-    cout << *it << " ";
-  cout << endl;
-  
   return result;
 }
+
+svm_parameter * SVMClassifier::new_svm_parameters(){
+  svm_parameter *newsvm =  new svm_parameter;
+  newsvm->svm_type = C_SVC;
+  newsvm->kernel_type = RBF;
+  newsvm->degree = 0;	/* for poly */
+  newsvm->gamma = 0;	/* for poly/rbf/sigmoid */
+  newsvm->coef0 = 0;	/* for poly/sigmoid */
+
+	/* these are for training only */
+  newsvm->cache_size = 1024; /* in MB */
+  newsvm->eps = 0;	/* stopping criteria */
+  newsvm->C = 0;	/* for C_SVC, EPSILON_SVR and NU_SVR */
+  newsvm->nr_weight = 0;		/* for C_SVC */
+  newsvm->weight_label = 0;	/* for C_SVC */
+  newsvm->weight = 0;		/* for C_SVC */
+  newsvm->nu = 0;	/* for NU_SVC, ONE_CLASS, and NU_SVR */
+  newsvm->p = 0;	/* for EPSILON_SVR */
+  newsvm->shrinking = 0;	/* use the shrinking heuristics */
+  newsvm->probability = 0; /* do probability estimates */
+  return newsvm;
+};
 
 }}

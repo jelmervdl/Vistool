@@ -12,6 +12,10 @@
     <svm_nu> 0.001 </svm_nu>
     <svm_p> 0.0 </svm_p>
 
+    <!-- One class -->
+      <one_class_gamma> 0.5 </one_class_gamma>
+      <one_class_nu> 0.25 </one_class_nu>
+
   </real>
   <integer>
 

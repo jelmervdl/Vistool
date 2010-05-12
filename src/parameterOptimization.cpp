@@ -12,12 +12,15 @@ namespace optimization{
 ParameterOptimization::ParameterOptimization(float (*func) ())
   : evaluation_function(func), best(-9999999.0){
 
+  add_float_parameter("one_class_gamma", 0.00001, 0.9, true);
+  add_float_parameter("one_class_nu", 0.00001, 0.9, true);
+  /*
   add_float_parameter("svm_C", 0.0, 100.0);
   add_float_parameter("svm_coef0", 0.0, 30.0);  
   add_float_parameter("svm_eps", 0.0003, 1.5);
   add_float_parameter("svm_gamma", 5.0, 100.0, true);
   add_int_parameter("svm_degree", 5, 30, true);
-
+  */
   //  add_int_parameter("svm_shrinking", 0, 10);
   //add_int_parameter("svm_probabiity", -1, 1, false);
 

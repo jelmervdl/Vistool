@@ -4,12 +4,14 @@
 #include "parameters.h"
 #include "dataset.h"
 #include "SVMClassifier.h"
+#include "oneClassSVM.h"
 #include "evaluation.h"
 
 namespace vito{
 namespace optimization{
 
-  float evaluateSVM();
+float evaluateSVM();
+float evaluateOneClassSVM();
 
 }}
 

@@ -9,5 +9,6 @@
 #include "oneClassSVM.h"
 
 void printLibraries ();
+void one_class_test();
 #endif
 

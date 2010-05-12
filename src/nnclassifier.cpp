@@ -1,7 +1,5 @@
 #include "nnclassifier.h"
 
-
-
 #define PrepareMatrices(dps)						\
   FeatureExtractor *fe = FeatureExtractor::getInstance();		\
   size_t rows, cols;							\

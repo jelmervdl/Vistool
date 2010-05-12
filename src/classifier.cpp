@@ -54,4 +54,8 @@ vector<int> Classifier::crossvalidation(vector<DataPoint> * _files)
   return results;
 }
 
+bool Classifier::single_class(){
+  return false;
+}
+
 }}

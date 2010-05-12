@@ -9,35 +9,42 @@ namespace vito{
 namespace optimization{
  
   const int kIterations  = 20;
-  const float kZoom= 1.5;
-  const int kResolution = 6;
+  const float kZoom = 1.2;
+  const int kResolution = 10;
   
   class ParameterOptimization {
   private:
     //evaluation function used to evaluate the parameters
-    float (*evaluation_function) ();
-    float best;
-
-    std::vector<TestResult> current_results; 
-    std::vector<Parameter<int> > int_parameters;
+    float                        (*evaluation_function) ();
+    float                          best;
+    std::vector<TestResult>        current_results; 
+    std::vector<Parameter<int> >   int_parameters;
     std::vector<Parameter<float> > float_parameters;
 
-    void add_int_parameter(std::string name, const int min, const int max,
-			   const bool positive = false);
-    void add_float_parameter(std::string name, const float min, const float max, 
-			     const bool positive = false);
-    void printCurrentParameters();
-    void set_all_to_best();
-    void set_best_to_current();
+    // add a parameters to optimize
+    void         add_int_parameter(std::string name, 
+				   const int min, 
+				   const int max,
+				   const bool positive = false);
+
+    void         add_float_parameter(std::string name, 
+				     const float min, 
+				     const float max, 
+				     const bool positive = false);
+
+    // print the parameters
+    void         printCurrentParameters();
+    void         set_all_to_best();
+    void         set_best_to_current();
     ParameterSet get_current_parameter_handle();
-    bool known(const ParameterSet &handle);
-    void optimize_int_parameter  (Parameter<int>   &parameter);
-    void optimize_float_parameter(Parameter<float> &parameter);
-    void apply_to_all_parameters(void (*int_func) (Parameter<int>*),
-				 void (*fl_func)  (Parameter<float>*));
+    bool         known(const ParameterSet &handle);
+    void         optimize_int_parameter  (Parameter<int>   &parameter);
+    void         optimize_float_parameter(Parameter<float> &parameter);
+    void         apply_to_all_parameters(void (*int_func) (Parameter<int>*),
+					 void (*fl_func)  (Parameter<float>*));
   public:
-    ParameterOptimization( float(*func)() );
-    void optimize();
+                 ParameterOptimization( float(*func)() );
+    void         optimize();
   };
 
   template<class Type> void set_to_best(Parameter<Type> *parameter){

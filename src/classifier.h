@@ -8,8 +8,8 @@ namespace classification{
 
 class Classifier{
 public:
+  virtual bool             single_class();
   virtual std::string      get_name() = 0;
-
   virtual void             train(std::vector<DataPoint*> files ) = 0;
   virtual void             train(std::vector<DataPoint> * files );
 

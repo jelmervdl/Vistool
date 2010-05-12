@@ -7,7 +7,10 @@
 namespace vito{
 namespace classification{
 
-class SVMClassifier : public Classifier{
+
+void svm_destroy_problem(svm_problem *problem);
+
+class SVMClassifier : public Classifier {
   using Classifier::train;
   using Classifier::crossvalidation;
 
@@ -48,7 +51,13 @@ class SVMClassifier : public Classifier{
   // get the return values
   virtual  std::vector<double> getValues(svm_node *nodes, 
 					 svm_model *model);
+
+  svm_node                    *constructNode(DataPoint *data_point);
+
+  svm_parameter               *new_svm_parameters();
 }; 
+
+class SVMClassifier_ : public SVMClassifier, public Singleton<SVMClassifier>{};
 
 }}
 

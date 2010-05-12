@@ -10,7 +10,10 @@ using namespace vito::optimization;
 using namespace vito::classification;
 using namespace std;
 
+
 int main(int argc, char ** argv){ 
+
+  //  return 0;
   if(argc > 1){
     Parameters * p = Parameters::getInstance();
     p->readFile((char *) "parameters.xml");
@@ -22,38 +25,144 @@ int main(int argc, char ** argv){
       start(1,argv);
       return 0;
     }if(mode == "optimize"){
-      ParameterOptimization opt(&vito::optimization::evaluateSVM);
+      ParameterOptimization opt(&vito::optimization::evaluateOneClassSVM);
       opt.optimize();
     }
   }  
+  //one_class_test();
+  //return 0;
   Parameters *p = Parameters::getInstance();
   Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
   p->readFile((char *) "parameters.xml");
   dataset.enableCategory("accordion");
   //dataset.enableCategory("anchor");
-  dataset.enableCategory("emu");
+  //dataset.enableCategory("emu");
   //dataset.enableCategory("bass");
   //dataset.enableCategory("ant");
   vector<DataPoint> train, test;
   dataset.randomDataSplit(&train, &test, 0.5);
   FeatureExtractor::getInstance()->saveDescriptorsToFile(&dataset);
-  SVMClassifier segsvm;
+  OneClassSVM segsvm(0);
   segsvm.train(ptr::ptrDeMorgan(&train));
   dataset.disableCategory("accordion");
   dataset.enableCategory("emu");
+  dataset.enableCategory("anchor");
+  dataset.enableCategory("emu");
+  dataset.enableCategory("bass");
+  dataset.enableCategory("ant");
   vector<DataPoint> others = dataset.enabledPoints();
+
   others.insert(others.end(), test.begin(), test.end());
-  vector<int> res = segsvm.classify(ptr::ptrDeMorgan(&test));
-  int total, correct;
+  vector<int> res(others.size());
+  for(int i = 0; i < (int) others.size(); ++i)
+    res[i] = segsvm.classify(&others[i]);
+  int total, correct, incorrect;
   for(int i = 0; i < (int) res.size(); i++){
-    cout << test[i].get_label() << " " << res[i]<< endl;
+    cout << others[i].get_label() << " " << res[i] 
+	 <<  " the values " << segsvm.getValue(&others[i])[0] << endl;
     total++;
-    if((int) test[i].get_label() == res[i])
-      correct++;
+    if(res[i] == 1)
+      if((int) others[i].get_label())
+	correct++;
+      else
+	incorrect++;
   }
-  cout << "total: " << total << endl << "correct: " << correct << endl
-       << "precision " << correct / (double) total << endl;
+  cout << "total: " << total << endl 
+       << "correct: " << correct << endl
+       << "incorrect: " << incorrect << endl
+       << "precision: " << correct / (double) (incorrect + correct) << endl
+       << "recall: " << correct / (double) total << endl;
   cout << "ya done" << endl;
   return 0;
 }
 
+
+
+void one_class_test(){
+  const unsigned int nFeatures = 3;
+  cout << "testing the one_class test" << endl;
+  cout << "setting parameters";
+  svm_parameter parameters;
+  parameters.svm_type = ONE_CLASS;
+  parameters.kernel_type = RBF;
+  parameters.gamma =  (1.0 / 3.0) * 0.001;
+  parameters.nu = 0.5;
+  parameters.cache_size = 1024;
+  parameters.C = 1;
+  parameters.eps = 0.001;
+  cout << " ... done!" << endl;
+
+
+  cout << "constructing problem" << endl;
+  svm_problem problem;
+  const unsigned int nProblems = 3;
+  problem.l = nProblems;
+  problem.x = new svm_node*[nProblems];
+  problem.y = new double[nProblems];
+
+  problem.y[0] = 1;
+  problem.x[0] = new svm_node[nFeatures + 1];
+  problem.x[0][0].index = 0;
+  problem.x[0][0].value = 1.5;
+
+  problem.x[0][1].index = 1;
+  problem.x[0][1].value = 2.5;
+
+  problem.x[0][2].index = 2;
+  problem.x[0][2].value = 3.5;
+
+  problem.x[0][nFeatures].index = -1;
+  problem.x[0][nFeatures].value = 0.0;
+
+  problem.y[1] = 1;
+  problem.x[1] = new svm_node[nFeatures + 1];
+  problem.x[1][0].index = 0;
+  problem.x[1][0].value = 1.4;
+
+  problem.x[1][1].index = 1;
+  problem.x[1][1].value = 2.4;
+
+  problem.x[1][2].index = 2;
+  problem.x[1][2].value = 3.4;
+
+  problem.x[1][nFeatures].index = -1;
+  problem.x[1][nFeatures].value = 0.0;
+  
+  problem.y[2] = 7;
+  problem.x[2] = new svm_node[nFeatures + 1];
+  problem.x[2][0].index = 0;
+  problem.x[2][0].value = 0.6;
+
+  problem.x[2][1].index = 1;
+  problem.x[2][1].value = 1.6;
+
+  problem.x[2][2].index = 2;
+  problem.x[2][2].value = 1.6;
+
+  problem.x[2][nFeatures].index = -1;
+  problem.x[2][nFeatures].value = 0.0;
+  
+  cout << " ... done!" << endl;
+  vito::print::print_svm_problem(&problem);
+  svm_model *model = svm_train(&problem, &parameters);
+
+  for(int i = 0; i < 20; ++i){
+  svm_node *test = new svm_node[nFeatures + 1];
+  test[0].index = 0;
+  test[0].value = 0.6;
+
+  test[1].index = 1;
+  test[1].value = 1.6;
+
+  test[2].index = 2;
+  test[2].value = 1.5 + (float) i / 10.0;
+
+  test[nFeatures].index = -1;
+  test[nFeatures].value = 0.0;
+  cout << "prediction: " << " with i: " << i / 100.0 << " " 
+       << svm_predict(model, test) << endl;
+  double *res = new double[2];
+  svm_predict_values(model, test, res);
+  cout << "value: " << res[0] << endl;
+  }
+}

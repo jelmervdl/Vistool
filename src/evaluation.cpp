@@ -83,4 +83,11 @@ map<int, int> Evaluation::getTotalMap(){
   return map_total_to_label;
 }
 
+Evaluation::Evaluation(vector<DataPoint> * dps,
+	   vector<int> * classification,
+	   int one_class_t){
+  cout << "one class evaluation!" << endl;
+}
+
+
 }}

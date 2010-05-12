@@ -9,7 +9,8 @@
 namespace vito{
 namespace classification{
 
-class SegmentSVM : public SVMClassifier{
+class SegmentSVM : public SVMClassifier, public Singleton<SegmentSVM>{
+  using SVMClassifier::classify;
 public:
   SegmentSVM();
   std::string             get_name();

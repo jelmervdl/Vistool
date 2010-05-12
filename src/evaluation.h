@@ -26,6 +26,9 @@ public:
 				     std::vector<int> &cls);
                           Evaluation(std::vector<DataPoint> * dps,
 				     std::vector<int> * classification);
+                          Evaluation(std::vector<DataPoint> * dps,
+				     std::vector<int> * classification,
+				     int one_class_t);
 
   // print a summary of this evaluation
   void                    print();

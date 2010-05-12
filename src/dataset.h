@@ -1,20 +1,13 @@
 #ifndef DATASET_H
 #define DATASET_H
 
-#include <math.h>
+#include <algorithm>
+#include <map>
+
 #include "core.h"
 #include "category.h"
-#include <vector>
-#include <string>
 #include "boost/filesystem.hpp"
-#include <stdio.h>
-#include <iostream>
-#include <algorithm>
-#include <numeric>
-#include <iterator>
-#include "dataPoint.h"
 #include "fileManagement.h"
-#include <map>
 
 namespace vito{
 
@@ -49,7 +42,7 @@ class Dataset{
 
   void                    enableRandom(const int number);
 
-  void print();
+  void                    print();
 
   std::vector<DataPoint>  enabledPoints(bool eqrep = true) ;
   std::vector<DataPoint*> enabledDataPoints(bool eqrep= true);

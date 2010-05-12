@@ -28,12 +28,12 @@ namespace optimization{
     }
     Type        get_min() const {
       if(positive && min < 0)
-	return 0;
+	return 0.0000001;
       return min;
     }
     Type        get_max() const {
       if(positive && max < 0)
-	return 0;
+	return 0.0000001;
       return max;
     }
     Type get_value() const {
@@ -50,8 +50,10 @@ namespace optimization{
     }
     void zoom(const float zoom_factor){
       const Type margin = (max - min) * 0.5 / zoom_factor;
-      min = best - margin;
-      max = best + margin;
+      if(min < best - margin) 
+	min = best - margin;
+      if(max > best + margin)
+	max = best + margin;
     }
   };
 

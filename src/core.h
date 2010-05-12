@@ -13,7 +13,7 @@ void print_svm_problem(svm_problem *problem);
 
 }
 
-namespace states {
+namespace states{
   enum EnabledClassifier{
     NearestNeighbor,
     SupportVectorMachine
