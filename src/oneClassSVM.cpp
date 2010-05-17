@@ -74,6 +74,7 @@ void OneClassSVM::set_truth_label(const int i ){
   truth_label = i;
 }
 
+/*
 int OneClassSVM::classify(DataPoint *data_point, svm_model *model){
   int res = SVMClassifier::classify(data_point, model);
   cout << "original results: " <<  res;
@@ -85,7 +86,7 @@ int OneClassSVM::classify(DataPoint *data_point, svm_model *model){
   cout << " with output " << output << endl;
   return res;
 }
-
+*/
 bool OneClassSVM::single_class(){
   return true;
 }

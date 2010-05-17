@@ -1,14 +1,23 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "segmentSVM.h"
+//test environment
+#include "test.h"
+
+//vision tool
+#include "gluiVisionTool.h"
+
+// parameter optimization
 #include "parameterOptimization.h"
 #include "optimizationFunctions.h"
-#include "gluiVisionTool.h"
-#include "test.h"
+
+//classifiers
+#include "segmentSVM.h"
 #include "oneClassSVM.h"
 
 void printLibraries ();
 void one_class_test();
+void one_class_test2();
+
 #endif
 

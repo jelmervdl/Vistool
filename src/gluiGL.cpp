@@ -25,21 +25,24 @@ void display(void){
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   switch(state.dm){
+    // Single Image:
+
   case Single_Image:
     if(state.current_single_image_texture!=NULL)
       state.current_single_image_texture->draw(state.window_height);
     break;
-  case Show_Dataset:
-    if(state.current_db != NULL){
+
+    // Dataset display:
+  case Show_Dataset:{
       size_t grid = ceil(sqrt(state.ims_per_page));
       float scale = 1.0/grid;
-      glScalef(scale, scale, 0);
       size_t count  = 0;
+      glScalef(scale, scale, 0);
       glPushMatrix();
-      for(vector<Texture *>::iterator it = state.textures.begin();
+      for(vector<Texture>::iterator it = state.textures.begin();
 	  it != state.textures.end();
 	  ++it){
-	(*it)->draw(state.window_height);
+	it->draw(state.window_height);
 	glTranslatef(800, 0, 0);
 	count++;
 	if(count == grid){
@@ -68,10 +71,10 @@ void myGlutIdle( void ){
 
 void setupWindow(){
   ToolState &state = *ToolState::getInstance();
-  glutInitWindowPosition( 0, 0 );
+  glutInitWindowPosition(0, 0 );
   state.window_height = 800;
-  state.window_width = 800;
+  state.window_width  = 800;
   glutInitWindowSize( state.window_width, state.window_height );
-  state.image_display_window = glutCreateWindow( "Image Viewer" );
+  state.image_display_window = glutCreateWindow( "Image Display" );
 }
 }}

@@ -9,7 +9,7 @@
 namespace vito{
 namespace features{
 
-class SiftDescriptor: public Feature{
+class SiftDescriptor: public Feature, public Singleton<SiftDescriptor> {
   using Feature::extract;
 private:
 

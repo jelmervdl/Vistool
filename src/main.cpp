@@ -11,9 +11,22 @@ using namespace vito::classification;
 using namespace std;
 
 
-int main(int argc, char ** argv){ 
+class Test{
+ public:
+  ~Test(){
+    cout << "kill kill " << endl;
+  }
+};
 
-  //  return 0;
+
+int main(int argc, char ** argv){ 
+  vector<Test> aap(5);
+  cout << "nother step" << endl;
+  aap[1] = Test();
+  cout << "stopped" << endl;
+
+  Parameters *p = Parameters::getInstance();
+  p->readFile((char *) "parameters.xml");
   if(argc > 1){
     Parameters * p = Parameters::getInstance();
     p->readFile((char *) "parameters.xml");
@@ -29,50 +42,6 @@ int main(int argc, char ** argv){
       opt.optimize();
     }
   }  
-  //one_class_test();
-  //return 0;
-  Parameters *p = Parameters::getInstance();
-  Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
-  p->readFile((char *) "parameters.xml");
-  dataset.enableCategory("accordion");
-  //dataset.enableCategory("anchor");
-  //dataset.enableCategory("emu");
-  //dataset.enableCategory("bass");
-  //dataset.enableCategory("ant");
-  vector<DataPoint> train, test;
-  dataset.randomDataSplit(&train, &test, 0.5);
-  FeatureExtractor::getInstance()->saveDescriptorsToFile(&dataset);
-  OneClassSVM segsvm(0);
-  segsvm.train(ptr::ptrDeMorgan(&train));
-  dataset.disableCategory("accordion");
-  dataset.enableCategory("emu");
-  dataset.enableCategory("anchor");
-  dataset.enableCategory("emu");
-  dataset.enableCategory("bass");
-  dataset.enableCategory("ant");
-  vector<DataPoint> others = dataset.enabledPoints();
-
-  others.insert(others.end(), test.begin(), test.end());
-  vector<int> res(others.size());
-  for(int i = 0; i < (int) others.size(); ++i)
-    res[i] = segsvm.classify(&others[i]);
-  int total, correct, incorrect;
-  for(int i = 0; i < (int) res.size(); i++){
-    cout << others[i].get_label() << " " << res[i] 
-	 <<  " the values " << segsvm.getValue(&others[i])[0] << endl;
-    total++;
-    if(res[i] == 1)
-      if((int) others[i].get_label())
-	correct++;
-      else
-	incorrect++;
-  }
-  cout << "total: " << total << endl 
-       << "correct: " << correct << endl
-       << "incorrect: " << incorrect << endl
-       << "precision: " << correct / (double) (incorrect + correct) << endl
-       << "recall: " << correct / (double) total << endl;
-  cout << "ya done" << endl;
   return 0;
 }
 
@@ -165,4 +134,47 @@ void one_class_test(){
   svm_predict_values(model, test, res);
   cout << "value: " << res[0] << endl;
   }
+}
+
+void one_class_test2(){
+  Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
+  dataset.enableCategory("accordion");
+  //dataset.enableCategory("anchor");
+  //dataset.enableCategory("emu");
+  //dataset.enableCategory("bass");
+  //dataset.enableCategory("ant");
+  vector<DataPoint> train, test;
+  dataset.randomDataSplit(&train, &test, 0.5);
+  FeatureExtractor::getInstance()->saveDescriptorsToFile(&dataset);
+  OneClassSVM segsvm(0);
+  segsvm.train(ptr::ptrDeMorgan(&train));
+  dataset.disableCategory("accordion");
+  dataset.enableCategory("emu");
+  dataset.enableCategory("anchor");
+  dataset.enableCategory("emu");
+  dataset.enableCategory("bass");
+  dataset.enableCategory("ant");
+  vector<DataPoint> others = dataset.enabledPoints();
+
+  others.insert(others.end(), test.begin(), test.end());
+  vector<int> res(others.size());
+  //for(int i = 0; i < (int) others.size(); ++i)
+    //res[i] = segsvm.classify(&others[i]);
+  int total, correct, incorrect;
+  for(int i = 0; i < (int) res.size(); i++){
+    cout << others[i].get_label() << " " << res[i] 
+	 <<  " the values " << segsvm.getValue(&others[i])[0] << endl;
+    total++;
+    if(res[i] == 1)
+      if((int) others[i].get_label())
+	correct++;
+      else
+	incorrect++;
+  }
+  cout << "total: " << total << endl 
+       << "correct: " << correct << endl
+       << "incorrect: " << incorrect << endl
+       << "precision: " << correct / (double) (incorrect + correct) << endl
+       << "recall: " << correct / (double) total << endl;
+  cout << "ya done" << endl;
 }

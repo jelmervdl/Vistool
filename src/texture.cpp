@@ -28,15 +28,15 @@ Texture::Texture(Matrix<Gradient> * m, int window){
   initTexture(window, &txt, m, &width, &height);
 }
 
-int Texture::getTXT(){
+int Texture::getTXT() const{
   return txt;
 }
 
-size_t Texture::getHeight(){
+size_t Texture::getHeight() const {
   return height;
 }
 
-size_t Texture::getWidth(){
+size_t Texture::getWidth() const{
   return width;
 }
 
@@ -52,8 +52,7 @@ void Texture::draw(size_t window_size){
   drawTexture(txt, (int) nwidth, (int) nheight);
 }
 
-Texture::~Texture(){
-  using namespace std;
+void Texture::destroyTexture(){
   glDeleteTextures(1, &txt);
 }
 

@@ -14,26 +14,31 @@ namespace gui{
 
 using evaluation::Evaluation;
 
-struct tool_state{
+class ToolState:  public Singleton<ToolState>{
+ public:
+  //Pointers
+  GLUI_Listbox               *selected_class_listbox;
+  classification::Classifier *current_classifier;
+  ParameterPanel             *parameter_panel;
+  DataPoint *singleDp;
+  Texture *current_single_image_texture;
+
   states::DisplayMode      dm;
   states::DatasetOnDisplay ds;
   states::DisplayModifier display_modifier;
 
-  ParameterPanel *parameter_panel;
-  Dataset *current_db;
-  size_t              current_image_page;
-  std::vector <Texture *>    textures;
-  std::vector <DataPoint*> currently_view_datapoints; 
-  std::vector <DataPoint>  train_data, test_data;
-  std::vector <int>        test_result;
-  classification::Classifier *current_classifier;
-  int enabled_classifier;
+  Dataset                     current_db;
+  size_t                      current_image_page;
+  std::vector <Texture>       textures;
+  std::vector <DataPoint*>    currently_view_datapoints; 
+  std::vector <DataPoint>     train_data, test_data;
+  std::vector <int>           test_result;
+  int                         enabled_classifier;
 
   // class view selection
-  int            selected_class;
-  Evaluation *current_evaluation;
-  GLUI_Listbox *selected_class_listbox;
-  std::vector<int>    current_classes;
+  int                         selected_class;
+  Evaluation                  current_evaluation;
+  std::vector<int>            current_classes;
 
   //Global Glui Objects 
   GLUI_StaticText *busytxt;
@@ -49,15 +54,8 @@ struct tool_state{
   int one_class_target;
   
   // Single Image parameters
-  Texture *current_single_image_texture;
   size_t image_width; 
   size_t image_height;
-  DataPoint *singleDp;
-  
-};
-
-class ToolState: public tool_state, public Singleton<ToolState>{
- public:
   ToolState();
 };
 

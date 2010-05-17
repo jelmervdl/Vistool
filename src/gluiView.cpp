@@ -7,12 +7,10 @@ namespace gui{
 
 void viewDataset(){
   ToolState &state = *ToolState::getInstance();
-  if(state.current_db != NULL){
-    state.dm = states::Show_Dataset;
-    setViewSelection();
-    refreshTexture(); 
-    display();
-  }
+  state.dm = states::Show_Dataset;
+  setViewSelection();
+  refreshTexture(); 
+  display();
   state.current_image_page = 0;
 }
 
@@ -22,7 +20,7 @@ void setViewSelection(){
 
   using namespace states;
   if(state.ds == Enabled_Datasets){
-      vector<Category*> enabs = state.current_db->getEnabled();
+      vector<Category*> enabs = state.current_db.getEnabled();
       for(vector<Category*>::iterator cat = enabs.begin(); cat != enabs.end(); ++cat){
 	vector<DataPoint> * dps = (*cat)->get_data_points();
 	for(size_t i = 0; i < dps->size(); ++i){
@@ -38,11 +36,11 @@ void setViewSelection(){
     state.currently_view_datapoints = ptr::ptrDeMorgan<DataPoint>(&state.test_data);
   }
   if(state.ds == Particular_Category){
-    state.current_evaluation->print();
+    state.current_evaluation.print();
     state.currently_view_datapoints.clear();
-    if(state.current_evaluation != NULL){
-      state.currently_view_datapoints = state.current_evaluation->getInstancesClassifiedAs(state.selected_class);
-    }
+    /*    if(state.current_evaluation != NULL){
+      state.currently_view_datapoints = state.current_evaluation.getInstancesClassifiedAs(state.selected_class);
+      }*/
   }
   state.image_width  = state.window_width / state.ims_per_page;
   state.image_height = state.window_height / state.ims_per_page;

@@ -87,7 +87,6 @@ void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
     vector<Feature*> features = getActiveFeatures();
     for(int i = 0; i < (int) features.size(); ++i){
       features[i]->extractTo(&descriptor, &image);
-      delete features[i];
     }
     writeDescriptor(&descriptor,final_descriptor_location);
     cout << "renewing descriptor for " << dp->get_image_url() << endl;

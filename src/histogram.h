@@ -7,7 +7,7 @@
 namespace vito{
 namespace features{
 
-class Histogram : public Feature{
+class Histogram : public Feature, public Singleton<Histogram>{
   friend class Singleton<Histogram>;
  public:
   // return activity of feature

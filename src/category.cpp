@@ -29,6 +29,10 @@ void Category::addDataPoint(DataPoint dp){
   data_points.push_back(dp);
 }
 
+vector<DataPoint> Category::get_data_points_() {
+  return data_points;
+}
+
 vector <DataPoint> * Category::get_data_points(){
   return &data_points;
 }

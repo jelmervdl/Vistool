@@ -22,6 +22,7 @@ private:
 
 public:
   // constructors 
+                          Evaluation();
                           Evaluation(std::vector<DataPoint*> &dps,
 				     std::vector<int> &cls);
                           Evaluation(std::vector<DataPoint> * dps,

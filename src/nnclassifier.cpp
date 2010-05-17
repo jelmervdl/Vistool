@@ -30,17 +30,17 @@ vector<int> NNClassifier::crossvalidation(vector<DataPoint> * files){
 }
 
 NNClassifier::NNClassifier() : knn(0){
+  cout << "creating nn classifier" << endl;
 }
 
 NNClassifier::~NNClassifier(){
   delete knn;
+  cout << "deleting nn classifier" << endl;
 }
 
 void NNClassifier::clean(){
-  if(knn != 0){
-    delete knn;
-    knn = 0;
-  }
+  delete knn;
+  knn = 0;
 }
 
 void NNClassifier::train(vector<DataPoint*> dps){

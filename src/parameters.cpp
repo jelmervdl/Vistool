@@ -113,12 +113,12 @@ bool Parameters::compare(string str){
 void Parameters::readFile(char * str){
   file = str;
   XMLPlatformUtils::Initialize();
-  XercesDOMParser* parser = new XercesDOMParser();
-  parser->setValidationScheme(XercesDOMParser::Val_Always);
-  ErrorHandler* errHandler = (ErrorHandler*) new HandlerBase();
-  parser->setErrorHandler(errHandler);
-  parser->parse(str);
-  DOMDocument * doc = parser->getDocument();
+  XercesDOMParser parser;
+  parser.setValidationScheme(XercesDOMParser::Val_Always);
+  HandlerBase errHandler;// = (ErrorHandler*) new HandlerBase();
+  parser.setErrorHandler(&errHandler);
+  parser.parse(str);
+  DOMDocument * doc = parser.getDocument();
   DOMElement* elementRoot = doc->getDocumentElement();
 
   // Extract floats
@@ -141,10 +141,7 @@ void Parameters::readFile(char * str){
 		    atoi(XMLString::transcode(child->getTextContent())));
     child = child->getNextElementSibling();
   }while(child != NULL);
-
-  XMLPlatformUtils::Terminate();
 }
-
 void Parameters::saveXML(string str){
   ofstream of(str.c_str());
   of << "<?xml version = \"1.0\" encoding=\'UTF-8\'?>" << endl;

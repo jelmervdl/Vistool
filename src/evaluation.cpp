@@ -4,6 +4,9 @@ using namespace std;
 namespace vito{
 namespace evaluation{
 
+Evaluation::Evaluation(){
+}
+
 Evaluation::Evaluation(vector<DataPoint*> &dps, 
 		       vector<int> &cls){
   instances = 0;

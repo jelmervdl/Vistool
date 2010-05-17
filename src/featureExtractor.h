@@ -29,7 +29,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   void                  saveDescriptorsToFile(Dataset * ds,
 					      const bool force = false);
 
-  // renew the a datapoints descriptor if it is required or do it
+  // refresh the a datapoints descriptor if it is required or do it
   // anyway if forced
   void                  renewDescriptor(DataPoint * db,
 					const bool force);

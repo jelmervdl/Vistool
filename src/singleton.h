@@ -18,6 +18,9 @@ class Singleton{
     return singleton;
   };
   ~Singleton(){
+    delete singleton;
+    singleton = 0;
+    instanceFlag = false;
   };
 }; 
 

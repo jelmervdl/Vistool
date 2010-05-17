@@ -17,6 +17,9 @@ void Dataset::addCategory(Category cat){
   categories.push_back(cat);
 }
 
+Dataset::Dataset(){
+};
+
 Dataset::Dataset(string str): root(str){
   path full_path =  system_complete(root);
   directory_iterator end_itr;
@@ -111,19 +114,17 @@ void Dataset::randomDataSplit(vector<DataPoint> * train, vector<DataPoint> * tes
     min = smallestCategory();
   for(vector<Category*>::iterator cat = enabled.begin();
       cat != enabled.end(); ++cat){
-    vector<DataPoint> * dps = (*cat)->get_data_points();
-    random_shuffle(dps->begin(), dps->end());
+    vector<DataPoint> dps = (*cat)->get_data_points_();
+    random_shuffle(dps.begin(), dps.end());
     if(eqrep) {
-      dps = new vector<DataPoint>(dps->begin(), dps->begin() + min);
+      dps = vector<DataPoint>(dps.begin(), dps.begin() + min);
     }
-    size_t int_cut = cut * dps->size();
+    size_t int_cut = cut * dps.size();
     for(size_t i = 0; i < int_cut; ++i){
-      train->push_back(dps->at(i));
+      train->push_back(dps.at(i));
     }
-    for(size_t i = (size_t) int_cut; i < dps->size(); ++i)
-      test->push_back(dps->at(i));
-    if(eqrep)
-      delete dps;
+    for(size_t i = (size_t) int_cut; i < dps.size(); ++i)
+      test->push_back(dps.at(i));
   }
 }
 

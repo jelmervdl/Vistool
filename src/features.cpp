@@ -7,8 +7,8 @@ namespace features{
 
 vector<Feature*> getExistingFeatures(){
   vector<Feature*> features;
-  features.push_back(new SiftDescriptor);
-  features.push_back(new Histogram);
+  features.push_back(SiftDescriptor::getInstance());
+  features.push_back(Histogram::getInstance());
   return features;
 }
 
@@ -18,8 +18,6 @@ vector<Feature*> getActiveFeatures(){
   for(int i = 0; i < (int) features.size(); ++i){
     if(features[i]->isActive())
       active_features.push_back(features[i]);
-    else
-      delete features[i];
   }
   return active_features;
 }

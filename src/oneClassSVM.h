@@ -8,7 +8,6 @@ namespace classification{
 
 class OneClassSVM : public SVMClassifier , public Singleton<OneClassSVM> {
   using SVMClassifier::getSVMParameters;
-  using Classifier::classify;
   int truth_label;
 
 protected:
@@ -25,7 +24,7 @@ public:
   virtual std::vector<double> getValues(svm_node *nodes, svm_model *model);
   virtual std::vector<double> getValue(DataPoint *dp, svm_model *model);
   virtual std::vector<double> getValue(DataPoint *dp);
-  virtual int                 classify(DataPoint *data_point, svm_model *model);
+  //virtual int                 classify(DataPoint *data_point, svm_model *model);
   virtual bool                single_class();
 };
 

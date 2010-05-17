@@ -12,16 +12,11 @@ void loadDataset(string location){
   if(state.classes != 0)
     state.classes->close();
   state.classes = GLUI_Master.create_glui( "classes", 0, 800, 250 );
-  if(state.current_db != 0){
-    delete state.current_db;
-    state.current_db = 0;
-  }
-  state.current_db = new Dataset(location);
-  vector<Category> * cats = state.current_db->getCategories();
+  state.current_db = Dataset(location);
+  vector<Category> * cats = state.current_db.getCategories();
   size_t c = 0;
   //  classes->add_column(true);
   GLUI_Panel * pan = state.classes->add_panel("categories");
-  if(state.current_db != NULL){
     vector<int*> live_vars;
     for(size_t i = 0; i < cats->size(); ++i){
       stringstream name;
@@ -36,7 +31,6 @@ void loadDataset(string location){
       if(c%34==0)
 	state.classes->add_column_to_panel(pan, false);
     }
-  }
 }
 
 void loadPicture(){

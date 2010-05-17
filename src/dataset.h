@@ -19,6 +19,7 @@ class Dataset{
 
  public:
   //constructor:
+  Dataset();
   Dataset(std::string rt);
 
   // getters:
