@@ -5,23 +5,24 @@ VPATH = $(SOURCE_DIRECTORY)
 include Lib.make
 include Inc.make
 
-#Global += -m32
-
 #Libaries
-Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_JNI) $(Lib_Boost) $(Lib_OpenCV) $(Lib_Magickpp) $(Lib_Xerces) $(Lib_VL) $(Lib_SVM)
+Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_JNI) $(Lib_Boost) $(Lib_OpenCV) $(Lib_Magickpp) $(Lib_Xerces) $(Lib_VL) $(Lib_SVM) $(Lib_MPG7)
 
 D_loc = -D 'DESCRIPTOR_LOCATION="$(DescriptorLocation)"'
 Java_Include = -D 'USER_CLASSPATH="$(CLASSPATH2)"'
+Mpeg7_Include = -D 'MPEG7_JAVA_CLASS_LOCATION="$(MPEG7JavaClassLocation)"'
+
+Macros = $(D_loc) $(Java_Include) $(Mpeg7_Include)
 
 #Flags
-Cpp_Flags = -Wall -DUNIX -g $(Java_Include) $(D_loc)
+Cpp_Flags = -Wall -DUNIX -g $(Macros)
 
 #Compiler
 Cpp_Comp = g++
 #Linker
 Linker = $(Cpp_Comp)
 
-.SUFFIXES: .cpp
+.SUFFIXES: .Cpp
 
 all: TAGS $(Target) 
 

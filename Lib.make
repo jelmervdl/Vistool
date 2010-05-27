@@ -10,6 +10,7 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_Core     = -framework CoreFoundation
 	Lib_GLUI     = -framework GLUI
 	Lib_JNI      = -framework JavaVM
+	Lib_MPG7     = -framework Mp7jrs
 	Lib_VL       = -lvl
 	Lib_SVM      = -lsvm
 
@@ -25,16 +26,17 @@ ifeq ("$(shell uname)", "Darwin")
 
 #Header include path
 	Head_Path += -I/usr/local/include
-	Head_Path += -I/usr/local/include/ImageMagick/
+	Head_Path += -I/usr/local/include/ImageMagick
 	Head_Path += -I/opt/local/include 
 	Head_Path += -I./sift/include
 	Head_Path += -I/System/Library/Frameworks/Carbon.framework/Headers
 	Head_Path += -I/Library/Frameworks/SDL.framework/Headers
 	Head_Path += -I/System/Library/Frameworks/CoreFoundation.framework/Headers
-	Head_Path += -I/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers/
-	Head_Path += -I/opt/local/include/opencv/
-	Head_Path += -I/opt/local/include/vl/
-	Head_Path += -I/opt/local/include/OPT++/
+	Head_Path += -I/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers
+	Head_Path += -I/Library/Frameworks/Mp7Jrs.framework/Versions/1/Headers
+	Head_Path += -I/opt/local/include/opencv
+	Head_Path += -I/opt/local/include/vl
+	Head_Path += -I/opt/local/include/OPT++
 
 #Library paths
 	Lib_Path  +=  -L/opt/local/lib 

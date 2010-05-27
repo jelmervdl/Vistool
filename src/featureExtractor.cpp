@@ -62,7 +62,7 @@ string FeatureExtractor::getCurrentDescriptorLocation(const DataPoint &dp){
     final_descriptor_location;
   stringstream xml_file;
   xml_file 
-    << "settings/" << pars->getCurrentHash() << ".xml";
+   << "settings/" << pars->getCurrentHash() << ".xml";
   hash_descriptor_dir 
     << general_descriptor_dir 
     << pars->getCurrentHash() << "/";

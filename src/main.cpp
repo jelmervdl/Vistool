@@ -1,6 +1,6 @@
 #include "main.h"
-#include <locale>
-#include <iomanip>
+
+#include "mpeg7.h"
 
 using std::sprintf;
 using namespace vito;
@@ -10,23 +10,29 @@ using namespace vito::optimization;
 using namespace vito::classification;
 using namespace std;
 
+void testMPEG7(){
+  MyImage my_image = MyImage( "../datasets/caltech101/accordion/image_0001.jpg");
+  mpeg7::EdgeHistogram mpeg7;
+  vector<float> aap = mpeg7.extract(&my_image);
+}
 
-class Test{
- public:
-  ~Test(){
-    cout << "kill kill " << endl;
+void resizeExperiment(){
+  Magick::Geometry geo = Magick::Geometry(100,100);
+  Magick::Image magick = Magick::Image("beaver_resize.jpg");
+  Magick::Blob blob;
+  magick.write(&blob);
+  for(int i = 0; i < 5000; ++i){
+    Magick::Image magick2(blob);
+    //magick2.resize(geo);
+    Magick::Blob blob2;
+    magick2.write(&blob2);
   }
-};
-
+}
 
 int main(int argc, char ** argv){ 
-  vector<Test> aap(5);
-  cout << "nother step" << endl;
-  aap[1] = Test();
-  cout << "stopped" << endl;
-
   Parameters *p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
+  //testMPEG7();
   if(argc > 1){
     Parameters * p = Parameters::getInstance();
     p->readFile((char *) "parameters.xml");
@@ -44,8 +50,6 @@ int main(int argc, char ** argv){
   }  
   return 0;
 }
-
-
 
 void one_class_test(){
   const unsigned int nFeatures = 3;
@@ -178,3 +182,4 @@ void one_class_test2(){
        << "recall: " << correct / (double) total << endl;
   cout << "ya done" << endl;
 }
+

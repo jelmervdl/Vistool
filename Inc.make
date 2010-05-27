@@ -28,3 +28,5 @@ CLASSPATH2 = $(subst $(space),:, $(Java_Objs))
 Java_Headers = $(SOURCE_DIRECTORY)/imageHandling.h
 
 DescriptorLocation = desc/
+
+MPEG7JavaClassLocation = ../mpg7/bin

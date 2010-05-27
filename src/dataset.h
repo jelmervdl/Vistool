@@ -25,8 +25,9 @@ class Dataset{
   // getters:
   std::vector<Category>  *getCategories();
   std::vector<Category*>  getEnabled();
-  std::string             getCatName(size_t cat);
-  std::string             get_root();
+
+  std::string             getCatName(size_t cat) ;
+  std::string             get_root() const ;
   size_t                  smallestCategory() ;
 
   //setters

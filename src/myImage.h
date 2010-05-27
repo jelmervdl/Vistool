@@ -17,13 +17,13 @@ class MyImage{
   Magick::Blob * blob;
   cv::Mat * mat;
  public:
-  size_t get_width();
-  size_t get_height();
+  size_t          get_width();
+  size_t          get_height();
   Magick::Image  *getMagickImage();
-  std::string getLocation();
-  Magick::Blob *getBlob();
-  cv::Mat * getOpenCVMat();
-  Matrix<float> getGrayscaleMatrix();
+  std::string     getLocation();
+  Magick::Blob   *getBlob();
+  cv::Mat        *getOpenCVMat();
+  Matrix<float>   getGrayscaleMatrix();
   MyImage(std::string loc);
   ~MyImage();
 };

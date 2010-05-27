@@ -5,7 +5,7 @@ using namespace boost::filesystem;
 
 namespace vito{
 
-string Dataset::get_root(){
+string Dataset::get_root() const {
   return root;
 }
 
@@ -95,7 +95,7 @@ vector<Category*> Dataset::getEnabled(){
   return enabled;
 }
 
-size_t Dataset::smallestCategory()  {
+size_t Dataset::smallestCategory(){
   vector<Category*> enabled = getEnabled();
   size_t min = 0;
   for(vector<Category*>::iterator cat = enabled.begin();
@@ -161,7 +161,7 @@ vector<DataPoint> Dataset::enabledPoints(bool eqrep) {
   return result;
 }
 
-string Dataset::getCatName(size_t cat){
+string Dataset::getCatName(size_t cat) {
   return category_names[cat];
 }
 

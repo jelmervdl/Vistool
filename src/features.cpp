@@ -5,10 +5,17 @@ using std::vector;
 namespace vito{
 namespace features{
 
+using mpeg7::EdgeHistogram;
+using mpeg7::ScalableColor;
+using mpeg7::ColorLayout;
+
 vector<Feature*> getExistingFeatures(){
   vector<Feature*> features;
   features.push_back(SiftDescriptor::getInstance());
   features.push_back(Histogram::getInstance());
+  features.push_back(EdgeHistogram::getInstance());
+  features.push_back(ScalableColor::getInstance());
+  features.push_back(ColorLayout::getInstance());
   return features;
 }
 

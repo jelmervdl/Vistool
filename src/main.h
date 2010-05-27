@@ -15,6 +15,10 @@
 #include "segmentSVM.h"
 #include "oneClassSVM.h"
 
+#include <locale>
+#include <iomanip>
+
+
 void printLibraries ();
 void one_class_test();
 void one_class_test2();
