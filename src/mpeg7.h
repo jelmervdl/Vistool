@@ -7,6 +7,7 @@
 #include "feature.h"
 #include "singleton.h"
 #include "boost/filesystem.hpp"
+#include "parameters.h"
 
 namespace vito{
 namespace features{
@@ -39,6 +40,7 @@ public:
     return 
       Parameters::getInstance()->getiParameter("feature_mpeg7_edge_histogram") 
       > 0; }
+  virtual std::string getParameterName(){ return "mpeg7_edge_histogram";}
 };
 
 class ScalableColor : public MPEG7Feature, public Singleton<ScalableColor> {
@@ -47,6 +49,7 @@ public:
   virtual bool        isActive(){ return
       Parameters::getInstance()->getiParameter("feature_mpeg7_scalable_color") 
       > 0; }
+  virtual std::string getParameterName(){ return "mpeg7_scalable_color";}
 };
 
 class ColorLayout : public MPEG7Feature, public Singleton<ColorLayout> {
@@ -55,6 +58,7 @@ public:
   virtual bool        isActive(){ return
       Parameters::getInstance()->getiParameter("feature_mpeg7_color_layout") 
       > 0; }
+  virtual std::string getParameterName(){ return "mpeg7_color_layout";}
 };
 
 

@@ -58,7 +58,7 @@ vector<float> MPEG7Feature::extractNumbers(string line){
 }
 
 bool MPEG7Feature::lineIsOfType(string line, string type){
-  return line.find(type) != -1;
+  return (int) line.find(type) != -1;
 }
 
 string MPEG7Feature::getDescriptorLocation(string loc){

@@ -10,6 +10,8 @@
 namespace vito{
 namespace features{
 
+
+
 std::vector<Feature*> getExistingFeatures();
 std::vector<Feature*> getActiveFeatures();
 

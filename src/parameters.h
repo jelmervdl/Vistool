@@ -7,17 +7,17 @@
 
 #define NO_PARAMETERS 100
 
+#include "singleton.h"
+#include "multiton.h"
+#include "parameterOptimization.h"
 #include <locale>
 #include <sstream>
 #include <stdio.h>
-#include "singleton.h"
-#include "multiton.h"
 #include <time.h>
 #include <iostream>
 #include <fstream>
 #include <map>
 #include <string>
-#include "parameterOptimization.h"
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/dom/DOM.hpp>
@@ -25,9 +25,10 @@
 #include <xercesc/util/XMLString.hpp>
 
 namespace vito{
-  namespace optimization{
-  class ParameterOptimization;
-}}
+namespace optimization{
+class ParameterOptimization;
+}
+}
 
 class Parameters : public Singleton<Parameters>{
   friend class Singleton<Parameters>;

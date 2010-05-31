@@ -1,5 +1,8 @@
 #include "parameters.h"
+#include "features.h"
 
+using vito::features::Feature;
+using std::vector;
 using std::collate;
 using std::use_facet;
 using std::locale;
@@ -62,29 +65,27 @@ string Parameters::getFile(){
 }
 
 string Parameters::getHashableString(){
-  string sift_str = "sift_";
-  string hist_str = "histogram_";
-  const bool sift_on = intParameters["feature_sift"];
-  const bool hist_on = intParameters["feature_histogram"]; 
-  stringstream str_str;
-  typedef map<string, float>::iterator fl_map_it;
-  typedef map<string, int>::iterator i_map_it;
-  for(fl_map_it it = floatParameters.begin();
-      it != floatParameters.end();
-      ++it){
-    if( (sift_on && (it->first.find(sift_str) != string::npos) )
-	|| 
-	(hist_on && (it->first.find(hist_str) != string::npos) ) ){
-      str_str << it->first << it->second;
+  vector<Feature*> features = vito::features::getExistingFeatures();
+  stringstream hashable_string;
+  for(size_t i = 0; i < features.size(); ++i){
+    Feature &feature = *features[i];
+    if(feature.isActive()){
+      string activity_string = "feature_" + feature.getParameterName();
+      string parameter_base_string = feature.getParameterName() + "_";
+      typedef map<string, float>::iterator fl_it;
+      typedef map<string, int>::iterator i_it;
+      if(intParameters[activity_string] > 0){
+	hashable_string << activity_string << "=1,";
+	for(fl_it it = floatParameters.begin(); it != floatParameters.end(); ++it)
+	  if(it->first.find(parameter_base_string) != string::npos)
+	    hashable_string << it->first << "=" << it->second << ",";
+	for(i_it it = intParameters.begin(); it != intParameters.end(); ++it)
+	  if(it->first.find(parameter_base_string) != string::npos)
+	    hashable_string << it->first << "=" << it->second << ",";
+      }
     }
   }
-  for(i_map_it it = intParameters.begin(); it != intParameters.end(); ++it)
-    if( (sift_on && (it->first.find(sift_str) != string::npos) )
-	|| 
-	(hist_on && (it->first.find(hist_str) != string::npos) ) ){
-      str_str << it->first << it->second;
-    }
-  return str_str.str();
+  return hashable_string.str();
 }
 
 

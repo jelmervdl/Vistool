@@ -34,6 +34,7 @@ public:
 		      bool save_visual_representation,
 		      Magick::Image *canvas);
 
+  virtual std::string getParameterName(){ return "sift";}
 };
 
 }}

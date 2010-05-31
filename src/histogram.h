@@ -17,6 +17,8 @@ class Histogram : public Feature, public Singleton<Histogram>{
   Descriptor extract_(MyImage * Image,  
 		     bool saveVisualRepresentation,
 		     Magick::Image* image);
+
+  virtual std::string getParameterName(){ return "histogram";}
 };
 
 }}

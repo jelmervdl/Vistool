@@ -7,6 +7,7 @@
   readDescriptor(&sample, fe->getCurrentDescriptorLocation(*dps.at(0)));\
   rows = dps.size();							\
   cols = sample.size();							\
+  cout << "rows: " << rows << " cols: " << cols << endl;		\
   CvMat * tmat = cvCreateMat(rows, cols, CV_32FC1);			\
   CvMat * labs = cvCreateMat(rows, 1, CV_32FC1);			\
   FeatureExtractor::getInstance()->getCVMatrices(dps, tmat, labs);	
@@ -44,8 +45,9 @@ void NNClassifier::clean(){
 }
 
 void NNClassifier::train(vector<DataPoint*> dps){
-  cout << "training" << endl;
+  cout << "training on " << dps.size() << " datapoints" << endl;
   PrepareMatrices(dps);
+  cout << "sample has " << sample.size() << "entries" << endl;
   cout << knn << endl;
   clean();
   knn = new CvKNearest(tmat, labs);  

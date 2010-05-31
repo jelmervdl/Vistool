@@ -1,6 +1,5 @@
 #include "classification.h"
 
-
 using std::cout;
 using std::endl;
 using std::vector;

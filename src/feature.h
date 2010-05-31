@@ -10,8 +10,12 @@ namespace features{
 
 class Feature{
  public:
+
   //constructor
                              Feature();
+
+  // features name;
+  virtual std::string        getParameterName() = 0;
 
   //returns whether the feature is currently active or not
   virtual bool               isActive() = 0;
