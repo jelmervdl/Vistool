@@ -28,6 +28,7 @@ class DataPoint{
   size_t      get_label() const;
 };
 
+
 }
 
 #endif

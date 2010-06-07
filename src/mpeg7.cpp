@@ -28,10 +28,15 @@ Descriptor MPEG7Feature::extract_(MyImage *image,
   vector<float> descriptor = getMPEG7Descriptor(descriptor_path,
 						getName());
   cout << "size: " <<  descriptor.size() << endl;
+  for(size_t i = 0; i < descriptor.size(); i++){
+    descriptor[i] = scale(descriptor[i]);
+    cout << descriptor[i] << ",";
+  }
+  cout << endl;
   return descriptor;
 }
 
-vector<float> MPEG7Feature::getMPEG7Descriptor(string descriptor_path, string type){
+vector<float> getMPEG7Descriptor(string descriptor_path, string type){
   ifstream in_file_stream(descriptor_path.c_str());
   string line;
   vector<float> ret;
@@ -42,7 +47,7 @@ vector<float> MPEG7Feature::getMPEG7Descriptor(string descriptor_path, string ty
   return ret;
 }
 
-vector<float> MPEG7Feature::extractNumbers(string line){
+vector<float> extractNumbers(string line){
   vector<float> ret;
   stringstream ss;
   for(int i = 0; i < (int) line.size(); ++i){
@@ -57,12 +62,11 @@ vector<float> MPEG7Feature::extractNumbers(string line){
 
 }
 
-bool MPEG7Feature::lineIsOfType(string line, string type){
+bool lineIsOfType(string line, string type){
   return (int) line.find(type) != -1;
 }
 
-string MPEG7Feature::getDescriptorLocation(string loc){
-  cout << "hi I'm gonna do " << loc << endl;
+string getDescriptorLocation(string loc, bool patches){
   string descriptor_path;
   int last_slash = loc.find_last_of('/');
   int secondlast_slash = loc.find_last_of('/', last_slash - 1);
@@ -74,7 +78,10 @@ string MPEG7Feature::getDescriptorLocation(string loc){
     category = loc.substr(secondlast_slash + 1, 
 			  last_slash - secondlast_slash - 1);
     name = loc.substr(last_slash + 1, loc.size());
-    filepath_stream << "desc/mpeg7/"  << category << "/" << name << ".txt";
+    filepath_stream << "desc/mpeg7/"  << category << "/" << name;
+    if(patches)
+      filepath_stream << "_patches";
+    filepath_stream << ".txt";
     descriptor_path = filepath_stream.str();
   }
   cout << descriptor_path << endl;
@@ -95,4 +102,51 @@ string MPEG7Feature::getDescriptorLocation(string loc){
   return descriptor_path;
 }
 
+
+Matrix<vector<float> > getPatches(string descriptor_path){
+  string location = getDescriptorLocation(descriptor_path, true);
+  cout << location << endl;
+  ifstream infile(location.c_str());
+  string line;
+  Matrix<vector<float> > matrix (10,10);
+  while(std::getline(infile, line)){
+    if(lineIsOfType(line, "edgehistogram")){
+      vector<float> numbers = extractNumbers(line);
+      int x = numbers[0];
+      int y = numbers[1];
+      matrix.at(x,y) = vector<float>(numbers.begin() + 2, numbers.end());
+    }
+  }
+  //printPatchMatrix(matrix);
+  return matrix;
+}
+
+void printPatchMatrix(const Matrix<vector <float> > &matrix){
+  for(size_t x = 0; x < matrix.get_width(); ++x){
+    cout << "x = " << x << " xsize " << matrix.get_width() << endl;
+    for(size_t y = 0; y < matrix.get_height(); ++y){
+      cout << "x: " << x << " y: " << y << ": ";
+      cout << matrix.at(x,y).size() << endl;
+      for(size_t i = 0; i < matrix.at(x,y).size(); ++i){
+	cout << matrix.at(x,y)[i] << " ";
+      }
+      cout << endl;
+    }
+  }
+}
+
+vector<vector<float> > getAllPatches(vector<DataPoint> datapoints){
+  vector< vector<float> > allpatches;
+  for(size_t i = 0; i < datapoints.size(); i++){
+    const Matrix<vector<float> > matrix = getPatches(datapoints[i].get_image_url());
+    for(int x = 0; x < 10; x++)
+      for (int y = 0; y < 10; y++)
+	allpatches.push_back(matrix.at(x,y));
+  } 
+  return allpatches;
+}
+
+
+
 }}}
+

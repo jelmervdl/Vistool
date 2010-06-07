@@ -18,3 +18,4 @@ std::vector<float> readDescriptor(std::string location);
 }}
 
 #endif
+

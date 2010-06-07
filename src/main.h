@@ -15,6 +15,8 @@
 #include "segmentSVM.h"
 #include "oneClassSVM.h"
 
+#include "kmeansclustering.h"
+
 #include <locale>
 #include <iomanip>
 
