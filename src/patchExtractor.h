@@ -11,9 +11,14 @@ namespace clustering{
 
 class PatchExtractor{
 public:
-  patch_collection getPatches(DataPoint dp, features::Feature *feature);
-  patch_collection getPatches(std::vector<DataPoint> *dps, features::Feature *feature);
-  patch getPatch(MyImage *image, features::Feature *feature);
+  patch_collection getPatches(MyImage &myImage, 
+			      features::Feature *feature);
+  patch_collection getPatches(DataPoint dp, 
+			      features::Feature *feature);
+  patch_collection getPatches(std::vector<DataPoint> *dps, 
+			      features::Feature *feature);
+  patch            getPatch(MyImage *image, 
+			    features::Feature *feature);
 };
 
 

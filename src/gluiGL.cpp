@@ -70,6 +70,7 @@ void myGlutIdle( void ){
 }
 
 void setupWindow(){
+
   ToolState &state = *ToolState::getInstance();
   glutInitWindowPosition(0, 0 );
   state.window_height = 800;

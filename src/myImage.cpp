@@ -94,7 +94,7 @@ Image MyImage::getMagickSubImage(int x, int x_segments,
 }
 
 MyImage MyImage::getSubImage(int x, int x_segments, 
-		    int y, int y_segments){
+		    int y, int y_segments) {
   Image magick = getMagickSubImage(x, x_segments, y, y_segments);
   return MyImage(magick);
 }

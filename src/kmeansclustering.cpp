@@ -7,10 +7,10 @@ using std::cout;
 namespace vito{
 namespace clustering{
 
-typedef KMeansClustering::patch patch;
-typedef KMeansClustering::labels labels;
-typedef KMeansClustering::patch_collection patch_collection;
-typedef KMeansClustering::label_collection label_collection;
+//typedef KMeansClustering::patch patch;
+//typedef KMeansClustering::labels labels;
+//typedef KMeansClustering::patch_collection patch_collection;
+//typedef KMeansClustering::label_collection label_collection;
 
 patch_collection KMeansClustering::initialize_means(const int kmeans, 
 						    const patch_collection &patches){

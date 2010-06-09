@@ -1,6 +1,8 @@
 #include "main.h"
 #include "mpeg7.h"
-
+#include "patchExtractor.h"
+#include "kmeanshistogram.h"
+ 
 using std::sprintf;
 using namespace vito;
 using namespace vito::features;
@@ -12,13 +14,21 @@ using namespace std;
 void testMPEG7(){
   Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
   //dataset.enableCategory("accordion");
-  //dataset.enableCategory("accordion");
+  dataset.enableCategory("accordion");
   //dataset.enableCategory("emu");
   dataset.enableCategory("buddha");
 
 
   //MyImage my_image = MyImage( "../datasets/caltech101/accordion/image_0001.jpg");
   vector<DataPoint> dps = dataset.enabledPoints();
+  vector<DataPoint> train, test;
+  
+  KMeansClusterHistogram<Histogram> aap(&dps);
+  MyImage im(dps[0].get_image_url());
+  vector<float> hond = aap.extract(&im);
+
+
+
   /*
   DataPoint dp1 = DataPoint(0,
 			    "image_0002.jpg",
@@ -30,9 +40,11 @@ void testMPEG7(){
 			    "emu");
   dps.push_back(dp1);
   dps.push_back(dp2);
-  */
+  
   //mpeg7::getPatches("../datasets/caltech101/accordion/image_0001.jpg");
-  vector<vector<float> > patches = mpeg7::getAllPatches(dps);
+  //vector<vector<float> > patches = mpeg7::getAllPatches(dps);
+  clustering::PatchExtractor pa;
+  vector<vector<float> > patches = pa.getPatches(&dps, Histogram::getInstance());
   clustering::KMeansClustering clustering;
   vector<vector<float> > centers = clustering.cluster(patches);
   vector<int>  classification = clustering.classify_per_patch(centers, patches);
@@ -96,7 +108,9 @@ void testMPEG7(){
     stringstream out;
     out << "bla_" << i << ".jpg";
     mag.write(out.str());
+  
   }
+  */
 }
 
 void resizeExperiment(){
@@ -113,11 +127,10 @@ void resizeExperiment(){
 }
 
 int main(int argc, char ** argv){ 
-  srand(time(0));
-  cout << rand() << " " << rand() << endl;
   Parameters *p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
   testMPEG7();
+  vector<DataPoint> dps;
   if(argc > 1){
     Parameters * p = Parameters::getInstance();
     p->readFile((char *) "parameters.xml");

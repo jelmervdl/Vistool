@@ -31,6 +31,20 @@ patch_collection PatchExtractor::getPatches(vector<DataPoint> *dps,
   return ret;
 }
 
+patch_collection PatchExtractor::getPatches(MyImage &myImage, Feature *feature){
+  const int x_bins = 10;
+  const int y_bins = x_bins;
+  patch_collection ret;
+   for(int x = 0; x < x_bins; x++)
+      for(int y = 0; y < y_bins; y++){
+	MyImage subImage = myImage.getSubImage(x, x_bins, y, y_bins);
+	patch current_patch = getPatch(&subImage, feature);
+	ret.push_back(current_patch);
+      }
+   return ret;
+}
+
+
 patch PatchExtractor::getPatch(MyImage *image, Feature *feature){
   return feature->extract(image);
 }
