@@ -29,8 +29,8 @@ public:
     }
   }
 
-  template <class FeatureType> void addClusterFeature(datapoint_list *dps){
-    Feature *new_feature = new KMeansClusterHistogram<FeatureType>(dps);
+  void addClusterFeature(datapoint_list *dps, Feature *feature){
+    Feature *new_feature = new KMeansClusterHistogram(dps, feature);
     currentFeatures.push_back(new_feature);
   }
 

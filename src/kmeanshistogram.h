@@ -9,7 +9,7 @@
 namespace vito{
 namespace features{
 
-template <class FeatureType> class KMeansClusterHistogram  : public Feature{
+class KMeansClusterHistogram  : public Feature{
 public:
 
   typedef clustering::patch patch;
@@ -18,9 +18,9 @@ public:
   typedef clustering::label_collection label_collection;
 
 protected:
-  patch_collection         centers;
-  std::string feature_type;
-
+  patch_collection centers;
+  std::string      feature_type;
+  Feature         *feature;
 
 public:
   virtual std::string getParameterName(){
@@ -36,8 +36,7 @@ public:
   }
 
 
-  KMeansClusterHistogram(std::vector<DataPoint> *dps){
-    Feature *feature = FeatureType::getInstance();
+  KMeansClusterHistogram(std::vector<DataPoint> *dps, Feature *feat) : feature(feat) {
     std::stringstream ss;
     ss << "kmeans_clustered_feature_using_visual_patches_"
        << feature->getParameterName() << "_of_" 
@@ -53,7 +52,6 @@ public:
   virtual Descriptor  extract_(MyImage *image, 
 			      bool makeVisualRepresentation, 
 			       Magick::Image * representation){
-    Feature *feature = FeatureType::getInstance();
     clustering::KMeansClustering clustering;
     clustering::PatchExtractor patch_extractor;
 

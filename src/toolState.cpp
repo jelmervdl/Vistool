@@ -10,6 +10,7 @@ ToolState::ToolState() : current_evaluation(Evaluation()){
 
   current_image_page = 0;
   enabled_classifier = 0;
+  enabled_feature = 0;
 
   ims_per_page = 16;
   parameter_panel = 0;

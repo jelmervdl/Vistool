@@ -1,9 +1,10 @@
 #include "gluiControl.h"
-#include "clusterFeatureExtractor.h"
 
 using vito::classification::getExistingClassifiers;
 using vito::classification::Classifier;
 
+using vito::features::getExistingFeatures;
+using vito::features::Feature;
 namespace vito{
 namespace gui{
 
@@ -48,6 +49,8 @@ void initGlui(){
   state.main_gui->add_column(false);
   GLUI_Panel * ml_panel = state.main_gui->add_panel("ML");
   state.main_gui->add_button_to_panel(ml_panel, "Get Descriptors", 0, (GLUI_Update_CB)extractFeatures );
+
+  //GLUI_Listbox *listbox;
   state.main_gui->add_button_to_panel(ml_panel, "Cluster", 0, (GLUI_Update_CB) cluster );
   state.main_gui->add_button_to_panel(ml_panel, "Recalc Descr.", 0, (GLUI_Update_CB)recalculateFeatures );
   state.main_gui->add_button_to_panel(ml_panel, "Divide/Evaluate", 0, (GLUI_Update_CB)evaluateClassifier);
@@ -56,13 +59,11 @@ void initGlui(){
 state.main_gui->add_spinner_to_panel(ml_panel, "one_class_target", GLUI_SPINNER_INT, &state.one_class_target);
 
   createClassifierSelectButton();
+  createFeatureSelectButton();
   //main_gui->add_button_to_panel(ml_panel, "Classify", 0, (GLUI_Update_CB)classify);
   state.main_gui->set_main_gfx_window(state.image_display_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
-
-
-
 
 void nextPage(){
   ToolState &state = *ToolState::getInstance();
@@ -89,11 +90,24 @@ void createClassifierSelectButton(){
   }  
 }
 
+
+void createFeatureSelectButton(){
+  ToolState &state = *ToolState::getInstance();
+  GLUI_Listbox * feature_sel = 
+    state.main_gui->add_listbox("classif.:", (int*) &state.enabled_feature);
+  vector<Feature*> features = getExistingFeatures();
+  for(int i = 0; i < (int) features.size(); ++i){
+    feature_sel->add_item(i, features[i]->getParameterName().c_str());  
+  }  
+}
+
+
 void cluster(){
   ToolState &state = *ToolState::getInstance();
   vector<DataPoint> enabs = state.current_db.enabledPoints();
   features::ClusterFeatureExtractor *cfe = features::ClusterFeatureExtractor::getInstance();
-  cfe->addClusterFeature<features::Histogram>(&enabs);
+  vector<Feature*> feature = getExistingFeatures();
+  cfe->addClusterFeature(&enabs, feature[state.enabled_feature]);
   FeatureSelectionWindow::getInstance()->fill();
 }
 

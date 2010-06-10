@@ -23,9 +23,9 @@ void testMPEG7(){
   vector<DataPoint> dps = dataset.enabledPoints();
   vector<DataPoint> train, test;
   
-  KMeansClusterHistogram<Histogram> aap(&dps);
-  MyImage im(dps[0].get_image_url());
-  vector<float> hond = aap.extract(&im);
+  //KMeansClusterHistogram<Histogram> aap(&dps);
+  //MyImage im(dps[0].get_image_url());
+  //vector<float> hond = aap.extract(&im);
 
 
 

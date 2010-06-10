@@ -34,6 +34,7 @@ class ToolState:  public Singleton<ToolState>{
   std::vector <DataPoint>     train_data, test_data;
   std::vector <int>           test_result;
   int                         enabled_classifier;
+  int                         enabled_feature;
 
   // class view selection
   int                         selected_class;
