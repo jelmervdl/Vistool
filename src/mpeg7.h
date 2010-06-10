@@ -29,8 +29,11 @@ protected:
   virtual std::string getName() = 0;
   virtual float       scale(float fl) = 0;
 public:
+  virtual ~MPEG7Feature(){};
+
   // give activity using the paramers.h class
   virtual bool        isActive() = 0;
+
   // extract the actual descriptor
   Descriptor          extract_(MyImage *Image,
 			       bool makeVisualRepresentation,
@@ -38,16 +41,15 @@ public:
 };
 
 // specific features:
-
 // Edge Histogram
 class EdgeHistogram : public MPEG7Feature, public Singleton<EdgeHistogram> {
   virtual std::string getName(){ return "edgehistogram";}
   virtual float       scale(float fl){return fl / 7.0;}
 public:
-  virtual bool        isActive(){ 
+  virtual bool       isActive(){ 
     return 
-      Parameters::getInstance()->getiParameter("feature_mpeg7_edge_histogram") 
-      > 0; }
+      Parameters::getInstance()->getiParameter("feature_mpeg7_edge_histogram");
+  }
   virtual std::string getParameterName(){ return "mpeg7_edge_histogram";}
 };
 
@@ -57,8 +59,7 @@ class ScalableColor : public MPEG7Feature, public Singleton<ScalableColor> {
   virtual float       scale(float fl){return fl / 255.0;}
 public:
   virtual bool        isActive(){ return
-      Parameters::getInstance()->getiParameter("feature_mpeg7_scalable_color") 
-      > 0; }
+      Parameters::getInstance()->getiParameter("feature_mpeg7_scalable_color"); }
   virtual std::string getParameterName(){ return "mpeg7_scalable_color";}
 };
 
@@ -68,8 +69,7 @@ class ColorLayout : public MPEG7Feature, public Singleton<ColorLayout> {
   virtual float       scale(float fl){return fl / 32.0;}
 public:
   virtual bool        isActive(){ return
-      Parameters::getInstance()->getiParameter("feature_mpeg7_color_layout") 
-      > 0; }
+      Parameters::getInstance()->getiParameter("feature_mpeg7_color_layout"); }
   virtual std::string getParameterName(){ return "mpeg7_color_layout";}
 };
 

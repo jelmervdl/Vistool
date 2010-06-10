@@ -28,12 +28,16 @@ namespace vito{
 namespace optimization{
 class ParameterOptimization;
 }
+namespace gui{
+class FeatureSelectionWindow;
+}
 }
 
 class Parameters : public Singleton<Parameters>{
   friend class Singleton<Parameters>;
   friend class ParameterPanel;
   friend class vito::optimization::ParameterOptimization;
+  friend class vito::gui::FeatureSelectionWindow;
  protected:
   Parameters();
  private:

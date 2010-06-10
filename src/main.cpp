@@ -129,7 +129,7 @@ void resizeExperiment(){
 int main(int argc, char ** argv){ 
   Parameters *p = Parameters::getInstance();
   p->readFile((char *) "parameters.xml");
-  testMPEG7();
+  //testMPEG7();
   vector<DataPoint> dps;
   if(argc > 1){
     Parameters * p = Parameters::getInstance();

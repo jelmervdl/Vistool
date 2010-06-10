@@ -14,11 +14,14 @@ class Feature{
   //constructor
                              Feature();
 
+  virtual                   ~Feature();
+
   // features name;
   virtual std::string        getParameterName() = 0;
 
   //returns whether the feature is currently active or not
   virtual bool               isActive() = 0;
+
 
   //actually extracts the descriptor
   virtual Descriptor         extract_(MyImage *Image, 

@@ -16,6 +16,11 @@ vector<Feature*> getExistingFeatures(){
   features.push_back(EdgeHistogram::getInstance());
   features.push_back(ScalableColor::getInstance());
   features.push_back(ColorLayout::getInstance());
+  ClusterFeatureExtractor *cfe = 
+    ClusterFeatureExtractor::getInstance();
+  vector<Feature*> clust_feats = cfe->getFeatures();
+  for(size_t i = 0; i < clust_feats.size(); i++)
+    features.push_back(clust_feats[i]);
   return features;
 }
 

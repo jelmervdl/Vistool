@@ -27,7 +27,6 @@ public:
   static void select(std::string str){
     current = str;
   }
-
   static std::string get_current_name() {
     return current;
   }

@@ -1,6 +1,7 @@
 #ifndef KMEANSHISTOGRAM_H
 #define KMEANSHISTOGRAM_H
 
+#include <sstream>
 #include "kmeansclustering.h"
 #include "feature.h"
 #include "patchExtractor.h"
@@ -17,21 +18,31 @@ public:
   typedef clustering::label_collection label_collection;
 
 protected:
-  patch_collection centers;
+  patch_collection         centers;
+  std::string feature_type;
+
 
 public:
   virtual std::string getParameterName(){
-    return "";
+    return feature_type;
   }
 
-  virtual bool        isActive(){
-    return false;
+  virtual bool isActive(){
+    std::stringstream ss;
+    ss << "feature_" <<  feature_type;
+    std::cout << "is this feature active?:" << ss.str() << " answer: " 
+	      << Parameters::getInstance()->getiParameter(ss.str()) << std::endl;
+    return Parameters::getInstance()->getiParameter(ss.str());
   }
 
 
   KMeansClusterHistogram(std::vector<DataPoint> *dps){
     Feature *feature = FeatureType::getInstance();
-
+    std::stringstream ss;
+    ss << "kmeans_clustered_feature_using_visual_patches_"
+       << feature->getParameterName() << "_of_" 
+       << dps->size() << "_images";
+    feature_type = ss.str();
     clustering::PatchExtractor patch_extractor;
     clustering::KMeansClustering clustering;
 
@@ -52,17 +63,24 @@ public:
     labels classification = 
       clustering.classify_per_patch(centers, image_patches);
 
-    const int kClasses = 50;
-
-    vector<float> histogram (kClasses);
+    std::cout  << "just made a class of size: " << classification.size() << std::endl;
+    std::cout << " with content: " << std::endl;
     for(size_t i = 0; i < classification.size(); i++)
-      histogram[i]++;
-    for(size_t i = 0; i < histogram.size(); i++)
-      histogram[i] /= (float) classification.size();
-    return histogram;
+      std::cout << classification[i]  << " ";
+    std::cout << std::endl;
 
-  }
-                 
+    const int kClasses = 50;    
+    std::vector<float> histogram (kClasses);
+    std::cout << "the hist content: " << std::endl;
+    for(size_t i = 0; i < classification.size(); i++)
+      histogram[classification[i]]++;
+    for(size_t i = 0; i < histogram.size(); i++){
+      //histogram[i] /= (float) classification.size();
+      std::cout << i << ":" << histogram[i] << ", ";
+    }
+    std::cout << std::endl;
+    return histogram;
+  }                 
 };
 
 

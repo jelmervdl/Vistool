@@ -1,4 +1,5 @@
 #include "gluiControl.h"
+#include "clusterFeatureExtractor.h"
 
 using vito::classification::getExistingClassifiers;
 using vito::classification::Classifier;
@@ -6,10 +7,14 @@ using vito::classification::Classifier;
 namespace vito{
 namespace gui{
 
+
 void initGlui(){
   ToolState &state = *ToolState::getInstance();
   state.parameter_panel = new ParameterPanel();
   state.main_gui = GLUI_Master.create_glui( "Control", 0, 800, 0 );
+
+  FeatureSelectionWindow::getInstance();
+
   state.busytxt = state.main_gui->add_statictext( "waiting" ); 
 
   GLUI_Panel * load_panel = state.main_gui->add_panel("load");
@@ -43,6 +48,7 @@ void initGlui(){
   state.main_gui->add_column(false);
   GLUI_Panel * ml_panel = state.main_gui->add_panel("ML");
   state.main_gui->add_button_to_panel(ml_panel, "Get Descriptors", 0, (GLUI_Update_CB)extractFeatures );
+  state.main_gui->add_button_to_panel(ml_panel, "Cluster", 0, (GLUI_Update_CB) cluster );
   state.main_gui->add_button_to_panel(ml_panel, "Recalc Descr.", 0, (GLUI_Update_CB)recalculateFeatures );
   state.main_gui->add_button_to_panel(ml_panel, "Divide/Evaluate", 0, (GLUI_Update_CB)evaluateClassifier);
   state.main_gui->add_button_to_panel(ml_panel, "Cross-Validate", 0, (GLUI_Update_CB)crossValidate);
@@ -54,6 +60,9 @@ state.main_gui->add_spinner_to_panel(ml_panel, "one_class_target", GLUI_SPINNER_
   state.main_gui->set_main_gfx_window(state.image_display_window);
   GLUI_Master.set_glutIdleFunc( myGlutIdle );
 }
+
+
+
 
 void nextPage(){
   ToolState &state = *ToolState::getInstance();
@@ -78,6 +87,14 @@ void createClassifierSelectButton(){
   for(int i = 0; i < (int) classifier.size(); ++i){
     classif_sel->add_item(i, classifier[i]->get_name().c_str());  
   }  
+}
+
+void cluster(){
+  ToolState &state = *ToolState::getInstance();
+  vector<DataPoint> enabs = state.current_db.enabledPoints();
+  features::ClusterFeatureExtractor *cfe = features::ClusterFeatureExtractor::getInstance();
+  cfe->addClusterFeature<features::Histogram>(&enabs);
+  FeatureSelectionWindow::getInstance()->fill();
 }
 
 }}

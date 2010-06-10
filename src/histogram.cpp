@@ -16,6 +16,9 @@ using Magick::DrawableRectangle;
 namespace vito{
 namespace features{
 
+Histogram::~Histogram(){
+}
+
 bool Histogram::isActive(){
   return (Parameters::getInstance()->getiParameter("feature_histogram") > 0);
 }
@@ -23,7 +26,6 @@ bool Histogram::isActive(){
 Descriptor Histogram::extract_(MyImage *image,  
 				 bool saveVisualRepresentation,
 				 Image *canvas){
-  cout << "making histogram" << endl;
   Mat * hsv = image->getOpenCVMat();
   Parameters * p = Parameters::getInstance();
   int 

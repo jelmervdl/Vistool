@@ -4,7 +4,7 @@
 #include "myImage.h"
 #include "clustering.h"
 #include "datapoint.h"
-#include "features.h"
+#include "feature.h"
 
 namespace vito{
 namespace clustering{

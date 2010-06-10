@@ -10,6 +10,7 @@ namespace features{
 class Histogram : public Feature, public Singleton<Histogram>{
   friend class Singleton<Histogram>;
  public:
+  ~Histogram();
   // return activity of feature
   bool       isActive();
 

@@ -6,10 +6,12 @@
 #include "gluiFeatures.h"
 #include "gluiEvaluate.h"
 #include "classification.h"
+#include "featureSelectionWindow.h"
 
 namespace vito{
 namespace gui{
 
+void cluster();
 void initGlui();
 void nextPage();
 void selectAndShow();

@@ -7,8 +7,10 @@ using std::string;
 namespace vito{
 namespace features{
 
+Feature::~Feature(){
+}
+
 Feature::Feature(){
-  
 }
 
 vector<float> Feature::extract(MyImage *image, bool saveVisualRepresentation, string vis_rep_loc){
