@@ -46,6 +46,7 @@ class ToolState:  public Singleton<ToolState>{
   GLUI *main_gui;
   GLUI *classes;
   GLUI *stats;
+  GLUI_Listbox *image_mod;
   int ims_per_page;
 
   // main window

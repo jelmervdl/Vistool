@@ -21,7 +21,6 @@ bool SiftDescriptor::isActive(){
 Descriptor SiftDescriptor::extract_(MyImage *my_image,
 			bool save_visual_representation,
 			Image *canvas){
-  cout << "making sift" << endl;
   //Arrange structures
   Descriptor descriptor;
   Parameters * parameters = Parameters::getInstance();

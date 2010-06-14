@@ -2,6 +2,10 @@
 
 using Magick::Image;
 
+using std::cout;
+using std::endl;
+using std::vector;
+
 namespace vito{
 namespace gui{
 
@@ -18,6 +22,9 @@ void refreshTexture(size_t p){
     state.textures[i].destroyTexture();
   }
   state.textures.clear();
+  //state.image_display_window = 1;
+  //cout << "image display window again: " << state.image_display_window << endl;
+  //cout << "image display window again: " << ToolState::getInstance()->image_display_window << endl;
 
   // display images.
   if(state.display_modifier == states::No_Modifier){
@@ -47,6 +54,22 @@ void refreshTexture(size_t p){
       state.textures.push_back(Texture(&canvas, state.image_display_window));
     }
   //display histpgrams
+  
+  if(state.display_modifier == 101){
+    std::vector<features::Feature*> feats = features::getActiveFeatures();
+    for(size_t i = p; i < (size_t) state.ims_per_page + p && 
+	  i < (size_t) state.currently_view_datapoints.size(); ++i){
+      if(feats.size() > 0){
+	MyImage im (state.currently_view_datapoints.at(i)->get_image_url());
+	Image canvas;
+	feats[0]->extract_(&im, true, &canvas);
+	state.textures.push_back(Texture(&canvas, state.image_display_window));
+      }
+    }
+  }
+  
+
+
   display();
 }
 

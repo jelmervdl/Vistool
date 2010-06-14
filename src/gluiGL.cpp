@@ -76,6 +76,7 @@ void setupWindow(){
   state.window_height = 800;
   state.window_width  = 800;
   glutInitWindowSize( state.window_width, state.window_height );
-  state.image_display_window = glutCreateWindow( "Image Display" );
+  state.image_display_window = glutCreateWindow( "Image Display");
+  std::cout << "display window is: " <<  state.image_display_window << std::endl;
 }
 }}

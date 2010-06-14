@@ -30,11 +30,15 @@ void initGlui(){
   state.main_gui->add_statictext_to_panel(view_panel, "Images Per Page:" ); 
   state.main_gui->add_spinner_to_panel(view_panel, "", GLUI_SPINNER_INT, &state.ims_per_page);
   state.main_gui->add_button_to_panel(view_panel, "Next Page", 0, (GLUI_Update_CB)nextPage );
-
+  
+  
   GLUI_Listbox * image_mod = state.main_gui->add_listbox_to_panel(view_panel, "show:", (int*) &state.display_modifier);
+  state.image_mod = image_mod;
   image_mod->add_item(states::No_Modifier, "image");
   image_mod->add_item(states::Show_Gradient, "gradient");
   image_mod->add_item(states::Show_Sift, "sift");
+  image_mod->add_item(101, "first active feature");
+  
   GLUI_Listbox * aap = state.main_gui->add_listbox_to_panel(view_panel, "view:", (int*) &state.ds, 0, 
 					 (GLUI_Update_CB)viewDataset);
   aap->add_item(states::Enabled_Datasets, "Enabled");
@@ -107,6 +111,8 @@ void cluster(){
   vector<DataPoint> enabs = state.current_db.enabledPoints();
   features::ClusterFeatureExtractor *cfe = features::ClusterFeatureExtractor::getInstance();
   vector<Feature*> feature = getExistingFeatures();
+  cout << "enabled_feature " << state.enabled_feature << " out of " << feature.size()
+       << " is " << feature[state.enabled_feature->getParameterName()] << endl;
   cfe->addClusterFeature(&enabs, feature[state.enabled_feature]);
   FeatureSelectionWindow::getInstance()->fill();
 }

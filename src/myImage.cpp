@@ -87,8 +87,6 @@ Image MyImage::getMagickSubImage(int x, int x_segments,
   int right = ((1 + x) / (float) x_segments) * width;
   int up = (y / (float) y_segments) * height;
   int down = ((1 + y) / (float) y_segments) * height;
-  cout << "l: " << left << " r: " << right << " u: " << up << " d: " << down << endl;
-  cout << "width: " << width << " height: " << height << endl;
   magick.crop(Magick::Geometry(right - left, down - up, left, up));
   return magick;
 }

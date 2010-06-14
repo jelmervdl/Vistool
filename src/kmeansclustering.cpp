@@ -124,7 +124,9 @@ patch_collection KMeansClustering::cluster(const patch_collection &patches){
   cout << "clustering into " << kmeans << " means" << endl;
   patch_collection cluster_centers = initialize_means(kmeans, patches);
   float distance_ = 1.0;
-  while(distance_ > 0){ // cluster until convergence
+  bool stop = false;
+  while(distance_ > 0 && !stop){ // cluster until convergence
+    float old_distance = distance_;
     distance_ = 0.0;
     patch_collection new_centers = update(cluster_centers, patches);
     for(size_t j = 0; j < cluster_centers.size(); j++){
@@ -133,6 +135,8 @@ patch_collection KMeansClustering::cluster(const patch_collection &patches){
     }
     cout << "converging... distance now: " << distance_ << endl;
     cluster_centers = new_centers;
+    if(old_distance == distance_)
+      stop = true;
   }
   return cluster_centers;
 }

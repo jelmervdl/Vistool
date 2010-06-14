@@ -138,6 +138,8 @@ void printPatchMatrix(const Matrix<vector <float> > &matrix){
 vector<vector<float> > getAllPatches(vector<DataPoint> datapoints){
   vector< vector<float> > allpatches;
   for(size_t i = 0; i < datapoints.size(); i++){
+  cout << "getting ALLL Patches, of " << datapoints.size()  << " datapoints " 
+       << "it's name: " << datapoints[i].get_image_url() << endl;
     const Matrix<vector<float> > matrix = getPatches(datapoints[i].get_image_url());
     for(int x = 0; x < 10; x++)
       for (int y = 0; y < 10; y++)

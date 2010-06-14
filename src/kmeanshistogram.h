@@ -23,6 +23,7 @@ protected:
   Feature         *feature;
 
 public:
+
   virtual std::string getParameterName(){
     return feature_type;
   }
@@ -45,18 +46,34 @@ public:
     clustering::PatchExtractor patch_extractor;
     clustering::KMeansClustering clustering;
 
-    patch_collection patches = patch_extractor.getPatches(dps, feature);
+    std::cout << "finding mpeg7 in feature name? " 
+	      << feature->getParameterName().find("mpeg7") << std::endl;
+
+    patch_collection patches;
+    if(feature->getParameterName().find("mpeg7") == 0)
+      patches = features::mpeg7::getAllPatches(*dps);
+    else
+      patches = patch_extractor.getPatches(dps, feature);
     centers = clustering.cluster(patches);
   }
 
   virtual Descriptor  extract_(MyImage *image, 
-			      bool makeVisualRepresentation, 
-			       Magick::Image * representation){
+			       bool makeVisualRepresentation, 
+			       Magick::Image * magick_image){
     clustering::KMeansClustering clustering;
     clustering::PatchExtractor patch_extractor;
 
-    patch_collection image_patches = 
-      patch_extractor.getPatches(*image, feature);
+    patch_collection image_patches;
+    std::cout << "finding mpeg7 in feature name? " 
+	      << feature->getParameterName().find("mpeg7") << std::endl;
+
+
+    if(feature->getParameterName().find("mpeg7") == 0){
+      std::vector<DataPoint> t_dps;
+      t_dps.push_back(DataPoint(0,"", image->getLocation(), ""));
+      image_patches = mpeg7::getAllPatches(t_dps);
+    }else
+      image_patches = patch_extractor.getPatches(*image, feature);
 
     labels classification = 
       clustering.classify_per_patch(centers, image_patches);
@@ -77,10 +94,56 @@ public:
       std::cout << i << ":" << histogram[i] << ", ";
     }
     std::cout << std::endl;
-    return histogram;
-  }                 
-};
 
+    if(makeVisualRepresentation){
+      *magick_image = *image->getMagickImage(); 
+      Magick::Image &mag = *magick_image;
+
+      std::vector<Magick::Color> colors;
+      colors.push_back(Magick::Color("black"));
+      colors.push_back(Magick::Color("green"));
+      colors.push_back(Magick::Color("yellow"));
+      colors.push_back(Magick::Color("red"));
+      colors.push_back(Magick::Color("purple"));
+      colors.push_back(Magick::Color("blue"));
+      colors.push_back(Magick::Color("brown"));
+      colors.push_back(Magick::Color("pink"));
+      colors.push_back(Magick::Color("gray"));
+
+      for(int x = 0; x < 10; x++){
+	for(int y = 0; y < 10; y++){
+	  const int index = 10 * x + y;
+	  int width = mag.columns();
+	  int height = mag.rows();
+	  int left = (x / (float) 10) * width;
+	  int right = ((1 + x) / (float) 10) * width;
+	  int up = (y / (float) 10) * height;
+	  int down = ((1 + y) / (float) 10) * height;
+	  Magick::Color color;
+	  color.alpha(10.0);
+	  mag.fillColor(color);
+	  mag.strokeColor("red");
+	  mag.draw(Magick::DrawableRectangle(left, up, right, down));
+	  std::stringstream b;
+	  b << classification[index];
+	  mag.fillColor(colors[classification[index] % colors.size()]);
+	  mag.strokeColor(color);
+	  int tleft = left + 10;
+	  int tup = up + 10;
+	  if(tleft > width)
+	    tleft = left;
+	  if(tup > height)
+	    tup = up;
+	  Magick::DrawableText text(tleft, tup, b.str());
+	  mag.draw(text);
+      }
+    }
+    }
+
+
+    return histogram;
+  }
+};
 
 }}
 #endif
