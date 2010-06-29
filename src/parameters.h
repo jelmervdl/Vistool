@@ -33,8 +33,9 @@ class FeatureSelectionWindow;
 }
 }
 
-class Parameters : public Singleton<Parameters>{
+class Parameters : public Multiton<Parameters>{
   friend class Singleton<Parameters>;
+  friend class Multiton<Parameters>;
   friend class ParameterPanel;
   friend class vito::optimization::ParameterOptimization;
   friend class vito::gui::FeatureSelectionWindow;
@@ -53,7 +54,7 @@ class Parameters : public Singleton<Parameters>{
   std::string getFile();
 
   // Read in a parameter file, can be done incrementally
-  void        readFile(char * str);
+  void        readFile(const char * str);
 
   // save a new real parameter under a string name
   void        saveReal(std::string str, 

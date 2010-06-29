@@ -8,15 +8,24 @@ using vito::features::Feature;
 namespace vito{
 namespace gui{
 
+void hide_window(int window_number){
+}
 
 void initGlui(){
   ToolState &state = *ToolState::getInstance();
-  state.parameter_panel = new ParameterPanel();
+
   state.main_gui = GLUI_Master.create_glui( "Control", 0, 800, 0 );
 
-  FeatureSelectionWindow::getInstance();
+  state.parameter_panel = new ParameterPanel();
+  FeatureSelectionWindow *feat_sel_win = FeatureSelectionWindow::getInstance();
 
-  state.busytxt = state.main_gui->add_statictext( "waiting" ); 
+  GLUI_Panel *window_control = state.main_gui->add_panel("window control");
+  state.main_gui->add_button_to_panel(window_control,
+				      "Feature Selection", 0, 
+				      (GLUI_Update_CB) hide_window);
+
+  state.main_gui->add_column(false);
+
 
   GLUI_Panel * load_panel = state.main_gui->add_panel("load");
   state.main_gui->add_button_to_panel(load_panel, "Quit", 0,(GLUI_Update_CB)exit );
@@ -111,8 +120,6 @@ void cluster(){
   vector<DataPoint> enabs = state.current_db.enabledPoints();
   features::ClusterFeatureExtractor *cfe = features::ClusterFeatureExtractor::getInstance();
   vector<Feature*> feature = getExistingFeatures();
-  cout << "enabled_feature " << state.enabled_feature << " out of " << feature.size()
-       << " is " << feature[state.enabled_feature->getParameterName()] << endl;
   cfe->addClusterFeature(&enabs, feature[state.enabled_feature]);
   FeatureSelectionWindow::getInstance()->fill();
 }

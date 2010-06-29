@@ -1,9 +1,11 @@
 #ifndef MYIMAGE_H
 #define MYIMAGE_H
 
+
 #include <Magick++.h>
 #include "parameters.h"
 #include "cv.h"
+#include "dataPoint.h"
 #include "highgui.h"
 #include "matrix.h"
 
@@ -11,6 +13,7 @@ namespace vito{
 
 class MyImage{
  private:
+  DataPoint dp;
   size_t width, height;
   std::string location;
   Magick::Image * magick;
@@ -39,7 +42,7 @@ class MyImage{
   MyImage         getSubImage(int x, int x_segments, 
 			      int y, int y_segments) ;
   //constructors:
-  MyImage(std::string loc);
+  MyImage(std::string loc, DataPoint dp);
   MyImage(const Magick::Image &image);
   ~MyImage();
 };

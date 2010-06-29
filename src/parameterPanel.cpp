@@ -5,7 +5,7 @@ using std::string;
 
 ParameterPanel::ParameterPanel() {
   Parameters *parameters = Parameters::getInstance();
-  panel = GLUI_Master.create_glui("parameters", 0, 800, 0);
+  panel = GLUI_Master.create_glui("parameters", 0, 1325, 150);
   setupFloatVariables( parameters->floatParameters );
   setupIntVariables( parameters->intParameters );
 }

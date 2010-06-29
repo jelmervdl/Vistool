@@ -16,7 +16,7 @@ FeatureSelectionWindow::FeatureSelectionWindow(){
 void FeatureSelectionWindow::fill(){
   if(feature_panel != NULL)
     feature_panel->close();
-  feature_panel = GLUI_Master.create_glui("Feature Selection", 0, 800, 100);
+  feature_panel = GLUI_Master.create_glui("Feature Selection", 0, 1325, 0);
   vector<features::Feature*> features = features::getExistingFeatures();
   Parameters *p = Parameters::getInstance();
   for(size_t i = 0; i < features.size(); i++){

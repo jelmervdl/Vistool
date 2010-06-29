@@ -9,9 +9,9 @@ namespace vito{
 namespace gui{
 
 class FeatureSelectionWindow : public Singleton<FeatureSelectionWindow> {
-protected: 
-  GLUI *feature_panel;
 public:
+  GLUI *feature_panel;
+
   FeatureSelectionWindow();
   void fill();
 };

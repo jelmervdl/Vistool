@@ -11,7 +11,7 @@ void loadDataset(string location){
   ToolState &state = *ToolState::getInstance();
   if(state.classes != 0)
     state.classes->close();
-  state.classes = GLUI_Master.create_glui( "classes", 0, 800, 250 );
+  state.classes = GLUI_Master.create_glui( "classes", 0, 800, 315 );
   state.current_db = Dataset(location);
   vector<Category> * cats = state.current_db.getCategories();
   size_t c = 0;

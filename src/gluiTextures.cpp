@@ -37,7 +37,8 @@ void refreshTexture(size_t p){
   // display their gradients
   if(state.display_modifier == states::Show_Gradient)
     for(size_t i = p; i < (size_t) state.ims_per_page + p && i < (size_t) state.currently_view_datapoints.size() ; ++i){
-      MyImage im (state.currently_view_datapoints.at(i)->get_image_url());
+      MyImage im (state.currently_view_datapoints.at(i)->get_image_url(),
+		  *state.currently_view_datapoints.at(i));
       Matrix<float> gray_image = im.getGrayscaleMatrix();
       Matrix<Gradient> image_gradient = imageGradient(gray_image);
       state.textures.push_back( Texture(&image_gradient, 
@@ -47,7 +48,8 @@ void refreshTexture(size_t p){
   if(state.display_modifier == states::Show_Sift)
     for(size_t i = p; i < (size_t) state.ims_per_page + p && 
 	  i < (size_t) state.currently_view_datapoints.size(); ++i){
-      MyImage im (state.currently_view_datapoints.at(i)->get_image_url());
+      MyImage im (state.currently_view_datapoints.at(i)->get_image_url(),
+		  *state.currently_view_datapoints.at(i));
       SiftDescriptor s;
       Image canvas;
       s.extract_(&im, true, &canvas);
@@ -60,7 +62,8 @@ void refreshTexture(size_t p){
     for(size_t i = p; i < (size_t) state.ims_per_page + p && 
 	  i < (size_t) state.currently_view_datapoints.size(); ++i){
       if(feats.size() > 0){
-	MyImage im (state.currently_view_datapoints.at(i)->get_image_url());
+	MyImage im (state.currently_view_datapoints.at(i)->get_image_url(),
+		    *state.currently_view_datapoints.at(i));
 	Image canvas;
 	feats[0]->extract_(&im, true, &canvas);
 	state.textures.push_back(Texture(&canvas, state.image_display_window));

@@ -42,7 +42,6 @@ class ToolState:  public Singleton<ToolState>{
   std::vector<int>            current_classes;
 
   //Global Glui Objects 
-  GLUI_StaticText *busytxt;
   GLUI *main_gui;
   GLUI *classes;
   GLUI *stats;

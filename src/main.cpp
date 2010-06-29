@@ -1,7 +1,4 @@
 #include "main.h"
-#include "mpeg7.h"
-#include "patchExtractor.h"
-#include "kmeanshistogram.h"
  
 using std::sprintf;
 using namespace vito;
@@ -10,108 +7,6 @@ using namespace vito::gui;
 using namespace vito::optimization;
 using namespace vito::classification;
 using namespace std;
-
-void testMPEG7(){
-  Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
-  //dataset.enableCategory("accordion");
-  dataset.enableCategory("accordion");
-  //dataset.enableCategory("emu");
-  dataset.enableCategory("buddha");
-
-
-  //MyImage my_image = MyImage( "../datasets/caltech101/accordion/image_0001.jpg");
-  vector<DataPoint> dps = dataset.enabledPoints();
-  vector<DataPoint> train, test;
-  
-  //KMeansClusterHistogram<Histogram> aap(&dps);
-  //MyImage im(dps[0].get_image_url());
-  //vector<float> hond = aap.extract(&im);
-
-
-
-  /*
-  DataPoint dp1 = DataPoint(0,
-			    "image_0002.jpg",
-			    "../datasets/caltech101/emu/image_0002.jpg", 
-			    "emu");
-  DataPoint dp2 = DataPoint(0,
-			    "image_0001.jpg",
-			    "../datasets/caltech101/emu/image_0001.jpg", 
-			    "emu");
-  dps.push_back(dp1);
-  dps.push_back(dp2);
-  
-  //mpeg7::getPatches("../datasets/caltech101/accordion/image_0001.jpg");
-  //vector<vector<float> > patches = mpeg7::getAllPatches(dps);
-  clustering::PatchExtractor pa;
-  vector<vector<float> > patches = pa.getPatches(&dps, Histogram::getInstance());
-  clustering::KMeansClustering clustering;
-  vector<vector<float> > centers = clustering.cluster(patches);
-  vector<int>  classification = clustering.classify_per_patch(centers, patches);
-  vector<Magick::Color> colors;
-  colors.push_back(Magick::Color("black"));
-  colors.push_back(Magick::Color("green"));
-  colors.push_back(Magick::Color("yellow"));
-  colors.push_back(Magick::Color("red"));
-  colors.push_back(Magick::Color("purple"));
-  colors.push_back(Magick::Color("blue"));
-  colors.push_back(Magick::Color("brown"));
-  colors.push_back(Magick::Color("pink"));
-  colors.push_back(Magick::Color("gray"));
-
-  clustering.writeClusters(centers);
-  vector<vector<float> > cools = clustering.readClusters();
-
-  for(size_t p = 0; p < cools.size(); p++){
-    cout << "patch " << p << " has "
-	 << cools[p].size() << " items" << endl;
-    for(size_t v = 0; v < cools[p].size(); v++)
-      cout << cools[p][v] << " ";
-    cout << endl;
-  }
-
-  for(size_t i = 0; i < dps.size(); i++){
-    MyImage image (dps[i].get_image_url());
-    Magick::Image mag = *image.getMagickImage();
-    for(int x = 0; x < 10; x++){
-      for(int y = 0; y < 10; y++){
-	const int index = 100 * i + 10 * x + y;
-	stringstream a;
-	a << classification[index] << "_" << index << "bla.jpg";
-	//image.save_sub_image(x, 10, y, 10, a.str());
-	int width = mag.columns();
-	int height = mag.rows();
-	int left = (x / (float) 10) * width;
-	int right = ((1 + x) / (float) 10) * width;
-	int up = (y / (float) 10) * height;
-	int down = ((1 + y) / (float) 10) * height;
-	Magick::Color color;
-	color.alpha(10.0);
-	mag.fillColor(color);
-	mag.strokeColor("red");
-	mag.draw(Magick::DrawableRectangle(left, up, right, down));
-	stringstream b;
-	b << classification[index];
-	mag.fillColor(colors[classification[index] % colors.size()]);
-	mag.strokeColor(color);
-
-	int tleft = left + 10;
-	int tup = up + 10;
-	if(tleft > width)
-	  tleft = left;
-	if(tup > height)
-	  tup = up;
-	Magick::DrawableText text(tleft, tup, b.str());
-	mag.draw(text);
-      }
-    }
-    stringstream out;
-    out << "bla_" << i << ".jpg";
-    mag.write(out.str());
-  
-  }
-  */
-}
 
 void resizeExperiment(){
   Magick::Geometry geo = Magick::Geometry(100,100);

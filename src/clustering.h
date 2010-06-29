@@ -9,11 +9,12 @@
 
 namespace vito{
 namespace clustering{
-  typedef std::vector<float>  patch;
-  typedef std::vector<patch> patch_collection;
 
-  typedef std::vector<int>    labels;
-  typedef std::vector<labels> label_collection;
+typedef std::vector<float>  patch;
+typedef std::vector<patch> patch_collection;
+
+typedef std::vector<int>    labels;
+typedef std::vector<labels> label_collection;
 
 class ClusteringAlgorithm{
 public:

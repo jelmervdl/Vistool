@@ -20,8 +20,14 @@
 #include <locale>
 #include <iomanip>
 
+#include "mpeg7.h"
+#include "patchExtractor.h"
+#include "kmeanshistogram.h"
 
-void printLibraries ();
+#include "classifierStack.h"
+
+
+void printLibraries();
 void one_class_test();
 void one_class_test2();
 

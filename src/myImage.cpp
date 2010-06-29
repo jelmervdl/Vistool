@@ -59,7 +59,7 @@ Blob *MyImage::getBlob(){
   return blob;
 }
 
-MyImage::MyImage(string loc){
+MyImage::MyImage(string loc, DataPoint dp_) : dp(dp_){
   location = loc;
   magick = 0;
   blob = 0;
@@ -68,7 +68,7 @@ MyImage::MyImage(string loc){
   height = getMagickImage()->rows();
 }
 
-MyImage::MyImage(const Image &image){
+MyImage::MyImage(const Image &image) : dp(DataPoint(0, "","","")){
   location = "";
   magick = new Image();
   blob = 0;

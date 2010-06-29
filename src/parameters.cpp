@@ -111,7 +111,7 @@ bool Parameters::compare(string str){
   return true;
 }
 
-void Parameters::readFile(char * str){
+void Parameters::readFile(const char * str){
   file = str;
   XMLPlatformUtils::Initialize();
   XercesDOMParser parser;

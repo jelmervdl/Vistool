@@ -119,6 +119,23 @@ float KMeansClustering::distance(const patch &a, const patch &b){
   return total_distance;
 }
 
+float KMeansClustering::total_distance_to_centers(const patch_collection &centers, 
+						  const patch_collection &patches){
+  float total = 0.0;
+  for(size_t i = 0; i < patches.size(); i++){
+    float smallest = -1.0;
+    for(size_t j = 0; j < centers.size(); j++){
+      const float current_distance = 
+	KMeansClustering::distance(centers[j], patches[i]);
+      cout << i <<  " " << j << " " << current_distance << endl;
+      if(smallest == -1 || current_distance < smallest)
+	smallest = current_distance;
+    }
+    total += smallest;
+  }
+  return total / (float) patches.size();
+}
+
 patch_collection KMeansClustering::cluster(const patch_collection &patches){
   const int kmeans = 50;
   cout << "clustering into " << kmeans << " means" << endl;
@@ -133,6 +150,8 @@ patch_collection KMeansClustering::cluster(const patch_collection &patches){
       float p_dist = KMeansClustering::distance(cluster_centers[j], new_centers[j]);
       distance_ += p_dist;
     }
+    cout << "total distance to centers: " << total_distance_to_centers(new_centers, patches) << endl;
+
     cout << "converging... distance now: " << distance_ << endl;
     cluster_centers = new_centers;
     if(old_distance == distance_)
@@ -140,6 +159,8 @@ patch_collection KMeansClustering::cluster(const patch_collection &patches){
   }
   return cluster_centers;
 }
+
+
 
 
 }}
