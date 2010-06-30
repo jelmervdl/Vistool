@@ -41,6 +41,7 @@ protected:
 
 public:
   ClassifierStack(std::vector<features::ClassifierSetup> s);
+  ~ClassifierStack();
 
   std::string      get_name();
   std::vector<int> classify(std::vector<DataPoint*> points);

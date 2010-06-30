@@ -49,7 +49,8 @@ vector<int> SVMClassifier::crossvalidation(vector<DataPoint*> files){
 void SVMClassifier::train(vector<DataPoint*> files){
   svm_problem   *problem = compileProblem(files);
   svm_parameter *parameter = getSVMParameters();
-  svm_model     *model = svm_train(problem, parameter);
+  model = svm_train(problem, parameter);
+  //model = model_;
   //print::print_svm_problem(problem);
   svm_save_model("model.svm", model);
   svm_destroy_problem(problem);
@@ -126,7 +127,7 @@ svm_parameter *SVMClassifier::getSVMParameters(){
 }
 
 vector<int> SVMClassifier::classify(vector<DataPoint*> data_points){
-  svm_model *model = svm_load_model("model.svm");
+  //svm_model *model = svm_load_model("model.svm");
   vector<int> results(data_points.size());
   for(int i = 0; i < (int) data_points.size(); ++i)
     results[i] = classify(data_points[i], model);
@@ -134,7 +135,7 @@ vector<int> SVMClassifier::classify(vector<DataPoint*> data_points){
 }
 
 int SVMClassifier::classify(DataPoint *data_point){
-  svm_model *model = svm_load_model("model.svm");
+  //svm_model *model = svm_load_model("model.svm");
   return classify(data_point, model);
 }
 

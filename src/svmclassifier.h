@@ -15,6 +15,9 @@ class SVMClassifier : public Classifier {
   using Classifier::crossvalidation;
 
  protected:
+
+  svm_model *model;
+
   virtual std::string         get_name();
 
   virtual double              dataPointLabel(const DataPoint &datapoint);

@@ -17,6 +17,7 @@ namespace features {
 ClassifierSetup::ClassifierSetup(Classifier *c, string xmlfile) : classifier(c){
   string old_name = Parameters::get_current_name();
   parameters = Parameters::getUnique();
+  Parameters::setUnique(parameters);
   Parameters::getInstance()->readFile(xmlfile.c_str());
   Parameters::select(old_name);
 }
@@ -33,6 +34,12 @@ ClassifierSetup::ClassifierSetup( Classifier *c) : classifier(c){
 void ClassifierSetup::train(vector<DataPoint*> dps){
   string previous_parameters = Parameters::get_current_name();
   Parameters::setUnique(parameters);
+  cout << "current hashable string is: " 
+       << Parameters::getInstance()->getHashableString() << endl;
+  cout << "the current hash is: " 
+       << Parameters::getInstance()->getCurrentHash() << endl;
+  for(size_t i = 0; i < dps.size(); i++)
+    FeatureExtractor::getInstance()->renewDescriptor(dps[i], false);
   classifier->train(dps);
   Parameters::select(previous_parameters);
 }
@@ -44,7 +51,6 @@ bool ClassifierSetup::isActive(){
 Descriptor ClassifierSetup::extract_(MyImage *image, 
 				     bool makevisres, 
 				     Image *representation){
-
   string previous_parameters = Parameters::get_current_name();
   Parameters::setUnique(parameters);
   FeatureExtractor *feature_extractor = FeatureExtractor::getInstance();
@@ -65,12 +71,40 @@ string ClassifierSetup::getParameterName(){
   return ss.str();
 }
 
-}
-
+} // features
 
 namespace classification {
 
-
+string ClassifierStack::get_name(){
+  return "some classifierstack";
 }
 
+ClassifierStack::ClassifierStack(vector<features::ClassifierSetup> s) : 
+  setups(s){
 }
+
+ClassifierStack::~ClassifierStack(){
+  //delete classifier
+}
+
+vector<int> ClassifierStack::classify(std::vector<DataPoint*> points){
+  return vector<int>();
+}
+
+int ClassifierStack::classify(DataPoint *point){
+  vector<DataPoint*> points(1);
+  points[0] = point;
+  return classify(points)[0];
+}
+
+void ClassifierStack::train(vector<DataPoint*> files){
+  cout << "training each classifier in stack:..." << endl;
+  for(size_t i = 0; i < setups.size(); ++i){
+    cout << "training classifier " << i << endl;
+    setups[i].train(files);
+  }
+}
+
+
+} // classification
+} // vito
