@@ -8,6 +8,11 @@ using namespace vito::optimization;
 using namespace vito::classification;
 using namespace std;
 
+void testClassifierStack(){
+  ClassifierSetup setup_1(NNClassifier::getInstance(), 
+			  "standard_color_histogram.xml");
+}
+
 void resizeExperiment(){
   Magick::Geometry geo = Magick::Geometry(100,100);
   Magick::Image magick = Magick::Image("beaver_resize.jpg");
@@ -23,9 +28,9 @@ void resizeExperiment(){
 
 int main(int argc, char ** argv){ 
   Parameters *p = Parameters::getInstance();
-  p->readFile((char *) "parameters.xml");
+  p->readFile("parameters.xml");
   //testMPEG7();
-  vector<DataPoint> dps;
+  testClassifierStack();
   if(argc > 1){
     Parameters * p = Parameters::getInstance();
     p->readFile((char *) "parameters.xml");
@@ -151,6 +156,7 @@ void one_class_test2(){
   dataset.enableCategory("emu");
   dataset.enableCategory("bass");
   dataset.enableCategory("ant");
+
   vector<DataPoint> others = dataset.enabledPoints();
 
   others.insert(others.end(), test.begin(), test.end());

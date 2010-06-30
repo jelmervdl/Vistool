@@ -13,3 +13,6 @@ TAGS
 java_src/imageHandling.h
 *.jpg
 *.png
+*.bin
+*.svm
+*.model

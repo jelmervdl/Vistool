@@ -11,8 +11,13 @@
 
 namespace vito{
 
+namespace features{
+class ClassifierSetup;
+}
+
 class MyImage{
- private:
+  friend class features::ClassifierSetup;
+ protected:
   DataPoint dp;
   size_t width, height;
   std::string location;

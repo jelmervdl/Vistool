@@ -54,7 +54,7 @@ class Parameters : public Multiton<Parameters>{
   std::string getFile();
 
   // Read in a parameter file, can be done incrementally
-  void        readFile(const char * str);
+  void        readFile(std::string str);
 
   // save a new real parameter under a string name
   void        saveReal(std::string str, 

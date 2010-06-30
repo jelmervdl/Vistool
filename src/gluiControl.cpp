@@ -17,7 +17,6 @@ void initGlui(){
   state.main_gui = GLUI_Master.create_glui( "Control", 0, 800, 0 );
 
   state.parameter_panel = new ParameterPanel();
-  FeatureSelectionWindow *feat_sel_win = FeatureSelectionWindow::getInstance();
 
   GLUI_Panel *window_control = state.main_gui->add_panel("window control");
   state.main_gui->add_button_to_panel(window_control,

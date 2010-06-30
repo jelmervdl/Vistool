@@ -26,10 +26,10 @@
 
 #include "classifierStack.h"
 
-
 void printLibraries();
 void one_class_test();
 void one_class_test2();
+void testClassifierStack();
 
 #endif
 

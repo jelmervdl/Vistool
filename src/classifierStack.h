@@ -7,7 +7,7 @@
 namespace vito{
 namespace features{
 
-/* defines the setup of a classification pipeline, nameing a set of
+/* defines the setup of a classification pipeline, naming a set of
    features and a classifier */
 class ClassifierSetup : public Feature{
 protected:
@@ -17,7 +17,7 @@ protected:
 public:
   ClassifierSetup(classification::Classifier *c);
   ClassifierSetup(classification::Classifier *c, 
-				   std::string xmlfile);
+		  std::string xmlfile);
 
 
   void        train(std::vector<DataPoint*>);
@@ -35,7 +35,6 @@ namespace classification{
 /* defines a classifier Stack, using several ClassifierSetups to
    define the features and classification to be extracted which then
    serve as a feature to a stacked classifier */
-
 class ClassifierStack : public Classifier {
 protected:
   std::vector<features::ClassifierSetup> setups;

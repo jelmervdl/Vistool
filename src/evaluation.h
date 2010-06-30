@@ -39,6 +39,7 @@ public:
   size_t                  getInstances();
   float                   getPrecision();
   
+
   // returns the all points classified as a certain label
   std::vector<DataPoint*> getInstancesClassifiedAs(int cl);
 

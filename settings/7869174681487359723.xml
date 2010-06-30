@@ -1,0 +1,46 @@
+<?xml version = "1.0" encoding='UTF-8'?>
+<!-- Mon May 31 12:31:06 2010 -->
+<!-- settings/7869174681487359723.xml -->
+
+<parameters>
+
+<integer>
+<cross_validation_k> 10 </cross_validation_k>
+<feature_histogram> 0 </feature_histogram>
+<feature_mpeg7_color_layout> 0 </feature_mpeg7_color_layout>
+<feature_mpeg7_edge_histogram> 0 </feature_mpeg7_edge_histogram>
+<feature_mpeg7_scalable_color> 1 </feature_mpeg7_scalable_color>
+<feature_sift> 0 </feature_sift>
+<histogram_hbins> 10 </histogram_hbins>
+<histogram_sbins> 10 </histogram_sbins>
+<knn_classifier_k> 1 </knn_classifier_k>
+<segmentsvm_segment_type> 0 </segmentsvm_segment_type>
+<segmentsvm_subsquare_hist_count> 4 </segmentsvm_subsquare_hist_count>
+<sift_auto_window_size_type> 1 </sift_auto_window_size_type>
+<sift_blur_toggle> 0 </sift_blur_toggle>
+<sift_blur_window> 10 </sift_blur_window>
+<sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
+<sift_keypoint_pixel_window> -1 </sift_keypoint_pixel_window>
+<sift_number_of_keypoints_x> 8 </sift_number_of_keypoints_x>
+<sift_number_of_keypoints_y> 8 </sift_number_of_keypoints_y>
+<sift_orientation_directions> 8 </sift_orientation_directions>
+<svm_degree> 16 </svm_degree>
+<svm_nr_weight> 0 </svm_nr_weight>
+<svm_probability> 1 </svm_probability>
+<svm_shrinking> 1 </svm_shrinking>
+</integer>
+
+<real>
+<one_class_gamma> 0.5 </one_class_gamma>
+<one_class_nu> 0.25 </one_class_nu>
+<sift_blur_std> 2 </sift_blur_std>
+<svm_C> 16 </svm_C>
+<svm_cache_size> 1024 </svm_cache_size>
+<svm_coef0> 15 </svm_coef0>
+<svm_eps> 0.64 </svm_eps>
+<svm_gamma> 1 </svm_gamma>
+<svm_nu> 0.001 </svm_nu>
+<svm_p> 0 </svm_p>
+</real>
+
+</parameters>

@@ -21,12 +21,6 @@ vector<Classifier*> getExistingClassifiers(){
 }
 
 Classifier *getExistingClassifier(int i){
-  cout << "hi" << endl;
-  vector<Classifier*> ex = getExistingClassifiers();
-  cout << "lookng for: " <<  i << endl;
-  cout << "in total we have " << ex.size() << endl;
-  Classifier *c = ex[i];
-  cout << "c: " << c->get_name() << endl;
   return getExistingClassifiers()[i];
 }
 

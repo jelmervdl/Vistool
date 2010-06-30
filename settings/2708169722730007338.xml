@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding='UTF-8'?>
+<!-- Mon Apr 26 10:55:21 2010 -->
+<!-- settings/2708169722730007338.xml -->
+
+<parameters>
+
+<integer>
+<cross_validation_k> 10 </cross_validation_k>
+<feature_histogram> 0 </feature_histogram>
+<feature_sift> 1 </feature_sift>
+<histogram_hbins> 10 </histogram_hbins>
+<histogram_sbins> 10 </histogram_sbins>
+<knn_classifier_k> 1 </knn_classifier_k>
+<sift_auto_window_size_type> 1 </sift_auto_window_size_type>
+<sift_blur_toggle> 0 </sift_blur_toggle>
+<sift_blur_window> 3 </sift_blur_window>
+<sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
+<sift_keypoint_pixel_window> -1 </sift_keypoint_pixel_window>
+<sift_number_of_keypoints_x> 5 </sift_number_of_keypoints_x>
+<sift_number_of_keypoints_y> 5 </sift_number_of_keypoints_y>
+<sift_orientation_directions> 16 </sift_orientation_directions>
+<svm_degree> 16 </svm_degree>
+<svm_nr_weight> 0 </svm_nr_weight>
+<svm_probabiity> 0 </svm_probabiity>
+<svm_probability> 1 </svm_probability>
+<svm_shrinking> 1 </svm_shrinking>
+</integer>
+
+<real>
+<sift_blur_std> 2 </sift_blur_std>
+<svm_C> 50 </svm_C>
+<svm_cache_size> 1024 </svm_cache_size>
+<svm_coef0> 15 </svm_coef0>
+<svm_eps> 0.64 </svm_eps>
+<svm_gamma> 10 </svm_gamma>
+<svm_nu> 0 </svm_nu>
+<svm_p> 0 </svm_p>
+</real>
+
+</parameters>

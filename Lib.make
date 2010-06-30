@@ -16,7 +16,8 @@ ifeq ("$(shell uname)", "Darwin")
 
 #Configed Libs
 	#Lib_Magickpp = `GraphicsMagick-config --cppflags --cflags --ldflags --libs`
-	Lib_Magickpp = `Magick++-config --cppflags --cxxflags --ldflags --libs`
+	#Lib_Magickpp = `Magick++-config --cppflags --cxxflags --ldflags --libs`
+	Lib_Magickpp = -I/usr/local/include/ImageMagick	-g -O2 -Wall -W -D_THREAD_SAFE -L/usr/local/lib -L/opt/local/lib -L/opt/local/lib -L/usr/local/lib -lMagick++ -lMagickWand -lMagickCore -ltiff -lfreetype -ljasper -ljpeg -lpng -lfftw3 -L/opt/local/lib -lfontconfig -lexpat -lfreetype -lz -liconv -lXext -lXt -lSM -lICE -lX11 -lbz2 -lxml2 -L/opt/local/lib -lgvc -lgraph -lcdt -lz -lm -lgomp -lclparser -framework OpenCL -L/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries -lm -lpthread -lltdl
 
 #Libraries
 	Lib_PNG      = -lpng

@@ -111,14 +111,14 @@ bool Parameters::compare(string str){
   return true;
 }
 
-void Parameters::readFile(const char * str){
+void Parameters::readFile(string str){
   file = str;
   XMLPlatformUtils::Initialize();
   XercesDOMParser parser;
   parser.setValidationScheme(XercesDOMParser::Val_Always);
   HandlerBase errHandler;// = (ErrorHandler*) new HandlerBase();
   parser.setErrorHandler(&errHandler);
-  parser.parse(str);
+  parser.parse(str.c_str());
   DOMDocument * doc = parser.getDocument();
   DOMElement* elementRoot = doc->getDocumentElement();
 

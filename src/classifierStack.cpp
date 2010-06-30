@@ -42,12 +42,13 @@ bool ClassifierSetup::isActive(){
 }
 
 Descriptor ClassifierSetup::extract_(MyImage *image, 
-				 bool makevisres, 
-				 Image *representation){
+				     bool makevisres, 
+				     Image *representation){
+
   string previous_parameters = Parameters::get_current_name();
   Parameters::setUnique(parameters);
-  //FeatureExtractor *feature_extractor = FeatureExtractor::getInstance();
-  //vector<float> descriptor = feature_extractor->get
+  FeatureExtractor *feature_extractor = FeatureExtractor::getInstance();
+  vector<float> descriptor = feature_extractor->getDescriptor(&image->dp);
   Parameters::select(previous_parameters);
   Descriptor desc;
   return desc;
@@ -61,8 +62,6 @@ string ClassifierSetup::getParameterName(){
   stringstream ss;
   ss << "activation_values_of_a" << classifier->get_name()
      << "with_settings:_" << hash;
-  //for(size_t i = 0; i < features.size(); i++)
-  //  ss << features[i]->getParameterName() << "_";
   return ss.str();
 }
 
