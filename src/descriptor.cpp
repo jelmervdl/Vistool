@@ -16,4 +16,11 @@ void Descriptor::print() const{
     printf("%.5f ", at(i));
 }
 
+int Example::get_label(){
+  return label;
+}
+
+void Example::Example(int lab) : label(lab){
+}
+
 }

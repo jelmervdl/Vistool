@@ -19,5 +19,19 @@ class Descriptor : public std::vector<float>{
 
 };
 
+class Example : public Descriptor{
+private:
+  int label;
+public:
+  void set_label();
+  int get_label();
+};
+
+class DescriptorCollection : public vector<Descriptor> {
+};
+
+class ExampleCollection : public vector<Example> {
+};
+
 }
 #endif

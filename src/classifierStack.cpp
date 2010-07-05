@@ -100,6 +100,7 @@ int ClassifierStack::classify(DataPoint *point){
 }
 
 void ClassifierStack::train(vector<DataPoint*> files){
+  // train every classifier In the Stack
   cout << "training each classifier in stack:..." << endl;
   for(size_t i = 0; i < setups.size(); ++i){
     cout << "training classifier " << i << endl;
