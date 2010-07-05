@@ -25,6 +25,12 @@ class MyImage{
   Magick::Blob * blob;
   cv::Mat * mat;
  public:
+  MyImage(const DataPoint &dp);
+  MyImage();
+  MyImage(std::string loc, DataPoint dp);
+  MyImage(const Magick::Image &image);
+  ~MyImage();
+
   size_t          get_width();
   size_t          get_height();
   Magick::Image  *getMagickImage();
@@ -47,9 +53,6 @@ class MyImage{
   MyImage         getSubImage(int x, int x_segments, 
 			      int y, int y_segments) ;
   //constructors:
-  MyImage(std::string loc, DataPoint dp);
-  MyImage(const Magick::Image &image);
-  ~MyImage();
 };
 
 }

@@ -5,6 +5,7 @@ using std::vector;
 using std::string;
 using std::cout;
 using std::endl;
+using std::ostream_iterator;
 using Magick::Image;
 
 namespace vito{
@@ -54,9 +55,10 @@ Descriptor ClassifierSetup::extract_(MyImage *image,
   string previous_parameters = Parameters::get_current_name();
   Parameters::setUnique(parameters);
   FeatureExtractor *feature_extractor = FeatureExtractor::getInstance();
-  vector<float> descriptor = feature_extractor->getDescriptor(&image->dp);
+  int result = classifier->classify(&image->dp);
   Parameters::select(previous_parameters);
-  Descriptor desc;
+  Descriptor desc(1);
+  desc[0] = (float) result;
   return desc;
 }
 
@@ -102,6 +104,17 @@ void ClassifierStack::train(vector<DataPoint*> files){
   for(size_t i = 0; i < setups.size(); ++i){
     cout << "training classifier " << i << endl;
     setups[i].train(files);
+  }
+  for(size_t i = 0; i < files.size(); i++){
+    const DataPoint &current_datapoint = *files[i];
+    for(size_t j = 0; j < setups.size(); j++){
+      MyImage image(current_datapoint);
+      Descriptor aap = setups[j].extract(&image);
+      cout << "datapoint : " << i 
+	   << ", features : " << j << ", descriptors:" ;
+      copy(aap.begin(), aap.end(), ostream_iterator<int> (cout, ", "));
+      cout << endl;
+    }
   }
 }
 

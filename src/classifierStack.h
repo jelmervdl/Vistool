@@ -1,6 +1,9 @@
 #ifndef CLASSIFIERSTACK_H
 #define CLASSIFIERSTACK_H
 
+// #include <algorithm>
+// #include <iostream>
+// #include <iterator>
 #include "classifier.h"
 #include "feature.h"
 
@@ -40,6 +43,10 @@ protected:
   std::vector<features::ClassifierSetup> setups;
 
 public:
+
+  using Classifier::train;
+  using Classifier::classify;
+
   ClassifierStack(std::vector<features::ClassifierSetup> s);
   ~ClassifierStack();
 
@@ -47,6 +54,7 @@ public:
   std::vector<int> classify(std::vector<DataPoint*> points);
   int              classify(DataPoint *point);
   void             train(std::vector<DataPoint*> files);
+
 };
 
 }

@@ -8,19 +8,22 @@ using namespace vito::optimization;
 using namespace vito::classification;
 using namespace std;
 
+
 void testClassifierStack(){
   Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
   dataset.enableCategory("accordion");
   dataset.enableCategory("emu");
+  vector<DataPoint> train, test;
+  dataset.randomDataSplit(&train, &test);
   vector<ClassifierSetup> to_stack;
   to_stack.push_back(ClassifierSetup (new NNClassifier, 
 				      "standard_color_histogram.xml") );
   to_stack.push_back(ClassifierSetup(new NNClassifier, 
 				     "standard_mpeg7_edge_histogram.xml"));
   ClassifierStack classifier_stacker(to_stack);
-  vector<DataPoint*>  enabled_data_points = dataset.enabledDataPoints();
-  classifier_stacker.train(enabled_data_points);
-
+  classifier_stacker.train(&train);
+  vector<int> result = classifier_stacker.classify(&test);
+  //Evaluation eval(&test, &result);  
 }
 
 void resizeExperiment(){

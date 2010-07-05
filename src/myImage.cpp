@@ -59,6 +59,16 @@ Blob *MyImage::getBlob(){
   return blob;
 }
 
+MyImage::MyImage(const DataPoint &dp_) : 
+  dp(dp_),
+  location(dp.get_image_url()),
+  magick(0),
+  blob(0),
+  mat(0){
+  width = getMagickImage()->columns();
+  height = getMagickImage()->rows();
+}
+
 MyImage::MyImage(string loc, DataPoint dp_) : dp(dp_){
   location = loc;
   magick = 0;
