@@ -9,16 +9,17 @@ using classification::NNClassifier;
 using classification::SVMClassifier;
 
 void train(){
-  cout << "yeah" << endl;
   ToolState &state = *ToolState::getInstance();
-  extractFeatures();
+  // create train and test set
   state.train_data.clear();
   state.test_data.clear();
-  state.current_db.randomDataSplit(&state.train_data, &state.test_data, 0.5, true);
+  state.current_db.randomDataSplit(&state.train_data, &state.test_data,
+				   0.5, true); // make a 50/50 split
+  // get Active classification Object
   state.current_classifier = getExistingClassifier(state.enabled_classifier);
-  cout << "yeah" << endl;
-  state.current_classifier->train(&state.train_data);
-  cout << "yeaoh" << endl;
+  ExampleCollection examples = 
+    features::FeatureExtractor::getInstance()->getExamples(state.train_data);
+  state.current_classifier->train(examples);
   for(vector<int>::iterator cl = state.current_classes.begin(); 
       cl != state.current_classes.end(); 
       cl++)
@@ -38,14 +39,16 @@ void classify(){
   if(state.current_classifier == NULL)
     train();
   vector<DataPoint> enabsp = state.current_db.enabledPoints();
-  state.test_result = state.current_classifier->classify(&state.test_data);
+  DescriptorCollection descriptors =
+    features::FeatureExtractor::getInstance()->getDescriptors(state.test_data);
+  state.test_result = state.current_classifier->classify(descriptors);
   if(!state.current_classifier->single_class())
-    state.current_evaluation = Evaluation(&state.test_data, 
-					      &state.test_result);
+    state.current_evaluation = Evaluation(state.test_data, 
+					  state.test_result);
   else
-    state.current_evaluation = Evaluation(&state.test_data, 
-					      &state.test_result,
-					      state.one_class_target);
+    state.current_evaluation = Evaluation(state.test_data, 
+					  state.test_result,
+					  state.one_class_target);
   viewDataset();
   showStatistics();
 }
@@ -54,9 +57,11 @@ void non_set_classify(){
   ToolState &state = *ToolState::getInstance();
   if(state.current_classifier == NULL)
     train();
-  vector<DataPoint*> points = state.current_db.enabledDataPoints(false);
-  state.test_result = state.current_classifier->classify(points);
-  state.current_evaluation = Evaluation(points, state.test_result);
+  DataPointCollection datapoints = state.current_db.enabledPoints(false);
+  DescriptorCollection descriptors = 
+    features::FeatureExtractor::getInstance()->getDescriptors(datapoints);
+  state.test_result = state.current_classifier->classify(descriptors);
+  state.current_evaluation = Evaluation(datapoints, state.test_result);
   viewDataset();
   showStatistics();
 }

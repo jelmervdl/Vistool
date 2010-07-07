@@ -7,54 +7,28 @@ namespace evaluation{
 Evaluation::Evaluation(){
 }
 
-Evaluation::Evaluation(vector<DataPoint*> &dps, 
-		       vector<int> &cls){
+Evaluation::Evaluation(const DataPointCollection &dps, 
+		       const LabelCollection &cls){
   instances = 0;
   correct = 0;
-  for(size_t dp_idx = 0; dp_idx < dps.size(); ++dp_idx){
-    DataPoint*&dp = dps[dp_idx];
+  for(vector<DataPoint>::const_iterator dp = dps.begin();
+      dp != dps.end(); ++dp){
     map_total_to_label[dp->get_label()] = 0;
     map_correct_to_label[dp->get_label()] = 0;
   }
+  cout << "dps is of size " << dps.size() 
+       << " and cls of size " << cls.size() << endl;
   if(dps.size() != cls.size())
-    throw 1;
+    throw "bla";
   for(size_t i = 0; i < dps.size(); ++i){
     instances++;
-    map_total_to_label[dps[i]->get_label()]++;
+    map_total_to_label[dps[i].get_label()]++;
     cout << ".";
-    if((int) dps[i]->get_label() == cls[i]){
+    if((int) dps[i].get_label() == cls[i]){
       correct++;
-      map_correct_to_label[dps[i]->get_label()]++;
+      map_correct_to_label[dps[i].get_label()]++;
     }
-    classificationmap[ cls[i] ].push_back(dps[i]);
-  }
-  precision = (float) correct  / (float ) instances ;
-  cout << instances << endl;
-
-}
-
-
-Evaluation::Evaluation(vector<DataPoint> * dps, vector<int> * cls){
-  instances = 0;
-  correct = 0;
-  for(vector<DataPoint>::iterator dp = dps->begin();
-      dp != dps->end(); ++dp){
-    map_total_to_label[dp->get_label()] = 0;
-    map_correct_to_label[dp->get_label()] = 0;
-  }
-  cout << "dps is of size " << dps->size() 
-       << " and cls of size " << cls->size() << endl;
-  if(dps->size() != cls->size())
-    throw "bla";
-  for(size_t i = 0; i < dps->size(); ++i){
-    instances++;
-    map_total_to_label[dps->at(i).get_label()]++;
-    cout << ".";
-    if((int) dps->at(i).get_label() == cls->at(i)){
-      correct++;
-      map_correct_to_label[dps->at(i).get_label()]++;
-    }
-    classificationmap[cls->at(i)].push_back(&dps->at(i));
+    classificationmap[cls[i]].push_back(&dps[i]);
   }
   precision = (float) correct  / (float ) instances ;
   cout << instances << endl;
@@ -70,7 +44,7 @@ float Evaluation::getPrecision(){
   return precision;
 }
 
-vector<DataPoint *> Evaluation::getInstancesClassifiedAs(int cl){
+vector<const DataPoint *> Evaluation::getInstancesClassifiedAs(int cl){
   return classificationmap[cl];
 }
 void Evaluation::print(){
@@ -86,9 +60,9 @@ map<int, int> Evaluation::getTotalMap(){
   return map_total_to_label;
 }
 
-Evaluation::Evaluation(vector<DataPoint> * dps,
-	   vector<int> * classification,
-	   int one_class_t){
+Evaluation::Evaluation(const DataPointCollection &dps,
+			const LabelCollection &classification,
+			int one_class_t){
   cout << "one class evaluation!" << endl;
 }
 

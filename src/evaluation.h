@@ -1,6 +1,7 @@
 #ifndef EVALUATION_H
 #define EVALUATION_H
 
+#include "labels.h"
 #include "dataset.h"
 
 namespace vito{
@@ -18,18 +19,17 @@ private:
   std::map<int, int> map_correct_to_label;
   std::map<int, int> map_total_to_label;
 
-  std::map<int, std::vector<DataPoint*> > classificationmap;
+  std::map<int, std::vector<const DataPoint*> > classificationmap;
 
 public:
   // constructors 
-                          Evaluation();
-                          Evaluation(std::vector<DataPoint*> &dps,
-				     std::vector<int> &cls);
-                          Evaluation(std::vector<DataPoint> * dps,
-				     std::vector<int> * classification);
-                          Evaluation(std::vector<DataPoint> * dps,
-				     std::vector<int> * classification,
-				     int one_class_t);
+  Evaluation();
+  Evaluation(const DataPointCollection &dps, 
+	     const LabelCollection &cls);
+  Evaluation(const DataPointCollection &dps,
+	     const LabelCollection &classification,
+	     int one_class_t);
+
 
   // print a summary of this evaluation
   void                    print();
@@ -41,7 +41,7 @@ public:
   
 
   // returns the all points classified as a certain label
-  std::vector<DataPoint*> getInstancesClassifiedAs(int cl);
+  std::vector<const DataPoint*> getInstancesClassifiedAs(int cl);
 
   // classmap getters
   std::map<int, int>      getCorrectMap();

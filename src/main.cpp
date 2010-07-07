@@ -13,7 +13,7 @@ void testClassifierStack(){
   Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
   dataset.enableCategory("accordion");
   dataset.enableCategory("emu");
-  vector<DataPoint> train, test;
+  DataPointCollection train, test;
   dataset.randomDataSplit(&train, &test);
   vector<ClassifierSetup> to_stack;
   to_stack.push_back(ClassifierSetup (new NNClassifier, 
@@ -21,8 +21,16 @@ void testClassifierStack(){
   to_stack.push_back(ClassifierSetup(new NNClassifier, 
 				     "standard_mpeg7_edge_histogram.xml"));
   ClassifierStack classifier_stacker(to_stack);
-  classifier_stacker.train(&train);
-  vector<int> result = classifier_stacker.classify(&test);
+  FeatureExtractor *fe = FeatureExtractor::getInstance();
+  {
+    ExampleCollection examples = fe->getExamples(train);
+    classifier_stacker.train(examples);
+  }
+  LabelCollection result;
+  {
+    DescriptorCollection descriptors = fe->getDescriptors(test);
+    result = classifier_stacker.classify(descriptors);
+  }
   //Evaluation eval(&test, &result);  
 }
 
@@ -43,7 +51,7 @@ int main(int argc, char ** argv){
   Parameters *p = Parameters::getInstance();
   p->readFile("parameters.xml");
   //testMPEG7();
-  testClassifierStack();
+  //testClassifierStack();
   if(argc > 1){
     Parameters * p = Parameters::getInstance();
     p->readFile((char *) "parameters.xml");
@@ -55,8 +63,8 @@ int main(int argc, char ** argv){
       start(1,argv);
       return 0;
     }if(mode == "optimize"){
-      ParameterOptimization opt(&vito::optimization::evaluateOneClassSVM);
-      opt.optimize();
+      //ParameterOptimization opt(&vito::optimization::evaluateOneClassSVM);
+      //opt.optimize();
     }
   }  
   return 0;
@@ -150,7 +158,7 @@ void one_class_test(){
   cout << "value: " << res[0] << endl;
   }
 }
-
+/*
 void one_class_test2(){
   Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
   dataset.enableCategory("accordion");
@@ -194,4 +202,4 @@ void one_class_test2(){
        << "recall: " << correct / (double) total << endl;
   cout << "ya done" << endl;
 }
-
+*/

@@ -12,9 +12,9 @@ class Descriptor : public std::vector<float>{
     return left;
   }
  public:
-  Descriptor();
-  Descriptor(std::vector<float> a);
-  Descriptor(int size);
+  Descriptor() : std::vector<float>(){}
+  Descriptor(std::vector<float> a) : std::vector<float>(a){}
+  Descriptor(int size) : std::vector<float>(size){}
   void print() const;
 
 };
@@ -23,14 +23,22 @@ class Example : public Descriptor{
 private:
   int label;
 public:
-  void set_label();
-  int get_label();
+  Example() : Descriptor() {}
+  Example(size_t size) : Descriptor(size) {}
+  Example(std::vector<float> values) : Descriptor(values) {}
+  void set_label(const int i);
+  int get_label() const;
 };
 
-class DescriptorCollection : public vector<Descriptor> {
+class DescriptorCollection : public std::vector<Descriptor> {
+public:
+  DescriptorCollection(size_t size) : std::vector<Descriptor> (size) {}
 };
 
-class ExampleCollection : public vector<Example> {
+class ExampleCollection : public std::vector<Example> {
+public:
+  ExampleCollection() : std::vector<Example>() {}
+  ExampleCollection(size_t size) : std::vector<Example>(size){}
 };
 
 }

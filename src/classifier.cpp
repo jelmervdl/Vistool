@@ -7,11 +7,11 @@ using std::endl;
 namespace vito{
 namespace classification{
 
-LabelCollection Classifier::classify(DescriptorCollection descriptors){
+LabelCollection Classifier::classify(const DescriptorCollection &descriptors){
   LabelCollection labels(descriptors.size());
-  transform(descriptors.begin(), descriptors.end(), 
-	    labels.begin(), mem_fun(*Classifier::classify));
-
+  for(size_t i = 0; i < descriptors.size(); ++i)
+    labels[i] = classify(descriptors[i]);
+  return labels;
 }
 
 
@@ -35,8 +35,10 @@ LabelCollection Classifier::crossvalidation(const ExampleCollection &files){
 	test_set.push_back(files[i]);
       else
 	training_set.push_back(files[i]);
-    train(training_set); // train on subgroup
-    LabelCollection bin_results = classify(test_set); // classify test set
+    // train on subgroup
+    train(training_set); 
+    // classify test set
+    LabelCollection bin_results = classify((DescriptorCollection&) test_set); 
     // fill in results of last classification
     for(int i = bin_min; i < bin_max; ++i)
       results[i] = bin_results[i - bin_min];

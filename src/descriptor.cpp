@@ -4,23 +4,18 @@ using std::vector;
 
 namespace vito{
 
-Descriptor::Descriptor(vector<float> vec): vector<float>(vec){
-}
-Descriptor::Descriptor(int size): vector<float>(size){
-}
-Descriptor::Descriptor(): vector<float>(){
-}
-
 void Descriptor::print() const{
   for(size_t i =0; i < size(); ++i)
     printf("%.5f ", at(i));
 }
 
-int Example::get_label(){
+int Example::get_label() const{
   return label;
 }
-
-void Example::Example(int lab) : label(lab){
+void Example::set_label(const int l){
+  label = l;
 }
+
+
 
 }

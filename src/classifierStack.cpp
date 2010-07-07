@@ -32,16 +32,14 @@ ClassifierSetup::ClassifierSetup( Classifier *c) : classifier(c){
   Parameters::select(old_name);
 }
 
-void ClassifierSetup::train(vector<DataPoint*> dps){
+void ClassifierSetup::train(const ExampleCollection &descriptors){
   string previous_parameters = Parameters::get_current_name();
   Parameters::setUnique(parameters);
   cout << "current hashable string is: " 
        << Parameters::getInstance()->getHashableString() << endl;
   cout << "the current hash is: " 
        << Parameters::getInstance()->getCurrentHash() << endl;
-  for(size_t i = 0; i < dps.size(); i++)
-    FeatureExtractor::getInstance()->renewDescriptor(dps[i], false);
-  classifier->train(dps);
+  classifier->train(descriptors);
   Parameters::select(previous_parameters);
 }
 
@@ -54,8 +52,7 @@ Descriptor ClassifierSetup::extract_(MyImage *image,
 				     Image *representation){
   string previous_parameters = Parameters::get_current_name();
   Parameters::setUnique(parameters);
-  FeatureExtractor *feature_extractor = FeatureExtractor::getInstance();
-  int result = classifier->classify(&image->dp);
+  int result;// = classifier->classify(&image->dp);
   Parameters::select(previous_parameters);
   Descriptor desc(1);
   desc[0] = (float) result;
@@ -77,9 +74,6 @@ string ClassifierSetup::getParameterName(){
 
 namespace classification {
 
-string ClassifierStack::get_name(){
-  return "some classifierstack";
-}
 
 ClassifierStack::ClassifierStack(vector<features::ClassifierSetup> s) : 
   setups(s){
@@ -89,34 +83,22 @@ ClassifierStack::~ClassifierStack(){
   //delete classifier
 }
 
-vector<int> ClassifierStack::classify(std::vector<DataPoint*> points){
-  return vector<int>();
+string ClassifierStack::get_name(){
+  return "some classifierstack";
 }
 
-int ClassifierStack::classify(DataPoint *point){
-  vector<DataPoint*> points(1);
-  points[0] = point;
-  return classify(points)[0];
+int ClassifierStack::classify(const Descriptor &descriptor){
+  return 0;
 }
 
-void ClassifierStack::train(vector<DataPoint*> files){
+void ClassifierStack::train(const ExampleCollection &examples){
   // train every classifier In the Stack
   cout << "training each classifier in stack:..." << endl;
   for(size_t i = 0; i < setups.size(); ++i){
     cout << "training classifier " << i << endl;
-    setups[i].train(files);
+    setups[i].train(examples);
   }
-  for(size_t i = 0; i < files.size(); i++){
-    const DataPoint &current_datapoint = *files[i];
-    for(size_t j = 0; j < setups.size(); j++){
-      MyImage image(current_datapoint);
-      Descriptor aap = setups[j].extract(&image);
-      cout << "datapoint : " << i 
-	   << ", features : " << j << ", descriptors:" ;
-      copy(aap.begin(), aap.end(), ostream_iterator<int> (cout, ", "));
-      cout << endl;
-    }
-  }
+  // train the stacktop classifier
 }
 
 

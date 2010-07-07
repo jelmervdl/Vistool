@@ -21,11 +21,13 @@ void crossValidate(){
   state.train_data.clear();
   state.test_data.clear();
   state.current_classifier = getExistingClassifier(state.enabled_classifier);
-  vector<DataPoint> enabsp = state.current_db.enabledPoints();
+  DataPointCollection enabsp = state.current_db.enabledPoints();
   random_shuffle(enabsp.begin(), enabsp.end());
   state.train_data = enabsp;
   state.test_data = enabsp;
-  state.test_result = state.current_classifier->crossvalidation(&enabsp);
+  ExampleCollection examples =
+    features::FeatureExtractor::getInstance()->getExamples(state.train_data);
+  state.test_result = state.current_classifier->crossvalidation(examples);
   for(vector<int>::iterator cl = state.current_classes.begin(); 
       cl != state.current_classes.end(); 
       cl++)
@@ -40,7 +42,7 @@ void crossValidate(){
   cout << "size of enabsp " << enabsp.size() << " and train: " 
        << state.train_data.size() << " and the test results " 
        << state.test_result.size() << endl;
-  state.current_evaluation = Evaluation(&state.train_data, &state.test_result);
+  state.current_evaluation = Evaluation(state.train_data, state.test_result);
   viewDataset();
   showStatistics();
 }

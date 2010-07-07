@@ -17,11 +17,11 @@ public:
   // pure methods
   virtual std::string      get_name() = 0;
   virtual void             train(const ExampleCollection &examples ) = 0;
-  virtual int              classify() = 0;
+  virtual Label            classify(const Descriptor &descriptor ) = 0;
 
   // generic methods
-  virtual LabelCollection  crossvalidation(const ExampleCollection &files);
-  virtual LabelCollection  classify(DescriptorCollection descriptor);
+  LabelCollection  crossvalidation(const ExampleCollection &files);
+  LabelCollection  classify(const DescriptorCollection &descriptor);
 
 
 };

@@ -13,18 +13,16 @@ namespace classification{
  
 class NNClassifier : public Classifier, public Singleton<NNClassifier> {
  private:
-  CvKNearest * knn;
+  CvKNearest * knn; // the model
  public:
   NNClassifier();
-
-  std::string get_name();
-
-  std::vector<int> crossvalidation(std::vector<DataPoint> * files);
-  void clean();
-  void train(std::vector<DataPoint*> dps);
-  int         classify(DataPoint* point);
-  std::vector<int> classify(std::vector<DataPoint*> point);
   ~NNClassifier();
+
+  std::string      get_name();
+  void             clean();
+  void             train(const ExampleCollection &examples);
+  Label              classify(const Descriptor &descriptor );
+
 };
 
 }}

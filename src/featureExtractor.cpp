@@ -17,10 +17,11 @@ namespace features{
 using write::readDescriptor;
 using write::writeDescriptor;
 
-  vector<float> FeatureExtractor::getDescriptor(DataPoint * dp, const bool force){
+  vector<float> FeatureExtractor::getDescriptor(const DataPoint &dp,
+						const bool force){
   renewDescriptor(dp, force);
   vector<float>  descriptor;
-  readDescriptor(&descriptor, getCurrentDescriptorLocation(*dp));
+  readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
   return descriptor;
 }
    
@@ -40,7 +41,7 @@ using write::writeDescriptor;
       create_directory(p);
     }
     for(vector<DataPoint>::iterator file = files->begin(); file != files->end(); ++file ){
-      renewDescriptor(&*file, force);
+      renewDescriptor(*file, force);
     }
   }
 }
@@ -79,17 +80,17 @@ string FeatureExtractor::getCurrentDescriptorLocation(const DataPoint &dp){
   return final_descriptor_location.str();
 }
 
-void FeatureExtractor::renewDescriptor(DataPoint * dp, const bool force){
-  string final_descriptor_location = getCurrentDescriptorLocation(*dp);
+void FeatureExtractor::renewDescriptor(const DataPoint &dp, const bool force){
+  string final_descriptor_location = getCurrentDescriptorLocation(dp);
   if(force || !exists(path(final_descriptor_location))) {
-    MyImage image(dp->get_image_url(), *dp);
+    MyImage image(dp.get_image_url(), dp);
     vector<float> descriptor;
     vector<Feature*> features = getActiveFeatures();
     for(int i = 0; i < (int) features.size(); ++i){
       features[i]->extractTo(&descriptor, &image);
     }
     writeDescriptor(&descriptor,final_descriptor_location);
-    cout << "renewing descriptor for " << dp->get_image_url() << endl;
+    cout << "renewing descriptor for " << dp.get_image_url() << endl;
   } 
 }
 
@@ -105,6 +106,25 @@ void FeatureExtractor::getCVMatrices(vector <DataPoint*>  dps, CvMat * training,
       tmatrix.at<float>(row,col) = desc[col];
     }
   }
+}
+
+ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
+  ExampleCollection examples(dps.size());
+  for(size_t i = 0; i < dps.size(); ++i){
+    Example current_example(getDescriptor(dps[i]));
+    current_example.set_label(dps[i].get_label());
+    examples[i] = current_example;
+  }
+  return examples;
+}
+
+DescriptorCollection FeatureExtractor::getDescriptors(const DataPointCollection &dps){
+  DescriptorCollection descriptors(dps.size());
+  for(size_t i = 0; i < dps.size(); ++i){
+    Descriptor current_descriptor(getDescriptor(dps[i]));
+    descriptors[i] = current_descriptor;
+  }
+  return descriptors;
 }
 
 }}

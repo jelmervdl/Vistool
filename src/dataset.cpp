@@ -145,10 +145,10 @@ vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
   return result;
 }
 
-vector<DataPoint> Dataset::enabledPoints(bool eqrep) {
+DataPointCollection Dataset::enabledPoints(bool eqrep) {
   int min = smallestCategory();
   vector<Category*> enabled_categories = getEnabled();
-  vector<DataPoint> result;
+  DataPointCollection result;
   for(size_t i = 0; i < enabled_categories.size(); ++i){
     vector<DataPoint> * data_points = enabled_categories[i]->get_data_points();
     if(!eqrep){

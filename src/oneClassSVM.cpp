@@ -9,14 +9,14 @@ using std::string;
 namespace vito{
 namespace classification{
 
-void OneClassSVM::train(vector<DataPoint*> files){
-  vector<DataPoint*> res;
-  for(vector<DataPoint*>::iterator it = files.begin();
-      it != files.end();
+void OneClassSVM::train(const ExampleCollection &examples){
+  ExampleCollection res;
+  for(ExampleCollection::const_iterator it = examples.begin();
+      it != examples.end();
       ++it)
-    if((int)(*it)->get_label() == truth_label)
+    if((int) it->get_label() == truth_label)
       res.push_back(*it);
-  return SVMClassifier::train(res);
+  SVMClassifier::train(res);
 }
 
 OneClassSVM::OneClassSVM() : truth_label(0){
@@ -59,14 +59,12 @@ vector<double> OneClassSVM::getValues(svm_node *nodes,
   return rets;
 }
 
-vector<double> OneClassSVM::getValue(DataPoint *dp){
-  svm_model *model;
-  model = svm_load_model("model.svm");
-  return getValue(dp, model);
+vector<double> OneClassSVM::getValue(const Descriptor &desc){
+  return getValue(desc, model);
 }
 
-vector<double> OneClassSVM::getValue(DataPoint *dp, svm_model *model){
-  svm_node * nodes = constructNode(dp);
+vector<double> OneClassSVM::getValue(const Descriptor &desc , svm_model *model){
+  svm_node * nodes = constructNode(desc);
   return getValues(nodes, model);
 }
 

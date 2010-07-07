@@ -21,7 +21,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
  public:
   // calculate the descriptors to a datapoint, if force is true the
   // descriptor is always calculated
-  std::vector<float>    getDescriptor(DataPoint * dp, 
+  std::vector<float>    getDescriptor(const DataPoint &dps,
 				      const bool force = false);
 
   // save all active categories within dataset to their respective
@@ -31,7 +31,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
 
   // refresh the a datapoints descriptor if it is required or do it
   // anyway if forced
-  void                  renewDescriptor(DataPoint * db,
+  void                  renewDescriptor(const DataPoint &dp,
 					const bool force);
 
   std::string           getCurrentDescriptorLocation(const DataPoint &dp);
@@ -40,6 +40,9 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   void                  getCVMatrices(std::vector<DataPoint*> dps,
 				      CvMat * training, 
 				      CvMat *  labels);
+
+  ExampleCollection     getExamples(const DataPointCollection &datapoints);
+  DescriptorCollection  getDescriptors(const DataPointCollection &dps);
 };
 
 }}

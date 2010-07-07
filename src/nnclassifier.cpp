@@ -1,16 +1,6 @@
 #include "nnclassifier.h"
 
-#define PrepareMatrices(dps)						\
-  FeatureExtractor *fe = FeatureExtractor::getInstance();		\
-  size_t rows, cols;							\
-  vector<float> sample;							\
-  readDescriptor(&sample, fe->getCurrentDescriptorLocation(*dps.at(0)));\
-  rows = dps.size();							\
-  cols = sample.size();							\
-  cout << "rows: " << rows << " cols: " << cols << endl;		\
-  CvMat * tmat = cvCreateMat(rows, cols, CV_32FC1);			\
-  CvMat * labs = cvCreateMat(rows, 1, CV_32FC1);			\
-  FeatureExtractor::getInstance()->getCVMatrices(dps, tmat, labs);	
+#define PrepareMatrices(examples)					\
 
 using std::string;
 using Magick::Image;
@@ -25,11 +15,6 @@ using write::readDescriptor;
 string NNClassifier::get_name(){
   return "NNClassifier";
 }
-
-vector<int> NNClassifier::crossvalidation(vector<DataPoint> * files){
-  return Classifier::crossvalidation(files);
-}
-
 NNClassifier::NNClassifier() : knn(0){
   cout << "creating nn classifier" << endl;
 }
@@ -44,37 +29,41 @@ void NNClassifier::clean(){
   knn = 0;
 }
 
-void NNClassifier::train(vector<DataPoint*> dps){
-  cout << "training on " << dps.size() << " datapoints" << endl;
-  PrepareMatrices(dps);
-  cout << "sample has " << sample.size() << "entries" << endl;
-  cout << knn << endl;
+void NNClassifier::train(const ExampleCollection &examples){
+  size_t rows, cols;							
+  rows = examples.size();						
+  cols = examples[0].size();						
+  CvMat * tmat = cvCreateMat(rows, cols, CV_32FC1);			
+  CvMat * labs = cvCreateMat(rows, 1, CV_32FC1);			
+  Mat labels(labs, 0);							
+  Mat tmatrix(tmat, 0);							
+  for(size_t row = 0; row < examples.size(); ++row){
+    labels.at<int>(row,0) = examples[row].get_label();			
+    for(size_t col = 0; col < examples[0].size(); ++col ){
+      tmatrix.at<float>(row,col) = examples[row][col];
+    }
+  }
   clean();
   knn = new CvKNearest(tmat, labs);  
 }
 
-vector<int>  NNClassifier::classify(vector<DataPoint*> datapoints){
-  vector<int> classes;
-  PrepareMatrices(datapoints);
-  CvMat * results = cvCreateMat(datapoints.size(),1,CV_32FC1);
+Label  NNClassifier::classify(const Descriptor &descriptor){
+  DescriptorCollection desc_col(1);
+  desc_col[0] = descriptor;
   const int k = Parameters::getInstance()->getiParameter("knn_classifier_k");
-  knn->find_nearest(tmat, k, results);
+  LabelCollection results;
+  size_t rows, cols;							
+  rows = 1;
+  cols = descriptor.size();						
+  CvMat * tmat = cvCreateMat(rows, cols, CV_32FC1);			
+  Mat tmatrix(tmat, 0);							
+  for(size_t col = 0; col < cols; ++col )
+    tmatrix.at<float>(0,col) = descriptor[col];
+  CvMat *results_mat = cvCreateMat(desc_col.size(),1,CV_32FC1);
+  // actual classification
+  knn->find_nearest(tmat, k, results_mat);
   Mat  res(results, 0);
-  classes.resize(results->rows);
-  for(size_t i = 0; i < (size_t) results->rows; ++i){
-    classes.at(i) = res.at<int>(i,0);
-  }
-  return classes;
-}
-
-int  NNClassifier::classify(DataPoint * datapoint){
-  if(knn == NULL){
-    cout << "trying to classify without training at all" << endl;
-    return 0;
-  }
-  vector<DataPoint*> dv;
-  dv.push_back(datapoint);
-  return classify(dv)[0];
+  return res.at<int>(0,0);
 }
 
 }}

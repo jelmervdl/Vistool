@@ -31,8 +31,8 @@ class ToolState:  public Singleton<ToolState>{
   size_t                      current_image_page;
   std::vector <Texture>       textures;
   std::vector <DataPoint*>    currently_view_datapoints; 
-  std::vector <DataPoint>     train_data, test_data;
-  std::vector <int>           test_result;
+  DataPointCollection         train_data, test_data;
+  LabelCollection             test_result;
   int                         enabled_classifier;
   int                         enabled_feature;
 

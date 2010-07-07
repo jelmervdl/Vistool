@@ -17,13 +17,15 @@ protected:
   
 
 public:
-  virtual void                train(std::vector<DataPoint*> files);
+  virtual void                train(const ExampleCollection &examples);
+
   void                        set_truth_label(const int i);
                               OneClassSVM();
                               OneClassSVM(int truth_label);
   virtual std::vector<double> getValues(svm_node *nodes, svm_model *model);
-  virtual std::vector<double> getValue(DataPoint *dp, svm_model *model);
-  virtual std::vector<double> getValue(DataPoint *dp);
+  virtual std::vector<double> getValue(const Descriptor &desc,
+				       svm_model *model);
+  virtual std::vector<double> getValue(const Descriptor &desc);
   //virtual int                 classify(DataPoint *data_point, svm_model *model);
   virtual bool                single_class();
 };

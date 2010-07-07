@@ -46,7 +46,7 @@ class Dataset{
 
   void                    print();
 
-  std::vector<DataPoint>  enabledPoints(bool eqrep = true) ;
+  DataPointCollection     enabledPoints(bool eqrep = true) ;
   std::vector<DataPoint*> enabledDataPoints(bool eqrep= true);
 
   void                    randomDataSplit(std::vector<DataPoint> * train, 

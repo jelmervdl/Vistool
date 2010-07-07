@@ -11,53 +11,32 @@ namespace classification{
 void svm_destroy_problem(svm_problem *problem);
 
 class SVMClassifier : public Classifier {
-  using Classifier::train;
-  using Classifier::crossvalidation;
-
  protected:
-
   svm_model *model;
-
-  virtual std::string         get_name();
-
-  virtual double              dataPointLabel(const DataPoint &datapoint);
-  // compile a set of datapoints into a problem
-  virtual svm_problem        *compileProblem(std::vector<DataPoint*> files);
-
-  // get the svm parameters
+  void                         addExampleToProblem(svm_problem &problem, 
+						     const Example &example);
+  virtual std::string          get_name();
+  virtual double               dataPointLabel(const DataPoint &datapoint);
+  virtual svm_problem         *compileProblem(const ExampleCollection &files);
   virtual svm_parameter       *getSVMParameters();
-
-  void                         addDataPointToProblem(svm_problem &problem, 
-						     const DataPoint &dp);
+  svm_node                    *constructNode(const Example &example);
+  svm_parameter               *new_svm_parameters();
 
  public:
-  // helper function for real crossvalidation function
-  virtual std::vector<int>     crossvalidation(std::vector<DataPoint> * files);
+  using Classifier::train;
+  using Classifier::classify;
 
-  // crossvalidation using svm's built in cross validator (saves
-  // filesaving)
-  virtual std::vector<int>     crossvalidation(std::vector<DataPoint*> files);
 
   // train the svm
-  virtual void                 train(std::vector<DataPoint*> files);
-
-  // classify a set of datapoints
-  virtual   std::vector<int>   classify(std::vector<DataPoint*> data_points);
-
-  // classify a single point
-  virtual int                  classify(DataPoint * data_point);
-
-  // classify a single point given a model
-  virtual int                  classify(DataPoint *data_point, 
+  virtual void                 train(const ExampleCollection &files);
+  virtual Label                classify(const Descriptor &descriptor);
+  virtual int                  classify(const Example &data_point, 
 					svm_model *model);
 
   // get the return values
   virtual  std::vector<double> getValues(svm_node *nodes, 
 					 svm_model *model);
 
-  svm_node                    *constructNode(DataPoint *data_point);
-
-  svm_parameter               *new_svm_parameters();
 }; 
 
 class SVMClassifier_ : public SVMClassifier, public Singleton<SVMClassifier>{};

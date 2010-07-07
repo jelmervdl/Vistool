@@ -1,6 +1,8 @@
 #ifndef DATAPOINT_H
 #define DATAPOINT_H
 
+
+#include <vector>
 #include <string>
 
 /* Contains all relevant information regarding a single
@@ -28,6 +30,8 @@ class DataPoint{
   size_t      get_label() const;
 };
 
+class DataPointCollection : public std::vector<DataPoint> {
+};
 
 }
 

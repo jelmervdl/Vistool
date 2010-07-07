@@ -20,18 +20,20 @@ float evaluateSVM(){
     Dataset dataset("../datasets/Caltech101/");
     dataset.enableRandom(15);
     dataset.print();
-    vector<DataPoint> points = dataset.enabledPoints();
+    DataPointCollection points = dataset.enabledPoints();
     random_shuffle(points.begin(), points.end());
     SVMClassifier svm;
-    vector<int> results = svm.crossvalidation(&points);
+    FeatureExtractor *fe = FeatureExtractor::getInstance();
+    ExampleCollection examples = fe->getExamples(points);
+    LabelCollection results = svm.crossvalidation(examples);
     cout << "done crossvalidating" << endl;
-    Evaluation evaluation(&points, &results);
+    Evaluation evaluation(points, results);
     cout << "done evaluating" << endl;
     result += evaluation.getPrecision();
   }
   return result / 10;
   }
-
+/*
 float evaluateOneClassSVM(){
   Dataset dataset("../datasets/Caltech101/");
   dataset.enableCategory("accordion");
@@ -39,23 +41,26 @@ float evaluateOneClassSVM(){
   //dataset.enableCategory("emu");
   //dataset.enableCategory("bass");
   //dataset.enableCategory("ant");
-  vector<DataPoint> train, test;
+  DataPointCollection train, test;
   dataset.randomDataSplit(&train, &test, 0.5);
   FeatureExtractor::getInstance()->saveDescriptorsToFile(&dataset);
   OneClassSVM segsvm(0);
-  segsvm.train(ptr::ptrDeMorgan(&train));
+  FeatureExtractor *fe = FeatureExtractor::getInstance();
+  ExampleCollection examples = fe->getExamples(train);
+  segsvm.train(examples);
+
   dataset.disableCategory("accordion");
   dataset.enableCategory("emu");
   dataset.enableCategory("anchor");
   dataset.enableCategory("emu");
   dataset.enableCategory("bass");
   dataset.enableCategory("ant");
-  vector<DataPoint> others = dataset.enabledPoints();
+  DataPointCollection others = dataset.enabledPoints();
 
   others.insert(others.end(), test.begin(), test.end());
   vector<int> res(others.size());
   for(int i = 0; i < (int) others.size(); ++i)
-    res[i] = segsvm.classify(&others[i]);
+    res[i] = segsvm.classify(others[i]);
   int total = 0, correct = 0, incorrect = 0;
   for(int i = 0; i < (int) res.size(); i++){
     //cout << others[i].get_label() << " " << res[i] 
@@ -82,5 +87,5 @@ float evaluateOneClassSVM(){
   cout << "ya done" << endl;
   return f_score;
 }
-
+*/
 }}

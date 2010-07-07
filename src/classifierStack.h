@@ -23,7 +23,7 @@ public:
 		  std::string xmlfile);
 
 
-  void        train(std::vector<DataPoint*>);
+  void        train(const ExampleCollection &descriptors);
   bool        isActive();
   std::string getParameterName();
   Descriptor  extract_(MyImage *Image, 
@@ -41,9 +41,7 @@ namespace classification{
 class ClassifierStack : public Classifier {
 protected:
   std::vector<features::ClassifierSetup> setups;
-
 public:
-
   using Classifier::train;
   using Classifier::classify;
 
@@ -51,9 +49,8 @@ public:
   ~ClassifierStack();
 
   std::string      get_name();
-  std::vector<int> classify(std::vector<DataPoint*> points);
-  int              classify(DataPoint *point);
-  void             train(std::vector<DataPoint*> files);
+  int              classify(const Descriptor &descriptor);
+  void             train(const ExampleCollection &files);
 
 };
 

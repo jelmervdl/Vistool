@@ -28,26 +28,8 @@ string SVMClassifier::get_name(){
   return "SVM";
 }
 
-vector<int> SVMClassifier::crossvalidation(vector<DataPoint> * files){
-  return Classifier::crossvalidation(files);
-}
-
-vector<int> SVMClassifier::crossvalidation(vector<DataPoint*> files){
-  svm_problem *problem = compileProblem(files);
-  svm_parameter *parameter = getSVMParameters();
-  double result[problem->l];
-  svm_cross_validation(problem, parameter, 10, result);
-  svm_destroy_problem(problem);
-  svm_destroy_param(parameter);
-  vector<int> classification(problem->l);
-  for(size_t i = 0; i < (size_t) problem->l; ++i){
-    classification[i] = (int) result[i];
-  }
-  return classification;
-}
-
-void SVMClassifier::train(vector<DataPoint*> files){
-  svm_problem   *problem = compileProblem(files);
+void SVMClassifier::train(const ExampleCollection &examples){
+  svm_problem   *problem = compileProblem(examples);
   svm_parameter *parameter = getSVMParameters();
   model = svm_train(problem, parameter);
   //model = model_;
@@ -58,21 +40,21 @@ void SVMClassifier::train(vector<DataPoint*> files){
   svm_destroy_param(parameter);
 }
 
-svm_problem *SVMClassifier::compileProblem(vector<DataPoint*> files){
-  const int& n_datapoints = files.size();
-  if(n_datapoints < 1){
+svm_problem *SVMClassifier::compileProblem(const ExampleCollection &examples){
+  // check if there are 1 or more examples to train on
+  const int& kExamples = examples.size();
+  if(kExamples < 1){
     printf("dude.. can't train on nothing...\n");
     return NULL;
   }
   svm_problem *problem_ = new svm_problem;
   svm_problem &problem = *problem_;
-  problem.l = 0;
-  problem.y = new double[n_datapoints]; // labels
-  problem.x = new svm_node*[n_datapoints]; // datapoints
-  for(size_t dp_index = 0; (int) dp_index < n_datapoints; ++dp_index){
-    const DataPoint& current_datapoint = *files[dp_index];
-    addDataPointToProblem(problem, current_datapoint);
-  }
+  problem.l = 0; 
+  problem.y = new double[kExamples]; // labels
+  problem.x = new svm_node*[kExamples]; // datapoints
+  // add every example to our newly allocated svm_problem
+  for(size_t i = 0; (int) i < kExamples; ++i)
+    addExampleToProblem(problem, examples[i]);
   return &problem;
 }
 
@@ -80,27 +62,22 @@ double SVMClassifier::dataPointLabel(const DataPoint &datapoint){
   return datapoint.get_label();
 }
 
-void SVMClassifier::addDataPointToProblem(svm_problem &problem, 
-					  const DataPoint &current_datapoint){
-  FeatureExtractor *fe = FeatureExtractor::getInstance();
-  vector<float> descriptor;
-  readDescriptor(&descriptor,
-		 fe->getCurrentDescriptorLocation(current_datapoint));
-  const int &descriptor_length = descriptor.size();
-  const int dp_index = problem.l;
-  problem.l++;
-
-  problem.y[dp_index] = (double) dataPointLabel(current_datapoint);
-  problem.x[dp_index] = new svm_node[descriptor_length + 1];
-  svm_node* &current_descriptor_nodes = problem.x[dp_index];
-  for(int descr_part = 0; descr_part < descriptor_length; ++descr_part){
-    svm_node &current_node = current_descriptor_nodes[descr_part];
-    current_node.index = descr_part; // set the feature index
-    current_node.value = descriptor[descr_part]; // set feature value
+void SVMClassifier::addExampleToProblem(svm_problem &problem, 
+					const Example &example){
+  const int &descriptor_length = example.size();
+  const int i = problem.l;
+  problem.y[i] = (double) example.get_label();
+  problem.x[i] = new svm_node[descriptor_length + 1];
+  svm_node* &current_descriptor_nodes = problem.x[i];
+  for(int v = 0; v < descriptor_length; ++v){ // v is for value
+    svm_node &current_node = current_descriptor_nodes[v];
+    current_node.index = v; // set the feature index
+    current_node.value = example[v]; // set feature value
   }
-  svm_node &last_node = problem.x[dp_index][descriptor_length];
+  svm_node &last_node = problem.x[i][descriptor_length];
   last_node.index = -1;
   last_node.value = 0.0;
+  problem.l++;
 }
 
 svm_parameter *SVMClassifier::getSVMParameters(){
@@ -126,19 +103,6 @@ svm_parameter *SVMClassifier::getSVMParameters(){
   return newpar;
 }
 
-vector<int> SVMClassifier::classify(vector<DataPoint*> data_points){
-  //svm_model *model = svm_load_model("model.svm");
-  vector<int> results(data_points.size());
-  for(int i = 0; i < (int) data_points.size(); ++i)
-    results[i] = classify(data_points[i], model);
-  return results;
-}
-
-int SVMClassifier::classify(DataPoint *data_point){
-  //svm_model *model = svm_load_model("model.svm");
-  return classify(data_point, model);
-}
-
 vector<double> SVMClassifier::getValues(svm_node *nodes,
 					svm_model *model){
   const int nr_classes = svm_get_nr_class(model);
@@ -160,24 +124,24 @@ vector<double> SVMClassifier::getValues(svm_node *nodes,
   return value_per_class;
 }
 
-svm_node* SVMClassifier::constructNode(DataPoint *data_point){
-  FeatureExtractor *fe = FeatureExtractor::getInstance();
-  vector<float> descriptor;
-  readDescriptor(&descriptor, 
-		 fe->getCurrentDescriptorLocation(*data_point));  
-  svm_node *nodes = new svm_node[descriptor.size() + 1];
-  for(int i = 0; i < (int) descriptor.size(); ++i){
-    nodes[i].value = descriptor[i];
+svm_node* SVMClassifier::constructNode(const Example &example){
+  svm_node *nodes = new svm_node[example.size() + 1];
+  for(int i = 0; i < (int) example.size(); ++i){
+    nodes[i].value = example[i];
     nodes[i].index = i;
   }
-  nodes[descriptor.size()].value = 0.0;
-  nodes[descriptor.size()].index = -1; 
+  nodes[example.size()].value = 0.0;
+  nodes[example.size()].index = -1; 
   delete [] nodes;
   return nodes;
 }
 
-int SVMClassifier::classify(DataPoint *data_point, svm_model *model){
-  svm_node * nodes = constructNode(data_point);
+int SVMClassifier::classify(const Descriptor &descriptor){
+  return classify(descriptor, model);
+}
+
+int SVMClassifier::classify(const Example &example, svm_model *model){
+  svm_node * nodes = constructNode(example);
   double result = svm_predict(model, nodes);
   vector<double> value_per_class = getValues(nodes, model);
   return result;
