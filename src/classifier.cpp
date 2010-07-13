@@ -21,24 +21,33 @@ LabelCollection Classifier::crossvalidation(const ExampleCollection &files){
     Parameters::getInstance()->getiParameter("cross_validation_k");
   const int kFiles = files.size();
   assert(kFolds > 1);
+
   // fill in results of training/classification on k subgroups
   LabelCollection results(kFiles);
   const float bin_size = kFiles / (float) kFolds;
   for(int subgroup = 0; subgroup < kFolds; ++subgroup){
+    cout << "at subgroup " << subgroup << endl;
     ExampleCollection training_set;
     ExampleCollection test_set;
     const int bin_min = (int) ((bin_size * subgroup) + 0.5);
     const int bin_max = (int) ((bin_size * (subgroup + 1) ) + 0.5);
+
     //fill training and test sets:
+    cout << "before filling" << endl;
     for(int i = 0; i < kFiles; ++i)
       if(i >= bin_min && i < bin_max )
 	test_set.push_back(files[i]);
       else
 	training_set.push_back(files[i]);
+
     // train on subgroup
+    cout << "before training" << endl;
     train(training_set); 
+
     // classify test set
+    cout << "before classifying" << endl;
     LabelCollection bin_results = classify((DescriptorCollection&) test_set); 
+
     // fill in results of last classification
     for(int i = bin_min; i < bin_max; ++i)
       results[i] = bin_results[i - bin_min];

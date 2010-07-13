@@ -12,6 +12,8 @@ void hide_window(int window_number){
 }
 
 void initGlui(){
+  createFeatureWindow();
+
   ToolState &state = *ToolState::getInstance();
 
   state.main_gui = GLUI_Master.create_glui( "Control", 0, 800, 0 );
@@ -121,6 +123,11 @@ void cluster(){
   vector<Feature*> feature = getExistingFeatures();
   cfe->addClusterFeature(&enabs, feature[state.enabled_feature]);
   FeatureSelectionWindow::getInstance()->fill();
+}
+
+
+void createFeatureWindow(){
+  FeatureSelectionWindow window;
 }
 
 }}

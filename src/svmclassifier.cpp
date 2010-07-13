@@ -29,15 +29,13 @@ string SVMClassifier::get_name(){
 }
 
 void SVMClassifier::train(const ExampleCollection &examples){
+  svm_destroy_model(model);
   svm_problem   *problem = compileProblem(examples);
   svm_parameter *parameter = getSVMParameters();
   model = svm_train(problem, parameter);
-  //model = model_;
-  //print::print_svm_problem(problem);
-  svm_save_model("model.svm", model);
   svm_destroy_problem(problem);
-  svm_destroy_model(model);
   svm_destroy_param(parameter);
+  cout << "done training" << endl;
 }
 
 svm_problem *SVMClassifier::compileProblem(const ExampleCollection &examples){
@@ -124,14 +122,14 @@ vector<double> SVMClassifier::getValues(svm_node *nodes,
   return value_per_class;
 }
 
-svm_node* SVMClassifier::constructNode(const Example &example){
-  svm_node *nodes = new svm_node[example.size() + 1];
-  for(int i = 0; i < (int) example.size(); ++i){
-    nodes[i].value = example[i];
+svm_node* SVMClassifier::constructNode(const Descriptor &descriptor){
+  svm_node *nodes = new svm_node[descriptor.size() + 1];
+  for(int i = 0; i < (int) descriptor.size(); ++i){
+    nodes[i].value = descriptor[i];
     nodes[i].index = i;
   }
-  nodes[example.size()].value = 0.0;
-  nodes[example.size()].index = -1; 
+  nodes[descriptor.size()].value = 0.0;
+  nodes[descriptor.size()].index = -1; 
   delete [] nodes;
   return nodes;
 }
@@ -140,10 +138,10 @@ int SVMClassifier::classify(const Descriptor &descriptor){
   return classify(descriptor, model);
 }
 
-int SVMClassifier::classify(const Example &example, svm_model *model){
-  svm_node * nodes = constructNode(example);
-  double result = svm_predict(model, nodes);
-  vector<double> value_per_class = getValues(nodes, model);
+int SVMClassifier::classify(const Descriptor &descriptor, svm_model *model){
+  svm_node *nodes = constructNode(descriptor);
+  double   result = svm_predict(model, nodes);
+  //vector<double> value_per_class = getValues(nodes, model);
   return result;
 }
 

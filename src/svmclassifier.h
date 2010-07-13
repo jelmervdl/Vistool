@@ -19,7 +19,7 @@ class SVMClassifier : public Classifier {
   virtual double               dataPointLabel(const DataPoint &datapoint);
   virtual svm_problem         *compileProblem(const ExampleCollection &files);
   virtual svm_parameter       *getSVMParameters();
-  svm_node                    *constructNode(const Example &example);
+  svm_node                    *constructNode(const Descriptor &descriptor);
   svm_parameter               *new_svm_parameters();
 
  public:
@@ -30,7 +30,7 @@ class SVMClassifier : public Classifier {
   // train the svm
   virtual void                 train(const ExampleCollection &files);
   virtual Label                classify(const Descriptor &descriptor);
-  virtual int                  classify(const Example &data_point, 
+  virtual int                  classify(const Descriptor &data_point, 
 					svm_model *model);
 
   // get the return values

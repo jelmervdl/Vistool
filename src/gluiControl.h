@@ -1,6 +1,7 @@
 #ifndef GLUICONTROL_H
 #define GLUICONTROL_H
 
+#include "featureWindow.h"
 #include "toolState.h"
 #include "gluiLoad.h"
 #include "gluiFeatures.h"
@@ -19,6 +20,7 @@ void nextPage();
 void selectAndShow();
 void createClassifierSelectButton();
 void createFeatureSelectButton();
+void createFeatureWindow();
 
 }}
 

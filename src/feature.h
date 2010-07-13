@@ -13,8 +13,7 @@ class Feature{
 
   //constructor
                              Feature();
-
-  virtual                   ~Feature();
+                            ~Feature();
 
   // features name;
   virtual std::string        getParameterName() = 0;

@@ -48,8 +48,8 @@ $(SOURCE_DIRECTORY)/%.h:$(Java_srcdir)%.java
 
 #Target
 $(Target): $(Java_Objects) $(Java_Headers) $(Objects) $(Obj-c_Objects)
-	@echo "\nLinking: objects to $@ $(Objects)"
-	 $(Linker) $(Global) $(Libraries) -o $(Target) $(Objects) $(Obj-c_Objects) $(Head_Path) $(Lib_Path)
+	@echo "\nLinking: objects to $@ $(Objects)\n"
+	 $(Linker) $(Global) $(Lib_Path) $(Libraries) -o $(Target) $(Objects) $(Obj-c_Objects) #$(Head_Path) 
 
 #Clean
 clean:

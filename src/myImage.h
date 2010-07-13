@@ -1,12 +1,10 @@
 #ifndef MYIMAGE_H
 #define MYIMAGE_H
 
-
 #include <Magick++.h>
 #include "parameters.h"
 #include "cv.h"
 #include "dataPoint.h"
-#include "highgui.h"
 #include "matrix.h"
 
 namespace vito{
