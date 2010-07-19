@@ -29,8 +29,12 @@ string SVMClassifier::get_name(){
 }
 
 void SVMClassifier::train(const ExampleCollection &examples){
-  svm_destroy_model(model);
+  if(model != 0){
+    svm_destroy_model(model);
+    model = 0;
+  }
   svm_problem   *problem = compileProblem(examples);
+  //print::print_svm_problem(problem);
   svm_parameter *parameter = getSVMParameters();
   model = svm_train(problem, parameter);
   svm_destroy_problem(problem);

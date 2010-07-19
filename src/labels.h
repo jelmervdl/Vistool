@@ -7,10 +7,10 @@ namespace vito{
 
 typedef int Label;
 
-class LabelCollection : public std::vector<Label>{
+class LabelCollection : public std::vector<int>{
 public:
-  LabelCollection() : std::vector<Label>(){}
-  LabelCollection(size_t s) : std::vector<Label>(s){}
+  LabelCollection() : std::vector<int>(){}
+  LabelCollection(int s) : std::vector<int>(s){}
 };
 
 }

@@ -8,9 +8,15 @@ namespace vito{
 namespace classification{
 
 LabelCollection Classifier::classify(const DescriptorCollection &descriptors){
-  LabelCollection labels(descriptors.size());
-  for(size_t i = 0; i < descriptors.size(); ++i)
+  cout << "attempting to create a label collection" << endl;
+  LabelCollection labels;
+  cout << descriptors.size() << "is the descriptor coll size" << endl;
+  labels.resize(descriptors.size());
+  cout << "created a label collection" << endl;
+  for(size_t i = 0; i < descriptors.size(); ++i){
+    cout << "at i: " << i << endl;
     labels[i] = classify(descriptors[i]);
+  }
   return labels;
 }
 
@@ -43,10 +49,10 @@ LabelCollection Classifier::crossvalidation(const ExampleCollection &files){
     // train on subgroup
     cout << "before training" << endl;
     train(training_set); 
-
+    DescriptorCollection test_set_descriptor = (DescriptorCollection) test_set;
     // classify test set
     cout << "before classifying" << endl;
-    LabelCollection bin_results = classify((DescriptorCollection&) test_set); 
+    LabelCollection bin_results = classify(test_set_descriptor); 
 
     // fill in results of last classification
     for(int i = bin_min; i < bin_max; ++i)

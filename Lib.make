@@ -34,6 +34,7 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_OpenCV   = -lml -lcv -lcxcore
 	Lib_Xerces   = -lxerces-c
 
+
 #Header include path
 	Head_Path += -Ilocal/include
 	Head_Path += -Ilocal/ImageMagick-6.6.3/include/ImageMagick

@@ -1,5 +1,4 @@
 #include "main.h"
- 
 using std::sprintf;
 using namespace vito;
 using namespace vito::features;
@@ -50,6 +49,9 @@ void resizeExperiment(){
 int main(int argc, char ** argv){ 
   Parameters *p = Parameters::getInstance();
   p->readFile("parameters.xml");
+  vector<int> cools;
+  cools.resize(10
+);
   //testMPEG7();
   //testClassifierStack();
   if(argc > 1){

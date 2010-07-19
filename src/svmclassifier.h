@@ -26,6 +26,7 @@ class SVMClassifier : public Classifier {
   using Classifier::train;
   using Classifier::classify;
 
+  SVMClassifier() : model(0){};
 
   // train the svm
   virtual void                 train(const ExampleCollection &files);

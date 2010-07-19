@@ -30,16 +30,22 @@ public:
   int get_label() const;
 };
 
-class DescriptorCollection : public std::vector<Descriptor> {
-public:
-  DescriptorCollection(size_t size) : std::vector<Descriptor> (size) {}
-};
-
 class ExampleCollection : public std::vector<Example> {
 public:
   ExampleCollection() : std::vector<Example>() {}
   ExampleCollection(size_t size) : std::vector<Example>(size){}
 };
+
+
+class DescriptorCollection : public std::vector<Descriptor> {
+public:
+  DescriptorCollection(const ExampleCollection &collection){
+    for(size_t i = 0; i < collection.size(); i++)
+      push_back((Descriptor&) collection[i]);
+  }
+  DescriptorCollection(size_t size) : std::vector<Descriptor> (size) {}
+};
+
 
 }
 #endif
