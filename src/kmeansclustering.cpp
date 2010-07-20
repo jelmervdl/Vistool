@@ -7,11 +7,6 @@ using std::cout;
 namespace vito{
 namespace clustering{
 
-//typedef KMeansClustering::patch patch;
-//typedef KMeansClustering::labels labels;
-//typedef KMeansClustering::patch_collection patch_collection;
-//typedef KMeansClustering::label_collection label_collection;
-
 patch_collection KMeansClustering::initialize_means(const int kmeans, 
 						    const patch_collection &patches){
   srand(time(NULL));
@@ -103,8 +98,13 @@ patch_collection KMeansClustering::update(const patch_collection &cluster_center
 float KMeansClustering::distance(const patch &a, const patch &b){
   assert(a.size() == b.size());
   float total_distance = 0.0;
-  for(size_t i = 0; i < a.size(); i++){
-    total_distance += fabs(a[i] - b[i]);
+  vector<float>::const_iterator 
+    a_it = a.begin(),
+    b_it = b.begin();
+  while(a_it != a.end()){
+    total_distance += fabs(*a_it - *b_it);
+    ++a_it;
+    ++b_it;
   }
   return total_distance;
 }
@@ -145,7 +145,7 @@ patch_collection KMeansClustering::cluster(const patch_collection &patches){
       float p_dist = KMeansClustering::distance(cluster_centers[j], new_centers[j]);
       distance_ += p_dist;
     }
-    cout << " total distance to centers: " << total_distance_to_centers(new_centers, patches) << endl;
+    //cout << " total distance to centers: " << total_distance_to_centers(new_centers, patches) << endl;
 
     cout << "converging... distance now: " << distance_ << endl;
     cluster_centers = new_centers;

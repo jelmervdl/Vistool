@@ -8,8 +8,8 @@
 #include <assert.h>
 #include "clustering.h"
 
-/* Kmeans Clustering Implementation using the summed (unsquared)
-   distance between patches. */
+// Kmeans Clustering Implementation using the summed (unsquared)
+// distance between patches.
 
 namespace vito{
 namespace clustering{
