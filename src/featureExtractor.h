@@ -21,7 +21,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
  public:
   // calculate the descriptors to a datapoint, if force is true the
   // descriptor is always calculated
-  std::vector<float>    getDescriptor(const DataPoint &dps,
+  Descriptor            getDescriptor(const DataPoint &dps,
 				      const bool force = false);
 
   // save all active categories within dataset to their respective

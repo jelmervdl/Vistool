@@ -21,13 +21,13 @@ class SVMClassifier : public Classifier {
   virtual svm_parameter       *getSVMParameters();
   svm_node                    *constructNode(const Descriptor &descriptor);
   svm_parameter               *new_svm_parameters();
-
+ 
  public:
   using Classifier::train;
   using Classifier::classify;
 
   SVMClassifier() : model(0){};
-
+  ~SVMClassifier();
   // train the svm
   virtual void                 train(const ExampleCollection &files);
   virtual Label                classify(const Descriptor &descriptor);

@@ -36,7 +36,7 @@
   <!-- Enabled Features: -->
     <feature_histogram> 0 </feature_histogram>
     <feature_sift> 1 </feature_sift>
-    <feature_mpeg7_edge_histogram> 1 </feature_mpeg7_edge_histogram>
+    <feature_mpeg7_edge_histogram> 0 </feature_mpeg7_edge_histogram>
     <feature_mpeg7_scalable_color> 0 </feature_mpeg7_scalable_color>
     <feature_mpeg7_color_layout> 0 </feature_mpeg7_color_layout>
 
@@ -48,8 +48,8 @@
       <!-- 0 = smallest window
 	   1 = all pixels are used -->
     <sift_orientation_directions> 8 </sift_orientation_directions>
-    <sift_number_of_keypoints_x> 8 </sift_number_of_keypoints_x>
-    <sift_number_of_keypoints_y> 8 </sift_number_of_keypoints_y>
+    <sift_number_of_keypoints_x> 4 </sift_number_of_keypoints_x>
+    <sift_number_of_keypoints_y> 4 </sift_number_of_keypoints_y>
     <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
       <!-- this variable is squared later on -->
     <sift_keypoint_pixel_window> -1  </sift_keypoint_pixel_window> 

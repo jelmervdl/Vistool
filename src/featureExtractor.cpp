@@ -17,11 +17,12 @@ namespace features{
 using write::readDescriptor;
 using write::writeDescriptor;
 
-  vector<float> FeatureExtractor::getDescriptor(const DataPoint &dp,
+  Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
 						const bool force){
   renewDescriptor(dp, force);
-  vector<float>  descriptor;
+  Descriptor descriptor;
   readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
+  //descriptor.normalize();
   return descriptor;
 }
    

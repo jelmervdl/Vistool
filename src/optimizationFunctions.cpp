@@ -18,7 +18,9 @@ float evaluateSVM(){
   float result = 0.0;
   for(int i  = 0; i < 10; ++i){
     Dataset dataset("../datasets/Caltech101/");
-    dataset.enableRandom(15);
+    for(int i = 0; i < 10; i++)
+      dataset.enableCategory(i);
+    //dataset.enableRandom(15);
     dataset.print();
     DataPointCollection points = dataset.enabledPoints();
     random_shuffle(points.begin(), points.end());

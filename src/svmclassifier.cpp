@@ -12,6 +12,13 @@ using features::FeatureExtractor;
 using write::readDescriptor;
 
 
+SVMClassifier::~SVMClassifier(){
+  if(model != 0){
+    svm_destroy_model(model);
+    model = 0;
+  }
+}
+
 void svm_destroy_problem(svm_problem *problem){
   delete [] problem->y;
   problem->y = 0;
@@ -33,6 +40,7 @@ void SVMClassifier::train(const ExampleCollection &examples){
     svm_destroy_model(model);
     model = 0;
   }
+  cout << "training on " << examples.size() << " examples" << endl;
   svm_problem   *problem = compileProblem(examples);
   //print::print_svm_problem(problem);
   svm_parameter *parameter = getSVMParameters();
@@ -134,7 +142,7 @@ svm_node* SVMClassifier::constructNode(const Descriptor &descriptor){
   }
   nodes[descriptor.size()].value = 0.0;
   nodes[descriptor.size()].index = -1; 
-  delete [] nodes;
+  //delete [] nodes;
   return nodes;
 }
 
@@ -143,9 +151,16 @@ int SVMClassifier::classify(const Descriptor &descriptor){
 }
 
 int SVMClassifier::classify(const Descriptor &descriptor, svm_model *model){
+  cout << "svm is classifiying"
+       << "descriptor of size:" << descriptor.size() << endl;
+
   svm_node *nodes = constructNode(descriptor);
+  cout << "created a node" << endl;
+  //print::print_svm_nodes(nodes, descriptor.size());
   double   result = svm_predict(model, nodes);
+  cout << "predicted: " << result << endl;
   //vector<double> value_per_class = getValues(nodes, model);
+  delete [] nodes;
   return result;
 }
 

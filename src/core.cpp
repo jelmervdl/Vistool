@@ -20,5 +20,11 @@ void print_svm_problem(svm_problem *problem){
   }
 }
 
+void print_svm_nodes(svm_node *nodes, size_t k){
+  for(size_t i = 0; i < k; ++i)
+    cout << nodes[i].index << ": " << nodes[i].value << ", ";
+  cout << endl;
+}
+
 }
 }

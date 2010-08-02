@@ -10,6 +10,7 @@
 #include "features.h"
 #include "featureSelectionWindow.h"
 #include "clusterFeatureExtractor.h"
+#include "featureExtractor.h"
 
 namespace vito{
 namespace gui{
@@ -21,7 +22,7 @@ void selectAndShow();
 void createClassifierSelectButton();
 void createFeatureSelectButton();
 void createFeatureWindow();
-
+void exportSelected();
 }}
 
 #endif

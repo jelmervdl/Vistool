@@ -12,32 +12,38 @@ namespace optimization{
 ParameterOptimization::ParameterOptimization(float (*func) ())
   : evaluation_function(func), best(-9999999.0){
 
-  add_float_parameter("one_class_gamma", 0.00001, 0.9, true);
-  add_float_parameter("one_class_nu", 0.00001, 0.9, true);
-  /*
-  add_float_parameter("svm_C", 0.0, 100.0);
-  add_float_parameter("svm_coef0", 0.0, 30.0);  
-  add_float_parameter("svm_eps", 0.0003, 1.5);
-  add_float_parameter("svm_gamma", 5.0, 100.0, true);
-  add_int_parameter("svm_degree", 5, 30, true);
-  */
+  //add_float_parameter("one_class_gamma", 0.00001, 0.9, true);
+  //add_float_parameter("one_class_nu", 0.00001, 0.9, true);
+  
+  add_float_parameter("svm_C", -5.0, 15.0, false, true);
+  //add_float_parameter("svm_coef0", 0.0, 30.0);  
+  //add_float_parameter("svm_eps", 0.0003, 1.5);
+  add_float_parameter("svm_gamma", -15.0, -1.0, false, true);
+  //2add_int_parameter("svm_degree", 5, 30, true);
+  
   //  add_int_parameter("svm_shrinking", 0, 10);
   //add_int_parameter("svm_probabiity", -1, 1, false);
 
 }
 
-void ParameterOptimization::add_int_parameter(string name, const int min, 
-					      const int max, const bool positive){
+void ParameterOptimization::add_int_parameter(string name, 
+					      const int min, 
+					      const int max, 
+					      const bool positive, 
+					      const bool exp){
   Parameters *pars = Parameters::getInstance();
   int *live = &pars->intParameters[name];
-  int_parameters.push_back(Parameter<int>(name, min, max, live, positive));
+  int_parameters.push_back(Parameter<int>(name, min, max, live, positive, exp));
 }
 
-void ParameterOptimization::add_float_parameter(string name, const float min, 
-						const float max, const bool positive){
+void ParameterOptimization::add_float_parameter(string name, 
+						const float min, 
+						const float max,
+						const bool positive,
+						const bool exp){
   Parameters *pars = Parameters::getInstance();
   float *live = &pars->floatParameters[name];
-  float_parameters.push_back(Parameter<float>(name, min, max, live, positive));
+  float_parameters.push_back(Parameter<float>(name, min, max, live, positive, exp));
 }
 
 ParameterSet ParameterOptimization::get_current_parameter_handle(){
@@ -96,8 +102,13 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
     parameter.set_value(current_value);
     const ParameterSet handle = get_current_parameter_handle();
     if(true || !known(handle)){
-      float result = evaluation_function();
+      std::cout << "going to test with: " << std::endl << std::endl;
       printCurrentParameters();
+      std::cout << ".. now .." << std::endl << std::endl;
+      float result = evaluation_function();
+      std::cout << "just tested with: " << std::endl;
+      printCurrentParameters();
+      std::cout << "and that's a fact" << std::endl;
       printf("result: %.2f\n\n", result);
       TestResult res( handle, result);
       current_results.push_back(res);
@@ -122,16 +133,22 @@ void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter
     parameter.set_value(current_value);
     const ParameterSet handle = get_current_parameter_handle();
     if(true || !known(handle)){
-      float result = evaluation_function();
+      std::cout << "going to test with: " << std::endl << std::endl;
       printCurrentParameters();
+      std::cout << ".. now .." << std::endl << std::endl;
+      float result = evaluation_function();
+      std::cout << "just tested with: " << std::endl;
+      printCurrentParameters();
+      std::cout << "and that's a fact" << std::endl;
       printf("result: %.2f\n\n", result);
       TestResult res( handle, result);
       current_results.push_back(res);
       if(result > best){
 	printf("improvement: %f -> %f\n", best, result);
 	best = result;
-	apply_to_all_parameters(&set_current_as_best<int>, 
-				&set_current_as_best<float> );
+	parameter.set_current_as_best();
+	//apply_to_all_parameters(&set_current_as_best<int>, 
+	//			&set_current_as_best<float> );
       }
     }
   }

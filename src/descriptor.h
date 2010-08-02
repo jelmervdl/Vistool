@@ -1,6 +1,7 @@
 #ifndef DESCRIPTOR_H
 #define DESCRIPTOR_H
 
+#include <algorithm>
 #include <vector>
 
 namespace vito{
@@ -16,6 +17,7 @@ class Descriptor : public std::vector<float>{
   Descriptor(std::vector<float> a) : std::vector<float>(a){}
   Descriptor(int size) : std::vector<float>(size){}
   void print() const;
+  void normalize();
 
 };
 

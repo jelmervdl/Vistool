@@ -25,12 +25,14 @@ namespace optimization{
     void         add_int_parameter(std::string name, 
 				   const int min, 
 				   const int max,
-				   const bool positive = false);
+				   const bool positive = false,
+				   const bool exp = false);
 
     void         add_float_parameter(std::string name, 
 				     const float min, 
 				     const float max, 
-				     const bool positive = false);
+				     const bool positive = false,
+				     const bool exp = false);
 
     // print the parameters
     void         printCurrentParameters();

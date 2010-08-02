@@ -33,7 +33,9 @@ void initGlui(){
   state.main_gui->add_button_to_panel(load_panel, "Load Picture", 0, (GLUI_Update_CB)loadPicture );
   state.main_gui->add_button_to_panel(load_panel, "Load Dataset", 0, (GLUI_Update_CB)askDataset );
   state.main_gui->add_button_to_panel(load_panel, "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
+  state.main_gui->add_button_to_panel(load_panel, "Export Selected", 0, (GLUI_Update_CB)exportSelected );
   state.main_gui->add_column(false);
+
 
   GLUI_Panel * view_panel = state.main_gui->add_panel("view");
   state.main_gui->add_button_to_panel(view_panel, "Refresh", 0, (GLUI_Update_CB)viewDataset );
@@ -128,6 +130,24 @@ void cluster(){
 
 void createFeatureWindow(){
   FeatureSelectionWindow window;
+}
+
+void exportSelected(){
+  ofstream myfile;
+  myfile.open ("exportedDataPoints");
+  features::FeatureExtractor &fe = *features::FeatureExtractor::getInstance();
+  Dataset &dataset = ToolState::getInstance()->current_db;
+  DataPointCollection datapoints = dataset.enabledPoints();
+  ExampleCollection examples = fe.getExamples(datapoints);
+  for(ExampleCollection::iterator it = examples.begin();
+      it != examples.end();
+      ++it){
+    myfile << it->get_label() << " ";
+    for(Example::iterator it2 = it->begin(); it2 != it->end(); it2++)
+      myfile << 1 + it2 - it->begin() << ":" << *it2 << " ";
+    myfile << endl;
+  }
+  myfile.close();
 }
 
 }}

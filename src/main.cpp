@@ -65,8 +65,8 @@ int main(int argc, char ** argv){
       start(1,argv);
       return 0;
     }if(mode == "optimize"){
-      //ParameterOptimization opt(&vito::optimization::evaluateOneClassSVM);
-      //opt.optimize();
+      ParameterOptimization opt(&vito::optimization::evaluateSVM);
+      opt.optimize();
     }
   }  
   return 0;

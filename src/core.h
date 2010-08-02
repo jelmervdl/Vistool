@@ -9,6 +9,7 @@ namespace vito{
 
 namespace print{
 
+void print_svm_nodes(svm_node *nodes, size_t k);
 void print_svm_problem(svm_problem *problem);
 
 }

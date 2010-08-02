@@ -10,7 +10,7 @@ namespace classification{
 LabelCollection Classifier::classify(const DescriptorCollection &descriptors){
   cout << "attempting to create a label collection" << endl;
   LabelCollection labels;
-  cout << descriptors.size() << "is the descriptor coll size" << endl;
+  cout << descriptors[0].size() << "is the descriptor coll size " << endl;
   labels.resize(descriptors.size());
   cout << "created a label collection" << endl;
   for(size_t i = 0; i < descriptors.size(); ++i){
@@ -47,7 +47,9 @@ LabelCollection Classifier::crossvalidation(const ExampleCollection &files){
 	training_set.push_back(files[i]);
 
     // train on subgroup
-    cout << "before training" << endl;
+    cout << "crossvalidation is training on " << training_set.size() 
+	 << " items"  << endl;
+    
     train(training_set); 
     DescriptorCollection test_set_descriptor = (DescriptorCollection) test_set;
     // classify test set
