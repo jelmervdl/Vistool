@@ -1,6 +1,7 @@
 #ifndef PARAMETEROPTIMIZATION
 #define PARAMETEROPTIMIZATION
 
+#include <fstream>
 #include "optimizationSupport.h"
 #include "parameters.h"
 #include "singleton.h"
@@ -8,6 +9,7 @@
 namespace vito{
 namespace optimization{
  
+
   const int kIterations  = 20;
   const float kZoom = 1.2;
   const int kResolution = 10;
@@ -17,6 +19,7 @@ namespace optimization{
     //evaluation function used to evaluate the parameters
     float                        (*evaluation_function) ();
     float                          best;
+    std::ofstream fout;
     std::vector<TestResult>        current_results; 
     std::vector<Parameter<int> >   int_parameters;
     std::vector<Parameter<float> > float_parameters;
@@ -36,6 +39,7 @@ namespace optimization{
 
     // print the parameters
     void         printCurrentParameters();
+    void         printCurrentParametersToFile();
     void         set_all_to_best();
     void         set_best_to_current();
     ParameterSet get_current_parameter_handle();
@@ -46,6 +50,7 @@ namespace optimization{
 					 void (*fl_func)  (Parameter<float>*));
   public:
                  ParameterOptimization( float(*func)() );
+                ~ParameterOptimization();
     void         optimize();
   };
 

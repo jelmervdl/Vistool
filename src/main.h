@@ -25,6 +25,7 @@
 #include "kmeanshistogram.h"
 
 #include "classifierStack.h"
+#include "experiment.h"
 
 void printLibraries();
 void one_class_test();

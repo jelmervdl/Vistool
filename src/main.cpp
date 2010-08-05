@@ -58,6 +58,13 @@ int main(int argc, char ** argv){
     Parameters * p = Parameters::getInstance();
     p->readFile((char *) "parameters.xml");
     string mode = argv[1];
+    if(mode == "experiment"){
+      if(argc == 3)
+	experiment::performExperiment(argv[2]);
+      else
+	cout << "correct use: VisionTool experiment [ExperimentName]" << endl;
+      return 0;
+    }
     if(mode == "test"){
       testing::testAll();
       return 0;
@@ -67,6 +74,7 @@ int main(int argc, char ** argv){
     }if(mode == "optimize"){
       ParameterOptimization opt(&vito::optimization::evaluateSVM);
       opt.optimize();
+      return 0;
     }
   }  
   return 0;

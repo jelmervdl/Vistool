@@ -3,8 +3,6 @@
 
 #include "labels.h"
 #include "descriptor.h"
-
-
 #include "featureExtractor.h"
 
 namespace vito{

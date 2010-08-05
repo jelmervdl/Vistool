@@ -18,9 +18,17 @@ float evaluateSVM(){
   float result = 0.0;
   for(int i  = 0; i < 10; ++i){
     Dataset dataset("../datasets/Caltech101/");
-    for(int i = 0; i < 10; i++)
-      dataset.enableCategory(i);
-    //dataset.enableRandom(15);
+    dataset.enableCategory("airplanes");
+    dataset.enableCategory("camera");
+    dataset.enableCategory("car_side");
+    dataset.enableCategory("cellphone");
+    dataset.enableCategory("cup");
+    dataset.enableCategory("helicopter");
+    dataset.enableCategory("Motorbikes");
+    dataset.enableCategory("scissors");
+    dataset.enableCategory("umbrella");
+    dataset.enableCategory("watch");
+
     dataset.print();
     DataPointCollection points = dataset.enabledPoints();
     random_shuffle(points.begin(), points.end());

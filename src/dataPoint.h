@@ -1,7 +1,6 @@
 #ifndef DATAPOINT_H
 #define DATAPOINT_H
 
-
 #include <vector>
 #include <string>
 

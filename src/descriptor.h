@@ -3,6 +3,8 @@
 
 #include <algorithm>
 #include <vector>
+#include <map>
+#include <iostream>
 
 namespace vito{
 
@@ -36,6 +38,7 @@ class ExampleCollection : public std::vector<Example> {
 public:
   ExampleCollection() : std::vector<Example>() {}
   ExampleCollection(size_t size) : std::vector<Example>(size){}
+  void print();
 };
 
 

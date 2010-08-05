@@ -19,6 +19,8 @@ void train(){
   state.current_classifier = getExistingClassifier(state.enabled_classifier);
   ExampleCollection examples = 
     features::FeatureExtractor::getInstance()->getExamples(state.train_data);
+  cout << "training points:" << endl;
+  examples.print();
   state.current_classifier->train(examples);
   for(vector<int>::iterator cl = state.current_classes.begin(); 
       cl != state.current_classes.end(); 
@@ -38,7 +40,10 @@ void classify(){
   ToolState &state = *ToolState::getInstance();
   if(state.current_classifier == NULL)
     train();
-  vector<DataPoint> enabsp = state.current_db.enabledPoints();
+  ExampleCollection examples = 
+    features::FeatureExtractor::getInstance()->getExamples(state.test_data);
+  cout << "test points:" << endl;
+  examples.print();
   DescriptorCollection descriptors =
     features::FeatureExtractor::getInstance()->getDescriptors(state.test_data);
   state.test_result = state.current_classifier->classify(descriptors);

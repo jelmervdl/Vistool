@@ -3,14 +3,20 @@
 
 using std::string;
 using std::vector;
-
+using std::endl;
 // Parameter Optimization Functions:
 
 namespace vito{
 namespace optimization{
 
+ParameterOptimization::~ParameterOptimization(){
+  fout.close();
+}
+
 ParameterOptimization::ParameterOptimization(float (*func) ())
-  : evaluation_function(func), best(-9999999.0){
+  : evaluation_function(func),
+    best(-9999999.0), 
+    fout("optimization_log.txt", std::ios_base::app){
 
   //add_float_parameter("one_class_gamma", 0.00001, 0.9, true);
   //add_float_parameter("one_class_nu", 0.00001, 0.9, true);
@@ -58,6 +64,16 @@ ParameterSet ParameterOptimization::get_current_parameter_handle(){
   return ParameterSet(int_values, float_values);
 }
 
+void ParameterOptimization::printCurrentParametersToFile(){
+  fout <<  "using the following parameters:" << endl;
+  for(size_t i = 0; i < int_parameters.size(); ++i)
+    fout << "\t" << int_parameters[i].get_name().c_str() 
+	 << " is set to " << int_parameters[i].get_value() << endl;
+  for(size_t i = 0; i < float_parameters.size(); ++i)
+    fout << "\t" << float_parameters[i].get_name().c_str() 
+	 << " is set to " << float_parameters[i].get_value() << endl;
+}
+
 void ParameterOptimization::printCurrentParameters(){
   printf("using the following parameters:\n");
   for(size_t i = 0; i < int_parameters.size(); ++i)
@@ -72,19 +88,21 @@ void ParameterOptimization::optimize(){
   const int total_parameters = 
     int_parameters.size() + float_parameters.size();
   for(int epoch = 0; epoch < kIterations; epoch++){
-    for(int parameter_index = 0; 
-	parameter_index < total_parameters;
-	++parameter_index){
+    for(int repet = 0; repet < 4; repet ++){
+      for(int parameter_index = 0; 
+	  parameter_index < total_parameters;
+	  ++parameter_index){
 
-      if(parameter_index < (int) int_parameters.size()){
-	optimize_int_parameter(int_parameters[parameter_index]);
-      } 
-      else{
-	optimize_float_parameter( float_parameters[parameter_index - 
-						   int_parameters.size()]);
-	Parameter<float> &parameter = 
-	  float_parameters[parameter_index - int_parameters.size()];
-	printf("Parameter name is %s\n", parameter.get_name().c_str());
+	if(parameter_index < (int) int_parameters.size()){
+	  optimize_int_parameter(int_parameters[parameter_index]);
+	} 
+	else{
+	  optimize_float_parameter( float_parameters[parameter_index - 
+						     int_parameters.size()]);
+	  Parameter<float> &parameter = 
+	    float_parameters[parameter_index - int_parameters.size()];
+	  printf("Parameter name is %s\n", parameter.get_name().c_str());
+	}
       }
     }
     apply_to_all_parameters(zoom<int>, zoom<float>);
@@ -110,6 +128,14 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
       printCurrentParameters();
       std::cout << "and that's a fact" << std::endl;
       printf("result: %.2f\n\n", result);
+
+      // log results
+      result > best? fout << "result is improvement:" : fout << "results:";
+      fout << result << endl;
+      printCurrentParametersToFile();
+      fout << endl;
+      fout.flush();
+
       TestResult res( handle, result);
       current_results.push_back(res);
       if(result > best){
@@ -141,6 +167,14 @@ void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter
       printCurrentParameters();
       std::cout << "and that's a fact" << std::endl;
       printf("result: %.2f\n\n", result);
+
+      // log results
+      result > best? fout << "result is improvement:" : fout << "results:";
+      fout << result << endl;
+      printCurrentParametersToFile();
+      fout << endl;
+      fout.flush();
+
       TestResult res( handle, result);
       current_results.push_back(res);
       if(result > best){
