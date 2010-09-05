@@ -1,7 +1,12 @@
 #include "gluiClassify.h"
 
+using std::cout;
+using std::endl;
+using std::vector;
+
 namespace vito{
 namespace gui{
+
 
 using classification::getExistingClassifier;
 using classification::Classifier;
@@ -17,6 +22,8 @@ void train(){
 				   0.5, true); // make a 50/50 split
   // get Active classification Object
   state.current_classifier = getExistingClassifier(state.enabled_classifier);
+  cout << "number of train data points: " 
+       << state.train_data.size() << endl;
   ExampleCollection examples = 
     features::FeatureExtractor::getInstance()->getExamples(state.train_data);
   cout << "training points:" << endl;

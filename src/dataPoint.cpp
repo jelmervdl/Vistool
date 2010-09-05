@@ -28,4 +28,12 @@ string DataPoint::get_cat_name() const{
   return cat_name;
 }
 
+LabelCollection DataPointCollection::getLabels(){
+  LabelCollection labels;
+  for(DataPointCollection::iterator it = begin();
+      it != end();
+      ++it)
+    labels.push_back(it->get_label());
+  return labels;
+}
 }

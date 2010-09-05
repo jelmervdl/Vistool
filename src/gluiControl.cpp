@@ -1,5 +1,11 @@
 #include "gluiControl.h"
 
+using std::cout;
+using std::endl;
+using std::vector;
+using std::ofstream;
+
+
 using vito::classification::getExistingClassifiers;
 using vito::classification::Classifier;
 

@@ -47,14 +47,14 @@
       <sift_auto_window_size_type> 1 </sift_auto_window_size_type>
       <!-- 0 = smallest window
 	   1 = all pixels are used -->
-    <sift_orientation_directions> 8 </sift_orientation_directions>
+    <sift_orientation_directions> 15 </sift_orientation_directions>
     <sift_number_of_keypoints_x> 4 </sift_number_of_keypoints_x>
     <sift_number_of_keypoints_y> 4 </sift_number_of_keypoints_y>
     <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
       <!-- this variable is squared later on -->
     <sift_keypoint_pixel_window> -1  </sift_keypoint_pixel_window> 
       <!-- if -1 pixel window is -1 it will be determined automatically-->
-    <sift_blur_window> 10 </sift_blur_window>
+    <sift_blur_window> 2 </sift_blur_window>
 
   <!-- histogram variables -->
     <histogram_hbins> 10 </histogram_hbins>

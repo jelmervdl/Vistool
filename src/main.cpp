@@ -50,8 +50,7 @@ int main(int argc, char ** argv){
   Parameters *p = Parameters::getInstance();
   p->readFile("parameters.xml");
   vector<int> cools;
-  cools.resize(10
-);
+  cools.resize(10);
   //testMPEG7();
   //testClassifierStack();
   if(argc > 1){
@@ -59,10 +58,14 @@ int main(int argc, char ** argv){
     p->readFile((char *) "parameters.xml");
     string mode = argv[1];
     if(mode == "experiment"){
-      if(argc == 3)
-	experiment::performExperiment(argv[2]);
+      if(argc >= 3){
+	if(argc == 3)
+	  experiment::performExperiment(argv[2]);
+	if(argc == 4)
+	  experiment::performExperiment(argv[2], atoi(argv[3]));
+      }
       else
-	cout << "correct use: VisionTool experiment [ExperimentName]" << endl;
+	cout << "correct use: VisionTool experiment [ExperimentName] [quantity]" << endl;
       return 0;
     }
     if(mode == "test"){

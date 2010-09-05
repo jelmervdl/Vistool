@@ -8,7 +8,7 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_Cocoa    = -framework Cocoa
 	Lib_Carbon   = -framework Carbon
 	Lib_Core     = -framework CoreFoundation
-	Lib_GLUI     = -framework GLUI
+	Lib_GLUI     = -lGLUI
 	Lib_JNI      = -framework JavaVM
 	Lib_MPG7     = -framework Mp7jrs
 	Lib_VL       = -lvl
@@ -16,8 +16,8 @@ ifeq ("$(shell uname)", "Darwin")
 
 #Configed Libs
 	#Lib_Magickpp = `GraphicsMagick-config --cppflags --cflags --ldflags --libs`
-	#Lib_Magickpp = `Magick++-config --cppflags --cxxflags --ldflags --libs`
-	Lib_Magickpp = -lMagick++ -staticlib=Magick++
+	Lib_Magickpp = `Magick++-config --cppflags --cxxflags --ldflags --libs`
+	#Lib_Magickpp = -lMagick++ -staticlib=Magick++
 	#Lib_Magickpp = -O2  -D_THREAD_SAFE -lMagick++ -lMagickWand -lMagickCore -llcms -ltiff -lfreetype -ljpeg -lfftw3 -lfontconfig -lexpat -lfreetype -lz -liconv -lXext -lSM -lICE -lX11 -lXt -lbz2 -lz -lm -lgomp -lclparser -Wl -framework OpenCL -L/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries -lm -lpthread -lltdl
 
 	#Lib_Magickpp = -I/opt/local/include/GraphicsMagick -O2  -D_THREAD_SAFE -L/opt/local/lib -L/opt/local/lib  -L/opt/local/lib -L/opt/local/lib -lGraphicsMagick++ -lGraphicsMagick -llcms -ltiff -lfreetype -ljpeg -lpng -lbz2 -lxml2 -lz -lm -lgomp -lpthread -lltdl
@@ -36,8 +36,9 @@ ifeq ("$(shell uname)", "Darwin")
 
 
 #Header include path
+	Head_Path += -I/opt/local/include/ImageMagick
 	Head_Path += -Ilocal/include
-	Head_Path += -Ilocal/ImageMagick-6.6.3/include/ImageMagick
+	#Head_Path += -Ilocal/ImageMagick-6.6.3/include/ImageMagick
 	Head_Path += -I/opt/local/include 
 	Head_Path += -I/opt/local/include/opencv
 	Head_Path += -I/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers
@@ -54,7 +55,7 @@ ifeq ("$(shell uname)", "Darwin")
 
 #Library paths
 	#Lib_Path  +=  -Llocal/lib
-	Lib_Path  +=  -Llocal/ImageMagick-6.6.3/lib
+	#Lib_Path  +=  -Llocal/ImageMagick-6.6.3/lib
 	Lib_Path  +=  -L/opt/local/lib 
 #	Lib_Path  +=  -L/usr/local/lib 
 #	Lib_Path  +=  -L/Users/mauricemulder/Downloads/vlfeat/bin/maci64

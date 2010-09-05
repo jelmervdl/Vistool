@@ -2,6 +2,9 @@
 
 #define PrepareMatrices(examples)					\
 
+using std::cout;
+using std::endl;
+
 using std::string;
 using Magick::Image;
 using cv::Mat;

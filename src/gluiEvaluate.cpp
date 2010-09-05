@@ -1,5 +1,11 @@
 #include "gluiEvaluate.h"
 
+using std::cout;
+using std::endl;
+using std::vector;
+using std::stringstream;
+using std::map;
+
 namespace vito{
 namespace gui{
 

@@ -52,7 +52,8 @@ class Dataset{
   void                    randomDataSplit(std::vector<DataPoint> * train, 
 					  std::vector<DataPoint> * test, 
 					  float cut = 0.5, 
-					  bool eqrep = true);
+					  bool eqrep = true,
+					  int max = -1);
 };
 }
 

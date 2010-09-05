@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "labels.h"
 
 /* Contains all relevant information regarding a single
 DataPoints. This include the file names of it's original image and the
@@ -30,6 +31,8 @@ class DataPoint{
 };
 
 class DataPointCollection : public std::vector<DataPoint> {
+public:
+  LabelCollection getLabels();
 };
 
 }
