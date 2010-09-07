@@ -14,7 +14,6 @@ LabelCollection Classifier::classify(const DescriptorCollection &descriptors){
   labels.resize(descriptors.size());
   cout << "created a label collection" << endl;
   for(size_t i = 0; i < descriptors.size(); ++i){
-    cout << "at i: " << i << endl;
     labels[i] = classify(descriptors[i]);
   }
   return labels;

@@ -28,6 +28,7 @@ class Category{
   std::string              get_name()  const;
   std::string              get_root()  const;
 
+  void                     shuffle();
   int *                    enabledLiveVar();
   std::vector<DataPoint> * get_data_points();
   std::vector<DataPoint>   get_data_points_();

@@ -1,6 +1,7 @@
 #ifndef OPTIMIZATATIONFUNCTIONS_H
 #define OPTIMIZATATIONFUNCTIONS_H
 
+#include "experiment.h"
 #include "parameters.h"
 #include "dataset.h"
 #include "SVMClassifier.h"
@@ -12,6 +13,7 @@ namespace optimization{
 
 float evaluateSVM();
 float evaluateOneClassSVM();
+float evaluateSVMAbdullah();
 
 }}
 

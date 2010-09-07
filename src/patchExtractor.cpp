@@ -9,16 +9,16 @@ using features::Feature;
 
 patch_collection PatchExtractor::getPatches(DataPoint dp, Feature *feature){
   vector<DataPoint> dps(1, DataPoint(dp));
-  return getPatches(&dps, feature);
+  return getPatches(dps, feature);
 }
 
-patch_collection PatchExtractor::getPatches(vector<DataPoint> *dps, 
+patch_collection PatchExtractor::getPatches(const vector<DataPoint> &dps, 
 					    Feature *feature){
   patch_collection ret;
   const int x_bins = 10;
   const int y_bins = x_bins;
-  for(vector<DataPoint>::iterator it = dps->begin();
-      it != dps->end();
+  for(vector<DataPoint>::const_iterator it = dps.begin();
+      it != dps.end();
       ++it){
     MyImage current_image(it->get_image_url());
     for(int x = 0; x < x_bins; x++)

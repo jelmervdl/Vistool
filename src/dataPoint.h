@@ -1,6 +1,7 @@
 #ifndef DATAPOINT_H
 #define DATAPOINT_H
 
+#include <iostream>
 #include <vector>
 #include <string>
 #include "labels.h"
@@ -33,6 +34,7 @@ class DataPoint{
 class DataPointCollection : public std::vector<DataPoint> {
 public:
   LabelCollection getLabels();
+  void print();
 };
 
 }

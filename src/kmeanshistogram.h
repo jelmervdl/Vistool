@@ -3,13 +3,13 @@
 
 #include <sstream>
 #include "kmeansclustering.h"
-#include "feature.h"
+#include "features.h"
 #include "patchExtractor.h"
 
 namespace vito{
 namespace features{
 
-class KMeansClusterHistogram  : public Feature{
+class KMeansClusterHistogram : public Feature{
 public:
 
   typedef clustering::patch patch;
@@ -37,11 +37,12 @@ public:
   }
 
 
-  KMeansClusterHistogram(std::vector<DataPoint> *dps, Feature *feat) : feature(feat) {
+  KMeansClusterHistogram(const std::vector<DataPoint> &dps, 
+			 Feature *feat) : feature(feat) {
     std::stringstream ss;
     ss << "kmeans_clustered_feature_using_visual_patches_"
        << feature->getParameterName() << "_of_" 
-       << dps->size() << "_images";
+       << dps.size() << "_images";
     feature_type = ss.str();
     clustering::PatchExtractor patch_extractor;
     clustering::KMeansClustering clustering;
@@ -51,7 +52,7 @@ public:
 
     patch_collection patches;
     if(feature->getParameterName().find("mpeg7") == 0)
-      patches = features::mpeg7::getAllPatches(*dps);
+      patches = features::mpeg7::getAllPatches(dps);
     else
       patches = patch_extractor.getPatches(dps, feature);
     centers = clustering.cluster(patches);

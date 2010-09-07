@@ -7,7 +7,6 @@ using namespace vito::optimization;
 using namespace vito::classification;
 using namespace std;
 
-
 void testClassifierStack(){
   Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
   dataset.enableCategory("accordion");
@@ -47,6 +46,8 @@ void resizeExperiment(){
 }
 
 int main(int argc, char ** argv){ 
+  cout << time(NULL) << endl; 
+  srand(time(NULL));
   Parameters *p = Parameters::getInstance();
   p->readFile("parameters.xml");
   vector<int> cools;
@@ -75,7 +76,7 @@ int main(int argc, char ** argv){
       start(1,argv);
       return 0;
     }if(mode == "optimize"){
-      ParameterOptimization opt(&vito::optimization::evaluateSVM);
+      ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
       opt.optimize();
       return 0;
     }

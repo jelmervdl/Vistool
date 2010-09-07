@@ -14,6 +14,10 @@ using evaluation::Evaluation;
 
 namespace optimization{
 
+float evaluateSVMAbdullah(){
+  return experiment::performExperiment("abdullah2010", 100);
+}
+
 float evaluateSVM(){   
   float result = 0.0;
   for(int i  = 0; i < 10; ++i){

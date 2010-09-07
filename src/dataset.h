@@ -31,20 +31,19 @@ class Dataset{
   size_t                  smallestCategory() ;
 
   //setters
-  void                    subsample(const int n);
 
+  void                    subsample(const int n);
   void                    setRoot(std::string str);
   void                    addCategory(Category cat);
-
   void                    enableCategory(size_t i);
   void                    enableCategory(std::string str);
-
   void                    disableCategory(size_t i);
   void                    disableCategory(std::string str);
-
   void                    enableRandom(const int number);
-
   void                    print();
+  void                    shuffle();
+  std::vector<Dataset>         split(float ratio = 0.5);
+  void                    cut(float ratio, bool second);
 
   DataPointCollection     enabledPoints(bool eqrep = true) ;
   std::vector<DataPoint*> enabledDataPoints(bool eqrep= true);

@@ -5,14 +5,16 @@
 #include "classification.h"
 #include "evaluation.h"
 #include "statistics.h"
+#include "kmeanshistogram.h"
 
 namespace vito{
 namespace experiment{
 
-void performExperiment(const std::string str, const int repetitions = 1);
+Dataset abdullah2010DataSet();
 
+float performExperiment(const std::string str, const int repetitions = 1);
 float abdullah2010();
-
+float clustering();
 
 }}
 

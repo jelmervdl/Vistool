@@ -17,7 +17,6 @@ protected:
   int current;
 
 public:
-
   ~ClusterFeatureExtractor(){
     clear();
   }
@@ -30,7 +29,7 @@ public:
   }
 
   void addClusterFeature(datapoint_list *dps, Feature *feature){
-    Feature *new_feature = new KMeansClusterHistogram(dps, feature);
+    Feature *new_feature = new KMeansClusterHistogram(*dps, feature);
     currentFeatures.push_back(new_feature);
   }
 

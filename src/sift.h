@@ -28,8 +28,6 @@ private:
 			  const Descriptor &descriptor, const int &window);
 public: 
 
-  virtual     ~SiftDescriptor(){};
-
   // extract sift feature from an image, saving visual representation
   // is optional
   Descriptor   extract_(MyImage *Image,

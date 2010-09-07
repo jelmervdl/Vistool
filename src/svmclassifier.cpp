@@ -151,14 +151,9 @@ int SVMClassifier::classify(const Descriptor &descriptor){
 }
 
 int SVMClassifier::classify(const Descriptor &descriptor, svm_model *model){
-  cout << "svm is classifiying"
-       << "descriptor of size:" << descriptor.size() << endl;
-
   svm_node *nodes = constructNode(descriptor);
-  cout << "created a node" << endl;
   //print::print_svm_nodes(nodes, descriptor.size());
   double   result = svm_predict(model, nodes);
-  cout << "predicted: " << result << endl;
   //vector<double> value_per_class = getValues(nodes, model);
   delete [] nodes;
   return result;

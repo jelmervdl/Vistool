@@ -2,6 +2,8 @@
 
 
 using std::string;
+using std::cout;
+using std::endl;
 
 namespace vito{
 
@@ -36,4 +38,12 @@ LabelCollection DataPointCollection::getLabels(){
     labels.push_back(it->get_label());
   return labels;
 }
+
+void DataPointCollection::print(){
+  cout << "collection has: " << size() << " items: " << endl;
+  for(DataPointCollection::iterator it = begin(); it != end(); ++it)
+    cout << "  " << "type: " << it->get_label() << " "
+	 << it->get_file_name() << endl;
+}
+
 }

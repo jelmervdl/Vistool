@@ -111,7 +111,6 @@ void Dataset::randomDataSplit(vector<DataPoint> * train,
 			      float cut, 
 			      bool eqrep,
 			      int max){
-
   vector<Category*> enabled = getEnabled();
   size_t min = 0;
   if(eqrep)
@@ -188,6 +187,28 @@ void Dataset::enableRandom(const int number){
     *categories[i].enabledLiveVar() =  enabled[i];
 }
 
+vector<Dataset> Dataset::split(float ratio){
+  shuffle();
+  assert(ratio < 1 && ratio > 0);
+  vector<Dataset> datasets;
+  datasets.push_back(*this);
+  datasets.push_back(*this);
+  datasets[0].cut(ratio, false);
+  datasets[0].cut(ratio, true);
+  return datasets;
+}
+
+void Dataset::cut(float ratio, bool second){
+  for(vector<Category>::iterator it = categories.begin();
+      it != categories.end();
+      ++it){
+    size_t cut = ratio * it->size();
+    vector<DataPoint> &dps = *it->get_data_points();
+    if(!second) dps.erase(dps.begin(), dps.begin() + cut - 1);
+    else dps.erase(dps.begin() + cut, dps.end());
+  }
+}
+
 void Dataset::subsample(const int n){
   typedef vector<Category>::iterator iter;
   for(iter it = categories.begin(); it != categories.end(); ++it){
@@ -195,5 +216,11 @@ void Dataset::subsample(const int n){
   }
 }
 
+void Dataset::shuffle(){
+  for(vector<Category>::iterator it = categories.begin();
+      it != categories.end();
+      ++it)
+    it->shuffle();
+}
 }
 
