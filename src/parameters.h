@@ -47,6 +47,9 @@ class Parameters : public Multiton<Parameters>{
   std::string file;
 
  public:
+
+  void        appointFeature(std::string str);
+  void        turnOffAllFeatures();
   // constructor
              ~Parameters();
 

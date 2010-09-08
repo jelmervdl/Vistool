@@ -28,9 +28,10 @@ public:
     }
   }
 
-  void addClusterFeature(datapoint_list *dps, Feature *feature){
-    Feature *new_feature = new KMeansClusterHistogram(*dps, feature);
+  std::string addClusterFeature(const datapoint_list &dps, Feature *feature){
+    Feature *new_feature = new KMeansClusterHistogram(dps, feature);
     currentFeatures.push_back(new_feature);
+    return new_feature->getParameterName();
   }
 
   feature_list getFeatures(){

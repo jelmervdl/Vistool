@@ -13,8 +13,12 @@ namespace classification{
  
 class NNClassifier : public Classifier, public Singleton<NNClassifier> {
  private:
+
   CvKNearest * knn; // the model
  public:
+  using Classifier::train;
+  using Classifier::classify;
+
   NNClassifier();
   ~NNClassifier();
 

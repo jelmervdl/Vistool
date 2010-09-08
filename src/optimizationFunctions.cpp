@@ -58,6 +58,7 @@ float evaluateOneClassSVM(){
   DataPointCollection train, test;
   dataset.randomDataSplit(&train, &test, 0.5);
   FeatureExtractor::getInstance()->saveDescriptorsToFile(&dataset);
+
   OneClassSVM segsvm(0);
   FeatureExtractor *fe = FeatureExtractor::getInstance();
   ExampleCollection examples = fe->getExamples(train);

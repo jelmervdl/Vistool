@@ -54,6 +54,7 @@ Label  NNClassifier::classify(const Descriptor &descriptor){
   DescriptorCollection desc_col(1);
   desc_col[0] = descriptor;
   const int k = Parameters::getInstance()->getiParameter("knn_classifier_k");
+  cout << "using k at : " << k << endl;
   LabelCollection results;
   size_t rows, cols;
   rows = 1;

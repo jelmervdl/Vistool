@@ -42,7 +42,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
 				      CvMat *  labels);
 
   ExampleCollection     getExamples(const DataPointCollection &datapoints);
-  DescriptorCollection  getDescriptors(const DataPointCollection &dps);
+  DescriptorCollection  getDescriptors(const DataPointCollection &datatpoints);
 };
 
 }}

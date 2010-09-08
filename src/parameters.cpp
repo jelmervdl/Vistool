@@ -184,3 +184,19 @@ void Parameters::requireOnlySift(){
   assert(intParameters["feature_sift"] == 1);
   assert(floatParameters["feature_histogram"] == 0);
 };
+
+void Parameters::turnOffAllFeatures(){
+  for(map<string, int>::iterator it = intParameters.begin();
+      it != intParameters.end();
+      ++it)
+    if(it->first.find("feature_") == 0){
+      cout << "turning off: " << it->first << endl;
+      it->second = 0;
+    }
+}
+
+void Parameters::appointFeature(std::string str){
+  cout << "activating: " << endl << str << endl;
+  turnOffAllFeatures();
+  intParameters["feature_" + str] = 1;
+}

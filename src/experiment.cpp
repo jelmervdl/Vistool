@@ -26,11 +26,13 @@ float performExperiment(const string str,
 
   if(str == "svm") exp_func = &svm;
   if(str == "clustering"){
-    exp_func = &clustering;
+    exp_func = &svm;
     vector<Dataset> splits = dataset.split();
-    KMeansClusterHistogram cluster(splits[0].enabledPoints(), 
-				   features::mpeg7::EdgeHistogram::getInstance());
+    features::ClusterFeatureExtractor *cfe = features::ClusterFeatureExtractor::getInstance();
+    string name = cfe->addClusterFeature(splits[0].enabledPoints(), 
+					 features::mpeg7::EdgeHistogram::getInstance());
     dataset = splits[1];
+    Parameters::getInstance()->appointFeature(name);
   }
 
  if(exp_func == 0){
@@ -77,7 +79,7 @@ float svm(Dataset &dataset){
   DescriptorCollection testing_descriptors = fe->getDescriptors(test);
 
   // train an svm
-  SVMClassifier svm;
+  classification::SVMClassifier svm;
   svm.train(training_examples);
 
   // classify the test
@@ -94,11 +96,14 @@ Feature* getClusteringFeature(const Dataset &dataset){
 }
 
 float clustering(Dataset &dataset){
-  vector<Dataset> datasets = abdullah2010().split();
-  KMeansClusterHistogram cluster(datasets[0].enabledPoints(), 
-				 features::mpeg7::EdgeHistogram::getInstance());  
+  DataPointCollection train, test;
+  dataset.randomDataSplit(&train, &test, 0.5, true, 30);
 
-  return 0.0;
+  //get Labels, Examples and Descriptors
+  FeatureExtractor *fe = FeatureExtractor::getInstance();
+  ExampleCollection training_examples = fe->getExamples(train);
+  DescriptorCollection testing_descriptors = fe->getDescriptors(test);
+
 }
 
 }}
