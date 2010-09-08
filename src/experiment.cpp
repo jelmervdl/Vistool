@@ -10,31 +10,49 @@ namespace vito{
 using features::KMeansClusterHistogram;
 
 typedef std::vector<Category*> categories;
-// vito namespace use:
 using features::FeatureExtractor;
+using features::Feature;
 using classification::SVMClassifier;
 using evaluation::Evaluation;
 namespace experiment{
 
-float performExperiment(const string str, const int repetitions){
+float performExperiment(const string str, 
+			const string dataset_string,
+			const int repetitions){
   cout << "performing experiment " << str << endl;
-  float (*exp_func)() = 0;
-  if(str == "abdullah2010") exp_func = &abdullah2010;
-  if(str == "clustering") exp_func = &clustering;
-  if(exp_func == 0){
+
+  Dataset dataset = getDataSet(dataset_string);
+  float (*exp_func)(Dataset&) = 0;
+
+  if(str == "svm") exp_func = &svm;
+  if(str == "clustering"){
+    exp_func = &clustering;
+    vector<Dataset> splits = dataset.split();
+    KMeansClusterHistogram cluster(splits[0].enabledPoints(), 
+				   features::mpeg7::EdgeHistogram::getInstance());
+    dataset = splits[1];
+  }
+
+ if(exp_func == 0){
     cout << "experiment not found" << endl;
   }else{
     Statistics values;
     for(int i = 0; i < repetitions; i++)
-      values.push_back(exp_func());
+      values.push_back(exp_func(dataset));
     cout << "mean: " << values.mean() << endl;
     cout << "std: " << values.std() << endl;
-  return values.mean();
+    return values.mean();
   }
   return 0.0;
 }
 
-Dataset abdullah2010DataSet(){
+Dataset getDataSet(const string str){
+  if(str == "abdullah2010")
+    return abdullah2010();
+  return Dataset();
+}
+
+Dataset abdullah2010(){
   Dataset dataset ("../datasets/Caltech101/");
   dataset.enableCategory("airplanes");
   dataset.enableCategory("camera");
@@ -49,11 +67,7 @@ Dataset abdullah2010DataSet(){
   return dataset;
 }
 
-float abdullah2010(){
-  // select correct dataset
-  Dataset dataset = abdullah2010DataSet();
-
-  // get dataPoints
+float svm(Dataset &dataset){
   DataPointCollection train, test;
   dataset.randomDataSplit(&train, &test, 0.5, true, 30);
 
@@ -75,11 +89,12 @@ float abdullah2010(){
   return evaluation.getPrecision();
 }
 
-  Feature getClusteringFeature(){
-  }
+Feature* getClusteringFeature(const Dataset &dataset){
 
-float clustering(){
-  vector<Dataset> datasets = abdullah2010DataSet().split();
+}
+
+float clustering(Dataset &dataset){
+  vector<Dataset> datasets = abdullah2010().split();
   KMeansClusterHistogram cluster(datasets[0].enabledPoints(), 
 				 features::mpeg7::EdgeHistogram::getInstance());  
 

@@ -24,6 +24,20 @@ protected:
 
 public:
 
+  virtual std::string generateFileName(Feature *feat){
+    return "cluster_"+ feat->getParameterName();
+  }
+
+  virtual void save(std::string location){
+    clustering::KMeansClustering().writeClusters(centers, 
+						 generateFileName(feature));
+  }
+
+  KMeansClusterHistogram(Feature *feat){
+    feature_type = generateName(feat);
+    centers = clustering::KMeansClustering().readClusters(generateFileName(feat));
+  }
+
   virtual std::string getParameterName(){
     return feature_type;
   }
@@ -37,19 +51,18 @@ public:
   }
 
 
-  KMeansClusterHistogram(const std::vector<DataPoint> &dps, 
-			 Feature *feat) : feature(feat) {
+  std::string generateName(Feature *feature){
     std::stringstream ss;
     ss << "kmeans_clustered_feature_using_visual_patches_"
-       << feature->getParameterName() << "_of_" 
-       << dps.size() << "_images";
-    feature_type = ss.str();
+       << feature->getParameterName();
+    return ss.str();
+  }
+
+  KMeansClusterHistogram(const std::vector<DataPoint> &dps, 
+			 Feature *feat) : feature(feat) {
+    feature_type = generateName(feat);
     clustering::PatchExtractor patch_extractor;
     clustering::KMeansClustering clustering;
-
-    std::cout << "finding mpeg7 in feature name? " 
-	      << feature->getParameterName().find("mpeg7") << std::endl;
-
     patch_collection patches;
     if(feature->getParameterName().find("mpeg7") == 0)
       patches = features::mpeg7::getAllPatches(dps);

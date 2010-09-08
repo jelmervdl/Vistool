@@ -11,10 +11,13 @@ namespace vito{
 namespace experiment{
 
 Dataset abdullah2010DataSet();
-
-float performExperiment(const std::string str, const int repetitions = 1);
-float abdullah2010();
-float clustering();
+Dataset getDataSet(const std::string str);
+float performExperiment(const std::string str,
+			const std::string dataset = "abdullah2010",
+			const int repetitions = 1);
+Dataset abdullah2010();
+float svm( Dataset &dataset);
+float clustering( Dataset &dataset);
 
 }}
 

@@ -63,7 +63,9 @@ int main(int argc, char ** argv){
 	if(argc == 3)
 	  experiment::performExperiment(argv[2]);
 	if(argc == 4)
-	  experiment::performExperiment(argv[2], atoi(argv[3]));
+	  experiment::performExperiment(argv[2], argv[3]);
+	if(argc == 5)
+	  experiment::performExperiment(argv[2], argv[3], atoi(argv[4]));	  
       }
       else
 	cout << "correct use: VisionTool experiment [ExperimentName] [quantity]" << endl;

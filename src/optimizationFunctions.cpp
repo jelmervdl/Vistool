@@ -15,7 +15,7 @@ using evaluation::Evaluation;
 namespace optimization{
 
 float evaluateSVMAbdullah(){
-  return experiment::performExperiment("abdullah2010", 100);
+  return experiment::performExperiment("svm", "abdullah2010", 100);
 }
 
 float evaluateSVM(){   
