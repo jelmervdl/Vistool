@@ -17,6 +17,10 @@ SVMClassifier::~SVMClassifier(){
     svm_destroy_model(model);
     model = 0;
   }
+  if(prblm != 0){
+    svm_destroy_problem(prblm);
+    prblm = 0;
+  }
 }
 
 void svm_destroy_problem(svm_problem *problem){
@@ -36,17 +40,24 @@ string SVMClassifier::get_name(){
 }
 
 void SVMClassifier::train(const ExampleCollection &examples){
+  cout << "training" << endl;
+  cout << "problem is: " << prblm << endl;
+  cout << "model is: " << model << endl;
   if(model != 0){
     svm_destroy_model(model);
     model = 0;
   }
+  if(prblm != 0){
+    cout << "removing problem" << endl;
+    svm_destroy_problem(prblm);
+    prblm = 0;
+  }
   cout << "training on " << examples.size() << " examples" << endl;
-  svm_problem   *problem = compileProblem(examples);
+  
+  prblm = compileProblem(examples);
   //print::print_svm_problem(problem);
   svm_parameter *parameter = getSVMParameters();
-  model = svm_train(problem, parameter);
-  svm_destroy_problem(problem);
-  svm_destroy_param(parameter);
+  model = svm_train(prblm, parameter);
   cout << "done training" << endl;
 }
 

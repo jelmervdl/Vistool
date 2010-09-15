@@ -13,6 +13,8 @@ void svm_destroy_problem(svm_problem *problem);
 class SVMClassifier : public Classifier {
  protected:
   svm_model *model;
+  svm_problem *prblm;
+
   void                         addExampleToProblem(svm_problem &problem, 
 						     const Example &example);
   virtual std::string          get_name();
@@ -26,7 +28,7 @@ class SVMClassifier : public Classifier {
   using Classifier::train;
   using Classifier::classify;
 
-  SVMClassifier() : model(0){};
+  SVMClassifier() : model(0), prblm(0){};
   ~SVMClassifier();
   // train the svm
   virtual void                 train(const ExampleCollection &files);

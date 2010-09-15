@@ -18,6 +18,7 @@ float   performExperiment(const std::string str,
 		 	const int repetitions = 1);
 Dataset abdullah2010();
 float   svm(Dataset &dataset);
+float   nn(Dataset &dataset);
 float   clustering( Dataset &dataset);
 
 }}

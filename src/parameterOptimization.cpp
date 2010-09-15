@@ -88,7 +88,7 @@ void ParameterOptimization::optimize(){
   const int total_parameters = 
     int_parameters.size() + float_parameters.size();
   for(int epoch = 0; epoch < kIterations; epoch++){
-    for(int repet = 0; repet < 4; repet ++){
+    for(int repet = 0; repet < 2; repet ++){
       for(int parameter_index = 0; 
 	  parameter_index < total_parameters;
 	  ++parameter_index){

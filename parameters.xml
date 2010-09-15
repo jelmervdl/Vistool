@@ -47,7 +47,7 @@
       <sift_auto_window_size_type> 1 </sift_auto_window_size_type>
       <!-- 0 = smallest window
 	   1 = all pixels are used -->
-    <sift_orientation_directions> 15 </sift_orientation_directions>
+    <sift_orientation_directions> 8 </sift_orientation_directions>
     <sift_number_of_keypoints_x> 4 </sift_number_of_keypoints_x>
     <sift_number_of_keypoints_y> 4 </sift_number_of_keypoints_y>
     <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>

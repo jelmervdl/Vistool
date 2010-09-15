@@ -25,6 +25,7 @@ float performExperiment(const string str,
   float (*exp_func)(Dataset&) = 0;
 
   if(str == "svm") exp_func = &svm;
+  if(str == "nn") exp_func = &nn;
   if(str == "clustering"){
     exp_func = &svm;
     vector<Dataset> splits = dataset.split();
@@ -90,6 +91,29 @@ float svm(Dataset &dataset){
   evaluation.print();
   return evaluation.getPrecision();
 }
+
+float nn(Dataset &dataset){
+  DataPointCollection train, test;
+  dataset.randomDataSplit(&train, &test, 0.5, true, 30);
+
+  //get Labels, Examples and Descriptors
+  FeatureExtractor *fe = FeatureExtractor::getInstance();
+  ExampleCollection training_examples = fe->getExamples(train);
+  DescriptorCollection testing_descriptors = fe->getDescriptors(test);
+
+  // train an svm
+  classification::NNClassifier svm;
+  svm.train(training_examples);
+
+  // classify the test
+  LabelCollection result_labels = svm.classify(testing_descriptors);
+
+  // evaluate the results
+  Evaluation evaluation(test, result_labels);
+  evaluation.print();
+  return evaluation.getPrecision();
+}
+
 
 Feature* getClusteringFeature(const Dataset &dataset){
 
