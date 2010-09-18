@@ -51,7 +51,6 @@ Matrix<Gradient> imageGradient(const Matrix<float> &image ){
   Matrix<Gradient> gradient_image(width-2, height-2);
   for(size_t x = 1; x < image.get_width() - 1; ++x)
     for(size_t y = 1; y < image.get_height() - 1; ++y){
-      Gradient grad = singleGradient(image, x, y);
       gradient_image.at(x - 1, y - 1) = singleGradient(image, x, y);
     }
   return gradient_image;

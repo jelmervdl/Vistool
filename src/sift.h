@@ -25,7 +25,7 @@ private:
   void         drawKeyPoint(Magick::Image &draw_me, 
 			  const int &orientations,
 			  const sift::KeyPoint &keypoint, 
-			  const Descriptor &descriptor, const int &window);
+			  Descriptor descriptor, const int &window);
 public: 
 
   // extract sift feature from an image, saving visual representation

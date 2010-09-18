@@ -4,11 +4,11 @@
     <sift_blur_std> 2.0 </sift_blur_std>
 
     <!-- SVM -->
-    <svm_gamma> 0.03 </svm_gamma>
+    <svm_gamma> 0.18946 </svm_gamma>
     <svm_coef0> 15.0 </svm_coef0>
     <svm_cache_size> 1024 </svm_cache_size>
     <svm_eps> 0.64 </svm_eps>
-    <svm_C> 2.00 </svm_C>
+    <svm_C> 32768.0 </svm_C>
     <svm_nu> 0.001 </svm_nu>
     <svm_p> 0.0 </svm_p>
 
@@ -41,19 +41,20 @@
     <feature_mpeg7_color_layout> 0 </feature_mpeg7_color_layout>
 
   <!-- Sift variables :-->
-    <sift_blur_window> 5 </sift_blur_window>
+    <sift_blur_window> 3 </sift_blur_window>
     <sift_blur_toggle> 0 </sift_blur_toggle>
       <!-- wether pixels are blurred or not -->
       <sift_auto_window_size_type> 1 </sift_auto_window_size_type>
       <!-- 0 = smallest window
 	   1 = all pixels are used -->
-    <sift_orientation_directions> 16 </sift_orientation_directions>
+    <sift_orientation_directions> 8 </sift_orientation_directions>
     <sift_number_of_keypoints_x> 8 </sift_number_of_keypoints_x>
     <sift_number_of_keypoints_y> 4 </sift_number_of_keypoints_y>
     <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
       <!-- this variable is squared later on -->
     <sift_keypoint_pixel_window> -1  </sift_keypoint_pixel_window> 
       <!-- if -1 pixel window is -1 it will be determined automatically-->
+    <sift_blur_window> 2 </sift_blur_window>
 
   <!-- histogram variables -->
     <histogram_hbins> 10 </histogram_hbins>

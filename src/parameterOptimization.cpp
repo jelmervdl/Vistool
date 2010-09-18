@@ -25,10 +25,13 @@ ParameterOptimization::ParameterOptimization(float (*func) ())
   //add_float_parameter("svm_coef0", 0.0, 30.0);  
   //add_float_parameter("svm_eps", 0.0003, 1.5);
   add_float_parameter("svm_gamma", -15.0, -1.0, false, true);
-  //2add_int_parameter("svm_degree", 5, 30, true);
+  // add_int_parameter("svm_degree", -10, 30, true);
   
   //  add_int_parameter("svm_shrinking", 0, 10);
   //add_int_parameter("svm_probabiity", -1, 1, false);
+
+  //add_int_parameter("sift_blur_window", 2, 6, true);
+  //add_int_parameter("sift_orientation_directions", 2, 40, true);
 
 }
 
