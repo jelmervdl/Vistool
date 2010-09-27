@@ -46,44 +46,73 @@ void resizeExperiment(){
 }
 
 int main(int argc, char ** argv){ 
-  cout << time(NULL) << endl; 
   srand(time(NULL));
+  vector<string> arguments;
   Parameters *p = Parameters::getInstance();
   p->readFile("parameters.xml");
-  vector<int> cools;
-  cools.resize(10);
-  //testMPEG7();
-  //testClassifierStack();
-  if(argc > 1){
-    Parameters * p = Parameters::getInstance();
-    p->readFile((char *) "parameters.xml");
-    string mode = argv[1];
-    if(mode == "experiment"){
-      if(argc >= 3){
-	if(argc == 3)
-	  experiment::performExperiment(argv[2]);
-	if(argc == 4)
-	  experiment::performExperiment(argv[2], argv[3]);
-	if(argc == 5)
-	  experiment::performExperiment(argv[2], argv[3], atoi(argv[4]));	  
+  // get out the options
+  for(int i = 1; i < argc; i++){
+    if(argv[i][0] == '-' && argc > (i + 1) ){
+      string option_name = string(argv[i]).substr(1);
+      string value = argv[i + 1];
+      i++;
+      if(option_name == "p"){
+	p->clear();
+	p->readFile(value);
+      }else{
+	return 1;
       }
-      else
-	cout << "correct use: VisionTool experiment [ExperimentName] [quantity]" << endl;
+    }else{
+      arguments.push_back(argv[i]);
+    }
+  }
+  // get actual commands
+  vector<string>::iterator
+    arg = arguments.begin(),
+    end = arguments.end();
+  if(arg == end) {
+    return 1;
+  }
+  if(*arg == "test"){
+    testing::testAll();
+    return 0;
+  }
+  if(*arg == "gui"){
+    start(1,argv);
+    return 0;
+  }
+  if(*arg == "optimize"){
+    ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
+    opt.optimize();
+    return 0;
+  }
+  if(*arg == "experiment"){
+    arg++;
+    if(arg == end){
+      cout << "experiment type needed!" << endl;
+      return 1;
+    }
+    string type = *arg;
+    arg++;
+    if(arg == end){
+      experiment::performExperiment(type);
       return 0;
     }
-    if(mode == "test"){
-      testing::testAll();
-      return 0;
-    }if(mode == "gui"){
-      start(1,argv);
-      return 0;
-    }if(mode == "optimize"){
-      ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
-      opt.optimize();
+    string dataset = *arg;
+    arg++;
+    if(arg == end){
+      experiment::performExperiment(type, dataset);
       return 0;
     }
-  }  
-  return 0;
+    int reps = atoi(arg->c_str());
+    arg++;
+    if(arg == end){
+	  experiment::performExperiment(type, dataset, reps);	  
+	  return 0;
+    }
+  }
+  cout << "not a valid command" << endl;
+  return 1;
 }
 
 void one_class_test(){

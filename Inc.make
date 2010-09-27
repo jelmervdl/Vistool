@@ -3,6 +3,10 @@ Sources = $(wildcard $(SOURCE_DIRECTORY)/*.cpp)
 Cpp_Headers = $(Sources:.cpp=.h)
 Objects = $(subst $(SOURCE_DIRECTORY), $(OBJECT_DIRECTORY), $(Sources:.cpp=.o))
 
+Glui_Objects = libs/glui/algebra3.o libs/glui/arcball.o libs/glui/glui.o libs/glui/glui_add_controls.o libs/glui/glui_bitmap_img_data.o libs/glui/glui_bitmaps.o libs/glui/glui_button.o libs/glui/glui_checkbox.o libs/glui/glui_column.o libs/glui/glui_control.o libs/glui/glui_edittext.o libs/glui/glui_listbox.o libs/glui/glui_mouse_iaction.o libs/glui/glui_node.o libs/glui/glui_panel.o libs/glui/glui_radio.o libs/glui/glui_rollout.o libs/glui/glui_rotation.o libs/glui/glui_separator.o libs/glui/glui_spinner.o libs/glui/glui_statictext.o libs/glui/glui_translation.o libs/glui/quaternion.o
+
+Lib_Objects = $(Glui_Objects)
+
 Obj-c_Sources = $(wildcard $(SOURCE_DIRECTORY)/*.mm)
 Obj-c_Objects = $(subst $(SOURCE_DIRECTORY), $(OBJECT_DIRECTORY), $(Obj-c_Sources:.mm=.o))
 
@@ -10,23 +14,7 @@ Obj-c_Objects = $(subst $(SOURCE_DIRECTORY), $(OBJECT_DIRECTORY), $(Obj-c_Source
 Target = machineVisionTool
 
 #Java
-empty:= 
-space:= $(empty) $(empty)
-
-Java_srcdir  =  java_src/
-Java_objdir  =  java_src/compiled/
-Java_Target = imageHandling
-Java_Sources = $(Java_srcdir)$(Java_Target).java
-Java_Objects = $(Java_objdir)$(Java_Target).class
-
-Java_Libs = $(wildcard runtime/*.jar)
-Java_Libs += $(Java_srcdir)
-Java_Objs = $(Java_Libs) $(Java_objdir)
-CLASSPATH = $(subst $(space),:, $(Java_Libs))
-CLASSPATH2 = $(subst $(space),:, $(Java_Objs))
-
-Java_Headers = $(SOURCE_DIRECTORY)/imageHandling.h
-
 DescriptorLocation = desc/
 
 MPEG7JavaClassLocation = ../mpg7/bin
+

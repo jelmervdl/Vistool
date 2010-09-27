@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "feature.h"
-#include "glui.h"
+#include "../libs/glui/glui.h"
 #include "features.h"
 
 namespace vito{

@@ -24,18 +24,15 @@ Descriptor SiftDescriptor::extract_(MyImage *my_image,
   //Arrange structures
   Descriptor descriptor;
   Parameters * parameters = Parameters::getInstance();
-
-
   const int kBlurWindow = parameters->getiParameter("sift_blur_window");
   my_image->getMagickImage()->blur(kBlurWindow, kBlurWindow / 3.0);
   Matrix<float> grayscale = my_image->getGrayscaleMatrix();
   Matrix<Gradient> gradient = imageGradient(grayscale);
 
-  //get Parameters
-  const int 
-    orientations = parameters->getiParameter("sift_orientation_directions"),
-    kKeyPoints_x = parameters->getiParameter("sift_number_of_keypoints_x"),
-    kKeyPoints_y = parameters->getiParameter("sift_number_of_keypoints_x");
+  //Configure Parameters
+  int orientations = parameters->getiParameter("sift_orientation_directions");
+  int kKeyPoints_x = parameters->getiParameter("sift_number_of_keypoints_x");
+  int kKeyPoints_y = parameters->getiParameter("sift_number_of_keypoints_x");
   int window_dummy;
   const int auto_window_type = parameters->getiParameter("sift_auto_window_size_type");
   if(parameters->getiParameter("sift_keypoint_pixel_window") < 0){
@@ -52,18 +49,30 @@ Descriptor SiftDescriptor::extract_(MyImage *my_image,
   const int window = window_dummy;
 
   //Spread up Keypoints
-  vector<sift::KeyPoint> keypoints = sift::divideIntoKeypoints(gradient.get_width(), 
-							       gradient.get_height(), 
-							       kKeyPoints_x, kKeyPoints_y);
+  vector<sift::KeyPoint> keypoints;
+  keypoints = sift::divideIntoKeypoints(gradient.get_width(), 
+					gradient.get_height(), 
+					kKeyPoints_x, kKeyPoints_y);
+
+  // prepare visual represenation if it'll be drawn
   if(save_visual_representation){
     *canvas = *my_image->getMagickImage();
     canvas->fillColor(Color());
   }
+
   //gather descriptors
   for(vector<sift::KeyPoint>::iterator keypoint = keypoints.begin();
       keypoint != keypoints.end(); ++keypoint){ 
-    Descriptor new_descriptor = getKeyPointDescriptor( &gradient, &(*keypoint),  window, 
-						       orientations);
+    Descriptor new_descriptor;
+    int sub_hists = parameters->getiParameter("sift_sub_hists");
+
+    if(sub_hists > 1) 
+      new_descriptor = 
+	getKeyPointDescriptor( &gradient, *keypoint,  window, orientations, sub_hists );
+    else
+      new_descriptor = 
+	getKeyPointDescriptor( &gradient, *keypoint,  window, orientations);
+
     descriptor = descriptor + new_descriptor;
     if(save_visual_representation){
       this->drawKeyPoint(*canvas, orientations, *keypoint, new_descriptor, window);
@@ -104,6 +113,8 @@ void SiftDescriptor::drawKeyPoint(Image &draw_me, const int &orientations,
       draw_me.strokeColor("red");
       for(int ori = 0; ori < orientations; ++ori){
 	float angle = (bin_size * (ori + 1)) - (0.5 * bin_size);
+	if(params->getiParameter("sift_phase_shift_ori_bins"))
+	   angle -= (1.0 / orientations) * PI;
 	int end_x = origin_x + descriptor.at(ori) * window * sin(angle);
 	int end_y = origin_y - descriptor.at(ori) * window * cos(angle);
 	draw_me.draw( DrawableLine( origin_x, origin_y, end_x, end_y));
@@ -113,13 +124,14 @@ void SiftDescriptor::drawKeyPoint(Image &draw_me, const int &orientations,
 }
 
 Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
-						 sift::KeyPoint * keypoint,
+						 const sift::KeyPoint &keypoint,
 						 const size_t window_size,
-						 const int kOrientations){
+						 int kOrientations){
   Parameters * params = Parameters::getInstance();
+  bool phase_shift = params->getiParameter("sift_phase_shift_ori_bins") > 0;
   int
-    window_left  = keypoint->get_center_x() - window_size,
-    window_up    = keypoint->get_center_y() - window_size,
+    window_left  = keypoint.get_center_x() - window_size,
+    window_up    = keypoint.get_center_y() - window_size,
     kHistograms = params->getiParameter("sift_histograms_per_keypoint"),
     histogram_range = (2 * window_size) / (kHistograms);
   Descriptor total_bins;
@@ -131,6 +143,8 @@ Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
 	up = window_up + histogram_range * hist_y,
 	down  = up + histogram_range;
       Descriptor bins( kOrientations );
+      if(phase_shift)
+	bins.resize(2 * kOrientations);
       for(size_t i = 0; i < bins.size(); ++i)
 	bins[i] = 0.0;
       int pixels_used = 0;
@@ -152,9 +166,43 @@ Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
 	else
 	  bins[i] = 0.0;
       }
+      if(phase_shift){
+	Descriptor real_bins (kOrientations);
+	for(size_t i = 0; i < bins.size(); i++)
+	  real_bins[((i + 1) / 2) % kOrientations] = bins[i];
+	bins = real_bins;
+      }
       total_bins = total_bins + bins;
     }
   }
   return total_bins;
 }
+
+Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
+						 const sift::KeyPoint &keypoint,
+						 const size_t window_size,
+						 int kOrientations,
+						 const int hists){
+  Descriptor total;
+  const size_t new_window_size = window_size / hists;
+  cout << "keyp: x: " << keypoint.get_center_x() << " y: " 
+	 << keypoint.get_center_y() << " at: " << window_size << endl
+	 << " wordt..." << endl;
+  for(int y_hist = 0; y_hist < hists; y_hist++){
+    for(int x_hist = 0; x_hist < hists; x_hist++){
+      size_t new_center_x = keypoint.get_center_x() - (window_size * 0.5) 
+	+ ((x_hist + 1) * new_window_size) - (new_window_size / 2);
+      size_t new_center_y = keypoint.get_center_y() - (window_size * 0.5) 
+	+ ((y_hist + 1) * new_window_size) - (new_window_size / 2);
+      cout << "hist: y:" << y_hist << " x: " << x_hist  << " x: " << new_center_x 
+	   << " y: " <<  new_center_y << " at " << new_window_size << endl;
+      total = total + 
+	getKeyPointDescriptor(gradient,
+			      sift::KeyPoint(new_center_x, new_center_y, 1.0), 
+			      new_window_size, hists);
+    }
+  }
+  return total;
+}
+
 }}

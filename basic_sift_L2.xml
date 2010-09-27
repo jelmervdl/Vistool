@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<parameters>
+  <real>
+    <sift_blur_std> 2.0 </sift_blur_std>
+
+    <!-- SVM -->
+    <svm_gamma> 0.00148019 </svm_gamma>
+    <svm_coef0> 15.0 </svm_coef0>
+    <svm_cache_size> 1024 </svm_cache_size>
+    <svm_eps> 0.64 </svm_eps>
+    <svm_C> 32768 </svm_C>
+    <svm_nu> 0.001 </svm_nu>
+    <svm_p> 0.0 </svm_p>
+
+    <!-- One class -->
+      <one_class_gamma> 0.5 </one_class_gamma>
+      <one_class_nu> 0.25 </one_class_nu>
+
+  </real>
+  <integer>
+
+  <!-- Classifier Parameters -->
+    <!-- knn -->
+      <cross_validation_k> 10 </cross_validation_k>
+      <knn_classifier_k> 1 </knn_classifier_k>
+    <!-- SVM -->
+      <svm_degree> 16 </svm_degree>
+      <svm_nr_weight> 0 </svm_nr_weight>
+      <svm_shrinking> 1 </svm_shrinking>
+      <svm_probability> 1 </svm_probability>
+    <!-- segment svm -->
+      <segmentsvm_segment_type> 0 </segmentsvm_segment_type>
+        <!-- 0 = subsquares -->
+      <segmentsvm_subsquare_hist_count> 4 </segmentsvm_subsquare_hist_count>
+
+  <!-- Enabled Features: -->
+    <feature_histogram> 0 </feature_histogram>
+    <feature_sift> 1 </feature_sift>
+    <feature_mpeg7_edge_histogram> 0 </feature_mpeg7_edge_histogram>
+    <feature_mpeg7_scalable_color> 0 </feature_mpeg7_scalable_color>
+    <feature_mpeg7_color_layout> 0 </feature_mpeg7_color_layout>
+
+  <!-- Sift variables :-->
+    <sift_gradient_use_diagonals> 0 </sift_gradient_use_diagonals>
+    <sift_blur_window> 2 </sift_blur_window>
+    <sift_blur_toggle> 0 </sift_blur_toggle>
+      <!-- wether pixels are blurred or not -->
+      <sift_auto_window_size_type> 1 </sift_auto_window_size_type>
+      <!-- 0 = smallest window
+	   1 = all pixels are used -->
+    <sift_phase_shift_ori_bins> 0 </sift_phase_shift_ori_bins>
+    <sift_orientation_directions> 8 </sift_orientation_directions>
+    <sift_sub_hists> 1 </sift_sub_hists>
+    <sift_number_of_keypoints_x> 16 </sift_number_of_keypoints_x>
+    <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
+      <!-- this variable is squared later on -->
+    <sift_keypoint_pixel_window> -1  </sift_keypoint_pixel_window> 
+      <!-- if -1 pixel window is -1 it will be determined automatically-->
+
+  <!-- histogram variables -->
+    <histogram_hbins> 10 </histogram_hbins>
+    <histogram_sbins> 10 </histogram_sbins>
+  </integer>
+</parameters>

@@ -2,7 +2,7 @@
 #define PARAMETERPANEL_H
 
 #include "parameters.h"
-#include "glui.h"
+#include "../libs/glui/glui.h"
 
 class ParameterPanel{
  private:

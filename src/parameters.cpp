@@ -195,6 +195,12 @@ void Parameters::turnOffAllFeatures(){
     }
 }
 
+void Parameters::clear(){
+  floatParameters.clear();
+  intParameters.clear();
+  file = "";
+}
+
 void Parameters::appointFeature(std::string str){
   cout << "activating: " << endl << str << endl;
   turnOffAllFeatures();

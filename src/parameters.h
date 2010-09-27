@@ -48,6 +48,8 @@ class Parameters : public Multiton<Parameters>{
 
  public:
 
+  void        clear();
+
   void        appointFeature(std::string str);
   void        turnOffAllFeatures();
   // constructor

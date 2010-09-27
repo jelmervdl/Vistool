@@ -38,12 +38,29 @@ Gradient singleGradient(const Matrix<float>& image,
     return Gradient(0,0);
   }
 
-  float dx,dy; // dx is the gradient to the right, dy is the gradient to the bottom.
-  dx = image.at(center_pixel_x+1, center_pixel_y) - 
-       image.at(center_pixel_x-1, center_pixel_y);
-  dy = image.at(center_pixel_x, center_pixel_y-1) - 
-       image.at(center_pixel_x, center_pixel_y+1);
-  return Gradient (sqrt(dx * dx + dy * dy), atan2( dx, dy));
+  float dx,dy; 
+  // dx is the gradient from left to right, 
+  //dy is the gradient from bottom to top.
+  dx = image.at(center_pixel_x + 1, center_pixel_y) - 
+       image.at(center_pixel_x - 1, center_pixel_y);
+  dy = image.at(center_pixel_x, center_pixel_y - 1) - 
+       image.at(center_pixel_x, center_pixel_y + 1);
+
+  // add diagonals
+  if(Parameters::getInstance()->getiParameter("sift_gradient_use_diagonals") > 0){
+    float ddbl, ddbr; 
+    ddbr = image.at(center_pixel_x + 1, center_pixel_y - 1) -
+           image.at(center_pixel_x - 1, center_pixel_y + 1);
+    ddbl = image.at(center_pixel_x - 1, center_pixel_y - 1) -
+           image.at(center_pixel_x + 1, center_pixel_y + 1);
+    dx += 0.5 * ( ddbr - ddbl);
+    dx /= 2.0;
+    dy += 0.5 * ( ddbr + ddbl);
+    dy /= 2.0;
+  }
+
+  
+  return Gradient(sqrt(dx * dx + dy * dy), atan2( dx, dy));
 }
 
 Matrix<Gradient> imageGradient(const Matrix<float> &image ){

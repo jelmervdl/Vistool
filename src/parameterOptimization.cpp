@@ -30,7 +30,7 @@ ParameterOptimization::ParameterOptimization(float (*func) ())
   //  add_int_parameter("svm_shrinking", 0, 10);
   //add_int_parameter("svm_probabiity", -1, 1, false);
 
-  //add_int_parameter("sift_blur_window", 2, 6, true);
+  //add_int_parameter("sift_blur_window", 0, 6, true);
   //add_int_parameter("sift_orientation_directions", 2, 40, true);
 
 }
@@ -83,7 +83,7 @@ void ParameterOptimization::printCurrentParameters(){
     printf("\t %s at value %d\n", int_parameters[i].get_name().c_str(),
 	   int_parameters[i].get_value());
   for(size_t i = 0; i < float_parameters.size(); ++i)
-    printf("\t %s at value %.2f\n", float_parameters[i].get_name().c_str(),
+    printf("\t %s at value %.6f\n", float_parameters[i].get_name().c_str(),
 	   float_parameters[i].get_value());
 }
 
@@ -117,9 +117,14 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
   apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
   const int min = parameter.get_min();
   const int max = parameter.get_max();
-  float step_size = (max - min) / kResolution;
+  float step_size = (float) (max - min) / kResolution;
   for(int res_step = 0; res_step < kResolution + 1; ++res_step){
     const int current_value = (int) (0.5 + min + res_step * step_size);
+    std::cout << " current value is: " << current_value << std::endl
+	      << "while: min:" << min << " max: " << max << std::endl
+	      << "and res step: " << res_step
+	      << " and step_size: " << step_size << std::endl;
+ 
     parameter.set_value(current_value);
     const ParameterSet handle = get_current_parameter_handle();
     if(true || !known(handle)){
@@ -130,7 +135,7 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
       std::cout << "just tested with: " << std::endl;
       printCurrentParameters();
       std::cout << "and that's a fact" << std::endl;
-      printf("result: %.2f\n\n", result);
+      printf("result: %.6f\n\n", result);
 
       // log results
       result > best? fout << "result is improvement:" : fout << "results:";
@@ -169,7 +174,7 @@ void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter
       std::cout << "just tested with: " << std::endl;
       printCurrentParameters();
       std::cout << "and that's a fact" << std::endl;
-      printf("result: %.2f\n\n", result);
+      printf("result: %.6f\n\n", result);
 
       // log results
       result > best? fout << "result is improvement:" : fout << "results:";
@@ -183,9 +188,9 @@ void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter
       if(result > best){
 	printf("improvement: %f -> %f\n", best, result);
 	best = result;
-	parameter.set_current_as_best();
-	//apply_to_all_parameters(&set_current_as_best<int>, 
-	//			&set_current_as_best<float> );
+	//parameter.set_current_as_best();
+	apply_to_all_parameters(&set_current_as_best<int>, 
+				&set_current_as_best<float> );
       }
     }
   }

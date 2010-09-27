@@ -8,7 +8,6 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_Cocoa    = -framework Cocoa
 	Lib_Carbon   = -framework Carbon
 	Lib_Core     = -framework CoreFoundation
-	Lib_GLUI     = -lGLUI
 	Lib_JNI      = -framework JavaVM
 	Lib_MPG7     = -framework Mp7jrs
 	Lib_VL       = -lvl

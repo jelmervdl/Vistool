@@ -17,9 +17,16 @@ private:
 
   // get the descriptor belonging to a single keypoint
   Descriptor   getKeyPointDescriptor(Matrix<Gradient> * gradient,
-				     sift::KeyPoint * keypoint,
+				     const sift::KeyPoint &keypoint,
 				     const size_t window_size,
-				     const int kOrientations);
+				     int kOrientations);
+
+  Descriptor   getKeyPointDescriptor(Matrix<Gradient> * gradient,
+				     const sift::KeyPoint &keypoint,
+				     const size_t window_size,
+				     int kOrientations,
+				     const int hists);
+
 
   // draw a single keypoint onto a canvas to construct visualisation
   void         drawKeyPoint(Magick::Image &draw_me, 

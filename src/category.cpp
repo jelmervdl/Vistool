@@ -41,10 +41,6 @@ int * Category::enabledLiveVar(){
   return &enabled;
 }
 
-void Category::subsample(const int n){
-  random_shuffle(data_points.begin(),data_points.end());
-}
-
 void Category::shuffle(){
   random_shuffle(data_points.begin(),data_points.end());
 }

@@ -7,7 +7,7 @@
 namespace sift{
 
 class KeyPoint{
- private:
+ public:
   size_t center_x;
   size_t center_y;
   float scale;

@@ -1,6 +1,6 @@
 *.o
 machineVisionTool
-test
+ztest
 *.class
 aap.jpg
 src/imageHandling.h
@@ -17,3 +17,4 @@ java_src/imageHandling.h
 *.svm
 *.model
 settings/*
+*~

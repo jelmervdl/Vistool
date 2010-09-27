@@ -209,13 +209,6 @@ void Dataset::cut(float ratio, bool second){
   }
 }
 
-void Dataset::subsample(const int n){
-  typedef vector<Category>::iterator iter;
-  for(iter it = categories.begin(); it != categories.end(); ++it){
-    it->subsample(n);
-  }
-}
-
 void Dataset::shuffle(){
   for(vector<Category>::iterator it = categories.begin();
       it != categories.end();

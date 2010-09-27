@@ -1,6 +1,6 @@
 SOURCE_DIRECTORY = src
 OBJECT_DIRECTORY = obj
-VPATH = $(SOURCE_DIRECTORY)
+VPATH = $(SOURCE_DIRECTORY) libs/
 
 include Lib.make
 include Inc.make
@@ -24,7 +24,13 @@ Linker = $(Cpp_Comp)
 
 .SUFFIXES: .Cpp
 
-all: TAGS $(Target) 
+
+all:  TAGS libs $(Target) 
+
+libs: glui
+
+glui: $(Glui_Objects)
+	$(MAKE) -C libs/glui
 
 #C++ objects
 $(Objects): $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.cpp $(SOURCE_DIRECTORY)/%.h
@@ -36,25 +42,16 @@ $(Obj-c_Objects): $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.mm $(SOURCE_DIR
 	@echo "\nCompiling: objective-c object $@"
 	$(Cpp_Comp) $(Global) -c $(Cpp_Flags) -o $@ $< $(Head_Path)
 
-#Java objects
-$(Java_objdir)%.class: $(Java_srcdir)%.java
-	@echo "\nCompiling: Java Class $@"
-	javac -classpath $(CLASSPATH) -d $(Java_objdir) $<
-
-#Java headers
-$(SOURCE_DIRECTORY)/%.h:$(Java_srcdir)%.java 
-	@echo "\nCompiling: Java Header $*"
-	javah -classpath $(CLASSPATH2) -jni -o  $@ $(Java_Target)
-
 #Target
-$(Target): $(Java_Objects) $(Java_Headers) $(Objects) $(Obj-c_Objects)
+$(Target): $(Java_Objects) $(Java_Headers) $(Objects) $(Obj-c_Objects) 
 	@echo "\nLinking: objects to $@ $(Objects)\n"
-	 $(Linker) $(Global) $(Lib_Path) $(Libraries) -o $(Target) $(Objects) $(Obj-c_Objects) #$(Head_Path) 
+	 $(Linker) $(Global) $(Lib_Path) $(Libraries) -o $(Target) $(Objects) $(Obj-c_Objects) $(Lib_Objects) #$(Head_Path) 
 
 #Clean
 clean:
 	@echo "\nRemoving: all c++ objects "
 	rm -f $(Objects) 
+	$(MAKE) clean -C  libs/glui
 
 cleanall: clean
 	@echo "\nRemoving: support files "

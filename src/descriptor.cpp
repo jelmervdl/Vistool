@@ -10,9 +10,9 @@ namespace vito{
 void Descriptor::normalize(){
   const float min = *std::min_element(begin(), end());
   const float max = *std::max_element(begin(), end());
-  const float multiplier = 1 / (max - min);
+  const float multiplier = 2 / (max - min);
   for(Descriptor::iterator it = begin(); it != end(); ++it)
-    *it = (*it - min) * multiplier;
+    *it = -1 + (*it - min) * multiplier;
 }
 
 void Descriptor::print() const{

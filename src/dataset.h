@@ -32,7 +32,6 @@ class Dataset{
 
   //setters
 
-  void                    subsample(const int n);
   void                    setRoot(std::string str);
   void                    addCategory(Category cat);
   void                    enableCategory(size_t i);
