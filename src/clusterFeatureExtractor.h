@@ -28,6 +28,10 @@ public:
     }
   }
 
+  void addClusterFeature(KMeansClusterHistogram *histogram){
+    currentFeatures.push_back(histogram);
+  }
+
   std::string addClusterFeature(const datapoint_list &dps, Feature *feature){
     Feature *new_feature = new KMeansClusterHistogram(dps, feature);
     currentFeatures.push_back(new_feature);

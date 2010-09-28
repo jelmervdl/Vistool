@@ -51,7 +51,7 @@
     <sift_phase_shift_ori_bins> 0 </sift_phase_shift_ori_bins>
     <sift_orientation_directions> 8 </sift_orientation_directions>
     <sift_sub_hists> 1 </sift_sub_hists>
-    <sift_number_of_keypoints_x> 8 </sift_number_of_keypoints_x>
+    <sift_number_of_keypoints_x> 1 </sift_number_of_keypoints_x>
     <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
       <!-- this variable is squared later on -->
     <sift_keypoint_pixel_window> -1  </sift_keypoint_pixel_window> 

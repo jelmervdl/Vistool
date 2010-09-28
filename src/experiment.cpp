@@ -8,12 +8,12 @@ using std::vector;
 namespace vito{
 
 using features::KMeansClusterHistogram;
-
 typedef std::vector<Category*> categories;
 using features::FeatureExtractor;
 using features::Feature;
 using classification::SVMClassifier;
 using evaluation::Evaluation;
+
 namespace experiment{
 
 float performExperiment(const string str, 
@@ -114,20 +114,23 @@ float nn(Dataset &dataset){
   return evaluation.getPrecision();
 }
 
-
-Feature* getClusteringFeature(const Dataset &dataset){
-
-}
-
-float clustering(Dataset &dataset){
-  DataPointCollection train, test;
-  dataset.randomDataSplit(&train, &test, 0.5, true, 30);
-
-  //get Labels, Examples and Descriptors
-  FeatureExtractor *fe = FeatureExtractor::getInstance();
-  ExampleCollection training_examples = fe->getExamples(train);
-  DescriptorCollection testing_descriptors = fe->getDescriptors(test);
-
+void cluster(string dataset, string filename){
+  Feature * feature = 0;
+  {
+    vector<Feature*> actives =  features::getActiveFeatures();
+    if(actives.size() > 1){
+      cout << "too many features active, 1 active feature is best" << endl;
+      return;
+    }if(actives.size() == 0){
+      cout << "no active feature to cluster with!" << endl;
+      return;
+    }
+    feature = actives[0];
+  }
+  Dataset dats = getDataSet(dataset);
+  features::KMeansClusterHistogram histogram(dats.enabledPoints(), feature);
+  histogram.save(filename + ".clustercenters");
+  Parameters::getInstance()->saveXML(filename + ".xml");
 }
 
 }}

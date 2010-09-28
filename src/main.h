@@ -27,6 +27,9 @@
 #include "classifierStack.h"
 #include "experiment.h"
 
+#include "clusterFeatureExtractor.h"
+
+void cluster(std::string filename);
 void printLibraries();
 void one_class_test();
 void one_class_test2();

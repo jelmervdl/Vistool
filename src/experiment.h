@@ -20,6 +20,7 @@ Dataset abdullah2010();
 float   svm(Dataset &dataset);
 float   nn(Dataset &dataset);
 float   clustering( Dataset &dataset);
+void cluster(std::string dataset, std::string filename);
 
 }}
 

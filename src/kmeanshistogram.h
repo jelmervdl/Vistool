@@ -11,31 +11,63 @@ namespace features{
 
 class KMeansClusterHistogram : public Feature{
 public:
-
+  
   typedef clustering::patch patch;
   typedef clustering::patch_collection patch_collection;
   typedef clustering::labels labels;
   typedef clustering::label_collection label_collection;
-
+  
 protected:
   patch_collection centers;
   std::string      feature_type;
   Feature         *feature;
+  const int        parameters; 
 
 public:
+  
+  KMeansClusterHistogram(const std::vector<DataPoint> &dps, 
+			 Feature *feat) : feature(feat), 
+					  parameters(Parameters::getUniqueClone()) {
+    Parameters::push(parameters);
+    
+    feature_type = generateName(feat);
+    std::cout << "generated feature type name: " << feature_type << std::endl;
+    clustering::PatchExtractor patch_extractor;
+    clustering::KMeansClustering clustering;
+    patch_collection patches;
+    std::cout << "getting patch collection " << std::endl;
+    if(feature->getParameterName().find("mpeg7") == 0)
+      patches = features::mpeg7::getAllPatches(dps);
+    else
+      patches = patch_extractor.getPatches(dps, feature);
+    std::cout << "got patches, going to cluster now" << std::endl;
+    centers = clustering.cluster(patches);
+
+    Parameters::pop();
+  }
+  
+  KMeansClusterHistogram(std::string location, Feature *feat) :
+    centers(clustering::KMeansClustering().readClusters(location + ".clustercenters")),
+    feature(feat),
+    parameters(Parameters::getUniqueClone()){
+    std::cout << "I received this thing: " << feat << std::endl;
+    std::cout << " which is a pointer to " << feat->getParameterName() << std::endl;
+    Parameters::push(parameters);
+
+    Parameters::getInstance()->readFile(location + ".xml");
+    feature_type = location;
+
+    Parameters::pop();
+  }
 
   virtual std::string generateFileName(Feature *feat){
     return "cluster_"+ feat->getParameterName();
   }
 
+ 
   virtual void save(std::string location){
     clustering::KMeansClustering().writeClusters(centers, 
-						 generateFileName(feature));
-  }
-
-  KMeansClusterHistogram(Feature *feat){
-    feature_type = generateName(feat);
-    centers = clustering::KMeansClustering().readClusters(generateFileName(feat));
+						 location);
   }
 
   virtual std::string getParameterName(){
@@ -58,22 +90,12 @@ public:
     return ss.str();
   }
 
-  KMeansClusterHistogram(const std::vector<DataPoint> &dps, 
-			 Feature *feat) : feature(feat) {
-    feature_type = generateName(feat);
-    clustering::PatchExtractor patch_extractor;
-    clustering::KMeansClustering clustering;
-    patch_collection patches;
-    if(feature->getParameterName().find("mpeg7") == 0)
-      patches = features::mpeg7::getAllPatches(dps);
-    else
-      patches = patch_extractor.getPatches(dps, feature);
-    centers = clustering.cluster(patches);
-  }
-
+ 
   virtual Descriptor  extract_(MyImage *image, 
 			       bool makeVisualRepresentation, 
 			       Magick::Image * magick_image){
+    Parameters::push(parameters);
+
     clustering::KMeansClustering clustering;
     clustering::PatchExtractor patch_extractor;
 
@@ -154,7 +176,7 @@ public:
     }
     }
 
-
+    Parameters::pop();
     return histogram;
   }
 };

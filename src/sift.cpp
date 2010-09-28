@@ -142,7 +142,7 @@ Descriptor SiftDescriptor::getKeyPointDescriptor(Matrix<Gradient> * gradient,
 	right = left + histogram_range,
 	up = window_up + histogram_range * hist_y,
 	down  = up + histogram_range;
-      Descriptor bins( kOrientations );
+      Descriptor bins( vector<float>(kOrientations, 0.0f));
       if(phase_shift)
 	bins.resize(2 * kOrientations);
       for(size_t i = 0; i < bins.size(); ++i)

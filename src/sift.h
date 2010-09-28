@@ -1,6 +1,7 @@
 #ifndef SIFT_H
 #define SIFT_H
 
+#include <assert.h>
 #include <math.h>
 #include <iostream>
 #include "keypoint.h"

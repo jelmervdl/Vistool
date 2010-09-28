@@ -59,8 +59,18 @@ int main(int argc, char ** argv){
       if(option_name == "p"){
 	p->clear();
 	p->readFile(value);
-      }else{
-	return 1;
+      }if(option_name == "c" || option_name == "C"){
+	int par = Parameters::getUnique();
+	Parameters::push(par);
+	Parameters::getInstance()->readFile(value + ".xml");
+	vector<Feature*> actives = features::getActiveFeatures();
+	assert(actives.size() == 1);
+	KMeansClusterHistogram *c_feature = new KMeansClusterHistogram(value, actives[0]);
+	features::ClusterFeatureExtractor::getInstance()->addClusterFeature(c_feature);
+	Parameters::pop();
+	if(option_name == "C"){
+	  Parameters::getInstance()->appointFeature(c_feature->getParameterName());
+	}
       }
     }else{
       arguments.push_back(argv[i]);
@@ -110,10 +120,44 @@ int main(int argc, char ** argv){
 	  experiment::performExperiment(type, dataset, reps);	  
 	  return 0;
     }
+  }if(*arg == "cluster"){
+    arg++;
+    if(arg == end){
+      cout << "no filename and dataset supplied" << endl;
+      return 1;
+    }else{
+      cout << "clustering dataset: " << *arg << endl;
+      string dataset = *arg;
+      arg++;
+      if(arg == end ){
+	cout << "no filename supplied" <<endl;
+	return 1;
+      }else{
+	cout << "saving to: " << *arg << endl;
+	experiment::cluster(dataset, *arg);
+	return 0;
+      }
+    }
+  }if(*arg == "help"){
+    arg++;
+    if(arg == end){
+      cout << "   help" << endl << "   experiment" << endl 
+	   << "   gui" << endl << "   optimize" << endl << "   cluster" << endl;
+      return 0;
+    }
   }
-  cout << "not a valid command" << endl;
+  if(arg != end){
+    cout << "following arguments were ignored:" << endl;
+      while(arg != end){
+	arg++;
+	cout << *arg << endl;
+      }
+  }
+  cout << "type help for a list of commands" << endl;
   return 1;
 }
+
+
 
 void one_class_test(){
   const unsigned int nFeatures = 3;
@@ -203,48 +247,3 @@ void one_class_test(){
   cout << "value: " << res[0] << endl;
   }
 }
-/*
-void one_class_test2(){
-  Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
-  dataset.enableCategory("accordion");
-  //dataset.enableCategory("anchor");
-  //dataset.enableCategory("emu");
-  //dataset.enableCategory("bass");
-  //dataset.enableCategory("ant");
-  vector<DataPoint> train, test;
-  dataset.randomDataSplit(&train, &test, 0.5);
-  FeatureExtractor::getInstance()->saveDescriptorsToFile(&dataset);
-  OneClassSVM segsvm(0);
-  segsvm.train(ptr::ptrDeMorgan(&train));
-  dataset.disableCategory("accordion");
-  dataset.enableCategory("emu");
-  dataset.enableCategory("anchor");
-  dataset.enableCategory("emu");
-  dataset.enableCategory("bass");
-  dataset.enableCategory("ant");
-
-  vector<DataPoint> others = dataset.enabledPoints();
-
-  others.insert(others.end(), test.begin(), test.end());
-  vector<int> res(others.size());
-  //for(int i = 0; i < (int) others.size(); ++i)
-    //res[i] = segsvm.classify(&others[i]);
-  int total, correct, incorrect;
-  for(int i = 0; i < (int) res.size(); i++){
-    cout << others[i].get_label() << " " << res[i] 
-	 <<  " the values " << segsvm.getValue(&others[i])[0] << endl;
-    total++;
-    if(res[i] == 1)
-      if((int) others[i].get_label())
-	correct++;
-      else
-	incorrect++;
-  }
-  cout << "total: " << total << endl 
-       << "correct: " << correct << endl
-       << "incorrect: " << incorrect << endl
-       << "precision: " << correct / (double) (incorrect + correct) << endl
-       << "recall: " << correct / (double) total << endl;
-  cout << "ya done" << endl;
-}
-*/

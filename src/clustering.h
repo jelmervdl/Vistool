@@ -18,7 +18,7 @@ typedef std::vector<labels> label_collection;
 
 class ClusteringAlgorithm{
 public:
-  int              assertSamePatchLength(const patch_collection &c);					 
+  int              assertSamePatchLength(const patch_collection &c);
   void             writeClusters(const patch_collection &centers, 
 				 std::string filename = "clusters.bin" );
   patch_collection readClusters(std::string file = "clusters.bin");
