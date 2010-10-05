@@ -127,7 +127,7 @@ float KMeansClustering::total_distance_to_centers(const patch_collection &center
 }
 
 patch_collection KMeansClustering::cluster(const patch_collection &patches){
-  const int kmeans = 50;
+  const int kmeans = Parameters::getInstance()->getiParameter("clustering_means");
   cout << "clustering into " << kmeans << " means" << endl;
   cout << "initializing means...";
   patch_collection cluster_centers = initialize_means(kmeans, patches);
@@ -141,7 +141,7 @@ patch_collection KMeansClustering::cluster(const patch_collection &patches){
     cout << "+";
     patch_collection new_centers = update(cluster_centers, patches);
     for(size_t j = 0; j < cluster_centers.size(); j++){
-      cout << ".";
+      cout << "." << std::flush;
       float p_dist = KMeansClustering::distance(cluster_centers[j], new_centers[j]);
       distance_ += p_dist;
     }

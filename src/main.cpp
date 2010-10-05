@@ -1,4 +1,5 @@
 #include "main.h"
+
 using std::sprintf;
 using namespace vito;
 using namespace vito::features;
@@ -57,7 +58,6 @@ int main(int argc, char ** argv){
       string value = argv[i + 1];
       i++;
       if(option_name == "p"){
-	p->clear();
 	p->readFile(value);
       }if(option_name == "c" || option_name == "C"){
 	int par = Parameters::getUnique();
@@ -93,7 +93,24 @@ int main(int argc, char ** argv){
   }
   if(*arg == "optimize"){
     ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
-    opt.optimize();
+    arg++;
+    if(arg == end)
+      opt.optimize();
+    else {
+      string original = *arg;
+      arg++;
+      if(arg != end){
+	string target = *arg;
+	arg++;
+	if(arg == end)
+	  opt.optimize_full_grid(original, target);
+      }
+    }
+    return 0;
+  }
+  if(*arg == "fulloptimize"){
+    ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
+    opt.optimize_full_grid();
     return 0;
   }
   if(*arg == "experiment"){

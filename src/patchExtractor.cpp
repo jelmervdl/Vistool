@@ -17,7 +17,7 @@ patch_collection PatchExtractor::getPatches(DataPoint dp, Feature *feature){
 patch_collection PatchExtractor::getPatches(const vector<DataPoint> &dps, 
 					    Feature *feature){
   patch_collection ret;
-  const int x_bins = 10;
+  const int x_bins = Parameters::getInstance()->getiParameter("clustering_patches");
   const int y_bins = x_bins;
   cout << "using patch resolution: " << x_bins << endl;
   for(vector<DataPoint>::const_iterator it = dps.begin();
@@ -38,7 +38,7 @@ patch_collection PatchExtractor::getPatches(const vector<DataPoint> &dps,
 }
 
 patch_collection PatchExtractor::getPatches(MyImage &myImage, Feature *feature){
-  const int x_bins = 10;
+  const int x_bins = Parameters::getInstance()->getiParameter("clustering_patches");
   const int y_bins = x_bins;
   patch_collection ret;
    for(int x = 0; x < x_bins; x++)

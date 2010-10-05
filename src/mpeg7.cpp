@@ -25,7 +25,7 @@ Descriptor MPEG7Feature::extract_(MyImage *image,
 				  Image *representation){
   string descriptor_path =
   getDescriptorLocation(image->getLocation());
-  vector<float> descriptor = getMPEG7Descriptor(descriptor_path,
+  Descriptor descriptor = getMPEG7Descriptor(descriptor_path,
 						getName());
   cout << "size: " <<  descriptor.size() << endl;
   for(size_t i = 0; i < descriptor.size(); i++){
@@ -33,6 +33,7 @@ Descriptor MPEG7Feature::extract_(MyImage *image,
     cout << descriptor[i] << ",";
   }
   cout << endl;
+  descriptor.normalize();
   return descriptor;
 }
 

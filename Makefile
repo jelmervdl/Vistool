@@ -24,13 +24,22 @@ Linker = $(Cpp_Comp)
 
 .SUFFIXES: .Cpp
 
-
 all:  TAGS libs $(Target) 
 
-libs: glui
+libs: glui svm
 
 glui: $(Glui_Objects)
+
+$(Glui_Objects):
 	$(MAKE) -C libs/glui
+
+svm: $(SVM_Objects)
+
+$(SVM_Objects):
+	$(MAKE) -C libs/libsvm-3.0
+
+cleanlibs: 
+	rm $(Lib_Objects)
 
 #C++ objects
 $(Objects): $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.cpp $(SOURCE_DIRECTORY)/%.h
@@ -99,4 +108,22 @@ TAGS: $(Sources) $(Cpp_Headers)
 time: $(TARGET)
 	@echo "\nTiming: main application"
 	time ./$(Target)
-	@echo "Program ended."	
+	@echo "Program ended."
+
+TO_OPTIMIZE = $(wildcard optimize_these/*.xml)
+OPTIMIZE_TARGET = $(subst optimize_these, experiments, $(TO_OPTIMIZE))
+
+opt: all $(OPTIMIZE_TARGET)
+
+$(OPTIMIZE_TARGET): experiments/%.xml : optimize_these/%.xml
+	@echo "optimizing $@ to $< and saving to $@.log"
+	./$(Target) optimize $< $@ > $<.log
+EXPERIMENTS = $(wildcard experiments/*.xml)
+RESULTS = $(EXPERIMENTS:.xml=.log)
+
+opt_and_exp: opt exp
+
+exp: all $(RESULTS)
+
+$(RESULTS): %.log: %.xml
+	./$(Target) experiment svm abdullah2010 1000 -p $< > $@

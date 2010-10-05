@@ -77,8 +77,6 @@ public:
   virtual bool isActive(){
     std::stringstream ss;
     ss << "feature_" <<  feature_type;
-    std::cout << "is this feature active?:" << ss.str() << " answer: " 
-	      << Parameters::getInstance()->getiParameter(ss.str()) << std::endl;
     return Parameters::getInstance()->getiParameter(ss.str());
   }
 
@@ -120,8 +118,8 @@ public:
       std::cout << classification[i]  << " ";
     std::cout << std::endl;
 
-    const int kClasses = 50;    
-    std::vector<float> histogram (kClasses);
+    const int kClasses = Parameters::getInstance()->getiParameter("clustering_means");    
+    Descriptor histogram (kClasses);
     std::cout << "the hist content: " << std::endl;
     for(size_t i = 0; i < classification.size(); i++)
       histogram[classification[i]]++;
@@ -172,11 +170,14 @@ public:
 	    tup = up;
 	  Magick::DrawableText text(tleft, tup, b.str());
 	  mag.draw(text);
+	}
       }
     }
-    }
-
+    std::cout << "argos 1" << std::endl;
     Parameters::pop();
+    std::cout << "2" << std::endl;
+    histogram.normalize();
+    std::cout << "3" << std::endl;
     return histogram;
   }
 };

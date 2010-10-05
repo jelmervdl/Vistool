@@ -14,7 +14,7 @@ using write::readDescriptor;
 
 SVMClassifier::~SVMClassifier(){
   if(model != 0){
-    svm_destroy_model(model);
+    svm_free_and_destroy_model(&model);
     model = 0;
   }
   if(prblm != 0){
@@ -44,7 +44,7 @@ void SVMClassifier::train(const ExampleCollection &examples){
   cout << "problem is: " << prblm << endl;
   cout << "model is: " << model << endl;
   if(model != 0){
-    svm_destroy_model(model);
+    svm_free_and_destroy_model(&model);
     model = 0;
   }
   if(prblm != 0){

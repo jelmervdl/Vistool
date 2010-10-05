@@ -11,7 +11,6 @@ ifeq ("$(shell uname)", "Darwin")
 	Lib_JNI      = -framework JavaVM
 	Lib_MPG7     = -framework Mp7jrs
 	Lib_VL       = -lvl
-	Lib_SVM      = -lsvm
 
 #Configed Libs
 	#Lib_Magickpp = `GraphicsMagick-config --cppflags --cflags --ldflags --libs`
@@ -35,6 +34,8 @@ ifeq ("$(shell uname)", "Darwin")
 
 
 #Header include path
+	Head_Path += -I./libs/glui
+	Head_Path += -I./libs/libsvm-3.0
 	Head_Path += -I/opt/local/include/ImageMagick
 	Head_Path += -Ilocal/include
 	#Head_Path += -Ilocal/ImageMagick-6.6.3/include/ImageMagick

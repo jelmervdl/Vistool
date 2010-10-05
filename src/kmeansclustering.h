@@ -7,6 +7,7 @@
 #include <time.h>
 #include <assert.h>
 #include "clustering.h"
+#include "parameters.h"
 
 // Kmeans Clustering Implementation using the summed (unsquared)
 // distance between patches.

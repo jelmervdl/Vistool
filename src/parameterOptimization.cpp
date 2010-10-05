@@ -1,6 +1,7 @@
 #include "parameterOptimization.h"
 
-
+using std::cout;
+using std::endl;
 using std::string;
 using std::vector;
 using std::endl;
@@ -21,10 +22,10 @@ ParameterOptimization::ParameterOptimization(float (*func) ())
   //add_float_parameter("one_class_gamma", 0.00001, 0.9, true);
   //add_float_parameter("one_class_nu", 0.00001, 0.9, true);
   
-  add_float_parameter("svm_C", -5.0, 15.0, false, true);
   //add_float_parameter("svm_coef0", 0.0, 30.0);  
   //add_float_parameter("svm_eps", 0.0003, 1.5);
   add_float_parameter("svm_gamma", -15.0, -1.0, false, true);
+  add_float_parameter("svm_C", -5.0, 15.0, false, true);
   // add_int_parameter("svm_degree", -10, 30, true);
   
   //  add_int_parameter("svm_shrinking", 0, 10);
@@ -87,7 +88,43 @@ void ParameterOptimization::printCurrentParameters(){
 	   float_parameters[i].get_value());
 }
 
-void ParameterOptimization::optimize(){
+void ParameterOptimization::optimize_full_grid(string file, string dest){
+  if(file != "" && dest != ""){
+    Parameters *pars = Parameters::getInstance();
+    pars->readFile(file);
+  }
+  cout << "performing full grid search" << endl;
+  const int kZooms = 3;
+  for(int current_zoom = 0; current_zoom < kZooms; current_zoom++){// iterate the zooms
+    cout << "at zoom level " << current_zoom << endl;
+    optimize_grid_axis(0);
+    apply_to_all_parameters(zoom<int>, zoom<float>);
+  }
+  if(file != "" && dest != ""){
+    apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
+    Parameters::getInstance()->saveXML(dest);
+  }
+}
+
+void ParameterOptimization::optimize_grid_axis(const size_t at){
+  cout << "optimizing grid axis: " << at << endl;
+  if(at == int_parameters.size() + float_parameters.size() ){
+    cout << "axis a leaf" << endl;
+    return;
+  }
+  else{
+    if(at < int_parameters.size()){
+      cout << "axis is integer" << endl;
+      optimize_int_parameter(int_parameters[at], true, at);
+    }
+    else{
+      cout << "axis is float" << endl;
+      optimize_float_parameter(float_parameters[at - int_parameters.size()], true, at);
+    }
+  }
+}
+
+  void ParameterOptimization::optimize(){ // not the full grid,
   const int total_parameters = 
     int_parameters.size() + float_parameters.size();
   for(int epoch = 0; epoch < kIterations; epoch++){
@@ -112,9 +149,12 @@ void ParameterOptimization::optimize(){
   }
 }
 
-void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
+void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter, 
+						   const bool fullgrid, 
+						   const int step){
   printf("Altering %s\n", parameter.get_name().c_str());
-  apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
+  if(!fullgrid)
+    apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
   const int min = parameter.get_min();
   const int max = parameter.get_max();
   float step_size = (float) (max - min) / kResolution;
@@ -128,6 +168,7 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
     parameter.set_value(current_value);
     const ParameterSet handle = get_current_parameter_handle();
     if(true || !known(handle)){
+      //text output -----------
       std::cout << "going to test with: " << std::endl << std::endl;
       printCurrentParameters();
       std::cout << ".. now .." << std::endl << std::endl;
@@ -136,13 +177,13 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
       printCurrentParameters();
       std::cout << "and that's a fact" << std::endl;
       printf("result: %.6f\n\n", result);
-
       // log results
       result > best? fout << "result is improvement:" : fout << "results:";
       fout << result << endl;
       printCurrentParametersToFile();
       fout << endl;
       fout.flush();
+      //text outpus done ----------
 
       TestResult res( handle, result);
       current_results.push_back(res);
@@ -153,12 +194,17 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter){
 				&set_current_as_best<float> );
       }
     }
+    if(fullgrid)
+      optimize_grid_axis(step + 1);
   }
 }
 
-void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter){
+  void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter,
+						       bool fullgrid,
+						       const int step){
   printf("Altering %s\n", parameter.get_name().c_str());
-  apply_to_all_parameters(&set_to_best<int>, &set_to_best<float>);
+  if(!fullgrid)
+    apply_to_all_parameters(&set_to_best<int>, &set_to_best<float>);
   const float min = parameter.get_min();
   const float max = parameter.get_max();
   float step_size = (max - min) / (float)kResolution;
@@ -193,6 +239,8 @@ void ParameterOptimization::optimize_float_parameter(Parameter<float> &parameter
 				&set_current_as_best<float> );
       }
     }
+    if(fullgrid)
+      optimize_grid_axis(step + 1);
   }
 }
 

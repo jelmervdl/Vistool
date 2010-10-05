@@ -84,6 +84,7 @@ string FeatureExtractor::getCurrentDescriptorLocation(const DataPoint &dp){
 void FeatureExtractor::renewDescriptor(const DataPoint &dp, const bool force){
   string final_descriptor_location = getCurrentDescriptorLocation(dp);
   if(force || !exists(path(final_descriptor_location))) {
+    cout << "trying to get" << final_descriptor_location << endl;
     MyImage image(dp.get_image_url(), dp);
     vector<float> descriptor;
     vector<Feature*> features = getActiveFeatures();

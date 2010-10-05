@@ -25,7 +25,9 @@ Descriptor SiftDescriptor::extract_(MyImage *my_image,
   Descriptor descriptor;
   Parameters * parameters = Parameters::getInstance();
   const int kBlurWindow = parameters->getiParameter("sift_blur_window");
-  my_image->getMagickImage()->blur(kBlurWindow, kBlurWindow / 3.0);
+  my_image->getMagickImage()->write("aapie.jpg");
+  if(parameters->getiParameter("sift_blur_toggle") > 0)
+    my_image->getMagickImage()->blur(kBlurWindow, kBlurWindow / 3.0);
   Matrix<float> grayscale = my_image->getGrayscaleMatrix();
   Matrix<Gradient> gradient = imageGradient(grayscale);
 

@@ -51,7 +51,7 @@
     <sift_phase_shift_ori_bins> 0 </sift_phase_shift_ori_bins>
     <sift_orientation_directions> 8 </sift_orientation_directions>
     <sift_sub_hists> 1 </sift_sub_hists>
-    <sift_number_of_keypoints_x> 1 </sift_number_of_keypoints_x>
+    <sift_number_of_keypoints_x> 4 </sift_number_of_keypoints_x>
     <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
       <!-- this variable is squared later on -->
     <sift_keypoint_pixel_window> -1  </sift_keypoint_pixel_window> 
@@ -60,5 +60,9 @@
   <!-- histogram variables -->
     <histogram_hbins> 10 </histogram_hbins>
     <histogram_sbins> 10 </histogram_sbins>
+
+  <!-- clustering variables -->
+    <clustering_means> 300 </clustering_means>
+    <clustering_patches> 10 </clustering_patches>
   </integer>
 </parameters>
