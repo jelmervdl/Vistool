@@ -1,9 +1,13 @@
 #ifndef MYIMAGE_H
 #define MYIMAGE_H
 
+#ifndef __cplusplus
+#define __cplusplus
+#endif
+
 #include <Magick++.h>
 #include "parameters.h"
-#include "cv.h"
+#include <cv.h>
 #include "dataPoint.h"
 #include "matrix.h"
 

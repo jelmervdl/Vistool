@@ -52,7 +52,7 @@ Descriptor ClassifierSetup::extract_(MyImage *image,
 				     Image *representation){
   string previous_parameters = Parameters::get_current_name();
   Parameters::setUnique(parameters);
-  int result;// = classifier->classify(&image->dp);
+  int result = 0;// classifier->classify(&image->dp);
   Parameters::select(previous_parameters);
   Descriptor desc(1);
   desc[0] = (float) result;

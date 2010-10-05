@@ -88,4 +88,4 @@ class Parameters : public Multiton<Parameters>{
   void        requireOnlySift();
 };
 
-#endif PARAMETERS_H
+#endif 

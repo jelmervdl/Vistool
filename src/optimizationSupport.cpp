@@ -1,5 +1,8 @@
 #include "optimizationSupport.h"
 
+using std::cout;
+using std::endl;
+
 namespace vito{
 namespace optimization{
 
@@ -16,12 +19,12 @@ bool ParameterSet::equals(const ParameterSet &other) const{
 }
 
 void ParameterSet::print() const{
-  printf("set: ");
+  cout << "set: ";
   for(size_t i = 0; i < ints.size(); ++i)
-    printf("%d, ", ints[i]);
+    cout << ints[i] << ", " ;
   for(size_t i = 0; i < floats.size(); ++i)
-    printf("%f, ", floats[i]);
-  printf("\n");
+    cout << floats[i] << ", " ;
+  cout << endl;
 }
 
 }}

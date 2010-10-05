@@ -772,7 +772,7 @@ int    GLUI_EditText::special_handler( int key,int modifiers )
 int    GLUI_EditText::find_word_break( int start, int direction )
 {
   int    i, j;
-  char   *breaks = " :-.,";
+  char   *breaks = (char *) " :-.,";
   int     num_break_chars = (int)strlen(breaks), text_len = (int)strlen(text);
   int     new_pt;
 

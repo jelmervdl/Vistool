@@ -19,7 +19,7 @@ void Descriptor::normalize(){
 
 void Descriptor::print() const{
   for(size_t i =0; i < size(); ++i)
-    printf("%.5f ", at(i));
+    cout << at(i) << endl;
 }
 
 

@@ -1,7 +1,12 @@
 #ifndef GLTEXTURE_H
 #define GLTEXTURE_H
 
+#if __MAC_OSX__
 #include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
 #include <Magick++.h>
 #include <stdio.h>
 #include <stdlib.h>

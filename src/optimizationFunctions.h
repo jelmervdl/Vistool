@@ -4,7 +4,7 @@
 #include "experiment.h"
 #include "parameters.h"
 #include "dataset.h"
-#include "SVMClassifier.h"
+#include "svmclassifier.h"
 #include "oneClassSVM.h"
 #include "evaluation.h"
 

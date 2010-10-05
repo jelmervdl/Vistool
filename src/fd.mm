@@ -1,4 +1,5 @@
 #import "fd.h"
+#if __MAC_OSX
 #import <Cocoa/Cocoa.h>
 
 char * askFile(){
@@ -36,3 +37,10 @@ char * askFile(){
   [autoreleasepool release];
   return (char *) "";
 }
+#else
+
+char* askFile(){
+  return (char *) "";
+}
+
+#endif

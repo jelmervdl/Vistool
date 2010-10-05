@@ -43,13 +43,13 @@ cleanlibs:
 
 #C++ objects
 $(Objects): $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.cpp $(SOURCE_DIRECTORY)/%.h
-	@echo "\nCompiling: c++ object $@"
+	@echo "\nCompiling: c++ object $@ and head path: $(Head_Path)"
 	$(Cpp_Comp) $(Global) -c $(Cpp_Flags) -o $@ $< $(Head_Path)
 
 #Objective-c objects
 $(Obj-c_Objects): $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.mm $(SOURCE_DIRECTORY)/%.h
 	@echo "\nCompiling: objective-c object $@"
-	$(Cpp_Comp) $(Global) -c $(Cpp_Flags) -o $@ $< $(Head_Path)
+	gcc $(Global) $(Head_Path) -c $(Cpp_Flags) -o $@ $< 
 
 #Target
 $(Target): $(Java_Objects) $(Java_Headers) $(Objects) $(Obj-c_Objects) 

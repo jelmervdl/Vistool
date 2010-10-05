@@ -551,7 +551,7 @@ char    *GLUI_Spinner::get_text( void )
   if (edittext) 
     return edittext->text; 
   else 
-    return ""; 
+    return (char *) ""; 
 }
 
 

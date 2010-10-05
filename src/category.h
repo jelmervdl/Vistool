@@ -6,6 +6,7 @@
    location of the images on disk and a vector of these images
    themselves.*/
 
+#include <algorithm>
 #include <vector>
 #include"dataPoint.h"
 

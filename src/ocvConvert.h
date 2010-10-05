@@ -10,4 +10,4 @@ namespace OCV_Convert{
 
 };
 
-#endif OCVCONVERT_H
+#endif 

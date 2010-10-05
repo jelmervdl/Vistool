@@ -2,7 +2,7 @@
 #define FEATURESELECTIONWINDOW_H
 
 #include "features.h"
-#include "toolstate.h"
+#include "toolState.h"
 #include <sstream>
 
 namespace vito{

@@ -1,3 +1,3 @@
-#import <stdio.h>
+#include <stdio.h>
 
 char * askFile();

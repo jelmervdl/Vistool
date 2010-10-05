@@ -3,7 +3,7 @@
 
 #include "myImage.h"
 #include "clustering.h"
-#include "datapoint.h"
+#include "dataPoint.h"
 #include "feature.h"
 
 namespace vito{
