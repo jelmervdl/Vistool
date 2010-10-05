@@ -24,7 +24,11 @@
 #ifdef __MACOSX__
 #include <GL/glut.h>
 #else
-#include <GLUT/glut.h>
+#ifdef __linux__
+#include <GL/glut.h>
+#else
+#include <GL/glut.h>
+#endif
 #endif
 
 #include <stdlib.h>
