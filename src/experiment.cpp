@@ -56,7 +56,7 @@ Dataset getDataSet(const string str){
 }
 
 Dataset abdullah2010(){
-  Dataset dataset ("../datasets/Caltech101/");
+  Dataset dataset ("../datasets/caltech101/");
   dataset.enableCategory("airplanes");
   dataset.enableCategory("camera");
   dataset.enableCategory("car_side");
