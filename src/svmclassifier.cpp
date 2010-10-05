@@ -40,25 +40,22 @@ string SVMClassifier::get_name(){
 }
 
 void SVMClassifier::train(const ExampleCollection &examples){
-  cout << "training" << endl;
-  cout << "problem is: " << prblm << endl;
-  cout << "model is: " << model << endl;
+  //  cout << "training";
   if(model != 0){
     svm_free_and_destroy_model(&model);
     model = 0;
   }
   if(prblm != 0){
-    cout << "removing problem" << endl;
+    // cout << "removing problem" << endl;
     svm_destroy_problem(prblm);
     prblm = 0;
   }
-  cout << "training on " << examples.size() << " examples" << endl;
+  //  cout << " on " << examples.size() << " examples... ";
   
   prblm = compileProblem(examples);
-  //print::print_svm_problem(problem);
   svm_parameter *parameter = getSVMParameters();
   model = svm_train(prblm, parameter);
-  cout << "done training" << endl;
+  //cout << "done training" << endl;
 }
 
 svm_problem *SVMClassifier::compileProblem(const ExampleCollection &examples){

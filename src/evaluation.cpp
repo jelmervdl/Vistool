@@ -16,14 +16,11 @@ Evaluation::Evaluation(const DataPointCollection &dps,
     map_total_to_label[dp->get_label()] = 0;
     map_correct_to_label[dp->get_label()] = 0;
   }
-  cout << "dps is of size " << dps.size() 
-       << " and cls of size " << cls.size() << endl;
   if(dps.size() != cls.size())
     throw "bla";
   for(size_t i = 0; i < dps.size(); ++i){
     instances++;
     map_total_to_label[dps[i].get_label()]++;
-    cout << ".";
     if((int) dps[i].get_label() == cls[i]){
       correct++;
       map_correct_to_label[dps[i].get_label()]++;
@@ -31,7 +28,6 @@ Evaluation::Evaluation(const DataPointCollection &dps,
     classificationmap[cls[i]].push_back(&dps[i]);
   }
   precision = (float) correct  / (float ) instances ;
-  cout << instances << endl;
 }
 
 size_t Evaluation::getCorrect(){

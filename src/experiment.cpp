@@ -88,7 +88,6 @@ float svm(Dataset &dataset){
 
   // evaluate the results
   Evaluation evaluation(test, result_labels);
-  evaluation.print();
   return evaluation.getPrecision();
 }
 

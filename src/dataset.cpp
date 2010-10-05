@@ -135,10 +135,11 @@ void Dataset::randomDataSplit(vector<DataPoint> * train,
       test->push_back(dps.at(i));
     }
   }
-  cout << "random data split:" << endl 
-       << "  enabled Categories: " << enabled.size() << endl
-       << "  train: " << train->size() << endl
-       << "   test: " << test->size() << endl;
+  /*
+  cout << "random data split taken of " << enabled.size()
+       << " enabled Categories: train:" << train->size() 
+       << " test: " << test->size() << endl;
+  */
 }
 
 vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
