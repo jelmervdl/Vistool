@@ -1,0 +1,6 @@
+performing experiment svm
+trying.../Users/mauricemulder/workspace/VisionTool/../datasets/caltech101/
+root is a dataset
+../datasets/caltech101/ is not a dir!
+mean: 0.840013
+std: 0.0284863

@@ -1,0 +1,8384 @@
+performing full grid search
+at zoom level 0
+optimizing grid axis: 0
+axis is float
+Altering svm_gamma
+I want to set to-15
+it's quadratic so, that means it'll be set to: 3.05176e-05
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.854867
+std: 0.0252253
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.854867
+
+improvement: -9999999.000000 -> 0.854867
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.779
+std: 0.0403361
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.779000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.777867
+std: 0.037899
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.777867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.777267
+std: 0.0410105
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.777267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.779067
+std: 0.0388732
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.779067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.781
+std: 0.0384635
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.781000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.788467
+std: 0.0369366
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.788467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.842267
+std: 0.0270345
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.842267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8548
+std: 0.0234867
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.854800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.854667
+std: 0.0298291
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.854667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.851933
+std: 0.0214019
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.851933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.853133
+std: 0.0267076
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.853133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-13.6
+it's quadratic so, that means it'll be set to: 8.05364e-05
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.856466
+std: 0.0290204
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.856466
+
+improvement: 0.854867 -> 0.856466
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.777067
+std: 0.0341672
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.777067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.7878
+std: 0.0381582
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.787800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.7762
+std: 0.0351537
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.776200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.775733
+std: 0.037399
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.775733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.772666
+std: 0.0396372
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.772666
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.822666
+std: 0.0301404
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.822666
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.853666
+std: 0.0284781
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.853666
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8512
+std: 0.0273882
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.851200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.846067
+std: 0.0285205
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.846067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.855533
+std: 0.0274559
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.855533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.85
+std: 0.0292803
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000081
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.850000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-12.2
+it's quadratic so, that means it'll be set to: 0.000212537
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.857
+std: 0.0272499
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.857000
+
+improvement: 0.856466 -> 0.857000
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.787133
+std: 0.0363472
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.787133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.7866
+std: 0.0362889
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.786600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.774667
+std: 0.0389872
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.774667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.776267
+std: 0.041722
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.776267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.808466
+std: 0.0297673
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.808466
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.846533
+std: 0.0281106
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.846533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.851267
+std: 0.0256246
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.851267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.853467
+std: 0.0262294
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.853467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8536
+std: 0.0303596
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.853600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8576
+std: 0.0275604
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.857600
+
+improvement: 0.857000 -> 0.857600
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.850267
+std: 0.0263889
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000213
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.850267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-10.8
+it's quadratic so, that means it'll be set to: 0.000560888
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.851933
+std: 0.0257215
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.851933
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.789467
+std: 0.0390576
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.789467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.777333
+std: 0.0376298
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.777333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.781733
+std: 0.0414474
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.781733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.791867
+std: 0.0348276
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.791867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.839866
+std: 0.0304044
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.839866
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8568
+std: 0.0258797
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.856800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8528
+std: 0.0282635
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.852800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8544
+std: 0.0272555
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.854400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.851466
+std: 0.0280805
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.851466
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8584
+std: 0.0264007
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.858400
+
+improvement: 0.857600 -> 0.858400
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.856333
+std: 0.0274934
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000561
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.856333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-9.4
+it's quadratic so, that means it'll be set to: 0.00148019
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8592
+std: 0.0302329
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.859200
+
+improvement: 0.858400 -> 0.859200
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.788
+std: 0.039339
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.788000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.792867
+std: 0.0378565
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.792867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.789933
+std: 0.0364965
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.789933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.824
+std: 0.0280793
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.824000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8532
+std: 0.0282525
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.853200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8564
+std: 0.0290198
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.856400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8612
+std: 0.0256191
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.861200
+
+improvement: 0.859200 -> 0.861200
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.856267
+std: 0.0279733
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.856267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8538
+std: 0.0242442
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.853800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.858267
+std: 0.0255364
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.858267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8602
+std: 0.0234844
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001480
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.860200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-8
+it's quadratic so, that means it'll be set to: 0.00390625
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.860267
+std: 0.0256285
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.860267
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.794866
+std: 0.0340177
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.794866
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.8032
+std: 0.0336185
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.803200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.797667
+std: 0.031289
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.797667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.856866
+std: 0.0291579
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.856866
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.859666
+std: 0.0242464
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.859666
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8582
+std: 0.0279182
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.858200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.861067
+std: 0.0283427
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.861067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8594
+std: 0.0294255
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.859400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.858133
+std: 0.0308124
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.858133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.858467
+std: 0.0252429
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.858467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.860467
+std: 0.0289406
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.003906
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.860467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-6.6
+it's quadratic so, that means it'll be set to: 0.0103087
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8584
+std: 0.0271313
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.858400
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.8008
+std: 0.0319761
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.800800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.799867
+std: 0.0352134
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.799867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.817734
+std: 0.0310443
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.817734
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.859867
+std: 0.0269976
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.859867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8618
+std: 0.0297673
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.861800
+
+improvement: 0.861200 -> 0.861800
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.857
+std: 0.0230627
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.857000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.863533
+std: 0.0305862
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.863533
+
+improvement: 0.861800 -> 0.863533
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.861333
+std: 0.0256125
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.861333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.858067
+std: 0.0285703
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.858067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.860733
+std: 0.0268311
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.860733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.860667
+std: 0.0259487
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.010309
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.860667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-5.2
+it's quadratic so, that means it'll be set to: 0.0272047
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.802534
+std: 0.0309664
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.802534
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.689867
+std: 0.0527171
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.689867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.685467
+std: 0.0507489
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.685467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.688267
+std: 0.0498453
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.688267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.814333
+std: 0.0322128
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.814333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.813467
+std: 0.037865
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.813467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8178
+std: 0.0309416
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.817800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.810667
+std: 0.0343188
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.810667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.807733
+std: 0.0398187
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.807733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.809333
+std: 0.0380526
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.809333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.8128
+std: 0.0283264
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.812800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.812133
+std: 0.0344916
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.027205
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.812133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3.8
+it's quadratic so, that means it'll be set to: 0.0717936
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.5794
+std: 0.0565379
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.579400
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.375067
+std: 0.0609526
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.375067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.353733
+std: 0.0494217
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.353733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.367467
+std: 0.0561765
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.367467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.585933
+std: 0.054266
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.585933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.5848
+std: 0.0556423
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.584800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.583734
+std: 0.0503086
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.583734
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.5826
+std: 0.0533491
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.582600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.588867
+std: 0.0521796
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.588867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.590933
+std: 0.0472866
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.590933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.595
+std: 0.0540401
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.595000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.590867
+std: 0.0530966
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.071794
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.590867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-2.4
+it's quadratic so, that means it'll be set to: 0.189464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.350133
+std: 0.047614
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.350133
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.2388
+std: 0.039893
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.238800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.240933
+std: 0.0412259
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.240933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.244067
+std: 0.0393491
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.244067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.346667
+std: 0.0553855
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.346667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.352733
+std: 0.0519067
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.352733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.353133
+std: 0.0521745
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.353133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.347733
+std: 0.0493758
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.347733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.351
+std: 0.053203
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.351000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.349267
+std: 0.0506219
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.349267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.346933
+std: 0.0487891
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.346933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.349933
+std: 0.0559483
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.189464
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.349933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.251333
+std: 0.043762
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.251333
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-5
+it's quadratic so, that means it'll be set to: 0.03125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.031250
+.. now ..
+
+performing experiment svm
+mean: 0.234333
+std: 0.0556367
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.031250
+and that's a fact
+result: 0.234333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3
+it's quadratic so, that means it'll be set to: 0.125
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.125000
+.. now ..
+
+performing experiment svm
+mean: 0.226733
+std: 0.0464901
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.125000
+and that's a fact
+result: 0.226733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.500000
+.. now ..
+
+performing experiment svm
+mean: 0.213133
+std: 0.0421263
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.500000
+and that's a fact
+result: 0.213133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1
+it's quadratic so, that means it'll be set to: 2
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 2.000000
+.. now ..
+
+performing experiment svm
+mean: 0.2512
+std: 0.0399876
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 2.000000
+and that's a fact
+result: 0.251200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3
+it's quadratic so, that means it'll be set to: 8
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 8.000000
+.. now ..
+
+performing experiment svm
+mean: 0.256533
+std: 0.039749
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 8.000000
+and that's a fact
+result: 0.256533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5
+it's quadratic so, that means it'll be set to: 32
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 32.000000
+.. now ..
+
+performing experiment svm
+mean: 0.2526
+std: 0.044009
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 32.000000
+and that's a fact
+result: 0.252600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7
+it's quadratic so, that means it'll be set to: 128
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 128.000000
+.. now ..
+
+performing experiment svm
+mean: 0.242067
+std: 0.0426635
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 128.000000
+and that's a fact
+result: 0.242067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9
+it's quadratic so, that means it'll be set to: 512
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 512.000000
+.. now ..
+
+performing experiment svm
+mean: 0.2492
+std: 0.041631
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 512.000000
+and that's a fact
+result: 0.249200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11
+it's quadratic so, that means it'll be set to: 2048
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 2048.000000
+.. now ..
+
+performing experiment svm
+mean: 0.2488
+std: 0.0409865
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 2048.000000
+and that's a fact
+result: 0.248800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13
+it's quadratic so, that means it'll be set to: 8192
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 8192.000000
+.. now ..
+
+performing experiment svm
+mean: 0.250467
+std: 0.044843
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 8192.000000
+and that's a fact
+result: 0.250467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to15
+it's quadratic so, that means it'll be set to: 32768
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.253333
+std: 0.044
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.253333
+
+optimizing grid axis: 2
+axis a leaf
+zooming
+zooming
+at zoom level 1
+optimizing grid axis: 0
+axis is float
+Altering svm_gamma
+I want to set to-10.4081
+it's quadratic so, that means it'll be set to: 0.00073595
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 32768.000000
+.. now ..
+
+performing experiment svm
+mean: 0.853333
+std: 0.0252631
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 32768.000000
+and that's a fact
+result: 0.853333
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.772067
+std: 0.0369347
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.772067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.788467
+std: 0.0337949
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.788467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.786067
+std: 0.039599
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.786067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.813933
+std: 0.0316241
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.813933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.8466
+std: 0.0315875
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.846600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.8608
+std: 0.0252152
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.860800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.858267
+std: 0.0253617
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.858267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.857267
+std: 0.0286914
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.857267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.853867
+std: 0.0227582
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.853867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.853467
+std: 0.0252451
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.853467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.8486
+std: 0.0292316
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.000736
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.848600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-9.46729
+it's quadratic so, that means it'll be set to: 0.00141273
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.8508
+std: 0.0267296
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.850800
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.787067
+std: 0.0379335
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.787067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.789
+std: 0.0386135
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.789000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.801266
+std: 0.0367054
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.801266
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.836533
+std: 0.0302358
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.836533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.8538
+std: 0.0285074
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.853800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.858067
+std: 0.0277656
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.858067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.859267
+std: 0.0268807
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.859267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.8556
+std: 0.0278922
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.855600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.854533
+std: 0.0238957
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.854533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.858066
+std: 0.0250386
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.858066
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.856
+std: 0.0264995
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001413
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.856000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-8.52648
+it's quadratic so, that means it'll be set to: 0.00271189
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.853067
+std: 0.0261265
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.853067
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.796733
+std: 0.0374581
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.796733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.796333
+std: 0.0320191
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.796333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.813066
+std: 0.0322341
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.813066
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.8498
+std: 0.0273163
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.849800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.8592
+std: 0.0276852
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.859200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.855867
+std: 0.0280282
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.855867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.8638
+std: 0.0273131
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.863800
+
+improvement: 0.863533 -> 0.863800
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.858733
+std: 0.0251165
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.858733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.856733
+std: 0.0253245
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.856733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.857467
+std: 0.0232433
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.857467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.858066
+std: 0.0272975
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002712
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.858066
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-7.58567
+it's quadratic so, that means it'll be set to: 0.00520577
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.859333
+std: 0.0251661
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.859333
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.808333
+std: 0.0343883
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.808333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.800667
+std: 0.0324483
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.800667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.836
+std: 0.0275842
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.836000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.8632
+std: 0.0292951
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.863200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.8604
+std: 0.0242912
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.860400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.862867
+std: 0.0269527
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.862867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.862133
+std: 0.0267811
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.862133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.8606
+std: 0.0278742
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.860600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.865667
+std: 0.0250754
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.865667
+
+improvement: 0.863800 -> 0.865667
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.858733
+std: 0.024796
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.858733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.857867
+std: 0.026648
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005206
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.857867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-6.64486
+it's quadratic so, that means it'll be set to: 0.00999303
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.856067
+std: 0.0247493
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.856067
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.7982
+std: 0.034096
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.798200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.800733
+std: 0.0375458
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.800733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.843133
+std: 0.0296716
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.843133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.861467
+std: 0.0246681
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.861467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.855133
+std: 0.0244559
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.855133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.858
+std: 0.0278169
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.858000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.859467
+std: 0.0235264
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.859467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.857
+std: 0.0296554
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.857000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.863733
+std: 0.0289416
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.863733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.861333
+std: 0.0288598
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.861333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.856933
+std: 0.0271689
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.009993
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.856933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-5.70405
+it's quadratic so, that means it'll be set to: 0.0191827
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.844467
+std: 0.0304493
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.844467
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.758267
+std: 0.0398845
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.758267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.756533
+std: 0.0366785
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.756533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.8236
+std: 0.030058
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.823600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.836
+std: 0.0281267
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.836000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.837666
+std: 0.0304831
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.837666
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.841
+std: 0.0266562
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.841000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.839533
+std: 0.029818
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.839533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.840333
+std: 0.0298198
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.840333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.845733
+std: 0.0273905
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.845733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.843133
+std: 0.0262205
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.843133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.838933
+std: 0.0310944
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.019183
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.838933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-4.76324
+it's quadratic so, that means it'll be set to: 0.0368232
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.7648
+std: 0.0377604
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.764800
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.587467
+std: 0.0529594
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.587467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.583467
+std: 0.0635014
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.583467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.664533
+std: 0.0518535
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.664533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.763
+std: 0.0393093
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.763000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.758733
+std: 0.0369467
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.758733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.765467
+std: 0.0381154
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.765467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.761733
+std: 0.0362659
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.761733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.762133
+std: 0.0348314
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.762133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.770467
+std: 0.0402134
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.770467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.765333
+std: 0.0398664
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.765333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.754533
+std: 0.0426498
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.036823
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.754533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3.82243
+it's quadratic so, that means it'll be set to: 0.070686
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.593333
+std: 0.0511555
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.593333
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.369533
+std: 0.0586989
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.369533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.369667
+std: 0.0554847
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.369667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.379267
+std: 0.0561102
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.379267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.593067
+std: 0.0513802
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.593067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.590933
+std: 0.0477356
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.590933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.587867
+std: 0.0526066
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.587867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.5908
+std: 0.0499135
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.590800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.594267
+std: 0.0471878
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.594267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.585867
+std: 0.0433618
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.585867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.6016
+std: 0.0528908
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.601600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.588
+std: 0.0493964
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.070686
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.588000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-2.88162
+it's quadratic so, that means it'll be set to: 0.135689
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.408333
+std: 0.0552278
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.408333
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.264733
+std: 0.0503172
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.264733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.2606
+std: 0.0471225
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.260600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.2628
+std: 0.0445838
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.262800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.412867
+std: 0.0486827
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.412867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.4206
+std: 0.0533591
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.420600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.410133
+std: 0.050706
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.410133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.4116
+std: 0.0501608
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.411600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.4136
+std: 0.0604201
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.413600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.4162
+std: 0.0527405
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.416200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.413933
+std: 0.0507026
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.413933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.415533
+std: 0.0548051
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.135689
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.415533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.94081
+it's quadratic so, that means it'll be set to: 0.26047
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.312867
+std: 0.0511838
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.312867
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.231467
+std: 0.041932
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.231467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.232067
+std: 0.0356114
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.232067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.228733
+std: 0.0407125
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.228733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.302467
+std: 0.0435294
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.302467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.2992
+std: 0.0478078
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.299200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.304333
+std: 0.0535444
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.304333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.309333
+std: 0.0448206
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.309333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.306467
+std: 0.0485931
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.306467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.306933
+std: 0.0535738
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.306933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.299467
+std: 0.0442586
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.299467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.296267
+std: 0.0504497
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.260470
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.296267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1
+it's quadratic so, that means it'll be set to: 0.5
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.254533
+std: 0.0435163
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.254533
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-3.4813
+it's quadratic so, that means it'll be set to: 0.0895413
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.089541
+.. now ..
+
+performing experiment svm
+mean: 0.2172
+std: 0.0438602
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.089541
+and that's a fact
+result: 0.217200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.81464
+it's quadratic so, that means it'll be set to: 0.284276
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.284276
+.. now ..
+
+performing experiment svm
+mean: 0.212467
+std: 0.0395267
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.284276
+and that's a fact
+result: 0.212467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-0.147969
+it's quadratic so, that means it'll be set to: 0.90252
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.902520
+.. now ..
+
+performing experiment svm
+mean: 0.21
+std: 0.0442367
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 0.902520
+and that's a fact
+result: 0.210000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.5187
+it's quadratic so, that means it'll be set to: 2.86532
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 2.865322
+.. now ..
+
+performing experiment svm
+mean: 0.251133
+std: 0.0417086
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 2.865322
+and that's a fact
+result: 0.251133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.18536
+it's quadratic so, that means it'll be set to: 9.09683
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 9.096829
+.. now ..
+
+performing experiment svm
+mean: 0.2468
+std: 0.0371661
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 9.096829
+and that's a fact
+result: 0.246800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to4.85203
+it's quadratic so, that means it'll be set to: 28.8806
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 28.880629
+.. now ..
+
+performing experiment svm
+mean: 0.249667
+std: 0.0445857
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 28.880629
+and that's a fact
+result: 0.249667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.5187
+it's quadratic so, that means it'll be set to: 91.6903
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 91.690300
+.. now ..
+
+performing experiment svm
+mean: 0.253067
+std: 0.046799
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 91.690300
+and that's a fact
+result: 0.253067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to8.18536
+it's quadratic so, that means it'll be set to: 291.099
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 291.098541
+.. now ..
+
+performing experiment svm
+mean: 0.246333
+std: 0.041648
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 291.098541
+and that's a fact
+result: 0.246333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.85203
+it's quadratic so, that means it'll be set to: 924.18
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 924.179810
+.. now ..
+
+performing experiment svm
+mean: 0.252
+std: 0.0438989
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 924.179810
+and that's a fact
+result: 0.252000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.5187
+it's quadratic so, that means it'll be set to: 2934.09
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 2934.090576
+.. now ..
+
+performing experiment svm
+mean: 0.251533
+std: 0.0415356
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 2934.090576
+and that's a fact
+result: 0.251533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.2586
+std: 0.0472468
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.500000
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.258600
+
+optimizing grid axis: 2
+axis a leaf
+zooming
+zooming
+at zoom level 2
+optimizing grid axis: 0
+axis is float
+Altering svm_gamma
+I want to set to-9.17803
+it's quadratic so, that means it'll be set to: 0.00172638
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.856133
+std: 0.025459
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.856133
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.804133
+std: 0.034095
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.804133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.836867
+std: 0.0306443
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.836867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.857933
+std: 0.0313361
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.857933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.859267
+std: 0.027242
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.859267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.854867
+std: 0.0260061
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.854867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.857333
+std: 0.0262805
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.857333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.859666
+std: 0.0244108
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.859666
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.858333
+std: 0.0254624
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.858333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.855333
+std: 0.0273821
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.855333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.855333
+std: 0.0276727
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.855333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.850333
+std: 0.0295202
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.001726
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.850333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-8.39402
+it's quadratic so, that means it'll be set to: 0.00297268
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.859667
+std: 0.0258607
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.859667
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.822667
+std: 0.0334797
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.822667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.850333
+std: 0.0274773
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.850333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.857
+std: 0.0267062
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.857000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.856867
+std: 0.0310906
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.856867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.8604
+std: 0.0257651
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.860400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.8622
+std: 0.027985
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.862200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.8562
+std: 0.0231949
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.856200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.8616
+std: 0.0281286
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.861600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.858733
+std: 0.0271079
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.858733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.862467
+std: 0.0303118
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.862467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.8616
+std: 0.0304503
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.002973
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.861600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-7.61001
+it's quadratic so, that means it'll be set to: 0.00511867
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.8634
+std: 0.0252542
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.863400
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.8344
+std: 0.0296456
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.834400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.863933
+std: 0.0249461
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.863933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.8634
+std: 0.0284174
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.863400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.858933
+std: 0.0288863
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.858933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.864
+std: 0.0283
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.864000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.856933
+std: 0.0305712
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.856933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.8634
+std: 0.0283078
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.863400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.8622
+std: 0.0254743
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.862200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.8666
+std: 0.0289443
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.866600
+
+improvement: 0.865667 -> 0.866600
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.86
+std: 0.0276003
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.860000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.862
+std: 0.0291281
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.005119
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.862000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-6.826
+it's quadratic so, that means it'll be set to: 0.00881389
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.856867
+std: 0.0255509
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.856867
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.837733
+std: 0.0330551
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.837733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.857
+std: 0.0226544
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.857000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.858267
+std: 0.0270575
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.858267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.8596
+std: 0.0270279
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.859600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.8636
+std: 0.0247552
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.863600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.864867
+std: 0.0261254
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.864867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.8608
+std: 0.0269366
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.860800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.859267
+std: 0.0276147
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.859267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.865067
+std: 0.0250709
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.865067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.865733
+std: 0.0255607
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.865733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.858867
+std: 0.0300526
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.008814
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.858867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-6.042
+it's quadratic so, that means it'll be set to: 0.0151767
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.851133
+std: 0.0266008
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.851133
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.8334
+std: 0.0301182
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.833400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.851667
+std: 0.0306576
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.851667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.852867
+std: 0.0290632
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.852867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.851067
+std: 0.0275232
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.851067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.851467
+std: 0.0259757
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.851467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.853467
+std: 0.0264991
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.853467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.8556
+std: 0.0246256
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.855600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.8538
+std: 0.0260641
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.853800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.851667
+std: 0.0309318
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.851667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.847733
+std: 0.0272555
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.847733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.851466
+std: 0.0291979
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.015177
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.851466
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-5.25799
+it's quadratic so, that means it'll be set to: 0.0261329
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.8156
+std: 0.0347847
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.815600
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.782733
+std: 0.0327155
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.782733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.811733
+std: 0.0387943
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.811733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.818067
+std: 0.0324454
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.818067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.813667
+std: 0.0347483
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.813667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.8102
+std: 0.0328965
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.810200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.817666
+std: 0.0316702
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.817666
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.8196
+std: 0.0372597
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.819600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.8098
+std: 0.0334459
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.809800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.813467
+std: 0.0358637
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.813467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.816067
+std: 0.0363941
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.816067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.812267
+std: 0.0309798
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.026133
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.812267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-4.47398
+it's quadratic so, that means it'll be set to: 0.0449985
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.711467
+std: 0.0443028
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.711467
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.5708
+std: 0.0564961
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.570800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.715867
+std: 0.0414705
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.715867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.721333
+std: 0.0473005
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.721333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.716733
+std: 0.035371
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.716733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.718267
+std: 0.0470047
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.718267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.7168
+std: 0.0420421
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.716800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.719533
+std: 0.0422296
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.719533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.725
+std: 0.049111
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.725000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.724667
+std: 0.0439141
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.724667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.716467
+std: 0.041467
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.716467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.7184
+std: 0.0406953
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.044999
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.718400
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-3.68997
+it's quadratic so, that means it'll be set to: 0.0774833
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.567467
+std: 0.0595037
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.567467
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.3506
+std: 0.0547487
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.350600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.567533
+std: 0.0469293
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.567533
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.572334
+std: 0.0450518
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.572334
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.567067
+std: 0.053912
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.567067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.573333
+std: 0.0530241
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.573333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.574467
+std: 0.0501735
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.574467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.5632
+std: 0.0569325
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.563200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.561067
+std: 0.0459248
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.561067
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.566
+std: 0.051212
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.566000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.572733
+std: 0.0470186
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.572733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.555867
+std: 0.0524746
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.077483
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.555867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-2.90596
+it's quadratic so, that means it'll be set to: 0.133419
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.416267
+std: 0.0499183
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.416267
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.265733
+std: 0.0409772
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.265733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.428733
+std: 0.0527779
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.428733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.419933
+std: 0.0502924
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.419933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.4196
+std: 0.0522628
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.419600
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.418333
+std: 0.0528425
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.418333
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.423867
+std: 0.0472175
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.423867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.413
+std: 0.0505382
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.413000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.409667
+std: 0.0470591
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.409667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.4198
+std: 0.045092
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.419800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.414
+std: 0.0491393
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.414000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.421733
+std: 0.0565734
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.133419
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.421733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-2.12195
+it's quadratic so, that means it'll be set to: 0.229736
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.309467
+std: 0.0472833
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.309467
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.234733
+std: 0.0475188
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.234733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.323933
+std: 0.0479175
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.323933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.3158
+std: 0.0487593
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.315800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.320733
+std: 0.0545844
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.320733
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.327267
+std: 0.0532006
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.327267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.3302
+std: 0.0475764
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.330200
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.323
+std: 0.053619
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.323000
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.326133
+std: 0.0458857
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.326133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.319933
+std: 0.0558848
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.319933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.322267
+std: 0.0503783
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.322267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.318667
+std: 0.0464184
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.229736
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.318667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to-1.33794
+it's quadratic so, that means it'll be set to: 0.395584
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.266467
+std: 0.0488668
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.266467
+
+optimizing grid axis: 1
+axis is float
+Altering svm_C
+I want to set to-0.115537
+it's quadratic so, that means it'll be set to: 0.923039
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 0.923039
+.. now ..
+
+performing experiment svm
+mean: 0.218467
+std: 0.0418022
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 0.923039
+and that's a fact
+result: 0.218467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to1.21455
+it's quadratic so, that means it'll be set to: 2.32069
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 2.320689
+.. now ..
+
+performing experiment svm
+mean: 0.274467
+std: 0.0489903
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 2.320689
+and that's a fact
+result: 0.274467
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to2.54464
+it's quadratic so, that means it'll be set to: 5.83464
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 5.834638
+.. now ..
+
+performing experiment svm
+mean: 0.264133
+std: 0.0427476
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 5.834638
+and that's a fact
+result: 0.264133
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to3.87473
+it's quadratic so, that means it'll be set to: 14.6694
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 14.669354
+.. now ..
+
+performing experiment svm
+mean: 0.266867
+std: 0.0430654
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 14.669354
+and that's a fact
+result: 0.266867
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to5.20482
+it's quadratic so, that means it'll be set to: 36.8815
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 36.881451
+.. now ..
+
+performing experiment svm
+mean: 0.266667
+std: 0.0458694
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 36.881451
+and that's a fact
+result: 0.266667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to6.53491
+it's quadratic so, that means it'll be set to: 92.7267
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 92.726738
+.. now ..
+
+performing experiment svm
+mean: 0.257667
+std: 0.0384866
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 92.726738
+and that's a fact
+result: 0.257667
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to7.865
+it's quadratic so, that means it'll be set to: 233.132
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 233.132141
+.. now ..
+
+performing experiment svm
+mean: 0.262267
+std: 0.0473683
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 233.132141
+and that's a fact
+result: 0.262267
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to9.19509
+it's quadratic so, that means it'll be set to: 586.137
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 586.136597
+.. now ..
+
+performing experiment svm
+mean: 0.265933
+std: 0.0475618
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 586.136597
+and that's a fact
+result: 0.265933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to10.5252
+it's quadratic so, that means it'll be set to: 1473.66
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 1473.656616
+.. now ..
+
+performing experiment svm
+mean: 0.261933
+std: 0.0466218
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 1473.656616
+and that's a fact
+result: 0.261933
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to11.8553
+it's quadratic so, that means it'll be set to: 3705.04
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 3705.041992
+.. now ..
+
+performing experiment svm
+mean: 0.2638
+std: 0.0454533
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 3705.041992
+and that's a fact
+result: 0.263800
+
+optimizing grid axis: 2
+axis a leaf
+I want to set to13.1854
+it's quadratic so, that means it'll be set to: 9315.15
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 9315.153320
+.. now ..
+
+performing experiment svm
+mean: 0.265467
+std: 0.0434243
+just tested with: 
+using the following parameters:
+	 svm_gamma at value 0.395584
+	 svm_C at value 9315.153320
+and that's a fact
+result: 0.265467
+
+optimizing grid axis: 2
+axis a leaf
+zooming
+zooming
+live_value of svm_gamma is now: 0.395584 setting it to the supposed best: 0.00511867
+live value is now 0.00511867
+live_value of svm_C is now: 9315.15 setting it to the supposed best: 1473.66
+live value is now 1473.66
