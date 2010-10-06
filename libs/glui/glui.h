@@ -21,8 +21,8 @@
 #define _GLUI_H_
 
 // use different headers locations on macosx
-#ifdef __MACOSX__
-#include <GL/glut.h>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
 #else
 #ifdef __linux__
 #include <GL/glut.h>

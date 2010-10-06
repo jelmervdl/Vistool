@@ -1,5 +1,5 @@
 #import "fd.h"
-#if __MAC_OSX
+#if __APPLE__
 #import <Cocoa/Cocoa.h>
 
 char * askFile(){

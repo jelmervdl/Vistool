@@ -1,7 +1,7 @@
 #ifndef GLTEXTURE_H
 #define GLTEXTURE_H
 
-#if __MAC_OSX__
+#if __APPLE__
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>

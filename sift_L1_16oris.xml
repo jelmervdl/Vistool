@@ -4,7 +4,7 @@
     <sift_blur_std> 2.0 </sift_blur_std>
 
     <!-- SVM -->
-    <svm_gamma> 0.03 </svm_gamma>
+    <svm_gamma> 0.000213 </svm_gamma>
     <svm_coef0> 15.0 </svm_coef0>
     <svm_cache_size> 1024 </svm_cache_size>
     <svm_eps> 0.64 </svm_eps>
