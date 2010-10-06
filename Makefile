@@ -9,7 +9,6 @@ include Inc.make
 Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_JNI) $(Lib_Boost) $(Lib_OpenCV) $(Lib_Magickpp) $(Lib_Xerces)  $(Lib_SVM) 
 
 D_loc = -D 'DESCRIPTOR_LOCATION="$(DescriptorLocation)"'
-Java_Include = -D 'USER_CLASSPATH="$(CLASSPATH2)"'
 Mpeg7_Include = -D 'MPEG7_JAVA_CLASS_LOCATION="$(MPEG7JavaClassLocation)"'
 
 Macros = $(D_loc) $(Java_Include) $(Mpeg7_Include)
@@ -60,9 +59,8 @@ $(Target): $(Java_Objects) $(Java_Headers) $(Objects) $(Obj-c_Objects)
 clean:
 	@echo "\nRemoving: all c++ objects "
 	rm -f $(Objects) 
-	$(MAKE) clean -C  libs/glui
 
-cleanall: clean
+cleanall: clean cleanlibs
 	@echo "\nRemoving: support files "
 	rm $(Obj-c_Objects) $(Java_Headers) $(Java_Objects)
 	@echo "\nRemoving: descriptors "

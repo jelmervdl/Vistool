@@ -263,4 +263,5 @@ void one_class_test(){
   svm_predict_values(model, test, res);
   cout << "value: " << res[0] << endl;
   }
+
 }
