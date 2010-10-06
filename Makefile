@@ -101,7 +101,7 @@ check-syntax:
 syntax-target: $(Objects)
 
 TAGS: $(Sources) $(Cpp_Headers)
-	rm $(SOURCE_DIRECTORY)/TAGS
+	echo "" > $(SOURCE_DIRECTORY)/TAGS
 	etags $(SOURCE_DIRECTORY)/*.h $(SOURCE_DIRECTORY)/*.cpp -o $(SOURCE_DIRECTORY)/TAGS
 
 
