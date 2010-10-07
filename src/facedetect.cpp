@@ -3,14 +3,17 @@
 using namespace std;
 using namespace cv;
 
+namespace vito{
+namespace features{
+
 String cascadeName =
 "data/haarcascades/haarcascade_frontalface_alt.xml";
 String nestedCascadeName =
 "data/haarcascades/haarcascade_eye_tree_eyeglasses.xml";
 
-void detectAndDraw( Mat& img,
-                   CascadeClassifier& cascade, CascadeClassifier& nestedCascade,
-                   double scale)
+int detect( Mat& img,
+	     CascadeClassifier& cascade, CascadeClassifier& nestedCascade,
+	     double scale)
 {
     int i = 0;
     double t = 0;
@@ -69,5 +72,35 @@ void detectAndDraw( Mat& img,
             circle( img, center, radius, color, 3, 8, 0 );
         }
     }
-    cout << faces.size() << endl;
+    return faces.size();
 }
+
+Descriptor FaceFeature::extract_(MyImage *Image, 
+				 bool makeVisualRepresentation, 
+				 Magick::Image * representation){
+  Descriptor res;
+  string cascadeName =
+    "data/haarcascades/haarcascade_frontalface_alt.xml";
+  string nestedCascadeName =
+    "data/haarcascades/haarcascade_eye_tree_eyeglasses.xml";
+  cv::Mat im = cv::imread(Image->getLocation(), 1);
+  cv::CascadeClassifier cascade, nestedCascade;
+  double scale = 1;
+  if( !nestedCascade.load( nestedCascadeName ) )
+    cerr << "WARNING: Could not load classifier cascade for nested objects" << endl;
+  if( !cascade.load( cascadeName ) ) {
+      cerr << "ERROR: Could not load classifier cascade" << endl;
+      cerr << "Usage: facedetect [--cascade=\"<cascade_path>\"]\n"
+            "   [--nested-cascade[=\"nested_cascade_path\"]]\n"
+            "   [--scale[=<image scale>\n"
+	"   [filename|camera_index]\n" ;
+      return 0;
+  }
+  const int nr = detect(im, cascade, nestedCascade, scale);
+  res.push_back(nr);
+  return res;
+}
+
+
+
+}}

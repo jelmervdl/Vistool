@@ -28,7 +28,7 @@ void testFaceRec(){
 	"   [filename|camera_index]\n" ;
       return;
   }
-  detectAndDraw(im, cascade, nestedCascade, scale);
+  cout << vito::features::detect(im, cascade, nestedCascade, scale);
 }
 
 void testClassifierStack(){

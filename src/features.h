@@ -1,6 +1,7 @@
 #ifndef FEATURES_H
 #define FEATURES_H
 
+#include "facedetect.h"
 #include <vector>
 #include "feature.h"
 #include "mpeg7.h"
