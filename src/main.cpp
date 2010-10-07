@@ -1,5 +1,7 @@
 #include "main.h"
 
+#include "facedetect.h"
+
 using std::sprintf;
 using namespace vito;
 using namespace vito::features;
@@ -7,6 +9,27 @@ using namespace vito::gui;
 using namespace vito::optimization;
 using namespace vito::classification;
 using namespace std;
+
+void testFaceRec(){
+  string cascadeName =
+    "data/haarcascades/haarcascade_frontalface_alt.xml";
+  string nestedCascadeName =
+    "data/haarcascades/haarcascade_eye_tree_eyeglasses.xml";
+  cv::Mat im = cv::imread("../datasets/caltech101/BACKGROUND_Google/image_0197.jpg", 1);
+  cv::CascadeClassifier cascade, nestedCascade;
+  double scale = 1;
+  if( !nestedCascade.load( nestedCascadeName ) )
+    cerr << "WARNING: Could not load classifier cascade for nested objects" << endl;
+  if( !cascade.load( cascadeName ) ) {
+      cerr << "ERROR: Could not load classifier cascade" << endl;
+      cerr << "Usage: facedetect [--cascade=\"<cascade_path>\"]\n"
+            "   [--nested-cascade[=\"nested_cascade_path\"]]\n"
+            "   [--scale[=<image scale>\n"
+	"   [filename|camera_index]\n" ;
+      return;
+  }
+  detectAndDraw(im, cascade, nestedCascade, scale);
+}
 
 void testClassifierStack(){
   Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
@@ -82,6 +105,10 @@ int main(int argc, char ** argv){
     end = arguments.end();
   if(arg == end) {
     return 1;
+  }
+  if(*arg == "face"){
+    testFaceRec();
+    return 0;
   }
   if(*arg == "test"){
     testing::testAll();

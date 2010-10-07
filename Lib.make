@@ -43,5 +43,5 @@ Head_Path += -I./libs/libsvm-3.0
 #Libraries
 	Lib_PNG      = -lpng
 	Lib_Boost    = -lboost_filesystem-mt -lboost_system-mt
-	Lib_OpenCV   = -lml -lcv -lcxcore
+	Lib_OpenCV   = -lml -lcv -lcxcore -lhighgui
 	Lib_Xerces   = -lxerces-c
