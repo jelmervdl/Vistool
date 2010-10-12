@@ -20,12 +20,14 @@ class ClassifierSetup;
 class MyImage{
   friend class features::ClassifierSetup;
  protected:
+size_t serial;
   DataPoint dp;
   size_t width, height;
   std::string location;
-  Magick::Image * magick;
+  Magick::Image magick;
   Magick::Blob * blob;
   cv::Mat * mat;
+  
  public:
   MyImage(const DataPoint &dp);
   MyImage();
@@ -44,17 +46,12 @@ class MyImage{
   // get the Image Magick Image that of the pixel region of zone x/y
   // given a number of segments;
   Magick::Image   getMagickSubImage(int x, int x_segments, 
-				   int y, int y_segments) ;
+				   int y, int y_segments)  ;
 
   // get The sub Image and save it
   void            save_sub_image(int x, int x_segments, 
 		      int y, int y_segments, 
 		      std::string filename);
-
-  // get a sub image and poor it into a MyImage wrapper;
-  MyImage         getSubImage(int x, int x_segments, 
-			      int y, int y_segments) ;
-  //constructors:
 };
 
 }

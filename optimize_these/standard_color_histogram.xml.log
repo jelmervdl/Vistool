@@ -1,0 +1,23 @@
+performing full grid search
+at zoom level 0
+optimizing grid axis: 0
+axis is float
+Altering svm_gamma
+I want to set to-15
+it's quadratic so, that means it'll be set to: 3.05176e-05
+going to test with: 
+
+using the following parameters:
+	 svm_gamma at value 0.000031
+	 svm_C at value 16.000000
+.. now ..
+
+performing experiment svm
+trying.../Users/mauricemulder/workspace/VisionTool/../datasets/caltech101/
+root is a dataset
+../datasets/caltech101/ is not a dir!
+creating directory desc/3609983869927491601/
+creating directory desc/3609983869927491601/airplanes/
+trying to getdesc/3609983869927491601/airplanes/image_0427.jpg.desc
+renewing descriptor for /Users/mauricemulder/workspace/VisionTool/../datasets/caltech101/airplanes/image_0427.jpg
+trying to getdesc/3609983869927491601/airplanes/image_0250.jpg.desc

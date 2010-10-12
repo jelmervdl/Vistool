@@ -15,7 +15,7 @@ using std::ofstream;
 
 XERCES_CPP_NAMESPACE_USE
 
-Parameters::Parameters(){
+Parameters::Parameters() : serial(0){
 }
 
 Parameters::~Parameters(){
@@ -205,4 +205,9 @@ void Parameters::appointFeature(std::string str){
   cout << "activating: " << endl << str << endl;
   turnOffAllFeatures();
   intParameters["feature_" + str] = 1;
+}
+
+size_t Parameters::getserial(){
+  serial++;
+  return serial;
 }

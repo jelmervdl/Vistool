@@ -25,7 +25,7 @@
       <knn_classifier_k> 1 </knn_classifier_k>
     <!-- SVM -->
       <svm_degree> 16 </svm_degree>
-      <svm_nr_weight> 0 </svm_nr_weight>bas
+      <svm_nr_weight> 0 </svm_nr_weight>
       <svm_shrinking> 1 </svm_shrinking>
       <svm_probability> 1 </svm_probability>
     <!-- segment svm -->

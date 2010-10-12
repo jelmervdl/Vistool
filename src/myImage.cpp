@@ -20,10 +20,7 @@ size_t MyImage::get_height(){
 }
 
 Image* MyImage::getMagickImage(){
-  if(magick==NULL){
-    magick = new Image(location);
-  }
-  return magick;
+  return &magick;
     
 }
 
@@ -35,17 +32,17 @@ string MyImage::getLocation(){
 Mat* MyImage::getOpenCVMat(){
   if(mat == NULL)  {
     Mat orig;
-    Image * image = getMagickImage();
-    magick->magick("BGR");
+    getMagickImage();
+    magick.magick("BGR");
     Blob blb ;
-    magick->write(&blb);
+    magick.write(&blb);
     mat = new Mat();
-    orig = Mat(image->size().height(),
-	       image->size().width(), 
+    orig = Mat(magick.size().height(),
+	       magick.size().width(), 
 	       CV_8UC3, 
 	       (void *) blb.data());
     cvtColor(orig, *mat, CV_RGB2HSV);
-    magick->magick("RGB");
+    magick.magick("RGB");
   }
   return mat;
 
@@ -59,63 +56,66 @@ Blob *MyImage::getBlob(){
   return blob;
 }
 
-MyImage::MyImage(const DataPoint &dp_) : 
-  dp(dp_),
-  location(dp.get_image_url()),
-  magick(0),
-  blob(0),
-  mat(0){
+MyImage::MyImage(const DataPoint &dp_) : serial(Parameters::getInstance()->getserial()),
+					 dp(dp_),
+					 location(dp.get_image_url()),
+					 blob(0),
+					 mat(0){
+  magick = Image(location);
   width = getMagickImage()->columns();
   height = getMagickImage()->rows();
 }
 
-MyImage::MyImage(string loc, DataPoint dp_) : dp(dp_){
+MyImage::MyImage(string loc, DataPoint dp_) : serial(Parameters::getInstance()->getserial()),
+					      dp(dp_){
   location = loc;
-  magick = 0;
   blob = 0;
   mat = 0;
+  magick = Image(location);
   width = getMagickImage()->columns();
   height = getMagickImage()->rows();
 }
 
-MyImage::MyImage(const Image &image) : dp(DataPoint(0, "","","")){
+MyImage::MyImage(const Image &image) : serial(Parameters::getInstance()->getserial()),
+				       dp(DataPoint(0, "","","")){
   location = "";
-  magick = new Image();
+  magick = image;
   blob = 0;
   mat = 0;
-  *magick = image;
   width = getMagickImage()->columns();
   height = getMagickImage()->rows();
 }
 
 Image MyImage::getMagickSubImage(int x, int x_segments, 
-				 int y, int y_segments){
-  Image magick = *getMagickImage();
-  int width = magick.columns();
-  int height = magick.rows();
+				 int y, int y_segments) {
+  Image new_mag = *getMagickImage();
+  int width = new_mag.columns();
+  int height = new_mag.rows();
   int left = (x / (float) x_segments) * width;
   int right = ((1 + x) / (float) x_segments) * width;
   int up = (y / (float) y_segments) * height;
   int down = ((1 + y) / (float) y_segments) * height;
-  magick.crop(Magick::Geometry(right - left, down - up, left, up));
-  return magick;
-}
-
-MyImage MyImage::getSubImage(int x, int x_segments, 
-		    int y, int y_segments) {
-  Image magick = getMagickSubImage(x, x_segments, y, y_segments);
-  magick.write("aapie.jpg");
-  return MyImage(magick);
+  new_mag.crop(Magick::Geometry(right - left, down - up, left, up));
+  return new_mag;
 }
 
 
 MyImage::~MyImage(){
-  delete mat;
-  mat = 0;
-  delete magick;
-  magick = 0;
-  delete blob;
-  blob = 0;
+  if(mat != 0){
+    delete mat;
+    mat = 0;
+  }
+  /*
+  if(magick != 0){
+    magick.write("honky.jpg");
+    cout << "written image " << magick->columns() << " " << magick->rows() << endl;
+    delete magick;
+    magick = 0;
+    }*/
+  if(blob != 0){
+    delete blob;
+    blob = 0;
+  }
 }
 
 
@@ -136,8 +136,8 @@ Matrix<float> MyImage::getGrayscaleMatrix(){
 void MyImage::save_sub_image(int x, int x_segments, 
 			     int y, int y_segments, 
 			     string filename){
-  Image magick = getMagickSubImage(x, x_segments, y, y_segments);
-  magick.write(filename);
+  Image magick_ = getMagickSubImage(x, x_segments, y, y_segments);
+  magick_.write(filename);
 }
 
 }

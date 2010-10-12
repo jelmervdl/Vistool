@@ -27,7 +27,7 @@ patch_collection PatchExtractor::getPatches(const vector<DataPoint> &dps,
     MyImage current_image(it->get_image_url());
     for(int x = 0; x < x_bins; x++)
       for(int y = 0; y < y_bins; y++){
-	MyImage subImage = current_image.getSubImage(x, x_bins, y, y_bins);
+	MyImage subImage(current_image.getMagickSubImage(x, x_bins, y, y_bins));
 	patch current_patch = getPatch(&subImage, feature);
 	ret.push_back(current_patch);
       }
@@ -43,7 +43,7 @@ patch_collection PatchExtractor::getPatches(MyImage &myImage, Feature *feature){
   patch_collection ret;
    for(int x = 0; x < x_bins; x++)
       for(int y = 0; y < y_bins; y++){
-	MyImage subImage = myImage.getSubImage(x, x_bins, y, y_bins);
+	MyImage subImage(myImage.getMagickSubImage(x, x_bins, y, y_bins));
 	patch current_patch = getPatch(&subImage, feature);
 	ret.push_back(current_patch);
       }

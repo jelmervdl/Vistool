@@ -45,6 +45,7 @@ class Parameters : public Multiton<Parameters>{
   std::map<std::string, float> floatParameters;
   std::map<std::string, int> intParameters;
   std::string file;
+  size_t serial;
 
  public:
 
@@ -86,6 +87,8 @@ class Parameters : public Multiton<Parameters>{
   void        printParameters();
 
   void        requireOnlySift();
+
+  size_t getserial();
 };
 
 #endif 
