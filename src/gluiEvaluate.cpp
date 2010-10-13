@@ -16,14 +16,13 @@ using classification::Classifier;
 
 
 void evaluateClassifier(){
-  extractFeatures();
   train();
   classify();
 }
 
 void crossValidate(){
   ToolState &state = *ToolState::getInstance();
-  extractFeatures();
+
   state.train_data.clear();
   state.test_data.clear();
   state.current_classifier = getExistingClassifier(state.enabled_classifier);

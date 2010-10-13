@@ -30,7 +30,7 @@ class ToolState:  public Singleton<ToolState>{
   Dataset                     current_db;
   size_t                      current_image_page;
   std::vector <Texture>       textures;
-  std::vector <DataPoint*>    currently_view_datapoints; 
+  std::vector <DataPoint*>  currently_view_datapoints; 
   DataPointCollection         train_data, test_data;
   LabelCollection             test_result;
   int                         enabled_classifier;

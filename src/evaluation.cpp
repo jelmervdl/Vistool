@@ -7,7 +7,7 @@ namespace evaluation{
 Evaluation::Evaluation(){
 }
 
-Evaluation::Evaluation(const DataPointCollection &dps, 
+Evaluation::Evaluation(DataPointCollection &dps, 
 		       const LabelCollection &cls){
   instances = 0;
   correct = 0;
@@ -40,7 +40,7 @@ float Evaluation::getPrecision(){
   return precision;
 }
 
-vector<const DataPoint *> Evaluation::getInstancesClassifiedAs(int cl){
+vector<DataPoint *> Evaluation::getInstancesClassifiedAs(int cl){
   return classificationmap[cl];
 }
 void Evaluation::print(){
@@ -56,7 +56,7 @@ map<int, int> Evaluation::getTotalMap(){
   return map_total_to_label;
 }
 
-Evaluation::Evaluation(const DataPointCollection &dps,
+Evaluation::Evaluation(DataPointCollection &dps,
 			const LabelCollection &classification,
 			int one_class_t){
   cout << "one class evaluation!" << endl;

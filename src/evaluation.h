@@ -19,14 +19,14 @@ private:
   std::map<int, int> map_correct_to_label;
   std::map<int, int> map_total_to_label;
 
-  std::map<int, std::vector<const DataPoint*> > classificationmap;
+  std::map<int, std::vector<DataPoint*> > classificationmap;
 
 public:
   // constructors 
   Evaluation();
-  Evaluation(const DataPointCollection &dps, 
+  Evaluation(DataPointCollection &dps, 
 	     const LabelCollection &cls);
-  Evaluation(const DataPointCollection &dps,
+  Evaluation(DataPointCollection &dps,
 	     const LabelCollection &classification,
 	     int one_class_t);
 
@@ -41,7 +41,7 @@ public:
   
 
   // returns the all points classified as a certain label
-  std::vector<const DataPoint*> getInstancesClassifiedAs(int cl);
+  std::vector<DataPoint*> getInstancesClassifiedAs(int cl);
 
   // classmap getters
   std::map<int, int>      getCorrectMap();

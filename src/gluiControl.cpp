@@ -98,6 +98,7 @@ void nextPage(){
 
 void selectAndShow(){
   ToolState &state = *ToolState::getInstance();
+  cout << "state.ds = " << state.ds;
   state.ds = states::Particular_Category;
   viewDataset();
 }

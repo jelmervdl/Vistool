@@ -182,6 +182,7 @@ int main(int argc, char ** argv){
 	return 0;
       }
     }
+
   }if(*arg == "help"){
     arg++;
     if(arg == end){

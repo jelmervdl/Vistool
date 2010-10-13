@@ -38,9 +38,9 @@ void setViewSelection(){
   if(state.ds == Particular_Category){
     state.current_evaluation.print();
     state.currently_view_datapoints.clear();
-    /*    if(state.current_evaluation != NULL){
+    if(state.current_evaluation.getInstances() != 0){
       state.currently_view_datapoints = state.current_evaluation.getInstancesClassifiedAs(state.selected_class);
-      }*/
+    }
   }
   state.image_width  = state.window_width / state.ims_per_page;
   state.image_height = state.window_height / state.ims_per_page;
