@@ -49,7 +49,7 @@ Descriptor Histogram::extract_(MyImage *image,
     *canvas = Image(Geometry(sbins * bin_representation_size, 
 			     hbins * bin_representation_size),
 		    Color("black"));
-  vector<float> data;
+  Descriptor data;
   // save the binning for each hue and saturation value
   for( int h = 0; h < hbins; h++ ){
     for( int s = 0; s < sbins; s++ ){
@@ -68,6 +68,7 @@ Descriptor Histogram::extract_(MyImage *image,
       }
     }
   }
+  data.normalize();
   return data;
 }
 
