@@ -119,15 +119,17 @@ int main(int argc, char ** argv){
     return 0;
   }
   if(*arg == "optimize"){
+    cout << "optimizing..." << endl;
     ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
     arg++;
     if(arg == end)
-      opt.optimize();
+      opt.optimize_full_grid("","opt_result.xml");
     else {
       string original = *arg;
       arg++;
       if(arg != end){
 	string target = *arg;
+	cout << "optimizing " << original << " to target: " << target << endl;
 	arg++;
 	if(arg == end)
 	  opt.optimize_full_grid(original, target);

@@ -5,7 +5,7 @@
 <parameters>
 
 <integer>
-<clustering_means> 300 </clustering_means>
+<clustering_means> 600 </clustering_means>
 <clustering_patches> 10 </clustering_patches>
 <cross_validation_k> 10 </cross_validation_k>
 <feature_face> 0 </feature_face>

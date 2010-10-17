@@ -88,6 +88,7 @@ void ParameterOptimization::printCurrentParameters(){
 	   float_parameters[i].get_value());
 }
 
+
 void ParameterOptimization::optimize_full_grid(string file, string dest){
   if(file != "" && dest != ""){
     Parameters *pars = Parameters::getInstance();
