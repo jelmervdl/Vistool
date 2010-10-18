@@ -95,10 +95,6 @@ Image MyImage::getMagickSubImage(int x, int x_segments,
   int right = ((1 + x) / (float) x_segments) * width;
   int up = (y / (float) y_segments) * height;
   int down = ((1 + y) / (float) y_segments) * height;
-  cout << "cropping" << endl 
-       << "  widht height:" << width << " " << height << endl
-       << "  sizes: " << right - left << " " << down-up << endl
-       << "  location: " << left << " " << up << endl;
   new_mag.crop(Magick::Geometry(right - left, down - up, left, up));
   return new_mag;
 }

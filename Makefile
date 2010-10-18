@@ -116,6 +116,7 @@ opt: all $(OPTIMIZE_TARGET)
 $(OPTIMIZE_TARGET): experiments/%.xml : optimize_these/%.xml
 	@echo "optimizing $@ to $< and saving to $@.log"
 	./$(Target) optimize $< $@ > $<.log
+
 EXPERIMENTS = $(wildcard experiments/*.xml)
 RESULTS = $(EXPERIMENTS:.xml=.log)
 
@@ -125,3 +126,13 @@ exp: all $(RESULTS)
 
 $(RESULTS): %.log: %.xml
 	./$(Target) experiment svm abdullah2010 1000 -p $< > $@
+
+CLUSTER_THESE = $(wildcard cluster_these/*.xml)
+CLUST_OPT_TARGET = $(subst cluster_these,cluster_opt,$(CLUSTER_THESE:.xml=.clog))
+
+opt_clust: $(CLUST_OPT_TARGET)
+	@echo "$(CLUSTER_THESE) and $(CLUST_OPT_TARGET)"
+
+cluster_opt/%.clog: 
+	./$(Target) cluster -p cluster_these/$*.xml abdullah2010 $*
+	./$(Target) -C $* optimize $* > $@
