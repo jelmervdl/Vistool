@@ -10,8 +10,9 @@ Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_JNI
 
 D_loc = -D 'DESCRIPTOR_LOCATION="$(DescriptorLocation)"'
 Mpeg7_Include = -D 'MPEG7_JAVA_CLASS_LOCATION="$(MPEG7JavaClassLocation)"'
+Image_Magick_Threads = -D 'OMP_NUM_THREADS=1'
 
-Macros = $(D_loc) $(Java_Include) $(Mpeg7_Include)
+Macros = $(D_loc) $(Java_Include) $(Mpeg7_Include) $(Image_Magick_Threads)
 
 #Flags
 Cpp_Flags = -Wall -DUNIX -g $(Macros)
@@ -128,11 +129,16 @@ $(RESULTS): %.log: %.xml
 	./$(Target) experiment svm abdullah2010 1000 -p $< > $@
 
 CLUSTER_THESE = $(wildcard cluster_these/*.xml)
-CLUST_OPT_TARGET = $(subst cluster_these,cluster_opt,$(CLUSTER_THESE:.xml=.clog))
+CLUSTER_TARGET = $(subst cluster_these,cluster_features,$(CLUSTER_THESE:.xml=.clustercenters))
+CLUSTER_OPT_TARGET = $(subst cluster_these,cluster_opt,$(CLUSTER_THESE:.xml=.clog))
 
-opt_clust: $(CLUST_OPT_TARGET)
-	@echo "$(CLUSTER_THESE) and $(CLUST_OPT_TARGET)"
+opt_clust: all $(CLUSTER_TARGET) $(CLUSTER_OPT_TARGET)
 
-cluster_opt/%.clog: 
-	./$(Target) cluster -p cluster_these/$*.xml abdullah2010 $*
-	./$(Target) -C $* optimize $* > $@
+cluster: all $(CLUSTER_TARGET) 
+
+
+$(CLUSTER_TARGET): cluster_features/%.clustercenters: cluster_these/%.xml
+	./$(Target) cluster -p cluster_these/$*.xml abdullah2010 cluster_features/$*
+
+$(CLUSTER_OPT_TARGET): cluster_opt/%.clog : 
+	./$(Target) -C cluster_features/$* optimize cluster_opt/$*.xml > $@

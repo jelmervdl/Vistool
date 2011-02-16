@@ -25,7 +25,7 @@ protected:
 
 public:
   
-  KMeansClusterHistogram(const std::vector<DataPoint> &dps, 
+  KMeansClusterHistogram(const DataPointCollection &dps, 
 			 Feature *feat) : feature(feat), 
 					  parameters(Parameters::getUniqueClone()) {
     Parameters::push(parameters);
@@ -98,9 +98,6 @@ public:
     clustering::PatchExtractor patch_extractor;
 
     patch_collection image_patches;
-    std::cout << "finding mpeg7 in feature name? " 
-	      << feature->getParameterName().find("mpeg7") << std::endl;
-
 
     if(feature->getParameterName().find("mpeg7") == 0){
       std::vector<DataPoint> t_dps;
@@ -109,25 +106,9 @@ public:
     }else
       image_patches = patch_extractor.getPatches(*image, feature);
 
-    labels classification = 
-      clustering.classify_per_patch(centers, image_patches);
-
-    std::cout  << "just made a class of size: " << classification.size() << std::endl;
-    std::cout << " with content: " << std::endl;
-    for(size_t i = 0; i < classification.size(); i++)
-      std::cout << classification[i]  << " ";
-    std::cout << std::endl;
-
     const int kClasses = Parameters::getInstance()->getiParameter("clustering_means");    
     Descriptor histogram (kClasses);
-    std::cout << "the hist content: " << std::endl;
-    for(size_t i = 0; i < classification.size(); i++)
-      histogram[classification[i]]++;
-    for(size_t i = 0; i < histogram.size(); i++){
-      //histogram[i] /= (float) classification.size();
-      std::cout << i << ":" << histogram[i] << ", ";
-    }
-    std::cout << std::endl;
+    labels classification = clustering.classify_per_patch(centers, image_patches, &histogram);
 
     if(makeVisualRepresentation){
       *magick_image = *image->getMagickImage(); 
@@ -173,11 +154,8 @@ public:
 	}
       }
     }
-    std::cout << "argos 1" << std::endl;
     Parameters::pop();
-    std::cout << "2" << std::endl;
     histogram.normalize();
-    std::cout << "3" << std::endl;
     return histogram;
   }
 };

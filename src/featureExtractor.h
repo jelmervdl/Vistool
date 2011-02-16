@@ -1,6 +1,10 @@
 #ifndef FEATUREEXTRACTOR_H
 #define FEATUREEXTRACTOR_H
 
+#define OMP_NUM_THREADS 1
+
+#include <queue>
+#include "boost/thread/thread.hpp"
 #include "features.h"
 #include <sstream>
 #include "descriptorWriter.h"
@@ -19,6 +23,8 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   void                  assertDir(std::string str);
 
  public:
+
+  void                  renewDescriptors(const DataPointCollection &dps);
   // calculate the descriptors to a datapoint, if force is true the
   // descriptor is always calculated
   Descriptor            getDescriptor(const DataPoint &dps,

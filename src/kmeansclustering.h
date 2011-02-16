@@ -1,6 +1,7 @@
 #ifndef KMEANSCLUSTERING_H
 #define KMEANSCLUSTERING_H
 
+#include "descriptor.h"
 #include <math.h>
 #include <iostream>
 #include <vector>
@@ -25,7 +26,8 @@ public:
 
   // get the classification per class
   labels           classify_per_patch(const patch_collection &cluster_centers,
-				      const patch_collection &patches);
+				    const patch_collection &patches,
+				    Descriptor *histogram);
 
   // initialize means by picking a random set of patches as the
   // initial means

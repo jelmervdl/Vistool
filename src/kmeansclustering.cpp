@@ -13,6 +13,7 @@ patch_collection KMeansClustering::initialize_means(const int kmeans,
   labels means_indices;
   while ((int) means_indices.size() < kmeans){
     int rand_index = rand() % patches.size() + 1;
+    cout << "rand index = " << rand_index << endl;
     bool add = true;
     for(size_t i = 0; i < means_indices.size(); i++)
       if(means_indices[i] == rand_index)
@@ -48,7 +49,11 @@ label_collection KMeansClustering::classify_per_class(const patch_collection &cl
 }
 
 labels KMeansClustering::classify_per_patch(const patch_collection &cluster_centers,
-							      const patch_collection &patches){
+					    const patch_collection &patches,
+					    Descriptor *histogram){
+  Parameters *parameters = Parameters::getInstance();
+  const bool isSoftAssignment = 
+    parameters->getiParameter("clustering_soft_assignment") > 1;
   labels classification(patches.size());
   for(size_t i = 0; i < patches.size(); i++){
     const patch &current_patch = patches[i]; 
@@ -57,12 +62,15 @@ labels KMeansClustering::classify_per_patch(const patch_collection &cluster_cent
     for(size_t j = 0; j < cluster_centers.size(); j++){
       const patch &cluster_center = cluster_centers[j];
       const float distance = KMeansClustering::distance(current_patch, cluster_center);
+      if(isSoftAssignment)
+	histogram->at(j) += 1.0 / (distance + 0.00000001);
       if(distance < smallest_distance || smallest_distance == -1){
 	smallest_distance = distance;
 	closest_cluster = j;
       }
     }
-    classification[i] = closest_cluster;    
+    if(!isSoftAssignment)
+      histogram->at(closest_cluster) += 1.0;
   }
   return classification;
 }

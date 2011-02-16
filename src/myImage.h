@@ -42,6 +42,7 @@ size_t serial;
   Magick::Blob   *getBlob();
   cv::Mat        *getOpenCVMat();
   Matrix<float>   getGrayscaleMatrix();
+  DataPoint     getDataPoint();
 
   // get the Image Magick Image that of the pixel region of zone x/y
   // given a number of segments;

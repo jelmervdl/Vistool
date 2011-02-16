@@ -8,6 +8,7 @@
 #include "gluiGL.h"
 #include "gluiControl.h"
 #include "gluiFeatures.h"
+#include "boost/thread/thread.hpp"
 
 namespace vito{
 namespace gui{

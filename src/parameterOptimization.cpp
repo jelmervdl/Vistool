@@ -19,15 +19,8 @@ ParameterOptimization::ParameterOptimization(float (*func) ())
     best(-9999999.0), 
     fout("optimization_log.txt", std::ios_base::app){
 
-  //add_float_parameter("one_class_gamma", 0.00001, 0.9, true);
-  //add_float_parameter("one_class_nu", 0.00001, 0.9, true);
-  
-  //add_float_parameter("svm_coef0", 0.0, 30.0);  
-  //add_float_parameter("svm_eps", 0.0003, 1.5);
-  add_float_parameter("svm_gamma", -15.0, -1.0, false, true);
-  add_float_parameter("svm_C", -5.0, 15.0, false, true);
-  // add_int_parameter("svm_degree", -10, 30, true);
-  
+  add_float_parameter("svm_gamma", -20.0, -0.1, false, true);
+  add_float_parameter("svm_C", -20.0, 20.0, false, true);
   //  add_int_parameter("svm_shrinking", 0, 10);
   //add_int_parameter("svm_probabiity", -1, 1, false);
 
@@ -90,18 +83,19 @@ void ParameterOptimization::printCurrentParameters(){
 
 
 void ParameterOptimization::optimize_full_grid(string file, string dest){
-  if(file != "" && dest != ""){
+  cout << "doing full grid " << file << " " << dest << endl;
+  if(file != ""){
     Parameters *pars = Parameters::getInstance();
     pars->readFile(file);
   }
   cout << "performing full grid search" << endl;
-  const int kZooms = 3;
+  const int kZooms = 2;
   for(int current_zoom = 0; current_zoom < kZooms; current_zoom++){// iterate the zooms
     cout << "at zoom level " << current_zoom << endl;
     optimize_grid_axis(0);
     apply_to_all_parameters(zoom<int>, zoom<float>);
   }
-  if(file != "" && dest != ""){
+  if(dest != ""){
     apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
     Parameters::getInstance()->saveXML(dest);
   }

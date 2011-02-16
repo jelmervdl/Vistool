@@ -3,6 +3,7 @@
 using std::stringstream;
 using std::string;
 using std::vector;
+using std::queue;
 using std::cout;
 using std::endl;
 using cv::Mat;
@@ -22,7 +23,6 @@ using write::writeDescriptor;
   renewDescriptor(dp, force);
   Descriptor descriptor;
   readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
-  //descriptor.normalize();
   return descriptor;
 }
    
@@ -81,10 +81,14 @@ string FeatureExtractor::getCurrentDescriptorLocation(const DataPoint &dp){
   return final_descriptor_location.str();
 }
 
+
+
 void FeatureExtractor::renewDescriptor(const DataPoint &dp, const bool force){
   string final_descriptor_location = getCurrentDescriptorLocation(dp);
   if(force || !exists(path(final_descriptor_location))) {
     cout << "trying to get" << final_descriptor_location << endl;
+    cout << dp.get_image_url() << " is the url" << endl;
+    Magick::Image imer(dp.get_image_url());
     MyImage image(dp.get_image_url(), dp);
     vector<float> descriptor;
     vector<Feature*> features = getActiveFeatures();
@@ -110,7 +114,31 @@ void FeatureExtractor::getCVMatrices(vector <DataPoint*>  dps, CvMat * training,
   }
 }
 
+void FeatureExtractor::renewDescriptors(const DataPointCollection &dps){
+  const int kThreads = 1;
+  queue<boost::thread*> threads;
+
+  DataPointCollection::const_iterator it = dps.begin();
+  while(it != dps.end() && (it - dps.begin()) < kThreads){
+    threads.push(new boost::thread( &FeatureExtractor::renewDescriptor, this, *it, false));
+    it++;
+  }
+  while(it != dps.end()){
+    threads.front()->join();
+    delete threads.front();
+    threads.pop();
+    threads.push(new boost::thread( &FeatureExtractor::renewDescriptor, this, *it, false));
+    it++;
+  }
+  while(threads.size() > 0){
+    threads.front()->join();
+    delete threads.front();
+    threads.pop();
+  }
+}
+
 ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
+  renewDescriptors(dps);
   ExampleCollection examples(dps.size());
   for(size_t i = 0; i < dps.size(); ++i){
     Example current_example(getDescriptor(dps[i]));
@@ -121,6 +149,7 @@ ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
 }
 
 DescriptorCollection FeatureExtractor::getDescriptors(const DataPointCollection &dps){
+  renewDescriptors(dps);
   DescriptorCollection descriptors(dps.size());
   for(size_t i = 0; i < dps.size(); ++i){
     Descriptor current_descriptor(getDescriptor(dps[i]));

@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include "boost/thread/thread.hpp"
+
 //test environment
 #include "test.h"
 
@@ -29,6 +31,8 @@
 
 #include "clusterFeatureExtractor.h"
 
+void stack_function();
+void test_threads();
 void cluster(std::string filename);
 void printLibraries();
 void one_class_test();

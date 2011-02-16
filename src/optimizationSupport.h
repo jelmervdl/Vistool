@@ -60,8 +60,8 @@ namespace optimization{
       std::cout << "live value is now " << *live_value << std::endl;
     }
     void zoom(const float zoom_factor){
-      std::cout << "zooming" << std::endl;
-      const Type margin = (max - min) * 0.5 / zoom_factor;
+      std::cout << "zooming with factor " << zoom_factor << std::endl;
+      const Type margin = (max - min) * 0.5 / 4;
       Type best_;
       expon? best_ = log(best) : best_ = best;
       if(min < best_ - margin) 

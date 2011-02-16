@@ -4,14 +4,46 @@
 // #include <algorithm>
 // #include <iostream>
 // #include <iterator>
+#include "featureExtractor.h"
 #include "classifier.h"
 #include "feature.h"
 
 namespace vito{
 namespace features{
 
+
+class Setup{
+protected:
+  int parameters;
+  std::string previous;
+  std::string name;
+public:
+  Setup(std::string xmlfile);
+  void push();
+  void pop();
+  std::string get_name();
+};
+
+class SetupFeature : public Feature, public std::vector<Setup>{
+public:
+  SetupFeature(std::vector<Setup> setup);
+  SetupFeature();
+  virtual std::string        getParameterName();
+  virtual bool               isActive();
+  virtual Descriptor         extract_(MyImage *Image, 
+				      bool makeVisualRepresentation, 
+				      Magick::Image * representation); 
+};
+
+class NaiveStackFeatures : public std::vector<SetupFeature> , 
+			   public Singleton<NaiveStackFeatures>{
+public:
+  void add_to(std::vector<Feature*> &features);
+};
+
 /* defines the setup of a classification pipeline, naming a set of
    features and a classifier */
+
 class ClassifierSetup : public Feature{
 protected:
   classification::Classifier *classifier;

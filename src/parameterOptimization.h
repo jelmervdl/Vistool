@@ -10,9 +10,9 @@ namespace vito{
 namespace optimization{
  
 
-  const int kIterations  = 20;
-  const float kZoom = 1.2;
-  const int kResolution = 10;
+  const int kIterations  = 3;
+  const float kZoom = 2.5;
+  const int kResolution = 7;
   
   class ParameterOptimization {
   private:
@@ -59,8 +59,6 @@ namespace optimization{
     void         optimize_full_grid(std::string str = "", std::string dest = "");
     void         optimize_grid_axis(const size_t at);
   };
-
-
 
   template<class Type> void set_to_best(Parameter<Type> *parameter){
     parameter->set_to_best();

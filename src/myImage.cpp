@@ -71,6 +71,7 @@ MyImage::MyImage(string loc, DataPoint dp_) : serial(Parameters::getInstance()->
   location = loc;
   blob = 0;
   mat = 0;
+  std::cout << "making image at: " << location << std::endl;
   magick = Image(location);
   width = getMagickImage()->columns();
   height = getMagickImage()->rows();
@@ -138,6 +139,10 @@ void MyImage::save_sub_image(int x, int x_segments,
 			     string filename){
   Image magick_ = getMagickSubImage(x, x_segments, y, y_segments);
   magick_.write(filename);
+}
+
+DataPoint MyImage::getDataPoint(){
+  return dp;
 }
 
 }

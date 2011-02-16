@@ -9,7 +9,6 @@ namespace features{
 class ClusterFeatureExtractor : public Singleton<ClusterFeatureExtractor> {
 
 public:
-  typedef std::vector<DataPoint> datapoint_list;
   typedef std::vector<Feature*> feature_list;
 
 protected:
@@ -32,7 +31,8 @@ public:
     currentFeatures.push_back(histogram);
   }
 
-  std::string addClusterFeature(const datapoint_list &dps, Feature *feature){
+  std::string addClusterFeature(const DataPointCollection &dps, 
+				Feature *feature){
     Feature *new_feature = new KMeansClusterHistogram(dps, feature);
     currentFeatures.push_back(new_feature);
     return new_feature->getParameterName();

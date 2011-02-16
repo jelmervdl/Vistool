@@ -3,7 +3,9 @@
 
 #include "labels.h"
 #include "descriptor.h"
-#include "featureExtractor.h"
+#include "parameters.h"
+#include <assert.h>
+//#include "featureExtractor.h"
 
 namespace vito{
 namespace classification{

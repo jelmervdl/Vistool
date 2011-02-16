@@ -127,7 +127,7 @@ void createFeatureSelectButton(){
 
 void cluster(){
   ToolState &state = *ToolState::getInstance();
-  vector<DataPoint> enabs = state.current_db.enabledPoints();
+  DataPointCollection enabs = state.current_db.enabledPoints();
   features::ClusterFeatureExtractor *cfe = features::ClusterFeatureExtractor::getInstance();
   vector<Feature*> feature = getExistingFeatures();
   cfe->addClusterFeature(enabs, feature[state.enabled_feature]);

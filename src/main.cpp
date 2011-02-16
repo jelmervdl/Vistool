@@ -15,11 +15,13 @@ void testFaceRec(){
     "data/haarcascades/haarcascade_frontalface_alt.xml";
   string nestedCascadeName =
     "data/haarcascades/haarcascade_eye_tree_eyeglasses.xml";
-  cv::Mat im = cv::imread("../datasets/caltech101/BACKGROUND_Google/image_0197.jpg", 1);
+  cv::Mat im = 
+    cv::imread("../datasets/caltech101/BACKGROUND_Google/image_0197.jpg", 1);
   cv::CascadeClassifier cascade, nestedCascade;
   double scale = 1;
   if( !nestedCascade.load( nestedCascadeName ) )
-    cerr << "WARNING: Could not load classifier cascade for nested objects" << endl;
+    cerr << "WARNING: Could not load classifier cascade for nested objects" 
+	 << endl;
   if( !cascade.load( cascadeName ) ) {
       cerr << "ERROR: Could not load classifier cascade" << endl;
       cerr << "Usage: facedetect [--cascade=\"<cascade_path>\"]\n"
@@ -88,11 +90,14 @@ int main(int argc, char ** argv){
 	Parameters::getInstance()->readFile(value + ".xml");
 	vector<Feature*> actives = features::getActiveFeatures();
 	assert(actives.size() == 1);
-	KMeansClusterHistogram *c_feature = new KMeansClusterHistogram(value, actives[0]);
-	features::ClusterFeatureExtractor::getInstance()->addClusterFeature(c_feature);
+	KMeansClusterHistogram *c_feature =
+	  new KMeansClusterHistogram(value, actives[0]);
+	features::ClusterFeatureExtractor::getInstance()->
+	  addClusterFeature(c_feature);
 	Parameters::pop();
 	if(option_name == "C"){
-	  Parameters::getInstance()->appointFeature(c_feature->getParameterName());
+	  Parameters::getInstance()->
+	    appointFeature(c_feature->getParameterName());
 	}
       }
     }else{
@@ -106,6 +111,10 @@ int main(int argc, char ** argv){
   if(arg == end) {
     return 1;
   }
+  if(*arg == "thread_test"){
+    test_threads();
+    return 0;
+  }
   if(*arg == "face"){
     testFaceRec();
     return 0;
@@ -115,6 +124,7 @@ int main(int argc, char ** argv){
     return 0;
   }
   if(*arg == "gui"){
+    stack_function();
     start(1,argv);
     return 0;
   }
@@ -123,10 +133,16 @@ int main(int argc, char ** argv){
     ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
     arg++;
     if(arg == end)
-      opt.optimize_full_grid("","opt_result.xml");
+      opt.optimize_full_grid();
     else {
       string original = *arg;
       arg++;
+      if(arg == end){
+	string target = original;
+	cout << "optimizing current setup (no original) with target "
+	     << target << endl;
+	opt.optimize_full_grid("",target);
+      }
       if(arg != end){
 	string target = *arg;
 	cout << "optimizing " << original << " to target: " << target << endl;
@@ -141,6 +157,13 @@ int main(int argc, char ** argv){
     ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
     opt.optimize_full_grid();
     return 0;
+  }
+  if(*arg == "stack"){
+    arg++;
+    if(arg == end){
+      stack_function();
+      return 0;
+    }
   }
   if(*arg == "experiment"){
     arg++;
@@ -294,4 +317,74 @@ void one_class_test(){
   cout << "value: " << res[0] << endl;
   }
 
+}
+
+class Aap{
+  int foo_;
+  int bar_;
+public:
+  Aap() : foo_(0) , bar_(0){}
+
+  void foo(){
+    foo_ = 0;
+    for(int i = 1; i < 10000; ++i){
+      foo_ += i;
+    }
+  }
+
+  void bar(){
+    bar_ = 1;
+    for(int i = 1; i < 10000; ++i){
+      bar_ += 2 * i;
+    }
+  }
+
+    void print(){
+      cout << "foo: " << foo_ << endl;
+      cout << "bar: " << bar_ << endl;
+    }
+};
+
+void test_threads(){
+  Aap aap;
+  boost::thread thread_1( &Aap::foo, &aap);
+  aap.print();
+  boost::thread thread_2( &Aap::bar, &aap);
+  aap.print();
+  aap.print();
+  aap.print();
+  thread_2.join();
+  aap.print();
+  aap.print();
+  aap.print();
+  thread_1.join();
+  aap.print();
+}
+
+void stack_function(){
+  /*
+  SVMClassifier svm;
+  SetupFeature setups;
+  setups.push_back(Setup("experiments/basic_sift_L0.5.xml"));
+  setups.push_back(Setup("experiments/basic_sift_L2.xml"));
+  Dataset dataset ("../datasets/caltech101/");
+  dataset.enableCategory("airplanes");
+  dataset.enableCategory("camera");
+  dataset.enableCategory("car_side");
+  dataset.enableCategory("cellphone");
+  dataset.enableCategory("cup");
+  dataset.enableCategory("helicopter");
+  dataset.enableCategory("Motorbikes");
+  dataset.enableCategory("scissors");
+  dataset.enableCategory("umbrella");
+  dataset.enableCategory("watch");
+  */
+  SetupFeature setup_feature;
+  setup_feature.push_back(Setup("experiments/basic_sift_L2.xml"));
+  //setup_feature.push_back(Setup("experiments/basic_sift_L0.5.xml"));
+  Parameters::getInstance()->appointFeature(setup_feature.getParameterName());
+  NaiveStackFeatures::getInstance()->push_back(setup_feature);
+  
+  //
+  //FeatureSetup b((Classifier *) &svm, "experiments/basic_sift_L2.xml");
 }

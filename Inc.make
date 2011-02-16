@@ -19,4 +19,3 @@ Target = machineVisionTool
 DescriptorLocation = desc/
 
 MPEG7JavaClassLocation = ../mpg7/bin
-

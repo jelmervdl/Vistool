@@ -25,7 +25,6 @@ Descriptor SiftDescriptor::extract_(MyImage *my_image,
   Descriptor descriptor;
   Parameters * parameters = Parameters::getInstance();
   const int kBlurWindow = parameters->getiParameter("sift_blur_window");
-  my_image->getMagickImage()->write("aapie.jpg");
   if(parameters->getiParameter("sift_blur_toggle") > 0)
     my_image->getMagickImage()->blur(kBlurWindow, kBlurWindow / 3.0);
   Matrix<float> grayscale = my_image->getGrayscaleMatrix();
@@ -90,17 +89,19 @@ void SiftDescriptor::drawKeyPoint(Image &draw_me, const int &orientations,
 				  const sift::KeyPoint &keypoint, 
 				  Descriptor orig_descriptor, 
 				  const int &window){
-  orig_descriptor.normalize();
+  //orig_descriptor.normalize();
   Parameters *params = Parameters::getInstance();
   const int kHistograms = params->getiParameter("sift_histograms_per_keypoint");
   const int kDescriptors = orig_descriptor.size() / orientations;
   assert(kHistograms * kHistograms == kDescriptors);
   int sub_window_size = (window * 2) / kHistograms;
   draw_me.strokeColor("green");
+  /*
   draw_me.draw( DrawableCircle(keypoint.get_center_x(),
 			       keypoint.get_center_y(),
 			       keypoint.get_center_x() + window, 
 			       keypoint.get_center_y() ));
+  */
   int offset = (sub_window_size / 2) - window;
   for(size_t x = 0; x < (size_t) kHistograms; ++x){
     for(size_t y = 0; y < (size_t) kHistograms; ++y){
@@ -116,9 +117,9 @@ void SiftDescriptor::drawKeyPoint(Image &draw_me, const int &orientations,
       for(int ori = 0; ori < orientations; ++ori){
 	float angle = (bin_size * (ori + 1)) - (0.5 * bin_size);
 	if(params->getiParameter("sift_phase_shift_ori_bins"))
-	   angle -= (1.0 / orientations) * PI;
-	int end_x = origin_x + descriptor.at(ori) * window * sin(angle);
-	int end_y = origin_y - descriptor.at(ori) * window * cos(angle);
+	  angle -= (1.0 / orientations) * PI;
+	int end_x = origin_x + descriptor.at(ori) * window * 65  * sin(angle);
+	int end_y = origin_y - descriptor.at(ori) * window * 65 * cos(angle);
 	draw_me.draw( DrawableLine( origin_x, origin_y, end_x, end_y));
       }
     }
