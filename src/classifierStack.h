@@ -5,8 +5,9 @@
 // #include <iostream>
 // #include <iterator>
 #include "featureExtractor.h"
-#include "classifier.h"
 #include "feature.h"
+#include "classifier.h"
+#include "svmclassifier.h"
 
 namespace vito{
 namespace features{
@@ -44,7 +45,18 @@ public:
 /* defines the setup of a classification pipeline, naming a set of
    features and a classifier */
 
-class ClassifierSetup : public Feature{
+class SVMActivationSetup : public Setup{
+private:
+  classification::SVMClassifier svm;
+  std::string origin;
+public:
+  SVMActivationSetup(std::string setting);
+  void train(DataPointCollection dps);
+  Descriptor getActivation(DataPoint dp);
+  std::string getFile();
+};
+
+class ClassifierSetup : public Setup, public Feature{
 protected:
   classification::Classifier *classifier;
   int                         parameters;
@@ -55,17 +67,50 @@ public:
 		  std::string xmlfile);
 
 
-  void        train(const ExampleCollection &descriptors);
-  bool        isActive();
-  std::string getParameterName();
-  Descriptor  extract_(MyImage *Image, 
-		       bool makevisres, 
-		       Magick::Image *representation);
+  void                train(const ExampleCollection &descriptors);
+  bool                isActive();
+  std::string         getParameterName();
+  virtual Descriptor  extract_(MyImage *Image, 
+			       bool makevisres, 
+			       Magick::Image *representation);
 };
 
+class SVMStack : public std::vector<features::SVMActivationSetup>,
+		 public Feature{
+public:
+  virtual bool isActive();
+  virtual std::string getParameterName();
+  virtual Descriptor extract_(MyImage *Image,
+			      bool makevisrep,
+			      Magick::Image rep);
+  void train(DataPointCollection dps);
+};
 }
 
 namespace classification{
+/*
+class SVMStackClassifier : public Classifier{
+ private:
+  SVMClassifier svm;
+  features::SVMStack *svmstack;
+public:
+*/
+
+//doesn't work
+class SVMStack : public std::vector<features::SVMActivationSetup>, 
+		 public Classifier{
+private:
+  ExampleCollection getStackExamples(ExampleCollection &examples);
+  SVMClassifier svm;
+public:
+  std::string          get_name();
+  void                 train(const ExampleCollection &examples);
+  Label                classify(const Descriptor &descriptor);
+  ExampleCollection    getStackExamples(const ExampleCollection &examples);
+  DescriptorCollection getStackResults(const DescriptorCollection & dc);
+  Descriptor           getStackResults(const Descriptor &descriptor);
+};
+
 
 /* defines a classifier Stack, using several ClassifierSetups to
    define the features and classification to be extracted which then

@@ -1,6 +1,7 @@
 #ifndef SEGMENTSVM_H
 #define SEGMENTSVM_H
 
+#include "matrix.h"
 #include "svmclassifier.h"
 #include <utility>
 #include <sstream>

@@ -1,6 +1,7 @@
 #ifndef DESCRIPTOR_H
 #define DESCRIPTOR_H
 
+#include "dataPoint.h"
 #include <algorithm>
 #include <vector>
 #include <map>
@@ -30,20 +31,28 @@ public:
   Example() : Descriptor() {}
   Example(size_t size) : Descriptor(size) {}
   Example(std::vector<float> values) : Descriptor(values) {}
+  Example(std::vector<float> values, int l) : Descriptor(values), label(l){}
   void set_label(const int i);
   int get_label() const;
 };
 
+
 class ExampleCollection : public std::vector<Example> {
 public:
+  const DataPointCollection dps;
   ExampleCollection() : std::vector<Example>() {}
   ExampleCollection(size_t size) : std::vector<Example>(size){}
+  /*ExampleCollection(DataPointCollection dps_) : 
+    std::vector<Example>(), dps(dps_) {}
+  ExampleCollection(size_t size, DataPointCollection dps_) :
+    std::vector<Example>(size), dps(dps_){}
+  */
   void print();
 };
 
-
 class DescriptorCollection : public std::vector<Descriptor> {
 public:
+  DescriptorCollection(){}
   DescriptorCollection(const ExampleCollection &collection){
     for(size_t i = 0; i < collection.size(); i++)
       push_back((Descriptor&) collection[i]);

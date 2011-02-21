@@ -8,8 +8,6 @@ using std::endl;
 namespace vito{
 namespace classification{
 
-using features::FeatureExtractor;
-using write::readDescriptor;
 
 
 SVMClassifier::~SVMClassifier(){
@@ -122,6 +120,22 @@ svm_parameter *SVMClassifier::getSVMParameters(){
   return newpar;
 }
 
+vector<double> SVMClassifier::getValuesPerClass(svm_node *nodes,
+						svm_model *model){
+  vector<double> values = getValues(nodes, model);
+  int index = 0;
+  const int nr_classes = svm_get_nr_class(model);
+  vector<double> value_per_class(nr_classes);
+  for(int i = 0; i < nr_classes; ++i)
+    for(int j = i + 1; j < nr_classes; ++j){
+      //cout << "waarde van value_ " << values[index] << endl;
+      value_per_class[i] += values[index];
+      value_per_class[j] -= values[index];
+      index++;
+    }
+  return value_per_class;
+}
+
 vector<double> SVMClassifier::getValues(svm_node *nodes,
 					svm_model *model){
   const int nr_classes = svm_get_nr_class(model);
@@ -130,17 +144,11 @@ vector<double> SVMClassifier::getValues(svm_node *nodes,
   for(int i = 0; i < nr_values; ++i)
     values[i] = 0.0;
   svm_predict_values(model, nodes, values);
-  vector<double> value_per_class(nr_classes);
-  int index = 0;
-  for(int i = 0; i < nr_classes; ++i)
-    for(int j = i + 1; j < nr_classes; ++j){
-      //cout << "waarde van value_ " << values[index] << endl;
-      value_per_class[i] += values[index];
-      value_per_class[j] -= values[index];
-      index++;
-    }
+  vector<double> values_vector;
+  for(int i = 0; i < nr_values; ++i)
+    values_vector.push_back(values[i]);
   delete values;
-  return value_per_class;
+  return values_vector;
 }
 
 svm_node* SVMClassifier::constructNode(const Descriptor &descriptor){
@@ -157,6 +165,13 @@ svm_node* SVMClassifier::constructNode(const Descriptor &descriptor){
 
 int SVMClassifier::classify(const Descriptor &descriptor){
   return classify(descriptor, model);
+}
+
+ std::vector<double> SVMClassifier::getValues(const Descriptor &descriptor){
+  svm_node *nodes = constructNode(descriptor);
+  vector<double> values = getValues(nodes, model);
+  delete [] nodes;
+  return values;
 }
 
 int SVMClassifier::classify(const Descriptor &descriptor, svm_model *model){

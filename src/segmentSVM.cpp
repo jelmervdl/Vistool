@@ -1,4 +1,6 @@
+#include "featureExtractor.h"
 #include "segmentSVM.h"
+#include "descriptorWriter.h"
 
 using std::string;
 using std::stringstream;

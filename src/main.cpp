@@ -129,6 +129,7 @@ int main(int argc, char ** argv){
     return 0;
   }
   if(*arg == "optimize"){
+    stack_function();
     cout << "optimizing..." << endl;
     ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
     arg++;
@@ -174,6 +175,7 @@ int main(int argc, char ** argv){
     string type = *arg;
     arg++;
     if(arg == end){
+      //stack_function();
       experiment::performExperiment(type);
       return 0;
     }
@@ -380,11 +382,22 @@ void stack_function(){
   dataset.enableCategory("watch");
   */
   SetupFeature setup_feature;
+
   setup_feature.push_back(Setup("experiments/basic_sift_L2.xml"));
-  //setup_feature.push_back(Setup("experiments/basic_sift_L0.5.xml"));
+  setup_feature.push_back(Setup("experiments/basic_sift_L1.xml"));
+  setup_feature.push_back(Setup("experiments/basic_sift_L0.xml"));
   Parameters::getInstance()->appointFeature(setup_feature.getParameterName());
   NaiveStackFeatures::getInstance()->push_back(setup_feature);
-  
+
+
+  // gets: mean: 0.867692 +- 0.0235648
+  //setup_feature.push_back(Setup("experiments/basic_sift_L1.xml"));
+  //setup_feature.push_back(Setup("experiments/basic_sift_L0.xml"));
+  //Parameters::getInstance()->saveReal("svm_gamma", 0.007562);
+  //Parameters::getInstance()->saveReal("svm_C", 2.405164);
   //
   //FeatureSetup b((Classifier *) &svm, "experiments/basic_sift_L2.xml");
 }
+
+//void stack_svm(){
+

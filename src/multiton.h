@@ -51,6 +51,7 @@ public:
 
   static void setUnique(int i){
     current = unique_instances[i];
+    current_name = "unique" + i;
   }
 
   static Type *getInstance(){

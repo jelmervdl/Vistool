@@ -15,15 +15,18 @@ using features::Feature;
 
 namespace features {
 
-ClassifierSetup::ClassifierSetup(Classifier *c, string xmlfile) : classifier(c){
+ClassifierSetup::ClassifierSetup(Classifier *c, string xmlfile) : 
+  Setup(xmlfile), classifier(c){
   string old_name = Parameters::get_current_name();
   parameters = Parameters::getUnique();
   Parameters::setUnique(parameters);
+  Parameters::getInstance()->readFile("parameters.xml");
   Parameters::getInstance()->readFile(xmlfile.c_str());
   Parameters::select(old_name);
 }
 
-ClassifierSetup::ClassifierSetup( Classifier *c) : classifier(c){
+ClassifierSetup::ClassifierSetup( Classifier *c) : 
+  Setup("parameters.xml"), classifier(c){
   string old_name = Parameters::get_current_name();
   parameters = Parameters::getUnique();
   Parameters::setUnique(parameters);
@@ -49,6 +52,8 @@ Setup::Setup(std::string xmlfile) : name(xmlfile){
   string old_name = Parameters::get_current_name();
   parameters = Parameters::getUnique();
   Parameters::setUnique(parameters);
+  Parameters::getInstance()->readFile(xmlfile);
+  Parameters::getInstance()->readFile("parameters.xml");
   Parameters::getInstance()->readFile(xmlfile);
   Parameters::select(old_name);
   previous = "0";
@@ -101,6 +106,8 @@ Descriptor SetupFeature::extract_(MyImage *Image,
   cout << "there are " << size() << "features to combine.." << endl;
   for(su_it i = begin(); i != end(); ++i){
     i->push();
+    cout << "current parameter list comes from"
+	 << Parameters::getInstance()->getFile() << endl; 
     Descriptor additive = fe->getDescriptor(Image->getDataPoint());
     cout << "adding additive of size " << additive.size() << endl;
     ret = ret + additive;
@@ -115,15 +122,14 @@ Descriptor SetupFeature::extract_(MyImage *Image,
 Descriptor ClassifierSetup::extract_(MyImage *image, 
 				     bool makevisres, 
 				     Image *representation){
-  string previous_parameters = Parameters::get_current_name();
-  Parameters::setUnique(parameters);
   FeatureExtractor *fe = FeatureExtractor::getInstance();
+  push();
   Descriptor des = fe->getDescriptor(image->getDataPoint());
   int result =  classifier->classify(des);
-  Parameters::select(previous_parameters);
-  Descriptor desc(1);
-  desc[0] = (float) result;
-  return desc;
+  pop();
+  Descriptor ret(1);
+  ret[0] = (float) result;
+  return ret;
 }
 
 string ClassifierSetup::getParameterName(){
@@ -144,10 +150,107 @@ void NaiveStackFeatures::add_to(std::vector<Feature*> &features){
     features.push_back((Feature *) &(*i));
 }
 
+SVMActivationSetup::SVMActivationSetup(std::string setting) : 
+  Setup(setting){}
 
+std::string SVMActivationSetup::getFile(){
+  return origin;
+}
+
+void SVMActivationSetup::train(DataPointCollection dps){
+  push();
+  ExampleCollection examples =
+    FeatureExtractor::getInstance()->getExamples(dps);
+  svm.train(examples);
+  pop();
+}
+
+Descriptor SVMActivationSetup::getActivation(DataPoint dp){
+  vector<double> dubs =
+    svm.getValues(FeatureExtractor::getInstance()->getDescriptor(dp));
+  Descriptor desc;
+  for(vector<double>::iterator i = dubs.begin(); i != dubs.end(); ++i)
+    desc.push_back(*i);
+  return desc;
+}
+
+bool SVMStack::isActive(){
+  return Parameters::getInstance()->getiParameter("feature_" +
+						  getParameterName()) > 0;
+}
+
+std::string SVMStack::getParameterName(){
+  stringstream name;
+  name << "svmstack_of";
+  for(SVMStack::iterator i = begin(); i != end(); ++i)
+    name << i->getFile() << "_";
+  return name.str();
+}
+
+Descriptor SVMStack::extract_(MyImage *image, 
+			      bool makevisrep,
+			      Magick::Image rep){
+  Descriptor desc;
+  for(SVMStack::iterator i = begin(); i != end(); ++i)
+    desc = desc + i->getActivation(image->getDataPoint());
+  return desc;
+}  
+
+void SVMStack::train(DataPointCollection dps){
+  for(SVMStack::iterator i = begin(); i != end(); ++i)
+    i->train(dps);
+}
 } // features
 
 namespace classification {
+
+std::string SVMStack::get_name(){
+  std::stringstream ss;
+  ss << "svm_stack";
+  for(SVMStack::iterator i = begin(); i != end(); ++i)
+    ss << "_" << i->getFile();
+  return ss.str();
+}
+
+void SVMStack::train(const ExampleCollection &examples){
+  //for(SVMStack::iterator i = begin(); i != end(); ++i)
+    //i->train(examples);
+  svm.train(getStackExamples(examples));
+}
+
+Label SVMStack::classify(const Descriptor &descriptor){
+  return svm.classify(getStackResults(descriptor));
+}
+
+ExampleCollection SVMStack::getStackExamples(const ExampleCollection &examples){
+  ExampleCollection stack_examples;
+  DescriptorCollection stack_result = 
+    getStackResults(DescriptorCollection(examples));
+
+  assert(examples.size() == stack_result.size());
+
+  DescriptorCollection::iterator d;
+  ExampleCollection::const_iterator e;
+  for( d =stack_result.begin(),	e = examples.begin();
+      d != stack_result.end() && e != examples.end();
+      ++e, ++d)
+    stack_examples.push_back(Example(*d, e->get_label()));
+  return stack_examples;
+}
+
+DescriptorCollection SVMStack::getStackResults(const DescriptorCollection & dc){
+  DescriptorCollection collection;
+  for(DescriptorCollection::const_iterator i = dc.begin(); i != dc.end(); ++i)
+    collection.push_back(getStackResults(*i));
+  return collection;
+}
+
+ Descriptor SVMStack::getStackResults(const Descriptor &descriptor){
+  Descriptor stack_result;
+  //for(SVMStack::iterator i = begin(); i != end(); ++i)
+  //stack_result = stack_result + i->getActivation(descriptor);
+  return descriptor;
+ }
 
 
 ClassifierStack::ClassifierStack(vector<features::ClassifierSetup> s) : 

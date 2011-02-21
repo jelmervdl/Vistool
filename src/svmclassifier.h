@@ -1,12 +1,13 @@
 #ifndef SVMCLASSIFIER_H
 #define SVMCLASSIFIER_H
 
+#include "datapoint.h"
+//#include "featureExtractor.h"
 #include "classifier.h"
 #include "svm.h"
 
 namespace vito{
 namespace classification{
-
 
 void svm_destroy_problem(svm_problem *problem);
 
@@ -39,11 +40,13 @@ class SVMClassifier : public Classifier {
   // get the return values
   virtual  std::vector<double> getValues(svm_node *nodes, 
 					 svm_model *model);
-
-}; 
-
+  virtual std::vector<double>  getValues(const Descriptor &descriptor);
+  std::vector<double>          getValuesPerClass(svm_node *nodes,
+						 svm_model *model);
+};
 class SVMClassifier_ : public SVMClassifier, public Singleton<SVMClassifier>{};
 
-}}
+}
+}
 
 #endif
