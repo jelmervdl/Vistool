@@ -26,7 +26,7 @@ ParameterOptimization::ParameterOptimization(float (*func) ())
 
   //add_int_parameter("sift_blur_window", 0, 6, true);
   //add_int_parameter("sift_orientation_directions", 2, 40, true);
-
+  tests_to_run = 144;//2 * pow(kResolution, float_parameters.size() + int_parameters.size());
 }
 
 void ParameterOptimization::add_int_parameter(string name, 
@@ -84,11 +84,13 @@ void ParameterOptimization::printCurrentParameters(){
 
 void ParameterOptimization::optimize_full_grid(string file, string dest){
   cout << "doing full grid " << file << " " << dest << endl;
+  progress = 0;
   if(file != ""){
     Parameters *pars = Parameters::getInstance();
     pars->readFile(file);
   }
   cout << "performing full grid search" << endl;
+  started_at = time(NULL);
   const int kZooms = 2;
   for(int current_zoom = 0; current_zoom < kZooms; current_zoom++){// iterate the zooms
     cout << "at zoom level " << current_zoom << endl;
@@ -99,6 +101,17 @@ void ParameterOptimization::optimize_full_grid(string file, string dest){
     apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
     Parameters::getInstance()->saveXML(dest);
   }
+}
+
+void ParameterOptimization::report_progress(){
+  progress++;
+  cout << "progress: " << progress << "/" << tests_to_run << " " 
+       << ((time(NULL) - started_at) / 	   60.0 / (float) progress) *
+    (float) (tests_to_run - progress)
+       << " minutes to go" 
+       << " time elapsed: " 
+       << (time(NULL) - started_at) / 60.0 << " minutes"
+       << endl; 
 }
 
 void ParameterOptimization::optimize_grid_axis(const size_t at){
@@ -168,6 +181,7 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter,
       printCurrentParameters();
       std::cout << ".. now .." << std::endl << std::endl;
       float result = evaluation_function();
+      report_progress();
       std::cout << "just tested with: " << std::endl;
       printCurrentParameters();
       std::cout << "and that's a fact" << std::endl;
@@ -212,6 +226,7 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter,
       printCurrentParameters();
       std::cout << ".. now .." << std::endl << std::endl;
       float result = evaluation_function();
+      report_progress();
       std::cout << "just tested with: " << std::endl;
       printCurrentParameters();
       std::cout << "and that's a fact" << std::endl;

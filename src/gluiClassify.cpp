@@ -24,6 +24,7 @@ void train(){
   state.current_classifier = getExistingClassifier(state.enabled_classifier);
   cout << "number of train data points: " 
        << state.train_data.size() << endl;
+  cout << "Getting examples for glui classifier" << endl;
   ExampleCollection examples = 
     features::FeatureExtractor::getInstance()->getExamples(state.train_data);
   cout << "training points:" << endl;
@@ -47,10 +48,7 @@ void classify(){
   ToolState &state = *ToolState::getInstance();
   if(state.current_classifier == NULL)
     train();
-  ExampleCollection examples = 
-    features::FeatureExtractor::getInstance()->getExamples(state.test_data);
   cout << "test points:" << endl;
-  examples.print();
   DescriptorCollection descriptors =
     features::FeatureExtractor::getInstance()->getDescriptors(state.test_data);
   state.test_result = state.current_classifier->classify(descriptors);

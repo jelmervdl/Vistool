@@ -16,6 +16,7 @@ namespace features{
 
 std::vector<Feature*> getExistingFeatures();
 std::vector<Feature*> getActiveFeatures();
+void                  printActiveFeatures();
 
 }
 }

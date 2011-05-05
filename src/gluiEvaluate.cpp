@@ -30,6 +30,7 @@ void crossValidate(){
   random_shuffle(enabsp.begin(), enabsp.end());
   state.train_data = enabsp;
   state.test_data = enabsp;
+  cout << "getting Examples for crossvalidation" << endl;
   ExampleCollection examples =
     features::FeatureExtractor::getInstance()->getExamples(state.train_data);
   state.test_result = state.current_classifier->crossvalidation(examples);

@@ -21,6 +21,7 @@ class Feature{
   //returns whether the feature is currently active or not
   virtual bool               isActive() = 0;
 
+  virtual void train (DataPointCollection dps){return;};
 
   //actually extracts the descriptor
   virtual Descriptor         extract_(MyImage *Image, 

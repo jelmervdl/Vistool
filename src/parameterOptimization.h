@@ -13,10 +13,14 @@ namespace optimization{
   const int kIterations  = 3;
   const float kZoom = 2.5;
   const int kResolution = 7;
+
   
   class ParameterOptimization {
   private:
     //evaluation function used to evaluate the parameters
+    int progress;
+    int tests_to_run;
+    time_t started_at;
     float                        (*evaluation_function) ();
     float                          best;
     std::ofstream fout;
@@ -25,6 +29,8 @@ namespace optimization{
     std::vector<Parameter<float> > float_parameters;
 
     // add a parameters to optimize
+    void report_progress();
+
     void         add_int_parameter(std::string name, 
 				   const int min, 
 				   const int max,

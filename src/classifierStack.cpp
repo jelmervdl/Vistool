@@ -68,12 +68,18 @@ void Setup::push(){
     Parameters::select(previous);
   previous = Parameters::get_current_name();
   Parameters::setUnique(parameters);
+  std::cout << "push going out of "
+	    << previous
+	    << " and into parameters: " << parameters << std::endl;
   return;
 }
 
 void Setup::pop(){
   if(previous != "0")
     Parameters::select(previous);
+  std::cout << "pop going out of "
+	    << parameters
+	    << " and into parameters: " << previous << std::endl;
   previous = "0";
 }
 
@@ -84,11 +90,14 @@ SetupFeature::SetupFeature(std::vector<Setup> setups)
 
 std::string SetupFeature::getParameterName(){
   typedef std::vector<Setup>::iterator setup_it;
-  std::stringstream ss;
-  ss << "naive_combining";
-  for(setup_it i = begin(); i != end(); ++i)
-    ss << i->get_name();
-  return ss.str();
+  std::stringstream name;
+  name << "naive_combining";
+  for(setup_it i = begin(); i != end(); ++i){
+    string adress = i->get_name();
+    string filename = adress.substr(adress.rfind('/') + 1, adress.size());
+    name << filename;
+  }
+  return name.str();
 }
 
 bool SetupFeature::isActive(){
@@ -150,8 +159,15 @@ void NaiveStackFeatures::add_to(std::vector<Feature*> &features){
     features.push_back((Feature *) &(*i));
 }
 
+void SVMStackFeatures::add_to(std::vector<Feature*> &features){
+  typedef std::vector<SVMStack>::iterator sf_it;
+  for(sf_it i = begin(); i != end(); ++i)
+    features.push_back((Feature *) &(*i));
+}
+
+
 SVMActivationSetup::SVMActivationSetup(std::string setting) : 
-  Setup(setting){}
+  Setup(setting), origin(setting){}
 
 std::string SVMActivationSetup::getFile(){
   return origin;
@@ -159,6 +175,7 @@ std::string SVMActivationSetup::getFile(){
 
 void SVMActivationSetup::train(DataPointCollection dps){
   push();
+  std::cout << "getting examples for an svm within the stack" << std::endl;
   ExampleCollection examples =
     FeatureExtractor::getInstance()->getExamples(dps);
   svm.train(examples);
@@ -166,11 +183,13 @@ void SVMActivationSetup::train(DataPointCollection dps){
 }
 
 Descriptor SVMActivationSetup::getActivation(DataPoint dp){
+  push();
   vector<double> dubs =
     svm.getValues(FeatureExtractor::getInstance()->getDescriptor(dp));
   Descriptor desc;
   for(vector<double>::iterator i = dubs.begin(); i != dubs.end(); ++i)
     desc.push_back(*i);
+  pop();
   return desc;
 }
 
@@ -182,14 +201,17 @@ bool SVMStack::isActive(){
 std::string SVMStack::getParameterName(){
   stringstream name;
   name << "svmstack_of";
-  for(SVMStack::iterator i = begin(); i != end(); ++i)
-    name << i->getFile() << "_";
+  for(SVMStack::iterator i = begin(); i != end(); ++i){
+    string adress = i->getFile();
+    string filename = adress.substr(adress.rfind('/') + 1, adress.size());
+    name << filename;
+  }
   return name.str();
 }
 
 Descriptor SVMStack::extract_(MyImage *image, 
 			      bool makevisrep,
-			      Magick::Image rep){
+			      Magick::Image *rep){
   Descriptor desc;
   for(SVMStack::iterator i = begin(); i != end(); ++i)
     desc = desc + i->getActivation(image->getDataPoint());
@@ -197,13 +219,17 @@ Descriptor SVMStack::extract_(MyImage *image,
 }  
 
 void SVMStack::train(DataPointCollection dps){
-  for(SVMStack::iterator i = begin(); i != end(); ++i)
+  std::cout << "training svm stack!" << endl;
+  for(SVMStack::iterator i = begin(); i != end(); ++i){
+    std::cout << "number " << i - begin() << " is up " << std::endl;
     i->train(dps);
+    std::cout << "done:" << endl;
+  }
 }
 } // features
 
 namespace classification {
-
+/*
 std::string SVMStack::get_name(){
   std::stringstream ss;
   ss << "svm_stack";
@@ -251,7 +277,7 @@ DescriptorCollection SVMStack::getStackResults(const DescriptorCollection & dc){
   //stack_result = stack_result + i->getActivation(descriptor);
   return descriptor;
  }
-
+*/
 
 ClassifierStack::ClassifierStack(vector<features::ClassifierSetup> s) : 
   setups(s){

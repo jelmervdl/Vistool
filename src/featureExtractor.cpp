@@ -86,17 +86,15 @@ string FeatureExtractor::getCurrentDescriptorLocation(const DataPoint &dp){
 void FeatureExtractor::renewDescriptor(const DataPoint &dp, const bool force){
   string final_descriptor_location = getCurrentDescriptorLocation(dp);
   if(force || !exists(path(final_descriptor_location))) {
-    cout << "trying to get" << final_descriptor_location << endl;
-    cout << dp.get_image_url() << " is the url" << endl;
     Magick::Image imer(dp.get_image_url());
     MyImage image(dp.get_image_url(), dp);
     vector<float> descriptor;
     vector<Feature*> features = getActiveFeatures();
+    //printActiveFeatures();
     for(int i = 0; i < (int) features.size(); ++i){
       features[i]->extractTo(&descriptor, &image);
     }
     writeDescriptor(&descriptor,final_descriptor_location);
-    cout << "renewing descriptor for " << dp.get_image_url() << endl;
   } 
 }
 
@@ -117,7 +115,11 @@ void FeatureExtractor::getCVMatrices(vector <DataPoint*>  dps, CvMat * training,
 void FeatureExtractor::renewDescriptors(const DataPointCollection &dps){
   const int kThreads = 1;
   queue<boost::thread*> threads;
-
+  typedef DataPointCollection::const_iterator dp_it;
+  for(dp_it i = dps.begin(); i!= dps.end(); ++i){
+    renewDescriptor(*i, false); 
+  }
+  /*
   DataPointCollection::const_iterator it = dps.begin();
   while(it != dps.end() && (it - dps.begin()) < kThreads){
     threads.push(new boost::thread( &FeatureExtractor::renewDescriptor, this, *it, false));
@@ -135,9 +137,16 @@ void FeatureExtractor::renewDescriptors(const DataPointCollection &dps){
     delete threads.front();
     threads.pop();
   }
+  */
 }
 
 ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
+  {
+    vector<Feature*> features = getActiveFeatures();
+    typedef vector<Feature*>::iterator fe_it;
+    for(fe_it i = features.begin(); i != features.end(); ++i)
+      (*i)->train(dps);
+  }
   renewDescriptors(dps);
   ExampleCollection examples(dps.size());
   for(size_t i = 0; i < dps.size(); ++i){

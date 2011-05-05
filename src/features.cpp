@@ -1,6 +1,8 @@
 #include "features.h"
 
 using std::vector;
+using std::cout;
+using std::endl;
 
 namespace vito{
 namespace features{
@@ -23,7 +25,7 @@ vector<Feature*> getExistingFeatures(){
   for(size_t i = 0; i < clust_feats.size(); i++)
     features.push_back(clust_feats[i]);
   NaiveStackFeatures::getInstance()->add_to(features);
-
+  SVMStackFeatures::getInstance()->add_to(features);
   return features;
 }
 
@@ -34,12 +36,16 @@ vector<Feature*> getActiveFeatures(){
     if(features[i]->isActive())
       active_features.push_back(features[i]);
   }
-  for(vector<Feature*>::iterator i = active_features.begin();
-      i != active_features.end(); ++i)
-    std::cout << "activated feature: " << (*i)->getParameterName() << std::endl;
   return active_features;
 }
 
-
+void printActiveFeatures(){
+  vector<Feature*> actives = getActiveFeatures();
+  cout << "printing active features:" << endl;
+  typedef vector<Feature*>::iterator feat_it;
+  for(feat_it i = actives.begin(); i != actives.end(); ++i)
+    cout << "active feature n." << i - actives.begin()
+	 << "=" << (*i)->getParameterName() << endl;
+}
 }
 }

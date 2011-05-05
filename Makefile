@@ -142,3 +142,55 @@ $(CLUSTER_TARGET): cluster_features/%.clustercenters: cluster_these/%.xml
 
 $(CLUSTER_OPT_TARGET): cluster_opt/%.clog : 
 	./$(Target) -C cluster_features/$* optimize cluster_opt/$*.xml > $@
+
+SETTINGS = $(wildcard exp/settings/*.xml)
+
+KNN = $(addsuffix .log, $(addprefix exp/knn/, $(basename $(notdir $(SETTINGS)))))
+SVM_OPT = $(addsuffix .xml, $(addprefix exp/svm_optimized/, $(basename $(notdir $(SETTINGS)))))
+#SVM = $(addsuffix .log, $(addprefix exp/svm/, $(basename $(notdir $(SETTINGS)))))
+COMBINE = $(shell ls exp/combine/)
+NAIVE_KNN = $(addsuffix .log, $(addprefix exp/naive/knn/, $(COMBINE)))
+NAIVE_SVM = $(addsuffix .log, $(addprefix exp/naive/svm/, $(COMBINE)))
+SVM_STACK = $(addsuffix .log, $(addprefix exp/svmstack/, $(COMBINE)))
+
+knn: all $(KNN)
+	@echo "knn experiments done"
+
+svm_opt: all $(SVM_OPT)
+
+svm_exp: all $(SVM)
+
+naive: all $(NAIVE_KNN)
+
+naive_svm: all $(NAIVE_SVM)
+
+svm_stack: all $(SVM_STACK)
+
+
+$(SVM_STACK): exp/svmstack/%.log : exp/combine/%
+	@echo "SVM experiments on $*:"
+	./$(Target) -svmstack exp/combine/$* optimize exp/svmstack/optimized/$*.xml > $@
+	./$(Target) -svmstack exp/combine/$* -p exp/svmstack/optimized/$*.xml experiment svm abdullah2010 1000 >> $@	
+
+$(NAIVE_SVM): exp/naive/svm/%.log : exp/combine/%
+	@echo "SVM experiments on $*:"
+	./$(Target) -naive exp/combine/$* optimize exp/naive/optimized/$*.xml > $@
+	./$(Target) -naive exp/combine/$* -p exp/naive/optimized/$*.xml experiment svm abdullah2010 1000 >> $@	
+
+$(NAIVE_KNN): exp/naive/knn/%.log : exp/combine/%
+	@echo "Naive combo knn experiments on $*"
+	./$(Target) -naive exp/combine/$* experiment nn abdullah2010 1000 > $@
+
+$(KNN): exp/knn/%.log : exp/settings/%.xml
+	@echo "KNN experiments on $*:"
+	./$(Target) -p $< experiment nn abdullah2010 1000 > $@
+
+$(SVM): exp/svm/%.log : exp/svm_optimized/%.xml
+	@echo "SVM experiments on $*:"
+	./$(Target) -p $< experiment svm abdullah2010 1000 > $@
+
+$(SVM_OPT): exp/svm_optimized/%.xml : exp/settings/%.xml
+	@echo "optimizing $@ to $< and saving to $@.log"
+	./$(Target) optimize $< $@ > $<.log
+
+

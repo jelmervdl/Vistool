@@ -47,6 +47,7 @@ void testClassifierStack(){
   ClassifierStack classifier_stacker(to_stack);
   FeatureExtractor *fe = FeatureExtractor::getInstance();
   {
+    cout << "getting examples to train the stack " <<endl;
     ExampleCollection examples = fe->getExamples(train);
     classifier_stacker.train(examples);
   }
@@ -100,6 +101,34 @@ int main(int argc, char ** argv){
 	    appointFeature(c_feature->getParameterName());
 	}
       }
+      if(option_name == "naive"){
+	cout << "creating naive feature..." << endl;
+	vector<string> files = getFiles(value, ".xml");
+	SetupFeature  naiveStack;
+	cout << "adding setup files: ";
+	typedef vector<string>::iterator strit;
+	for(strit i = files.begin(); i != files.end(); ++i){
+	  naiveStack.push_back(Setup(*i));
+	  cout << " " << *i << " ";
+	}
+	cout << endl;
+	Parameters::getInstance()->appointFeature(naiveStack.getParameterName());
+	NaiveStackFeatures::getInstance()->push_back(naiveStack);
+      }
+      if(option_name == "svmstack"){
+	cout << "creating naive feature..." << endl;
+	vector<string> files = getFiles(value, ".xml");
+	features::SVMStack svmStack;
+	cout << "adding setup files: ";
+	typedef vector<string>::iterator strit;
+	for(strit i = files.begin(); i != files.end(); ++i){
+	  svmStack.push_back(SVMActivationSetup(*i));
+	  cout << " " << *i << " ";
+	}
+	cout << endl;
+	Parameters::getInstance()->appointFeature(svmStack.getParameterName());
+	SVMStackFeatures::getInstance()->push_back(svmStack);
+      }
     }else{
       arguments.push_back(argv[i]);
     }
@@ -124,12 +153,13 @@ int main(int argc, char ** argv){
     return 0;
   }
   if(*arg == "gui"){
-    stack_function();
+    //stack_function();
+    //stack_svm();
     start(1,argv);
     return 0;
   }
   if(*arg == "optimize"){
-    stack_function();
+    //stack_function();
     cout << "optimizing..." << endl;
     ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
     arg++;
@@ -155,6 +185,7 @@ int main(int argc, char ** argv){
     return 0;
   }
   if(*arg == "fulloptimize"){
+    //stack_svm();
     ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
     opt.optimize_full_grid();
     return 0;
@@ -383,9 +414,9 @@ void stack_function(){
   */
   SetupFeature setup_feature;
 
-  setup_feature.push_back(Setup("experiments/basic_sift_L2.xml"));
-  setup_feature.push_back(Setup("experiments/basic_sift_L1.xml"));
-  setup_feature.push_back(Setup("experiments/basic_sift_L0.xml"));
+  //setup_feature.push_back(Setup("experiments/basic_sift_L2.xml"));
+  setup_feature.push_back(Setup("experiments/sift_L1_4oris.xml"));
+  setup_feature.push_back(Setup("experiments/sift_L1_4oris_phase_shift.xml"));
   Parameters::getInstance()->appointFeature(setup_feature.getParameterName());
   NaiveStackFeatures::getInstance()->push_back(setup_feature);
 
@@ -399,5 +430,40 @@ void stack_function(){
   //FeatureSetup b((Classifier *) &svm, "experiments/basic_sift_L2.xml");
 }
 
-//void stack_svm(){
+void stack_svm(){
+  Dataset abdul = experiment::abdullah2010();
+  vector<Dataset> sets = abdul.split();
+  DataPointCollection train = sets[0].enabledPoints();
+  DataPointCollection test = sets[1].enabledPoints();
+  features::SVMStack stack;
+  {
+    using features::SVMActivationSetup;
+    stack.push_back(SVMActivationSetup("experiments/basic_sift_L0.xml"));
+    stack.push_back(SVMActivationSetup("experiments/basic_sift_L1.xml"));
+    stack.push_back(SVMActivationSetup("experiments/basic_sift_L2.xml"));
+  }
+  Parameters::getInstance()->appointFeature(stack.getParameterName());
+  SVMStackFeatures::getInstance()->push_back(stack);
+  //classification::SVMClassifier svm;
+  //features::FeatureExtractor *fe = FeatureExtractor::getInstance();
+  //svm.train(fe->getExamples(train));
+  //LabelCollection labels = svm.classify(fe->getDescriptors(test));
+  //evaluation::Evaluation evaluation(test, labels);
+  //evaluation.print();
+}
 
+vector<string> getFiles(string root, string extension){
+  cout << root << endl;
+  using namespace boost::filesystem;
+  vector<string> files;
+  path stack_path = system_complete(root);
+  if(is_directory(stack_path)){
+    directory_iterator dir_end;
+    for( directory_iterator i(stack_path); i != dir_end; ++i){
+      cout << "a file: " << i->path() << endl;
+      if(((string) i->path().extension()) == extension)
+	files.push_back((string) i->path().file_string());      
+    }
+  }
+  return files;
+}

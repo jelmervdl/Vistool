@@ -38,6 +38,8 @@ void printLibraries();
 void one_class_test();
 void one_class_test2();
 void testClassifierStack();
-
+void stack_svm();
+std::vector<std::string> getFiles(std::string root, 
+			     std::string extension = ".xml");
 #endif
 

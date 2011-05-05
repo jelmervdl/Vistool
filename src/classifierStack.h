@@ -82,9 +82,17 @@ public:
   virtual std::string getParameterName();
   virtual Descriptor extract_(MyImage *Image,
 			      bool makevisrep,
-			      Magick::Image rep);
-  void train(DataPointCollection dps);
+			      Magick::Image *rep);
+  virtual void train(DataPointCollection dps);
 };
+
+class SVMStackFeatures : public std::vector<SVMStack> , 
+			 public Singleton<SVMStackFeatures>{
+public:
+  void add_to(std::vector<Feature*> &features);
+};
+
+
 }
 
 namespace classification{
@@ -96,6 +104,7 @@ class SVMStackClassifier : public Classifier{
 public:
 */
 
+/*
 //doesn't work
 class SVMStack : public std::vector<features::SVMActivationSetup>, 
 		 public Classifier{
@@ -110,7 +119,7 @@ public:
   DescriptorCollection getStackResults(const DescriptorCollection & dc);
   Descriptor           getStackResults(const Descriptor &descriptor);
 };
-
+*/
 
 /* defines a classifier Stack, using several ClassifierSetups to
    define the features and classification to be extracted which then

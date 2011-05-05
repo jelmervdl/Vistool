@@ -145,6 +145,7 @@ void exportSelected(){
   features::FeatureExtractor &fe = *features::FeatureExtractor::getInstance();
   Dataset &dataset = ToolState::getInstance()->current_db;
   DataPointCollection datapoints = dataset.enabledPoints();
+  cout << "getting datapoint for exporting" << endl;
   ExampleCollection examples = fe.getExamples(datapoints);
   for(ExampleCollection::iterator it = examples.begin();
       it != examples.end();

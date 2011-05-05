@@ -39,7 +39,8 @@ string SVMClassifier::get_name(){
 
 void SVMClassifier::train(const ExampleCollection &examples){
   //  cout << "training";
-  cout << "pars: " << Parameters::getInstance()->getCurrentHash();
+  //
+cout << "pars: " << Parameters::getInstance()->getCurrentHash();
   if(model != 0){
     svm_free_and_destroy_model(&model);
     model = 0;

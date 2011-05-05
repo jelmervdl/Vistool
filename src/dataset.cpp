@@ -24,9 +24,9 @@ Dataset::Dataset(string str): root(str){
   path full_path =  system_complete(root);
   directory_iterator end_itr;
   size_t label = 0;
-  cout << "trying..." << full_path <<  endl;
+  cout << "trying :" << full_path <<  "...";
   if(is_directory(full_path)){
-    cout << "root is a dataset" << endl;
+    cout << "done! Directory is a dataset." << endl;
     try{
       for (directory_iterator itr( full_path ); itr != end_itr;++itr ){
 	if(is_directory(itr->path())){
@@ -48,8 +48,7 @@ Dataset::Dataset(string str): root(str){
 	    addCategory(newcat);
 	    label++;
 	  }
-	}else
-	  cout << root << " is not a dir!" << endl;
+	}
       }
     }
     catch(...){
