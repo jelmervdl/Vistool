@@ -192,5 +192,6 @@ $(SVM): exp/svm/%.log : exp/svm_optimized/%.xml
 $(SVM_OPT): exp/svm_optimized/%.xml : exp/settings/%.xml
 	@echo "optimizing $@ to $< and saving to $@.log"
 	./$(Target) optimize $< $@ > $<.log
+	./$(Target) -p $@ experiments svm abdullah2010 1000 >> $<.log
 
 

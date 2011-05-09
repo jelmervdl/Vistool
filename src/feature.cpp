@@ -28,4 +28,8 @@ void Feature::extractTo(vector<float> * vec, MyImage * im){
   vec->insert(vec->end(), extr.begin(), extr.end()); 
 }
 
+bool Feature::isStack(){
+  return false;
+}
+
 }}

@@ -36,10 +36,6 @@ ClassifierSetup::ClassifierSetup( Classifier *c) :
 void ClassifierSetup::train(const ExampleCollection &descriptors){
   string previous_parameters = Parameters::get_current_name();
   Parameters::setUnique(parameters);
-  cout << "current hashable string is: " 
-       << Parameters::getInstance()->getHashableString() << endl;
-  cout << "the current hash is: " 
-       << Parameters::getInstance()->getCurrentHash() << endl;
   classifier->train(descriptors);
   Parameters::select(previous_parameters);
 }
@@ -68,24 +64,22 @@ void Setup::push(){
     Parameters::select(previous);
   previous = Parameters::get_current_name();
   Parameters::setUnique(parameters);
-  std::cout << "push going out of "
-	    << previous
-	    << " and into parameters: " << parameters << std::endl;
   return;
 }
 
 void Setup::pop(){
   if(previous != "0")
     Parameters::select(previous);
-  std::cout << "pop going out of "
-	    << parameters
-	    << " and into parameters: " << previous << std::endl;
   previous = "0";
 }
 
 SetupFeature::SetupFeature() {}
 SetupFeature::SetupFeature(std::vector<Setup> setups) 
   : std::vector<Setup>(setups){
+}
+
+bool SetupFeature::isStack(){
+  return true;
 }
 
 std::string SetupFeature::getParameterName(){
@@ -173,9 +167,12 @@ std::string SVMActivationSetup::getFile(){
   return origin;
 }
 
+bool SVMActivationSetup::isStack(){
+  return true;
+}
+
 void SVMActivationSetup::train(DataPointCollection dps){
   push();
-  std::cout << "getting examples for an svm within the stack" << std::endl;
   ExampleCollection examples =
     FeatureExtractor::getInstance()->getExamples(dps);
   svm.train(examples);
@@ -196,6 +193,10 @@ Descriptor SVMActivationSetup::getActivation(DataPoint dp){
 bool SVMStack::isActive(){
   return Parameters::getInstance()->getiParameter("feature_" +
 						  getParameterName()) > 0;
+}
+
+bool SVMStack::isStack(){
+  return true;
 }
 
 std::string SVMStack::getParameterName(){

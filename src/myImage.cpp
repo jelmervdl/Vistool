@@ -56,6 +56,15 @@ Blob *MyImage::getBlob(){
   return blob;
 }
 
+MyImage::MyImage(const DataPoint &dp_, bool dummy) : 
+  serial(Parameters::getInstance()->getserial()),
+  dp(dp_),
+  location(dp.get_image_url()),
+  magick(0),
+  blob(0),
+  mat(0){
+}
+
 MyImage::MyImage(const DataPoint &dp_) : serial(Parameters::getInstance()->getserial()),
 					 dp(dp_),
 					 location(dp.get_image_url()),

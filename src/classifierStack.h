@@ -34,6 +34,7 @@ public:
   virtual Descriptor         extract_(MyImage *Image, 
 				      bool makeVisualRepresentation, 
 				      Magick::Image * representation); 
+  virtual bool               isStack();
 };
 
 class NaiveStackFeatures : public std::vector<SetupFeature> , 
@@ -54,6 +55,7 @@ public:
   void train(DataPointCollection dps);
   Descriptor getActivation(DataPoint dp);
   std::string getFile();
+  virtual bool isStack();
 };
 
 class ClassifierSetup : public Setup, public Feature{
@@ -79,6 +81,7 @@ class SVMStack : public std::vector<features::SVMActivationSetup>,
 		 public Feature{
 public:
   virtual bool isActive();
+  virtual bool isStack();
   virtual std::string getParameterName();
   virtual Descriptor extract_(MyImage *Image,
 			      bool makevisrep,

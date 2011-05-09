@@ -29,6 +29,7 @@ size_t serial;
   cv::Mat * mat;
   
  public:
+  MyImage(const DataPoint &dp, bool dummy);
   MyImage(const DataPoint &dp);
   MyImage();
   MyImage(std::string loc, DataPoint dp);

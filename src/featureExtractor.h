@@ -24,6 +24,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
 
  public:
 
+  std::vector<float>    calcDescriptor(MyImage &image, const DataPoint &dp);
   void                  renewDescriptors(const DataPointCollection &dps);
   // calculate the descriptors to a datapoint, if force is true the
   // descriptor is always calculated

@@ -18,11 +18,17 @@ namespace features{
 using write::readDescriptor;
 using write::writeDescriptor;
 
-  Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
-						const bool force){
-  renewDescriptor(dp, force);
+Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
+					   const bool force){
   Descriptor descriptor;
-  readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
+  vector<Feature*> features = getActiveFeatures();
+  if(features.size() == 1 && features[0]->isStack()){
+    MyImage image(dp, true);
+    descriptor = calcDescriptor(image, dp);   
+  }else{  
+    renewDescriptor(dp, force);
+    readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
+  }
   return descriptor;
 }
    
@@ -82,18 +88,22 @@ string FeatureExtractor::getCurrentDescriptorLocation(const DataPoint &dp){
 }
 
 
-
-void FeatureExtractor::renewDescriptor(const DataPoint &dp, const bool force){
-  string final_descriptor_location = getCurrentDescriptorLocation(dp);
-  if(force || !exists(path(final_descriptor_location))) {
-    Magick::Image imer(dp.get_image_url());
-    MyImage image(dp.get_image_url(), dp);
-    vector<float> descriptor;
-    vector<Feature*> features = getActiveFeatures();
-    //printActiveFeatures();
+vector<float> FeatureExtractor::calcDescriptor(MyImage &image, 
+					       const DataPoint &dp){
+  vector<Feature*> features = getActiveFeatures();
+  vector<float> descriptor;
     for(int i = 0; i < (int) features.size(); ++i){
       features[i]->extractTo(&descriptor, &image);
     }
+    return descriptor;
+}
+
+void FeatureExtractor::renewDescriptor(const DataPoint &dp, const bool force){
+  vector<Feature*> features = getActiveFeatures();
+  string final_descriptor_location = getCurrentDescriptorLocation(dp);
+  if(force || !exists(path(final_descriptor_location))) {
+    MyImage image(dp);
+    vector<float> descriptor = calcDescriptor(image, dp);
     writeDescriptor(&descriptor,final_descriptor_location);
   } 
 }
@@ -141,13 +151,10 @@ void FeatureExtractor::renewDescriptors(const DataPointCollection &dps){
 }
 
 ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
-  {
-    vector<Feature*> features = getActiveFeatures();
-    typedef vector<Feature*>::iterator fe_it;
-    for(fe_it i = features.begin(); i != features.end(); ++i)
-      (*i)->train(dps);
+  vector<Feature*> features = getActiveFeatures();
+  if(features.size() == 1 && features[0]->isStack()){
+      features[0]->train(dps);
   }
-  renewDescriptors(dps);
   ExampleCollection examples(dps.size());
   for(size_t i = 0; i < dps.size(); ++i){
     Example current_example(getDescriptor(dps[i]));
@@ -157,8 +164,8 @@ ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
   return examples;
 }
 
-DescriptorCollection FeatureExtractor::getDescriptors(const DataPointCollection &dps){
-  renewDescriptors(dps);
+DescriptorCollection FeatureExtractor::getDescriptors(const DataPointCollection
+						      &dps){
   DescriptorCollection descriptors(dps.size());
   for(size_t i = 0; i < dps.size(); ++i){
     Descriptor current_descriptor(getDescriptor(dps[i]));
