@@ -79,7 +79,6 @@ Descriptor SiftDescriptor::extract_(MyImage *my_image,
       this->drawKeyPoint(*canvas, orientations, *keypoint, new_descriptor, window);
     }
   }
-  descriptor.normalize();
   return descriptor;
 }
 

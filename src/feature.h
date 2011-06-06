@@ -9,7 +9,10 @@ namespace vito{
 namespace features{
 
 class Feature{
- public:
+private:
+
+
+public:
 
   //constructor
                              Feature();

@@ -40,7 +40,6 @@ string SVMClassifier::get_name(){
 void SVMClassifier::train(const ExampleCollection &examples){
   //  cout << "training";
   //
-cout << "pars: " << Parameters::getInstance()->getCurrentHash();
   if(model != 0){
     svm_free_and_destroy_model(&model);
     model = 0;
@@ -134,6 +133,9 @@ vector<double> SVMClassifier::getValuesPerClass(svm_node *nodes,
       value_per_class[j] -= values[index];
       index++;
     }
+  typedef vector<double>::iterator dvi;
+  for(dvi i = value_per_class.begin(); i != value_per_class.end(); ++i)
+    *i = *i / (double) nr_classes;
   return value_per_class;
 }
 
@@ -180,6 +182,16 @@ int SVMClassifier::classify(const Descriptor &descriptor, svm_model *model){
   //print::print_svm_nodes(nodes, descriptor.size());
   double   result = svm_predict(model, nodes);
   //vector<double> value_per_class = getValues(nodes, model);
+  /*
+  typedef Descriptor::const_iterator desit;
+  cout << "descriptor: ";
+  for(desit i = descriptor.begin(); i != descriptor.end(); ++i){
+    if((i - descriptor.begin()) % 10 == 0)
+      cout << endl;
+    cout << *i << " ";
+  }
+  cout << endl << "result: " << result << endl;
+  */
   delete [] nodes;
   return result;
 }

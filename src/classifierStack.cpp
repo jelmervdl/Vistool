@@ -105,18 +105,12 @@ Descriptor SetupFeature::extract_(MyImage *Image,
   Descriptor ret;
   FeatureExtractor *fe = FeatureExtractor::getInstance();
   typedef std::vector<Setup>::iterator su_it;
-  cout << "extracting stuff from combined features" << endl;
-  cout << "there are " << size() << "features to combine.." << endl;
   for(su_it i = begin(); i != end(); ++i){
     i->push();
-    cout << "current parameter list comes from"
-	 << Parameters::getInstance()->getFile() << endl; 
     Descriptor additive = fe->getDescriptor(Image->getDataPoint());
-    cout << "adding additive of size " << additive.size() << endl;
     ret = ret + additive;
     i->pop();
   }
-  cout << "returning combination of size " << ret.size() << endl;
   return ret;
 }
 
@@ -184,9 +178,11 @@ Descriptor SVMActivationSetup::getActivation(DataPoint dp){
   vector<double> dubs =
     svm.getValues(FeatureExtractor::getInstance()->getDescriptor(dp));
   Descriptor desc;
-  for(vector<double>::iterator i = dubs.begin(); i != dubs.end(); ++i)
+  for(vector<double>::iterator i = dubs.begin(); i != dubs.end(); ++i){
     desc.push_back(*i);
+  }
   pop();
+
   return desc;
 }
 
@@ -214,17 +210,15 @@ Descriptor SVMStack::extract_(MyImage *image,
 			      bool makevisrep,
 			      Magick::Image *rep){
   Descriptor desc;
-  for(SVMStack::iterator i = begin(); i != end(); ++i)
+  for(SVMStack::iterator i = begin(); i != end(); ++i){
     desc = desc + i->getActivation(image->getDataPoint());
+  }
   return desc;
 }  
 
 void SVMStack::train(DataPointCollection dps){
-  std::cout << "training svm stack!" << endl;
   for(SVMStack::iterator i = begin(); i != end(); ++i){
-    std::cout << "number " << i - begin() << " is up " << std::endl;
     i->train(dps);
-    std::cout << "done:" << endl;
   }
 }
 } // features

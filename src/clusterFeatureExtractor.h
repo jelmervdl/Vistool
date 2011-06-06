@@ -1,6 +1,7 @@
 #ifndef CLUSTERFEATUREXTRACTOR_H
 #define CLUSTERFEATUREXTRACTOR_H
 
+#include "trueClustering.h"
 #include "kmeanshistogram.h"
 
 namespace vito{
@@ -25,6 +26,10 @@ public:
       delete currentFeatures.back();
       currentFeatures.pop_back();
     }
+  }
+
+  void addClusterFeature(clustering::TrueClusterHistogram * histogram){
+    currentFeatures.push_back(histogram);
   }
 
   void addClusterFeature(KMeansClusterHistogram *histogram){

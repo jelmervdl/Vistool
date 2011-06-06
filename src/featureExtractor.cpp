@@ -18,16 +18,53 @@ namespace features{
 using write::readDescriptor;
 using write::writeDescriptor;
 
+FeatureExtractor::FeatureExtractor() :
+  normalization_calibrated(false){
+}
+
+void FeatureExtractor::calibrateNormalization(const DataPointCollection &dps){
+  cout << "calibrating normalization... " << endl;
+  typedef DataPointCollection::const_iterator dpcit;
+  for(dpcit i = dps.begin(); i != dps.end(); ++i){
+    float cmin, cmax;
+    Descriptor current_descriptor = getDescriptor(*i, false, false);
+    cmin = *std::min_element(current_descriptor.begin(),
+			     current_descriptor.end());
+    cmax = *std::max_element(current_descriptor.begin(), 
+			     current_descriptor.end());
+    if(cmin < min || i == dps.begin())
+       min = cmin;
+    if(cmax > max || i == dps.begin())
+      max = cmax;
+  }
+  cout << "calibration results: min = " << min << " max = " << max << endl;
+  normalization_calibrated = true;
+}
+
 Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
-					   const bool force){
+					   const bool force,
+					   const bool normalize){
+
+  // if we are to normalize, assure normalization has been calibrated
+  if(normalize && !normalization_calibrated )
+    calibrateNormalization(experiment::abdullah2010().enabledPoints());
+    
   Descriptor descriptor;
   vector<Feature*> features = getActiveFeatures();
+
+  // if the active feature is a stack feature, recalculate it rather than 
+  // loading it from file
   if(features.size() == 1 && features[0]->isStack()){
     MyImage image(dp, true);
     descriptor = calcDescriptor(image, dp);   
+
+    // if the feature isn't a stack feature just append it.
   }else{  
     renewDescriptor(dp, force);
     readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
+  }
+  if(normalize && normalization_calibrated){
+    descriptor.normalize(min, max);
   }
   return descriptor;
 }
@@ -102,6 +139,7 @@ void FeatureExtractor::renewDescriptor(const DataPoint &dp, const bool force){
   vector<Feature*> features = getActiveFeatures();
   string final_descriptor_location = getCurrentDescriptorLocation(dp);
   if(force || !exists(path(final_descriptor_location))) {
+    cout << "having to rewrite: " << final_descriptor_location << endl;
     MyImage image(dp);
     vector<float> descriptor = calcDescriptor(image, dp);
     writeDescriptor(&descriptor,final_descriptor_location);
@@ -152,11 +190,14 @@ void FeatureExtractor::renewDescriptors(const DataPointCollection &dps){
 
 ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
   vector<Feature*> features = getActiveFeatures();
-  if(features.size() == 1 && features[0]->isStack()){
-      features[0]->train(dps);
+  for(vector<Feature*>::iterator i = features.begin();
+      i != features.end(); ++i){
+    if((*i)->isStack())
+      (*i)->train(dps);
   }
   ExampleCollection examples(dps.size());
   for(size_t i = 0; i < dps.size(); ++i){
+
     Example current_example(getDescriptor(dps[i]));
     current_example.set_label(dps[i].get_label());
     examples[i] = current_example;

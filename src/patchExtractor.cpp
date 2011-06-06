@@ -47,8 +47,6 @@ patch_collection PatchExtractor::getPatches (MyImage &myImage,
     const int width  = parameters->getiParameter("clustering_warp_x");
     const int height = parameters->getiParameter("clustering_warp_y");
     Magick::Image magick = *myImage.getMagickImage();
-    cout << "is: " << magick.columns() << "x"
-	 << magick.rows() << " "  << width << " x " << height << "?";
     if( (int) magick.columns() != width || 
         (int) magick.rows()    != height   ){
       std::stringstream ss;
@@ -80,5 +78,7 @@ patch PatchExtractor::getPatch (MyImage *image,
 				Feature *feature){
   return feature->extract(image);
 }
+
+
 
 }}

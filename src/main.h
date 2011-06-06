@@ -25,6 +25,7 @@
 #include "mpeg7.h"
 #include "patchExtractor.h"
 #include "kmeanshistogram.h"
+#include "trueClustering.h"
 
 #include "classifierStack.h"
 #include "experiment.h"

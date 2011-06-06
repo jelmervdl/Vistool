@@ -3,6 +3,8 @@
 using Magick::Image;
 using std::vector;
 using std::string;
+using std::cout;
+using std::endl;
 
 namespace vito{
 namespace features{

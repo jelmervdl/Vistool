@@ -8,6 +8,8 @@
 #include "statistics.h"
 #include "kmeanshistogram.h"
 #include "classification.h"
+#include "trueClustering.h"
+
 namespace vito{
 namespace experiment{
 

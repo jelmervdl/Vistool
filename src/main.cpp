@@ -91,14 +91,16 @@ int main(int argc, char ** argv){
 	Parameters::getInstance()->readFile(value + ".xml");
 	vector<Feature*> actives = features::getActiveFeatures();
 	assert(actives.size() == 1);
-	KMeansClusterHistogram *c_feature =
-	  new KMeansClusterHistogram(value, actives[0]);
+	clustering::TrueClusterHistogram *c_feature =
+	  new clustering::TrueClusterHistogram(value, actives[0]);
 	features::ClusterFeatureExtractor::getInstance()->
 	  addClusterFeature(c_feature);
 	Parameters::pop();
 	if(option_name == "C"){
 	  Parameters::getInstance()->
 	    appointFeature(c_feature->getParameterName());
+	  Dataset ds = experiment::abdullah2010();
+	  //c_feature->drawRandomPatches(ds.enabledPoints());
 	}
       }
       if(option_name == "naive"){

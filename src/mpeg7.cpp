@@ -136,8 +136,8 @@ void printPatchMatrix(const Matrix<vector <float> > &matrix){
   }
 }
 
-vector<vector<float> > getAllPatches(vector<DataPoint> datapoints){
-  vector< vector<float> > allpatches;
+vector<Descriptor> getAllPatches(vector<DataPoint> datapoints){
+  vector<Descriptor> allpatches;
   for(size_t i = 0; i < datapoints.size(); i++){
   cout << "getting ALLL Patches, of " << datapoints.size()  << " datapoints " 
        << "it's name: " << datapoints[i].get_image_url() << endl;

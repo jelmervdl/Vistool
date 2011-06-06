@@ -1,6 +1,8 @@
 #ifndef DESCRIPTOR_H
 #define DESCRIPTOR_H
 
+#include <math.h>
+#include <assert.h>
 #include "dataPoint.h"
 #include <algorithm>
 #include <vector>
@@ -21,6 +23,8 @@ class Descriptor : public std::vector<float>{
   Descriptor(int size) : std::vector<float>(size){}
   void print() const;
   void normalize();
+  void normalize(const float min, const float max);
+  float distance(const Descriptor &b) const;
 
 };
 

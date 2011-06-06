@@ -21,7 +21,7 @@ std::vector<float>          extractNumbers(std::string line);
 bool                        lineIsOfType(std::string line, std::string type);
 std::vector<float>          getMPEG7Descriptor(std::string p, std::string t);
 void                        printPatchMatrix(const Matrix<std::vector<float> > &m);
-std::vector<std::vector<float> > getAllPatches(std::vector<DataPoint> datapoints );
+std::vector<Descriptor> getAllPatches(std::vector<DataPoint> datapoints );
 
 // Mpeg7 feature prototype
 class MPEG7Feature : public Feature {

@@ -3,6 +3,7 @@
 
 #define OMP_NUM_THREADS 1
 
+#include "experiment.h"
 #include <queue>
 #include "boost/thread/thread.hpp"
 #include "features.h"
@@ -17,7 +18,18 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   friend class Singleton<FeatureExtractor>;
 
  private:
+  float min, max;
+  bool normalization_calibrated;
+
+
   std::vector<Feature*> features;
+
+
+  //constructor
+  FeatureExtractor();
+
+  // calibrate normalization range based on datapoints dps
+  void calibrateNormalization(const DataPointCollection &dps);
 
   //create directory if it doesn't exist
   void                  assertDir(std::string str);
@@ -29,7 +41,10 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   // calculate the descriptors to a datapoint, if force is true the
   // descriptor is always calculated
   Descriptor            getDescriptor(const DataPoint &dps,
-				      const bool force = false);
+				      const bool force = false,
+				      const bool normalize = true);
+
+
 
   // save all active categories within dataset to their respective
   // files.

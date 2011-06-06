@@ -1,6 +1,7 @@
 #ifndef CLUSTERING_H
 #define CLUSTERING_H
 
+#include "descriptor.h"
 #include <assert.h>
 #include <iostream>
 #include <vector>
@@ -10,8 +11,8 @@
 namespace vito{
 namespace clustering{
 
-typedef std::vector<float>  patch;
-typedef std::vector<patch> patch_collection;
+typedef Descriptor  patch;
+typedef std::vector<Descriptor> patch_collection;
 
 typedef std::vector<int>    labels;
 typedef std::vector<labels> label_collection;

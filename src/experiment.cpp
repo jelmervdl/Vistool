@@ -42,7 +42,7 @@ float performExperiment(const string str,
  }if(str == "nn"){
    Parameters *params = Parameters::getInstance();
    int orig = params->getiParameter("knn_classifier_k");
-   const int reps = 30;
+   //const int reps = 30;
    vector<int> k_candidates;
    k_candidates.push_back(1);
    k_candidates.push_back(3);
@@ -70,8 +70,11 @@ float performExperiment(const string str,
    params->saveInteger("knn_classifier_k", orig);
  }
  Statistics values;
- for(int i = 0; i < repetitions; i++)
+
+ for(int i = 0; i < repetitions; i++){
    values.push_back(exp_func(dataset));
+   //cout << "added: " << values[i] << " currentmean: " << values.mean() << endl;
+ }
  cout << "k = " << Parameters::getInstance()->getiParameter("knn_classifier_k") << endl;
  cout << "mean: " << values.mean() << endl;
  cout << "std: " << values.std() << endl;
@@ -105,6 +108,7 @@ float svm(Dataset &dataset){
 
   //get Labels, Examples and Descriptors
   FeatureExtractor *fe = FeatureExtractor::getInstance();
+
   ExampleCollection training_examples = fe->getExamples(train);
   DescriptorCollection testing_descriptors = fe->getDescriptors(test);
 
@@ -156,7 +160,9 @@ void cluster(string dataset, string filename){
     feature = actives[0];
   }
   Dataset dats = getDataSet(dataset);
-  features::KMeansClusterHistogram histogram(dats.enabledPoints(), feature);
+  //features::KMeansClusterHistogram histogram(dats.enabledPoints(), feature);
+  clustering::TrueClusterHistogram histogram(feature, dats.enabledPoints());
+  //histogram.drawRandomPatches(dats.enabledPoints());
   histogram.save(filename + ".clustercenters");
   Parameters::getInstance()->saveXML(filename + ".xml");
 }

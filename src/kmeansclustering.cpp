@@ -12,8 +12,7 @@ patch_collection KMeansClustering::initialize_means(const int kmeans,
   srand(time(NULL));
   labels means_indices;
   while ((int) means_indices.size() < kmeans){
-    int rand_index = rand() % patches.size() + 1;
-    cout << "rand index = " << rand_index << endl;
+    int rand_index = rand() % patches.size();
     bool add = true;
     for(size_t i = 0; i < means_indices.size(); i++)
       if(means_indices[i] == rand_index)
@@ -22,8 +21,9 @@ patch_collection KMeansClustering::initialize_means(const int kmeans,
       means_indices.push_back(rand_index);
   }
   patch_collection ret(kmeans);
-  for(size_t i = 0; i < means_indices.size(); i++)
+  for(size_t i = 0; i < means_indices.size(); i++){
     ret[i] = patches[means_indices[i]];
+  }
   return ret;
 }
 
@@ -36,7 +36,8 @@ label_collection KMeansClustering::classify_per_class(const patch_collection &cl
     int closest_cluster = -1;
     for(size_t j = 0; j < cluster_centers.size(); j++){
       const patch &cluster_center = cluster_centers[j];
-      const float distance = KMeansClustering::distance(current_patch, cluster_center);
+      
+const float distance = current_patch.distance(cluster_center);
       if(distance < smallest_distance || smallest_distance == -1){
 	smallest_distance = distance;
 	closest_cluster = j;
@@ -61,7 +62,7 @@ labels KMeansClustering::classify_per_patch(const patch_collection &cluster_cent
     int closest_cluster = -1;
     for(size_t j = 0; j < cluster_centers.size(); j++){
       const patch &cluster_center = cluster_centers[j];
-      const float distance = KMeansClustering::distance(current_patch, cluster_center);
+      const float distance = current_patch.distance(cluster_center);
       if(isSoftAssignment)
 	histogram->at(j) += 1.0 / (distance + 0.00000001);
       if(distance < smallest_distance || smallest_distance == -1){
@@ -103,19 +104,6 @@ patch_collection KMeansClustering::update(const patch_collection &cluster_center
   return new_cluster_centers;
 }
 
-float KMeansClustering::distance(const patch &a, const patch &b){
-  assert(a.size() == b.size());
-  float total_distance = 0.0;
-  vector<float>::const_iterator 
-    a_it = a.begin(),
-    b_it = b.begin();
-  while(a_it != a.end()){
-    total_distance += fabs(*a_it - *b_it);
-    ++a_it;
-    ++b_it;
-  }
-  return total_distance;
-}
 
 float KMeansClustering::total_distance_to_centers(const patch_collection &centers, 
 						  const patch_collection &patches){
@@ -123,9 +111,8 @@ float KMeansClustering::total_distance_to_centers(const patch_collection &center
   for(size_t i = 0; i < patches.size(); i++){
     float smallest = -1.0;
     for(size_t j = 0; j < centers.size(); j++){
-      const float current_distance = 
-	KMeansClustering::distance(centers[j], patches[i]);
-      //cout << i <<  " " << j << " " << current_distance << endl;
+      const float current_distance = centers[j].distance(patches[i]);
+
       if(smallest == -1 || current_distance < smallest)
 	smallest = current_distance;
     }
@@ -136,7 +123,8 @@ float KMeansClustering::total_distance_to_centers(const patch_collection &center
 
 patch_collection KMeansClustering::cluster(const patch_collection &patches){
   const int kmeans = Parameters::getInstance()->getiParameter("clustering_means");
-  cout << "clustering into " << kmeans << " means" << endl;
+  cout << "clustering " << patches.size() << " datapoint into " 
+       << kmeans << " means" << endl;
   cout << "initializing means...";
   patch_collection cluster_centers = initialize_means(kmeans, patches);
   cout << "..done!" << endl;
@@ -146,11 +134,9 @@ patch_collection KMeansClustering::cluster(const patch_collection &patches){
   while(distance_ > 0 && !stop){ // cluster until convergence
     float old_distance = distance_;
     distance_ = 0.0;
-    cout << "+";
     patch_collection new_centers = update(cluster_centers, patches);
     for(size_t j = 0; j < cluster_centers.size(); j++){
-      cout << "." << std::flush;
-      float p_dist = KMeansClustering::distance(cluster_centers[j], new_centers[j]);
+      float p_dist = cluster_centers[j].distance(new_centers[j]);
       distance_ += p_dist;
     }
     //cout << " total distance to centers: " << total_distance_to_centers(new_centers, patches) << endl;

@@ -43,9 +43,6 @@ public:
   // patches
   patch_collection cluster(const patch_collection &patches);
 
-  // find the distance between two patches
-  float            distance(const patch &a, const  patch &b);
-
   float            total_distance_to_centers(const patch_collection &centers, 
 					     const patch_collection &patches);
 };

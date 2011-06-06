@@ -18,9 +18,6 @@ void ClusteringAlgorithm::writeClusters(const patch_collection &centers,
   for(int p = 0; p < kPatches; p++)
     for(int v = 0 ; v < patch_size; v++)
       toFile[2 + p * patch_size + v] = centers[p][v];
-  for(size_t i = 0; i < toFile.size(); i++)
-    cout << toFile[i] << " ";
-  cout << endl;
   write::writeDescriptor(&toFile, file);
 }
 
@@ -45,7 +42,7 @@ patch_collection ClusteringAlgorithm::readClusters(string file){
   cout << endl;
 
   assert((int) values.size() == 2 + kPatches * patch_size);
-  vector<vector<float> > centers(kPatches, vector<float>(patch_size));
+  vector<Descriptor> centers(kPatches, vector<float>(patch_size));
   for(int p = 0; p < kPatches; p++)
     for(int v = 0; v < patch_size; v++)
       centers[p][v] = values[2 + p * patch_size + v];
