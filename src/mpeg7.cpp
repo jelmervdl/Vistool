@@ -1,155 +1,199 @@
 #include "mpeg7.h"
 
-namespace vito{
-namespace features{
-namespace mpeg7{
-
-using std::stringstream;
 using std::cout;
 using std::endl;
-using std::vector;
+
+typedef Feature Mpeg7Feature;
+
+namespace vito{
+namespace features{
+
 using std::string;
-using std::ifstream;
 
-using Magick::Image;
-
-using boost::filesystem::path;
-using boost::filesystem::exists;
-
-bool MPEG7Feature::isActive(){
-  return false;
+// Edge Histogram --------------------------------------------------------------
+string EdgeHistogram::getParameterName(){
+  return "mpeg7_edge_histogram";
 }
 
-Descriptor MPEG7Feature::extract_(MyImage *image,
-				  bool makeVisualRepresentation,
-				  Image *representation){
-  string descriptor_path =
-  getDescriptorLocation(image->getLocation());
-  Descriptor descriptor = getMPEG7Descriptor(descriptor_path,
-						getName());
-  cout << "size: " <<  descriptor.size() << endl;
-  for(size_t i = 0; i < descriptor.size(); i++){
-    descriptor[i] = scale(descriptor[i]);
-    cout << descriptor[i] << ",";
-  }
-  cout << endl;
-  descriptor.normalize();
-  return descriptor;
+Descriptor EdgeHistogram::extract_(MyImage *image,
+				   bool makeVisRep,
+				   Magick::Image *repr){
+  cv::Mat &img = *image->getOpenCVMat();
+  Frame* frame = new Frame(img);
+  XM::EdgeHistogramDescriptor *ehd_ = Mpeg7Feature::getEdgeHistogramD(frame);
+  XM::EHD *ehd = ehd_->GetEdgeHistogram();
+  Descriptor desc;
+  for(int i = 0; i < 80; ++i)
+    desc.push_back((float) ehd->Local_Edge[i]);
+  return desc;
 }
 
-vector<float> getMPEG7Descriptor(string descriptor_path, string type){
-  ifstream in_file_stream(descriptor_path.c_str());
-  string line;
-  vector<float> ret;
-  while(std::getline(in_file_stream, line)){
-    if(lineIsOfType(line, type))
-      ret = extractNumbers(line);
-  }
-  return ret;
+// Color Structure -------------------------------------------------------------
+
+
+string ColorStructure::getParameterName(){
+  return "mpeg7_color_structure";
 }
 
-vector<float> extractNumbers(string line){
-  vector<float> ret;
-  stringstream ss;
-  for(int i = 0; i < (int) line.size(); ++i){
-    if(std::isdigit(line[i]) || line[i] == '.' || line[i] == '-')
-      ss << line[i];
-    else if(ss.str().size() > 0){
-         ret.push_back(std::atof(ss.str().c_str()));
-      ss.str("");
-    }
-  }
-  return ret;
-
+Descriptor ColorStructure::extract_(MyImage *image,
+				   bool makeVisRep,
+				   Magick::Image *repr){
+  cv::Mat &img = *image->getOpenCVMat();
+  Frame* frame = new Frame(img);
+  XM::ColorStructureDescriptor *ehd = Mpeg7Feature::getColorStructureD(frame, 64);
+  Descriptor desc;
+  for(size_t i = 0; i < ehd->GetSize(); ++i)
+    desc.push_back((float) ehd->GetElement(i));
+  return desc;
 }
 
-bool lineIsOfType(string line, string type){
-  return (int) line.find(type) != -1;
+// Scalable Color --------------------------------------------------------------
+
+string ScalableColor::getParameterName(){
+  return "mpeg7_scalable_color";
 }
 
-string getDescriptorLocation(string loc, bool patches){
-  string descriptor_path;
-  int last_slash = loc.find_last_of('/');
-  int secondlast_slash = loc.find_last_of('/', last_slash - 1);
-  {
-    string name, category;
-    stringstream filepath_stream;
-    
-
-    category = loc.substr(secondlast_slash + 1, 
-			  last_slash - secondlast_slash - 1);
-    name = loc.substr(last_slash + 1, loc.size());
-    filepath_stream << "desc/mpeg7/"  << category << "/" << name;
-    if(patches)
-      filepath_stream << "_patches";
-    filepath_stream << ".txt";
-    descriptor_path = filepath_stream.str();
-  }
-  cout << descriptor_path << endl;
-  if(!exists(path(descriptor_path))){
-    stringstream javacommand;
-    string category_root = loc.substr(0, last_slash);
-    javacommand << "java "
-		<< "-cp " << MPEG7_JAVA_CLASS_LOCATION << " "
-		<< "features.MPEG7FeatureExtractor "
-		<< category_root;
-    cout << javacommand.str() << endl;
-    std::system(javacommand.str().c_str());
-  } 
-  if(!exists(path(descriptor_path))){
-    cout << "problem extracting feature!" << endl;
-    return "";
-  } 
-  return descriptor_path;
+Descriptor ScalableColor::extract_(MyImage *image,
+				   bool makeVisRep,
+				   Magick::Image *repr){
+  cv::Mat &img = *image->getOpenCVMat();
+  Frame* frame = new Frame(img);
+  const size_t dsize = 256;
+  XM::ScalableColorDescriptor *scd = Mpeg7Feature::getScalableColorD(frame, true, dsize);
+  Descriptor desc;
+  for(size_t i = 0; i < dsize; ++i)
+    desc.push_back((float) scd->GetCoefficient(i));
+  return desc;
 }
 
+// Dominant Color --------------------------------------------------------------
 
-Matrix<vector<float> > getPatches(string descriptor_path){
-  string location = getDescriptorLocation(descriptor_path, true);
-  cout << location << endl;
-  ifstream infile(location.c_str());
-  string line;
-  Matrix<vector<float> > matrix (10,10);
-  while(std::getline(infile, line)){
-    if(lineIsOfType(line, "edgehistogram")){
-      vector<float> numbers = extractNumbers(line);
-      int x = numbers[0];
-      int y = numbers[1];
-      matrix.at(x,y) = vector<float>(numbers.begin() + 2, numbers.end());
-    }
-  }
-  //printPatchMatrix(matrix);
-  return matrix;
+string DominantColor::getParameterName(){
+  return "mpeg7_dominant_color";
 }
 
-void printPatchMatrix(const Matrix<vector <float> > &matrix){
-  for(size_t x = 0; x < matrix.get_width(); ++x){
-    cout << "x = " << x << " xsize " << matrix.get_width() << endl;
-    for(size_t y = 0; y < matrix.get_height(); ++y){
-      cout << "x: " << x << " y: " << y << ": ";
-      cout << matrix.at(x,y).size() << endl;
-      for(size_t i = 0; i < matrix.at(x,y).size(); ++i){
-	cout << matrix.at(x,y)[i] << " ";
-      }
-      cout << endl;
-    }
-  }
+Descriptor DominantColor::extract_(MyImage *image,
+				   bool makeVisRep,
+				   Magick::Image *repr){
+  cv::Mat &img = *image->getOpenCVMat();
+  Frame* frame = new Frame(img);
+  XM::DominantColorDescriptor *dcd = 
+    Mpeg7Feature::getDominantColorD( frame , false ); // don't normalize
+  size_t nColors = dcd->GetDominantColorsNumber();
+  XM::DOMCOL *colors = dcd->GetDominantColors();
+  cout << "we've got: " << nColors << " dominant colors" << endl;
+  Descriptor desc;
+  for(size_t i = 0; i < nColors; ++i){
+    cout << "color " << i << "  percentage: " << colors[i].m_Percentage;
+    for(size_t j = 0; j < 3; ++j){
+      cout << " " <<  j << " " << colors[i].m_ColorValue[j];
+      desc.push_back((float) colors[i].m_ColorValue[j]);
+    } // for j
+    cout << endl;
+  } // for i
+  desc.resize(24, 0.0);
+  return desc;
 }
 
-vector<Descriptor> getAllPatches(vector<DataPoint> datapoints){
-  vector<Descriptor> allpatches;
-  for(size_t i = 0; i < datapoints.size(); i++){
-  cout << "getting ALLL Patches, of " << datapoints.size()  << " datapoints " 
-       << "it's name: " << datapoints[i].get_image_url() << endl;
-    const Matrix<vector<float> > matrix = getPatches(datapoints[i].get_image_url());
-    for(int x = 0; x < 10; x++)
-      for (int y = 0; y < 10; y++)
-	allpatches.push_back(matrix.at(x,y));
-  } 
-  return allpatches;
+// Color Layout ----------------------------------------------------------------
+
+string ColorLayout::getParameterName(){
+  return "mpeg7_color_layout";
 }
 
+Descriptor ColorLayout::extract_(MyImage *image,
+				 bool makeVisrep,
+				 Magick::Image *repr){
+  cv::Mat &img = *image->getOpenCVMat();
+  Frame *frame = new Frame(img);
+  XM::ColorLayoutDescriptor *xmdesc = 
+    Mpeg7Feature::getColorLayoutD(frame);
+  size_t nY = xmdesc->GetNumberOfYCoeff();
+  size_t nC = xmdesc->GetNumberOfCCoeff();
+  int *YCoeff  = xmdesc->GetYCoeff();
+  int *CbCoeff = xmdesc->GetCbCoeff();
+  int *CrCoeff = xmdesc->GetCrCoeff();
+
+  // write coefficients to single descriptor
+  Descriptor desc;
+  for(size_t i = 0; i < nY; i++)
+    desc.push_back((float) YCoeff[i]);
+  for(size_t i = 0; i < nC; i++)
+    desc.push_back((float) CbCoeff[i]);
+  for(size_t i = 0; i < nC; i++)
+    desc.push_back((float) CrCoeff[i]);
+  return desc;
+}
+
+// Homogeneous Texture ---------------------------------------------------------
 
 
-}}}
+string HomogeneousTexture::getParameterName(){
+  return "mpeg7_homogeneous_texture";
+}
 
+Descriptor HomogeneousTexture::extract_(MyImage *image,
+					bool makeVisrep,
+					Magick::Image *repr){
+  cv::Mat non_gray = *image->getOpenCVMat();
+  cv::Mat img = Mat( non_gray.rows, non_gray.cols, CV_8UC1);
+  cvtColor(non_gray, img, CV_BGR2GRAY);
+  Frame *frame = new Frame(img.rows, img.cols, false, true, false);
+  frame->setGray(img);
+  XM::HomogeneousTextureDescriptor *xmdesc = 
+    Mpeg7Feature::getHomogeneousTextureD(frame, true);
+  Descriptor desc;
+  for(int i = 0; i < 62; ++i)
+    desc.push_back((float) xmdesc->feature[i]);
+  delete xmdesc;
+  return desc;
+}
+
+/*
+
+// Contour Shape ---------------------------------------------------------------
+bool ContourShape::isActive(){
+  return true;
+}
+
+string ContourShape::getParameterName(){
+  return "ContourShape";
+}
+
+Descriptor ContourShape::extract_(MyImage *image,
+				  bool makeVisrep,
+				  Magick::Image *repr){
+  cv::Mat &img = *image->getOpenCVMat();
+  Frame *frame = new Frame(img);
+  XM::ContourShapeDescriptor *xmdesc = 
+    Mpeg7Feature::getContourShapeD(frame);
+  // some cool code ....
+  xmdesc->Print();
+  Descriptor desc;
+  return desc;
+}
+
+// Region Shape ----------------------------------------------------------------
+
+bool RegionShape::isActive(){
+  return true;
+}
+
+string RegionShape::getParameterName(){
+  return "RegionShape";
+}
+
+Descriptor RegionShape::extract_(MyImage *image,
+				 bool makeVisrep,
+				 Magick::Image *repr){
+  cv::Mat &img = *image->getOpenCVMat();
+  Frame *frame = new Frame(img);
+  XM::RegionShapeDescriptor *xmdesc = 
+    Mpeg7Feature::getRegionShapeD(frame);
+  // some cool code ....
+  Descriptor desc;
+  return desc;
+}
+*/
+} // namespace features
+} // namespace vito

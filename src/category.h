@@ -4,7 +4,7 @@
 /* Contains all relevant information regarding a single class/category
    of images. This include the class name, it's integer label, the
    location of the images on disk and a vector of these images
-   themselves.*/
+   themselves. To be used mainly by Dataset.*/
 
 #include <algorithm>
 #include <vector>
@@ -30,6 +30,8 @@ class Category{
   std::string              get_root()  const;
 
   void                     shuffle();
+
+  // return the live variable for the gui for this class' activation
   int *                    enabledLiveVar();
   std::vector<DataPoint> * get_data_points();
   std::vector<DataPoint>   get_data_points_();

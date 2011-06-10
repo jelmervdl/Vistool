@@ -1,7 +1,10 @@
 #include "parameters.h"
 #include "features.h"
 
-using vito::features::Feature;
+namespace vito{
+
+using features::Feature;
+
 using std::vector;
 using std::collate;
 using std::use_facet;
@@ -210,4 +213,5 @@ void Parameters::appointFeature(std::string str){
 size_t Parameters::getserial(){
   serial++;
   return serial;
+}
 }

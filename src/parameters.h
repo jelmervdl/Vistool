@@ -7,6 +7,7 @@
 
 #define NO_PARAMETERS 100
 
+
 #include "singleton.h"
 #include "multiton.h"
 #include "parameterOptimization.h"
@@ -30,15 +31,16 @@ class ParameterOptimization;
 }
 namespace gui{
 class FeatureSelectionWindow;
+class ParameterPanel;
 }
-}
+
 
 class Parameters : public Multiton<Parameters>{
   friend class Singleton<Parameters>;
   friend class Multiton<Parameters>;
-  friend class ParameterPanel;
-  friend class vito::optimization::ParameterOptimization;
-  friend class vito::gui::FeatureSelectionWindow;
+  friend class gui::ParameterPanel;
+  friend class optimization::ParameterOptimization;
+  friend class gui::FeatureSelectionWindow;
  protected:
   Parameters();
  private:
@@ -90,5 +92,5 @@ class Parameters : public Multiton<Parameters>{
 
   size_t getserial();
 };
-
+}
 #endif 

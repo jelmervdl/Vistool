@@ -4,6 +4,7 @@
 #include <vector>
 #include "myImage.h"
 #include "descriptor.h"
+#include "parameters.h"
 
 namespace vito{
 namespace features{
@@ -22,7 +23,7 @@ public:
   virtual std::string        getParameterName() = 0;
 
   //returns whether the feature is currently active or not
-  virtual bool               isActive() = 0;
+  virtual bool               isActive();
 
   virtual bool               isStack();
 

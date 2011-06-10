@@ -5,13 +5,14 @@ using std::endl;
 using std::vector;
 using std::ofstream;
 
+namespace vito{
 
 using vito::classification::getExistingClassifiers;
 using vito::classification::Classifier;
 
 using vito::features::getExistingFeatures;
 using vito::features::Feature;
-namespace vito{
+
 namespace gui{
 
 void hide_window(int window_number){

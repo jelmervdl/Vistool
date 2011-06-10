@@ -26,59 +26,50 @@ float performExperiment(const string str,
 
   if(str == "svm") exp_func = &svm;
   if(str == "nn") exp_func = &nn;
-  if(str == "clustering"){
-    exp_func = &svm;
-    vector<Dataset> splits = dataset.split();
-    features::ClusterFeatureExtractor *cfe = features::ClusterFeatureExtractor::getInstance();
-    string name = cfe->addClusterFeature(splits[0].enabledPoints(), 
-					 features::mpeg7::EdgeHistogram::getInstance());
-    dataset = splits[1];
-    Parameters::getInstance()->appointFeature(name);
-  }
 
- if(exp_func == 0){
+  if(exp_func == 0){
     cout << "experiment not found" << endl;
     return 0.0;
- }if(str == "nn"){
-   Parameters *params = Parameters::getInstance();
-   int orig = params->getiParameter("knn_classifier_k");
-   //const int reps = 30;
-   vector<int> k_candidates;
-   k_candidates.push_back(1);
-   k_candidates.push_back(3);
-   k_candidates.push_back(5);
-   k_candidates.push_back(7);
-   k_candidates.push_back(9);
-   k_candidates.push_back(11);
-   k_candidates.push_back(13);
-   k_candidates.push_back(15);
-   k_candidates.push_back(31);
-   float max = 0;
-   for(vector<int>::iterator i = k_candidates.begin();
-       i != k_candidates.end(); ++i){
-     params->saveInteger("knn_classifier_k", *i);
-     Statistics temp_vals;
-     for(int j = 0; j < 20; j++)
+  }if(str == "nn"){
+    Parameters *params = Parameters::getInstance();
+    int orig = params->getiParameter("knn_classifier_k");
+    //const int reps = 30;
+    vector<int> k_candidates;
+    k_candidates.push_back(1);
+    k_candidates.push_back(3);
+    k_candidates.push_back(5);
+    k_candidates.push_back(7);
+    k_candidates.push_back(9);
+    k_candidates.push_back(11);
+    k_candidates.push_back(13);
+    k_candidates.push_back(15);
+    k_candidates.push_back(31);
+    float max = 0;
+    for(vector<int>::iterator i = k_candidates.begin();
+	i != k_candidates.end(); ++i){
+      params->saveInteger("knn_classifier_k", *i);
+      Statistics temp_vals;
+      for(int j = 0; j < 20; j++)
        temp_vals.push_back(exp_func(dataset));
-     cout << "k = " << *i << " : " << temp_vals.mean();
+      cout << "k = " << *i << " : " << temp_vals.mean();
      cout << " +- " << temp_vals.std() << endl;
      if(temp_vals.mean() > max){
        max = temp_vals.mean();
        orig = *i;
      }
-   }
+    }
    params->saveInteger("knn_classifier_k", orig);
- }
- Statistics values;
-
- for(int i = 0; i < repetitions; i++){
-   values.push_back(exp_func(dataset));
-   //cout << "added: " << values[i] << " currentmean: " << values.mean() << endl;
- }
- cout << "k = " << Parameters::getInstance()->getiParameter("knn_classifier_k") << endl;
- cout << "mean: " << values.mean() << endl;
- cout << "std: " << values.std() << endl;
- return values.mean();
+  }
+  Statistics values;
+  
+  for(int i = 0; i < repetitions; i++){
+    values.push_back(exp_func(dataset));
+    //cout << "added: " << values[i] << " currentmean: " << values.mean() << endl;
+  }
+  cout << "k = " << Parameters::getInstance()->getiParameter("knn_classifier_k") << endl;
+  cout << "mean: " << values.mean() << endl;
+  cout << "std: " << values.std() << endl;
+  return values.mean();
 }
 
 Dataset getDataSet(const string str){

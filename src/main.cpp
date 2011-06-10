@@ -10,6 +10,7 @@ using namespace vito::optimization;
 using namespace vito::classification;
 using namespace std;
 
+
 void testFaceRec(){
   string cascadeName =
     "data/haarcascades/haarcascade_frontalface_alt.xml";
@@ -89,7 +90,7 @@ int main(int argc, char ** argv){
 	int par = Parameters::getUnique();
 	Parameters::push(par);
 	Parameters::getInstance()->readFile(value + ".xml");
-	vector<Feature*> actives = features::getActiveFeatures();
+	vector<features::Feature*> actives = features::getActiveFeatures();
 	assert(actives.size() == 1);
 	clustering::TrueClusterHistogram *c_feature =
 	  new clustering::TrueClusterHistogram(value, actives[0]);

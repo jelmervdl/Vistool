@@ -5,7 +5,6 @@
 #include "descriptor.h"
 #include "parameters.h"
 #include <assert.h>
-//#include "featureExtractor.h"
 
 namespace vito{
 namespace classification{
@@ -14,12 +13,13 @@ class Classifier{
 
 public:
   virtual bool             single_class();
+
   // pure methods
   virtual std::string      get_name() = 0;
   virtual void             train(const ExampleCollection &examples ) = 0;
   virtual Label            classify(const Descriptor &descriptor ) = 0;
 
-  // generic methods
+  // non-virtual generic methods
   LabelCollection  crossvalidation(const ExampleCollection &files);
   LabelCollection  classify(const DescriptorCollection &descriptor);
 

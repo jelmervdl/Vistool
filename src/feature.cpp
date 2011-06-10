@@ -15,6 +15,12 @@ Feature::~Feature(){
 Feature::Feature(){
 }
 
+bool Feature::isActive(){
+  stringstream ss;
+  ss << "feature_" << getParameterName();
+  return Parameters::getInstance()->getiParameter(ss.str()) > 0;
+}
+
 vector<float> Feature::extract(MyImage *image, bool saveVisualRepresentation, string vis_rep_loc){
   if(saveVisualRepresentation){
     Image newImage;

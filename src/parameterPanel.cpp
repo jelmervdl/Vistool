@@ -3,6 +3,9 @@
 using std::map;
 using std::string;
 
+namespace vito{
+namespace gui{
+
 ParameterPanel::ParameterPanel() {
   Parameters *parameters = Parameters::getInstance();
   panel = GLUI_Master.create_glui("parameters", 0, 1325, 150);
@@ -41,3 +44,4 @@ void ParameterPanel::setupIntVariables(map<string, int> &int_parameters){
   }
 }
 
+}}

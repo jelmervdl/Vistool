@@ -7,17 +7,24 @@ using std::endl;
 namespace vito{
 namespace features{
 
-using mpeg7::EdgeHistogram;
-using mpeg7::ScalableColor;
-using mpeg7::ColorLayout;
+//using mpeg7::EdgeHistogram;
+//using mpeg7::ScalableColor;
+//using mpeg7::ColorLayout;
 
 vector<Feature*> getExistingFeatures(){
   vector<Feature*> features;
   features.push_back(SiftDescriptor::getInstance());
   features.push_back(Histogram::getInstance());
+
+  //mpeg 7
   features.push_back(EdgeHistogram::getInstance());
   features.push_back(ScalableColor::getInstance());
   features.push_back(ColorLayout::getInstance());
+  features.push_back(DominantColor::getInstance());
+  features.push_back(ColorStructure::getInstance());
+  features.push_back(HomogeneousTexture::getInstance());
+
+  // face detection
   features.push_back(FaceFeature::getInstance());
   ClusterFeatureExtractor *cfe = 
     ClusterFeatureExtractor::getInstance();

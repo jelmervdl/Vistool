@@ -3,6 +3,10 @@
 
 #include "parameters.h"
 #include "../libs/glui/glui.h"
+#include <vector>
+
+namespace vito{
+namespace gui{
 
 class ParameterPanel{
  private:
@@ -14,4 +18,5 @@ class ParameterPanel{
   ParameterPanel();
 };
 
+}}
 #endif

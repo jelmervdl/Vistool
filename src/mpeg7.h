@@ -1,80 +1,92 @@
-#ifndef MPEG7_H
-#define MPEG7_H
+#ifndef MPEG7NEW
+#define MPEG7NEW
 
-#include <ctype.h>
-#include <fstream>
-#include <sstream>
 #include "feature.h"
+#include "../libs/mpeg7/Feature.h" // mpeg7 file
 #include "singleton.h"
-#include "boost/filesystem.hpp"
-#include "parameters.h"
-#include "dataPoint.h"
+
+/* This file is basically a wrapper for the MPEG7 library by 
+   by Muhammet Bastan, (c) October 2010 (see libs/mpeg7/Feature.g for more info)
+*/
 
 namespace vito{
 namespace features{
-namespace mpeg7{
 
-Matrix<std::vector<float> > getPatches(std::string descriptor_path);
-std::string                 getDescriptorLocation(std::string loc, 
-						  bool use_patches = false);
-std::vector<float>          extractNumbers(std::string line);
-bool                        lineIsOfType(std::string line, std::string type);
-std::vector<float>          getMPEG7Descriptor(std::string p, std::string t);
-void                        printPatchMatrix(const Matrix<std::vector<float> > &m);
-std::vector<Descriptor> getAllPatches(std::vector<DataPoint> datapoints );
+// Color Descriptors -----------------------------------------------------------
 
-// Mpeg7 feature prototype
-class MPEG7Feature : public Feature {
-protected:
-  virtual std::string getName() = 0;
-  virtual float       scale(float fl) = 0;
+class ColorStructure : public Feature, public Singleton<ColorStructure>{
 public:
-  virtual ~MPEG7Feature(){};
-
-  // give activity using the paramers.h class
-  virtual bool        isActive() = 0;
-
-  // extract the actual descriptor
-  Descriptor          extract_(MyImage *Image,
-			       bool makeVisualRepresentation,
-			       Magick::Image *representation);
+  virtual std::string getParameterName();
+  virtual Descriptor  extract_(MyImage *Image,
+			       bool makeVisualRespresentation,
+			       Magick::Image * repr) ;
 };
 
-// specific features:
-// Edge Histogram
-class EdgeHistogram : public MPEG7Feature, public Singleton<EdgeHistogram> {
-  virtual std::string getName(){ return "edgehistogram";}
-  virtual float       scale(float fl){return fl / 7.0;}
+class ScalableColor : public Feature, public Singleton<ScalableColor>{
 public:
-  virtual bool       isActive(){ 
-    return 
-      Parameters::getInstance()->getiParameter("feature_mpeg7_edge_histogram");
-  }
-  virtual std::string getParameterName(){ return "mpeg7_edge_histogram";}
+  virtual std::string getParameterName();
+  virtual Descriptor  extract_(MyImage *Image,
+			       bool makeVisualRespresentation,
+			       Magick::Image * repr) ;
 };
 
-// ScalableColor
-class ScalableColor : public MPEG7Feature, public Singleton<ScalableColor> {
-  virtual std::string getName(){ return "scalablecolor"; };
-  virtual float       scale(float fl){return fl / 255.0;}
+class DominantColor : public Feature, public Singleton<DominantColor>{
 public:
-  virtual bool        isActive(){ return
-      Parameters::getInstance()->getiParameter("feature_mpeg7_scalable_color"); }
-  virtual std::string getParameterName(){ return "mpeg7_scalable_color";}
+  virtual std::string getParameterName();
+  virtual Descriptor extract_(MyImage *image,
+			      bool makeVisRep,
+			      Magick::Image *repr);
 };
 
-// ColorLayout
-class ColorLayout : public MPEG7Feature, public Singleton<ColorLayout> {
-  virtual std::string getName(){ return "colorlayout"; };
-  virtual float       scale(float fl){return fl / 32.0;}
+class ColorLayout : public Feature, public Singleton<ColorLayout>{
 public:
-  virtual bool        isActive(){ return
-      Parameters::getInstance()->getiParameter("feature_mpeg7_color_layout"); }
-  virtual std::string getParameterName(){ return "mpeg7_color_layout";}
+  virtual std::string getParameterName();
+  virtual Descriptor extract_(MyImage *image,
+			      bool makeVisualRep,
+			      Magick::Image *repr);
 };
 
+// Texture Based Descriptors ---------------------------------------------------
 
+class EdgeHistogram : public Feature, public Singleton<EdgeHistogram>{
+public:
+  virtual std::string getParameterName();
+  virtual Descriptor  extract_(MyImage *Image,
+			       bool makeVisualRespresentation,
+			       Magick::Image * repr) ;
+};
 
-}}}
+class HomogeneousTexture : public Feature, public Singleton<HomogeneousTexture>{
+public:
+  virtual std::string getParameterName();
+  virtual Descriptor extract_(MyImage *image,
+			      bool makeVisualRep,
+			      Magick::Image *repr);
+};
+
+/*
+// Shape Based Descriptors -----------------------------------------------------
+
+class ContourShape : public Feature, public Singleton<ContourShape>{
+public:
+  virtual bool isActive();
+  virtual std::string getParameterName();
+  virtual Descriptor extract_(MyImage *image,
+			      bool makeVisualRep,
+			      Magick::Image *repr);
+};
+
+class RegionShape : public Feature, public Singleton<RegionShape>{
+public:
+  virtual bool isActive();
+  virtual std::string getParameterName();
+  virtual Descriptor extract_(MyImage *image,
+			      bool makeVisualRep,
+			      Magick::Image *repr);
+};
+*/
+} // namespace features
+} // namespace vito
+
 
 #endif

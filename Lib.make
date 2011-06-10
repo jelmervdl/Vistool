@@ -37,6 +37,7 @@ endif
 Head_Path += -I/usr/include/opencv
 Head_Path += -I/usr/include/ImageMagick
 
+Head_Path += -I./libs/mpeg7
 Head_Path += -I./libs/glui
 Head_Path += -I./libs/libsvm-3.0
 
@@ -47,5 +48,5 @@ Lib_Magickpp  =  -I/opt/include/ImageMagick -g -O2 -D_THREAD_SAFE -pthread -L/op
 #Libraries
 	Lib_PNG      = -lpng
 	Lib_Boost    = -lboost_filesystem-mt -lboost_system-mt -lboost_thread-mt
-	Lib_OpenCV   = -lml -lcv -lcxcore -lhighgui
+	Lib_OpenCV   = -lopencv_ml -lopencv_core -lopencv_imgproc -lopencv_objdetect -lopencv_highgui -lopencv_legacy
 	Lib_Xerces   = -lxerces-c

@@ -36,10 +36,7 @@ public:
     clustering::KMeansClustering clustering;
     patch_collection patches;
     std::cout << "getting patch collection " << std::endl;
-    if(feature->getParameterName().find("mpeg7") == 0)
-      patches = features::mpeg7::getAllPatches(dps);
-    else
-      patches = patch_extractor.getPatches(dps, feature);
+    patches = patch_extractor.getPatches(dps, feature);
     std::cout << "got patches, going to cluster now" << std::endl;
     centers = clustering.cluster(patches);
 
@@ -99,12 +96,7 @@ public:
 
     patch_collection image_patches;
 
-    if(feature->getParameterName().find("mpeg7") == 0){
-      std::vector<DataPoint> t_dps;
-      t_dps.push_back(DataPoint(0,"", image->getLocation(), ""));
-      image_patches = mpeg7::getAllPatches(t_dps);
-    }else
-      image_patches = patch_extractor.getPatches(*image, feature);
+    image_patches = patch_extractor.getPatches(*image, feature);
 
     const int kClasses = Parameters::getInstance()->getiParameter("clustering_means");    
     Descriptor histogram (kClasses);
