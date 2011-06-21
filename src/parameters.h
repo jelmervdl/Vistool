@@ -35,6 +35,8 @@ class ParameterPanel;
 }
 
 
+/* Class that reads xml files and supplies classifiers and features
+   with parameters. */
 class Parameters : public Multiton<Parameters>{
   friend class Singleton<Parameters>;
   friend class Multiton<Parameters>;

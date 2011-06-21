@@ -1,15 +1,13 @@
 #ifndef DATASET_H
 #define DATASET_H
 
-#include <algorithm>
 #include <map>
-
 #include "core.h"
 #include "category.h"
-#include "boost/filesystem.hpp"
 #include "fileManagement.h"
 
 namespace vito{
+
 
 class Dataset{
  private:

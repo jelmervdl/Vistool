@@ -20,7 +20,7 @@ class ClassifierSetup;
 class MyImage{
   friend class features::ClassifierSetup;
  protected:
-size_t serial;
+  size_t serial;
   DataPoint dp;
   size_t width, height;
   std::string location;

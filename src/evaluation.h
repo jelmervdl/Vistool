@@ -7,19 +7,9 @@
 namespace vito{
 namespace evaluation{
 
+/* Evaluates classification results given the original datapoints and
+ some labels */
 class Evaluation{
-
-private:
-  size_t correct;
-  size_t instances;
-  float recall;
-  float precision;
-  float tval;
-
-  std::map<int, int> map_correct_to_label;
-  std::map<int, int> map_total_to_label;
-
-  std::map<int, std::vector<DataPoint*> > classificationmap;
 
 public:
   // constructors 
@@ -46,6 +36,18 @@ public:
   // classmap getters
   std::map<int, int>      getCorrectMap();
   std::map<int, int>      getTotalMap();
+
+private:
+  size_t correct;
+  size_t instances;
+  float recall;
+  float precision;
+  float tval;
+
+  std::map<int, int> map_correct_to_label;
+  std::map<int, int> map_total_to_label;
+
+  std::map<int, std::vector<DataPoint*> > classificationmap;
 };
 
 }}

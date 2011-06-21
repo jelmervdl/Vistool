@@ -4,12 +4,10 @@
 #define CV_NO_BACKWARD_COMPATIBILITY
 
 #include "parameters.h"
-#include "singleton.h"
 #include "cv.h"
 #include "highgui.h"
 #include "feature.h"
 
-#include <iostream>
 #include <cstdio>
 
 #ifdef _EiC
@@ -24,6 +22,7 @@ int detect( cv::Mat& img,
 	     cv::CascadeClassifier& nestedCascade,
 	     double scale);
 
+/* face detection features */
 class FaceFeature : public Feature, public Singleton<FaceFeature> {
 public:
   std::string getParameterName(){

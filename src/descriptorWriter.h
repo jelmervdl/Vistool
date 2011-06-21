@@ -11,8 +11,10 @@
 namespace vito{
 namespace write{
 
-void writeDescriptor(std::vector<float> * datapoints, std::string destination);
-void readDescriptor(std::vector<float> * datapoints, std::string location);
+// read an write descriptor binary files 
+
+void               writeDescriptor(std::vector<float> * datapoints, std::string destination);
+void               readDescriptor(std::vector<float> * datapoints, std::string location);
 std::vector<float> readDescriptor(std::string location);
 
 }}

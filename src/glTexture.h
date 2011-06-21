@@ -11,9 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
-#include <iostream>
 #include "texture.h"
-#include "gradient.h"
+#include "sift.h"
 
 namespace vito{
 namespace gui{

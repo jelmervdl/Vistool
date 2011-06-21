@@ -5,6 +5,7 @@ using namespace std;
 
 namespace vito{
 
+/* appearantly I had more in mind for this file than this... */
 
 bool is_image (boost::filesystem::path::string_type  string){
   if(string == ".png"){

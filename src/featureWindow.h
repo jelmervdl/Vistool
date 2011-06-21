@@ -9,6 +9,8 @@
 namespace vito{
 namespace gui{
 
+/* windows containing boxes for each of the existing features to
+   activate and deactivate */
 class FeatureWindow {
 protected:
   GLUI *window;

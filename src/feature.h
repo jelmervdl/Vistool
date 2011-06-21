@@ -1,18 +1,15 @@
 #ifndef FEATURE_H
 #define FEATURE_H
 
-#include <vector>
 #include "myImage.h"
 #include "descriptor.h"
-#include "parameters.h"
 
 namespace vito{
 namespace features{
 
+
+/* Feature Extractor class */
 class Feature{
-private:
-
-
 public:
 
   //constructor

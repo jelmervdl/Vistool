@@ -7,7 +7,6 @@
    themselves. To be used mainly by Dataset.*/
 
 #include <algorithm>
-#include <vector>
 #include"dataPoint.h"
 
 namespace vito{ 
