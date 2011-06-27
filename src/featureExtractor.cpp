@@ -161,8 +161,8 @@ void FeatureExtractor::getCVMatrices(vector <DataPoint*>  dps, CvMat * training,
 }
 
 void FeatureExtractor::renewDescriptors(const DataPointCollection &dps){
-  const int kThreads = 1;
   queue<boost::thread*> threads;
+  
   typedef DataPointCollection::const_iterator dp_it;
   for(dp_it i = dps.begin(); i!= dps.end(); ++i){
     renewDescriptor(*i, false); 
@@ -185,7 +185,18 @@ void FeatureExtractor::renewDescriptors(const DataPointCollection &dps){
     delete threads.front();
     threads.pop();
   }
+  
+  typedef DataPointCollection::const_iterator dpit;
+  for(dpit i = dps.begin(); i!= dps.end(); ++i)
+    threads.push(new boost::thread( &FeatureExtractor::renewDescriptor, 
+				    this, *i, false));
+  while(threads.size() != 0 ){
+    threads.front()->join();
+    delete threads.front();
+    threads.pop();
+  }
   */
+
 }
 
 ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){

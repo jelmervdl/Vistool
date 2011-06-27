@@ -131,6 +131,7 @@ float nn(Dataset &dataset){
   // classify the test
   LabelCollection result_labels = svm.classify(testing_descriptors);
 
+  svm.clean();
   // evaluate the results
   Evaluation evaluation(test, result_labels);
   //evaluation.print();

@@ -46,6 +46,8 @@ void NNClassifier::train(const ExampleCollection &examples){
   }
   clean();
   knn = new CvKNearest(tmat, labs); 
+  cvReleaseMat(&tmat);
+  cvReleaseMat(&labs);
 }
 
 Label  NNClassifier::classify(const Descriptor &descriptor){
@@ -63,7 +65,10 @@ Label  NNClassifier::classify(const Descriptor &descriptor){
   CvMat *results_mat = cvCreateMat(1,1,CV_32FC1);
   knn->find_nearest(tmat, k, results_mat);
   Mat  res(results_mat, 0);
-  return res.at<int>(0,0);
+  Label fin = res.at<int>(0,0);
+  cvReleaseMat(&tmat);
+  cvReleaseMat(&results_mat);
+  return fin;
 }
 
 }}

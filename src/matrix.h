@@ -6,9 +6,9 @@ namespace vito{
 
 template<class Type> class Matrix{
  private:
-  Type * values;
   size_t width, height;
  public:
+  Type * values;
   //constructor
         ~Matrix();
          Matrix(size_t width_, size_t height_);

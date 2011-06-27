@@ -42,6 +42,7 @@ Gradient         singleGradient(const Matrix<float> &image,
 // create a gradient for an entire image
 Matrix<Gradient> imageGradient(const Matrix<float>  &image);
 
+
 // bin gradients together to make a histogram
 void             bin(Gradient &gradient, 
 		     Descriptor  &bins, 
