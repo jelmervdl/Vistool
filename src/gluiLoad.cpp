@@ -45,7 +45,7 @@ void loadPicture(){
 }
 
 void loadCaltech(){
-  loadDataset("../datasets/caltech101/");
+  loadDataset(string(DATASET_LOCATION) + "caltech101/");
 }
 
 void askDataset(){

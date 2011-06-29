@@ -37,10 +37,6 @@ patch_collection ClusteringAlgorithm::readClusters(string file){
   assert(values.size() > 2);
   const int kPatches = values[0];
   const int patch_size = values[1];
-  for(size_t i = 0; i < values.size(); i++)
-    cout << values[i] << " ";
-  cout << endl;
-
   assert((int) values.size() == 2 + kPatches * patch_size);
   vector<Descriptor> centers(kPatches, vector<float>(patch_size));
   for(int p = 0; p < kPatches; p++)

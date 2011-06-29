@@ -18,11 +18,12 @@ namespace experiment{
 
 float performExperiment(const string str, 
 			const string dataset_string,
-			const int repetitions){
+			const int repetitions,
+			const size_t kDataPoints){
   cout << "performing experiment " << str << endl;
 
   Dataset dataset = getDataSet(dataset_string);
-  float (*exp_func)(Dataset&) = 0;
+  float (*exp_func)(Dataset&, size_t) = 0;
 
   if(str == "svm") exp_func = &svm;
   if(str == "nn") exp_func = &nn;
@@ -31,9 +32,9 @@ float performExperiment(const string str,
     cout << "experiment not found" << endl;
     return 0.0;
   }if(str == "nn"){
+    // optimize the k for nn
     Parameters *params = Parameters::getInstance();
     int orig = params->getiParameter("knn_classifier_k");
-    //const int reps = 30;
     vector<int> k_candidates;
     k_candidates.push_back(1);
     k_candidates.push_back(3);
@@ -50,7 +51,7 @@ float performExperiment(const string str,
       params->saveInteger("knn_classifier_k", *i);
       Statistics temp_vals;
       for(int j = 0; j < 20; j++)
-       temp_vals.push_back(exp_func(dataset));
+	temp_vals.push_back(exp_func(dataset, kDataPoints));
       cout << "k = " << *i << " : " << temp_vals.mean();
      cout << " +- " << temp_vals.std() << endl;
      if(temp_vals.mean() > max){
@@ -63,7 +64,7 @@ float performExperiment(const string str,
   Statistics values;
   
   for(int i = 0; i < repetitions; i++){
-    values.push_back(exp_func(dataset));
+    values.push_back(exp_func(dataset, kDataPoints));
     //cout << "added: " << values[i] << " currentmean: " << values.mean() << endl;
   }
   cout << "k = " << Parameters::getInstance()->getiParameter("knn_classifier_k") << endl;
@@ -79,7 +80,7 @@ Dataset getDataSet(const string str){
 }
 
 Dataset abdullah2010(){
-  Dataset dataset ("../datasets/caltech101/");
+  Dataset dataset (string(DATASET_LOCATION) + "caltech101/");
   dataset.enableCategory("airplanes");
   dataset.enableCategory("camera");
   dataset.enableCategory("car_side");
@@ -93,9 +94,9 @@ Dataset abdullah2010(){
   return dataset;
 }
 
-float svm(Dataset &dataset){
+float svm(Dataset &dataset, size_t datapoints){
   DataPointCollection train, test;
-  dataset.randomDataSplit(&train, &test, 0.5, true, 30);
+  dataset.randomDataSplit(&train, &test, 0.5, true, datapoints);
 
   //get Labels, Examples and Descriptors
   FeatureExtractor *fe = FeatureExtractor::getInstance();
@@ -115,9 +116,9 @@ float svm(Dataset &dataset){
   return evaluation.getPrecision();
 }
 
-float nn(Dataset &dataset){
+float nn(Dataset &dataset, size_t datapoints){
   DataPointCollection train, test;
-  dataset.randomDataSplit(&train, &test, 0.5, true, 30);
+  dataset.randomDataSplit(&train, &test, 0.5, true, datapoints);
 
   //get Labels, Examples and Descriptors
   FeatureExtractor *fe = FeatureExtractor::getInstance();

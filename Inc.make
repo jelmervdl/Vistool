@@ -18,7 +18,7 @@ Obj-c_Objects = $(subst $(SOURCE_DIRECTORY), $(OBJECT_DIRECTORY), $(Obj-c_Source
 #executable
 Target = machineVisionTool
 
-#Java
 DescriptorLocation = desc/
+DatasetLocation = datasets/
 
 MPEG7JavaClassLocation = ../mpg7/bin

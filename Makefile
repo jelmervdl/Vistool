@@ -11,8 +11,9 @@ Libraries = $(Lib_GLUT) $(Lib_GLUI) $(Lib_OGL) $(Lib_PNG) $(Lib_Cocoa) $(Lib_JNI
 D_loc = -D 'DESCRIPTOR_LOCATION="$(DescriptorLocation)"'
 Mpeg7_Include = -D 'MPEG7_JAVA_CLASS_LOCATION="$(MPEG7JavaClassLocation)"'
 Image_Magick_Threads = -D 'OMP_NUM_THREADS=1'
+Dataset_loc = -D 'DATASET_LOCATION="$(DatasetLocation)"'
 
-Macros = $(D_loc) $(Java_Include) $(Mpeg7_Include) $(Image_Magick_Threads)
+Macros = $(D_loc) $(Java_Include) $(Mpeg7_Include) $(Image_Magick_Threads) $(Dataset_loc)
 
 #Flags
 Cpp_Flags = -Wall -DUNIX -g $(Macros)
@@ -191,7 +192,7 @@ $(SVM): exp/svm/%.log : exp/svm_optimized/%.xml
 
 $(SVM_OPT): exp/svm_optimized/%.xml : exp/settings/%.xml
 	@echo "optimizing $@ to $< and saving to $@.log"
+	echo "placeholder " >$@
 	./$(Target) optimize $< $@ > $<.log
 	./$(Target) -p $@ experiment svm abdullah2010 1000 >> $<.log
-
 

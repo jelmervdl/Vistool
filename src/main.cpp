@@ -35,7 +35,7 @@ void testFaceRec(){
 }
 
 void testClassifierStack(){
-  Dataset dataset("/Users/mauricemulder/workspace/datasets/caltech101/");
+  Dataset dataset(string(DATASET_LOCATION) + "caltech101/");
   dataset.enableCategory("accordion");
   dataset.enableCategory("emu");
   DataPointCollection train, test;
@@ -224,6 +224,12 @@ int main(int argc, char ** argv){
     if(arg == end){
 	  experiment::performExperiment(type, dataset, reps);	  
 	  return 0;
+    } 
+    int kdps = atoi(arg->c_str());
+    arg++;
+    if(arg == end){
+      experiment::performExperiment(type, dataset, reps, kdps);	  
+      return 0;
     }
   }if(*arg == "cluster"){
     arg++;
