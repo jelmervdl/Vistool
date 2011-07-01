@@ -27,7 +27,10 @@ Linker = $(Cpp_Comp)
 
 all:  libs $(Target) 
 
-libs: glui svm
+libs: glui svm mpeg7lib
+
+mpeg7lib: 
+	cd libs/mpeg7 && $(MAKE)
 
 glui: $(Glui_Objects)
 

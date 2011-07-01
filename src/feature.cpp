@@ -5,6 +5,7 @@ using std::vector;
 using std::string;
 using std::cout;
 using std::endl;
+using std::stringstream;
 
 namespace vito{
 namespace features{
@@ -13,8 +14,7 @@ namespace features{
 Feature::~Feature(){
 }
 
-Feature::Feature() : 
-  min(0), max(0), norm(false){
+  Feature::Feature(){
 }
 
 bool Feature::isActive(){

@@ -49,7 +49,6 @@ public:
 
 class ExampleCollection : public std::vector<Example> {
 public:
-  const DataPointCollection dps;
   ExampleCollection() : std::vector<Example>() {}
   ExampleCollection(size_t size) : std::vector<Example>(size){}
   void print();

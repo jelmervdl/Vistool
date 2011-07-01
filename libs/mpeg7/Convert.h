@@ -1,7 +1,7 @@
 #ifndef __CONVERT__H__
 #define __CONVERT__H__
 
-#include <opencv2/core/core.hpp>
+#include <opencv/cxcore.h>
 
 #include "AddressLib/vopio.h"
 

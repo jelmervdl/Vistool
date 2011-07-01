@@ -41,7 +41,7 @@
 #include <cstring>
 #include <cfloat>
 
-#include "Descriptors/ColorLayout.h"                     /* Naming Convention */
+#include "../Descriptors/ColorLayout.h"                     /* Naming Convention */
 #include "ColorLayoutExtraction.h"
 
 #ifndef M_PI

@@ -37,8 +37,8 @@
 #ifndef __COLOR_LAYOUT_EXTRACTION_H__
 #define __COLOR_LAYOUT_EXTRACTION_H__
 
-#include "AddressLib/vopio.h"
-#include "Descriptors/ColorLayout.h"
+#include "../AddressLib/vopio.h"
+#include "../Descriptors/ColorLayout.h"
 
 namespace XM
 {

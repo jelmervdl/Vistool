@@ -1,7 +1,7 @@
 #ifndef SVMCLASSIFIER_H
 #define SVMCLASSIFIER_H
 
-#include "datapoint.h"
+#include "dataPoint.h"
 //#include "featureExtractor.h"
 #include "classifier.h"
 #include "svm.h"
