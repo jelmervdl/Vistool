@@ -25,7 +25,7 @@ Linker = $(Cpp_Comp)
 
 .SUFFIXES: .Cpp
 
-all:  TAGS libs $(Target) 
+all:  libs $(Target) 
 
 libs: glui svm
 
