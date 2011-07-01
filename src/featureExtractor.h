@@ -11,25 +11,25 @@
 #include "descriptorWriter.h"
 #include "dataset.h"
 
+
+
 namespace vito{
 namespace features{
+
+struct NormalizationInfo{
+  float min;
+  float max;
+  bool calibrated;
+  void calibrateNormalization(const DataPointCollection &dps);
+};
 
 class FeatureExtractor:public Singleton<FeatureExtractor>{
   friend class Singleton<FeatureExtractor>;
 
  private:
-  float min, max;
-  bool normalization_calibrated;
-
+  std::map<std::string, NormalizationInfo> normalizations;
 
   std::vector<Feature*> features;
-
-
-  //constructor
-  FeatureExtractor();
-
-  // calibrate normalization range based on datapoints dps
-  void calibrateNormalization(const DataPointCollection &dps);
 
   //create directory if it doesn't exist
   void                  assertDir(std::string str);

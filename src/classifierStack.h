@@ -80,8 +80,8 @@ public:
 class SVMStack : public std::vector<features::SVMActivationSetup>,
 		 public Feature{
 public:
-  virtual bool isActive();
-  virtual bool isStack();
+  virtual bool        isActive();
+  virtual bool        isStack();
   virtual std::string getParameterName();
   virtual Descriptor extract_(MyImage *Image,
 			      bool makevisrep,
@@ -95,6 +95,21 @@ public:
   void add_to(std::vector<Feature*> &features);
 };
 
+class SVMMeanRule : public SVMStack{
+public:
+  virtual std::string  getParameterName();
+  virtual Descriptor   extract_(MyImage *Image,
+				bool makevisrep,
+				Magick::Image *rep);
+};
+
+class SVMProductRule : public SVMStack{
+public:
+  virtual std::string  getParameterName();
+  virtual Descriptor   extract_(MyImage *Image,
+				bool makevisrep,
+				Magick::Image *rep);
+};
 
 }
 

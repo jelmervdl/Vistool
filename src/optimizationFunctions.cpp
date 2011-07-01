@@ -21,7 +21,9 @@ float evaluateSVMAbdullah(){
 float evaluateSVM(){   
   float result = 0.0;
   for(int i  = 0; i < 10; ++i){
-    Dataset dataset("../datasets/Caltech101/");
+    Dataset dataset = Dataset::createDatasetByName("bigclasses");
+      /*
+      ("../datasets/Caltech101/");
     dataset.enableCategory("airplanes");
     dataset.enableCategory("camera");
     dataset.enableCategory("car_side");
@@ -32,7 +34,7 @@ float evaluateSVM(){
     dataset.enableCategory("scissors");
     dataset.enableCategory("umbrella");
     dataset.enableCategory("watch");
-
+      */
     dataset.print();
     DataPointCollection points = dataset.enabledPoints();
     random_shuffle(points.begin(), points.end());

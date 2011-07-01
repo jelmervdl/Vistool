@@ -18,27 +18,24 @@ namespace features{
 using write::readDescriptor;
 using write::writeDescriptor;
 
-FeatureExtractor::FeatureExtractor() :
-  normalization_calibrated(false){
-}
-
-void FeatureExtractor::calibrateNormalization(const DataPointCollection &dps){
+void NormalizationInfo::calibrateNormalization(const DataPointCollection &dps){
   cout << "calibrating normalization... " << endl;
+  FeatureExtractor *fe = FeatureExtractor::getInstance();
   typedef DataPointCollection::const_iterator dpcit;
   for(dpcit i = dps.begin(); i != dps.end(); ++i){
     float cmin, cmax;
-    Descriptor current_descriptor = getDescriptor(*i, false, false);
+    Descriptor current_descriptor = fe->getDescriptor(*i, false, false);
     cmin = *std::min_element(current_descriptor.begin(),
 			     current_descriptor.end());
     cmax = *std::max_element(current_descriptor.begin(), 
 			     current_descriptor.end());
     if(cmin < min || i == dps.begin())
-       min = cmin;
+      min = cmin;
     if(cmax > max || i == dps.begin())
       max = cmax;
   }
   cout << "calibration results: min = " << min << " max = " << max << endl;
-  normalization_calibrated = true;
+  calibrated = true;
 }
 
 Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
@@ -46,9 +43,14 @@ Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
 					   const bool normalize){
 
   // if we are to normalize, assure normalization has been calibrated
-  if(normalize && !normalization_calibrated )
-    calibrateNormalization(experiment::abdullah2010().enabledPoints());
-    
+  NormalizationInfo *info = 0;
+  if(normalize){
+    stringstream hash;
+    hash << Parameters::getInstance()->getCurrentHash();
+    info = &normalizations[hash.str().c_str()];
+    if(!info->calibrated)
+      info->calibrateNormalization(experiment::getDataSet("abdullah2010").enabledPoints());
+  }
   Descriptor descriptor;
   vector<Feature*> features = getActiveFeatures();
 
@@ -57,14 +59,14 @@ Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
   if(features.size() == 1 && features[0]->isStack()){
     MyImage image(dp, true);
     descriptor = calcDescriptor(image, dp);   
-
+    return descriptor;
     // if the feature isn't a stack feature just append it.
   }else{  
     renewDescriptor(dp, force);
     readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
   }
-  if(normalize && normalization_calibrated){
-    descriptor.normalize(min, max);
+  if(normalize){
+    descriptor.normalize(info->min, info->max);
   }
   return descriptor;
 }

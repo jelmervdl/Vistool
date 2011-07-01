@@ -5,8 +5,31 @@
 #include "core.h"
 #include "category.h"
 #include "fileManagement.h"
+#include "singleton.h"
+#include <xercesc/util/PlatformUtils.hpp>
+#include <xercesc/parsers/XercesDOMParser.hpp>
+#include <xercesc/dom/DOM.hpp>
+#include <xercesc/sax/HandlerBase.hpp>
+#include <xercesc/util/XMLString.hpp>
+
 
 namespace vito{
+
+struct DatasetSpecification{
+  std::string name;
+  std::string root;
+  std::vector<std::string> categories;
+};
+
+class Specifications : public Singleton<Specifications>{
+private:
+  std::map<std::string, DatasetSpecification> readDatasetIndex(std::string str);
+public:
+  Specifications() :
+    datasets(readDatasetIndex("datasets/index.xml")){}
+  const std::map<std::string, DatasetSpecification> datasets;
+};
+
 
 
 class Dataset{
@@ -50,6 +73,8 @@ class Dataset{
 					  float cut = 0.5, 
 					  bool eqrep = true,
 					  int max = -1);
+  static Dataset          createDatasetByName(std::string str);
+  static Dataset          createDatasetBySpecification(DatasetSpecification dss);
 };
 }
 

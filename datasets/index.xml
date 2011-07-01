@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding='UTF-8'?>
+<datasets>
+  <dataset name="abdullah2010" root="caltech101small">
+      <category>airplanes</category>
+      <category>camera</category>
+      <category>car_side</category>
+      <category>cellphone</category>
+      <category>cup</category>
+      <category>helicopter</category>
+      <category>Motorbikes</category>
+      <category>scissors</category>
+      <category>umbrella</category>
+      <category>watch</category>
+  </dataset>
+  <dataset name="2bigclasses" root="caltech101">
+      <category>airplanes</category>
+      <category>Motorbikes</category>
+      <category>watch</category>
+      <category>Leopards</category>
+  </dataset>
+  <dataset name="bigclasses" root="caltech256">
+    <!-- <category>008.bathtub</category> -->
+    <!-- <category>011.billiards</category> -->
+    <category>012.binoculars</category> 
+    <!-- <category>090.gorilla</category> -->
+    <!-- <category>092.grapes</category> -->
+    <!-- <category>096.hammock</category> -->
+    <!-- <category>105.horse</category> -->
+    <!-- <category>126.ladder</category> -->
+    <category>145.motorbikes-101</category>
+    <!-- <category>147.mushroom</category> -->
+    <!-- <category>159.people</category> -->
+    <category>232.t-shirt</category>
+    <category>240.watch-101</category>
+    <category>251.airplanes-101</category>
+    <!-- <category>253.faces-easy-101</category> -->
+  </dataset>
+</datasets>

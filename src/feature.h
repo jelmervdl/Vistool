@@ -10,6 +10,9 @@ namespace features{
 
 /* Feature Extractor class */
 class Feature{
+  float min;
+  float max;
+  bool norm;
 public:
 
   //constructor

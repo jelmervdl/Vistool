@@ -221,58 +221,74 @@ void SVMStack::train(DataPointCollection dps){
     i->train(dps);
   }
 }
+
+
+
+std::string SVMMeanRule::getParameterName(){
+  stringstream name;
+  name << "svmstackmean_of";
+  for(SVMStack::iterator i = begin(); i != end(); ++i){
+    string adress = i->getFile();
+    string filename = adress.substr(adress.rfind('/') + 1, adress.size());
+    name << filename;
+  }
+  return name.str();
+}
+
+float op_sum(float i, float j){ 
+  return i + j;
+}
+Descriptor SVMMeanRule::extract_(MyImage *image, 
+			      bool makevisrep,
+			      Magick::Image *rep){
+  Descriptor desc;
+  for(SVMStack::iterator i = begin(); i != end(); ++i){
+    Descriptor current = i->getActivation(image->getDataPoint());
+    if(desc.size() == 0)
+      desc = current;
+    else     // add the two vectors
+      transform(desc.begin(), desc.end(), desc.begin(), 
+		current.begin(), op_sum);
+    for(Descriptor::iterator i = desc.begin(); i != desc.end(); ++i)
+      *i/= (float) size();
+  }
+  return desc;
+}  
+
+std::string SVMProductRule::getParameterName(){
+  stringstream name;
+  name << "svmstackproduct_of";
+  for(SVMStack::iterator i = begin(); i != end(); ++i){
+    string adress = i->getFile();
+    string filename = adress.substr(adress.rfind('/') + 1, adress.size());
+    name << filename;
+  }
+  return name.str();
+}
+
+float op_product(float i, float j){ 
+  return i * j;
+}
+Descriptor SVMProductRule::extract_(MyImage *image, 
+				    bool makevisrep,
+				    Magick::Image *rep){
+  Descriptor desc;
+  for(SVMStack::iterator i = begin(); i != end(); ++i){
+    Descriptor current = i->getActivation(image->getDataPoint());
+    if(desc.size() == 0)
+      desc = current;
+    else     // multiply the two vectors
+      transform(desc.begin(), desc.end(), desc.begin(), 
+		current.begin(), op_product);
+  }
+  return desc;
+}
+
+
+
 } // features
 
 namespace classification {
-/*
-std::string SVMStack::get_name(){
-  std::stringstream ss;
-  ss << "svm_stack";
-  for(SVMStack::iterator i = begin(); i != end(); ++i)
-    ss << "_" << i->getFile();
-  return ss.str();
-}
-
-void SVMStack::train(const ExampleCollection &examples){
-  //for(SVMStack::iterator i = begin(); i != end(); ++i)
-    //i->train(examples);
-  svm.train(getStackExamples(examples));
-}
-
-Label SVMStack::classify(const Descriptor &descriptor){
-  return svm.classify(getStackResults(descriptor));
-}
-
-ExampleCollection SVMStack::getStackExamples(const ExampleCollection &examples){
-  ExampleCollection stack_examples;
-  DescriptorCollection stack_result = 
-    getStackResults(DescriptorCollection(examples));
-
-  assert(examples.size() == stack_result.size());
-
-  DescriptorCollection::iterator d;
-  ExampleCollection::const_iterator e;
-  for( d =stack_result.begin(),	e = examples.begin();
-      d != stack_result.end() && e != examples.end();
-      ++e, ++d)
-    stack_examples.push_back(Example(*d, e->get_label()));
-  return stack_examples;
-}
-
-DescriptorCollection SVMStack::getStackResults(const DescriptorCollection & dc){
-  DescriptorCollection collection;
-  for(DescriptorCollection::const_iterator i = dc.begin(); i != dc.end(); ++i)
-    collection.push_back(getStackResults(*i));
-  return collection;
-}
-
- Descriptor SVMStack::getStackResults(const Descriptor &descriptor){
-  Descriptor stack_result;
-  //for(SVMStack::iterator i = begin(); i != end(); ++i)
-  //stack_result = stack_result + i->getActivation(descriptor);
-  return descriptor;
- }
-*/
 
 ClassifierStack::ClassifierStack(vector<features::ClassifierSetup> s) : 
   setups(s){

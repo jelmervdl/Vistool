@@ -144,6 +144,54 @@ void Dataset::randomDataSplit(vector<DataPoint> * train,
   */
 }
 
+Dataset Dataset::createDatasetByName(string str){
+  DatasetSpecification dss =  
+    Specifications::getInstance()->datasets.find(str)->second;
+  return createDatasetBySpecification(dss);
+}
+
+Dataset Dataset::createDatasetBySpecification(DatasetSpecification dss){
+  Dataset result("datasets/" + dss.root);
+  for(vector<string>::const_iterator i = dss.categories.begin();
+      i != dss.categories.end(); ++i)
+    result.enableCategory(*i);
+  return result;
+
+}
+
+map<string, DatasetSpecification> Specifications::readDatasetIndex(string str){
+  map<string, DatasetSpecification> result;
+  XERCES_CPP_NAMESPACE_USE
+  XMLPlatformUtils::Initialize();
+  XercesDOMParser parser;
+  parser.setValidationScheme(XercesDOMParser::Val_Always);
+  HandlerBase errHandler;// = (ErrorHandler*) new HandlerBase();
+  parser.setErrorHandler(&errHandler);
+  parser.parse(str.c_str());
+  DOMDocument * doc = parser.getDocument();
+  DOMElement* elementRoot = doc->getDocumentElement();
+  DOMNodeList *entries = 
+    elementRoot->getElementsByTagName(XMLString::transcode("dataset"));
+  for(size_t i = 0; i < entries->getLength(); ++i){
+    DOMNode *current = entries->item(i);
+    DatasetSpecification dss;
+    dss.name = XMLString::transcode(current->getAttributes()->
+				    getNamedItem(XMLString::transcode("name"))->
+				    getNodeValue());
+    dss.root = XMLString::transcode(current->getAttributes()->
+				    getNamedItem(XMLString::transcode("root"))->
+				    getNodeValue());
+    cout << "name: " << dss.name << " root: " << dss.root;
+    DOMNodeList *categories = current->getChildNodes();
+    for(size_t j = 0; j < categories->getLength(); ++j)
+      if((string) XMLString::transcode(categories->item(j)->getNodeName()) ==
+	 "category")
+	dss.categories.push_back(XMLString::transcode(categories->item(j)->getTextContent()));
+    result[dss.name] = dss;
+  }
+  return result;
+}
+
 vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
   size_t min = smallestCategory();
   vector<Category*> enabled = getEnabled();
