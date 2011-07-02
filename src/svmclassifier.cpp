@@ -142,14 +142,17 @@ vector<double> SVMClassifier::getValuesPerClass(svm_node *nodes,
 vector<double> SVMClassifier::getValues(svm_node *nodes,
 					svm_model *model){
   const int nr_classes = svm_get_nr_class(model);
-  const int nr_values = (nr_classes * (nr_classes + 1) ) / 2;
-  double *values = new double[ nr_values ];
-  for(int i = 0; i < nr_values; ++i)
+  //const int nr_values = (nr_classes * (nr_classes + 1) ) / 2;
+  double *values = new double[ nr_classes ];
+  for(int i = 0; i < nr_classes; ++i)
     values[i] = 0.0;
-  svm_predict_values(model, nodes, values);
+  svm_predict_probability(model, nodes, values);
   vector<double> values_vector;
-  for(int i = 0; i < nr_values; ++i)
+  for(int i = 0; i < nr_classes; ++i){
     values_vector.push_back(values[i]);
+    cout << values[i] << " ";
+  }
+  cout << endl;
   delete values;
   return values_vector;
 }
@@ -214,7 +217,7 @@ svm_parameter * SVMClassifier::new_svm_parameters(){
   newsvm->nu = 0;	/* for NU_SVC, ONE_CLASS, and NU_SVR */
   newsvm->p = 0;	/* for EPSILON_SVR */
   newsvm->shrinking = 0;	/* use the shrinking heuristics */
-  newsvm->probability = 0; /* do probability estimates */
+  newsvm->probability = 1; /* do probability estimates */
   return newsvm;
 };
 
