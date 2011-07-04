@@ -35,6 +35,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   void                  assertDir(std::string str);
 
  public:
+  bool                  allExtracted(const DataPointCollection &dps);
 
   std::vector<float>    calcDescriptor(MyImage &image, const DataPoint &dp);
   void                  renewDescriptors(const DataPointCollection &dps);
@@ -42,9 +43,10 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   // descriptor is always calculated
   Descriptor            getDescriptor(const DataPoint &dps,
 				      const bool force = false,
-				      const bool normalize = true);
+				      const bool normalize = true,
+				      const bool stacktraining = false);
 
-
+  Descriptor            getDescriptorWhileTrainingStack(const DataPoint &dp);
 
   // save all active categories within dataset to their respective
   // files.
@@ -54,7 +56,8 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   // refresh the a datapoints descriptor if it is required or do it
   // anyway if forced
   void                  renewDescriptor(const DataPoint &dp,
-					const bool force);
+					const bool force,
+					const bool train = false);
 
   std::string           getCurrentDescriptorLocation(const DataPoint &dp);
 

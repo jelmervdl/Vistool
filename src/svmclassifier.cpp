@@ -38,7 +38,7 @@ string SVMClassifier::get_name(){
 }
 
 void SVMClassifier::train(const ExampleCollection &examples){
-  //  cout << "training";
+    cout << "training";
   //
   if(model != 0){
     svm_free_and_destroy_model(&model);
@@ -116,7 +116,7 @@ svm_parameter *SVMClassifier::getSVMParameters(){
   multi_svm_par.nu = p.getfParameter("svm_nu");
   multi_svm_par.p = p.getfParameter("svm_p");
   multi_svm_par.shrinking = p.getiParameter("svm_shrinking");
-  multi_svm_par.probability = p.getiParameter("svm_probabiity");
+  multi_svm_par.probability = p.getiParameter("svm_probability_real");
   return newpar;
 }
 
@@ -148,11 +148,8 @@ vector<double> SVMClassifier::getValues(svm_node *nodes,
     values[i] = 0.0;
   svm_predict_probability(model, nodes, values);
   vector<double> values_vector;
-  for(int i = 0; i < nr_classes; ++i){
+  for(int i = 0; i < nr_classes; ++i)
     values_vector.push_back(values[i]);
-    cout << values[i] << " ";
-  }
-  cout << endl;
   delete values;
   return values_vector;
 }
@@ -217,7 +214,7 @@ svm_parameter * SVMClassifier::new_svm_parameters(){
   newsvm->nu = 0;	/* for NU_SVC, ONE_CLASS, and NU_SVR */
   newsvm->p = 0;	/* for EPSILON_SVR */
   newsvm->shrinking = 0;	/* use the shrinking heuristics */
-  newsvm->probability = 1; /* do probability estimates */
+  newsvm->probability = 0; /* do probability estimates */
   return newsvm;
 };
 

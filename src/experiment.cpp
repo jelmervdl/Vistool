@@ -65,6 +65,8 @@ float performExperiment(const string str,
   
   for(int i = 0; i < repetitions; i++){
     values.push_back(exp_func(dataset, kDataPoints));
+    if(i % 10 == 0)
+      cout << "done with " << i << "currently: " << values.mean() << endl;
     //cout << "added: " << values[i] << " currentmean: " << values.mean() << endl;
   }
   cout << "k = " << Parameters::getInstance()->getiParameter("knn_classifier_k") << endl;

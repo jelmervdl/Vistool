@@ -80,6 +80,7 @@ public:
 class SVMStack : public std::vector<features::SVMActivationSetup>,
 		 public Feature{
 public:
+  SVMStack ();
   virtual bool        isActive();
   virtual bool        isStack();
   virtual std::string getParameterName();

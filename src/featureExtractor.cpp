@@ -24,7 +24,8 @@ void NormalizationInfo::calibrateNormalization(const DataPointCollection &dps){
   typedef DataPointCollection::const_iterator dpcit;
   for(dpcit i = dps.begin(); i != dps.end(); ++i){
     float cmin, cmax;
-    Descriptor current_descriptor = fe->getDescriptor(*i, false, false);
+    Descriptor current_descriptor = fe->getDescriptor(*i, false, false, true);
+    cout << Parameters::getInstance()->getCurrentHash() << " " << current_descriptor.size() << endl;
     cmin = *std::min_element(current_descriptor.begin(),
 			     current_descriptor.end());
     cmax = *std::max_element(current_descriptor.begin(), 
@@ -40,7 +41,8 @@ void NormalizationInfo::calibrateNormalization(const DataPointCollection &dps){
 
 Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
 					   const bool force,
-					   const bool normalize){
+					   const bool normalize,
+					   const bool Stacktraining){
 
   // if we are to normalize, assure normalization has been calibrated
   NormalizationInfo *info = 0;
@@ -57,10 +59,21 @@ Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
   // if the active feature is a stack feature, recalculate it rather than 
   // loading it from file
   if(features.size() == 1 && features[0]->isStack()){
-    MyImage image(dp, true);
-    descriptor = calcDescriptor(image, dp);   
-    return descriptor;
-    // if the feature isn't a stack feature just append it.
+    //however while optimizing, to save time just keep the non-training points
+    if(Parameters::getInstance()->getiParameter("mode_optimize") > 0){
+      if(Stacktraining){
+	descriptor = getDescriptorWhileTrainingStack(dp);
+      }
+      else{
+	renewDescriptor(dp, force);
+	readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
+      }
+
+    }else{ // when not optimizing always recalculate stackfeatures!
+      MyImage image(dp, true);
+      descriptor = calcDescriptor(image, dp);   
+    }    
+  // if the feature isn't a stack feature just append it.
   }else{  
     renewDescriptor(dp, force);
     readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
@@ -137,13 +150,28 @@ vector<float> FeatureExtractor::calcDescriptor(MyImage &image,
     return descriptor;
 }
 
-void FeatureExtractor::renewDescriptor(const DataPoint &dp, const bool force){
+Descriptor FeatureExtractor::getDescriptorWhileTrainingStack(const DataPoint &dp){
+  string final_descriptor_location = getCurrentDescriptorLocation(dp);
+  Descriptor desc;
+  if(!exists(path(final_descriptor_location))){
+    MyImage image(dp);
+    desc = calcDescriptor(image, dp);
+  }else{
+    readDescriptor(&desc, getCurrentDescriptorLocation(dp));
+  }
+  return desc;
+}
+
+void FeatureExtractor::renewDescriptor(const DataPoint &dp, 
+				       const bool force, 
+				       const bool train){
   vector<Feature*> features = getActiveFeatures();
   string final_descriptor_location = getCurrentDescriptorLocation(dp);
   if(force || !exists(path(final_descriptor_location))) {
     cout << "having to rewrite: " << final_descriptor_location << endl;
     MyImage image(dp);
     vector<float> descriptor = calcDescriptor(image, dp);
+
     writeDescriptor(&descriptor,final_descriptor_location);
   } 
 }
@@ -201,30 +229,45 @@ void FeatureExtractor::renewDescriptors(const DataPointCollection &dps){
 
 }
 
-ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
-  vector<Feature*> features = getActiveFeatures();
-  for(vector<Feature*>::iterator i = features.begin();
-      i != features.end(); ++i){
-    if((*i)->isStack())
-      (*i)->train(dps);
-  }
-  ExampleCollection examples(dps.size());
-  for(size_t i = 0; i < dps.size(); ++i){
+bool FeatureExtractor::allExtracted(const DataPointCollection &dps2){
+  Dataset dset = Dataset::createDatasetByName("abdullah2010");
+  const DataPointCollection dps = dset.enabledPoints();
+  for(DataPointCollection::const_iterator i = dps.begin(); i!= dps.end(); ++i)
+    if(!exists(path(getCurrentDescriptorLocation(*i)))){
+      return false;
+      cout << "not all extracted yet" << endl;
+    }
+  return true;
+}
 
-    Example current_example(getDescriptor(dps[i]));
-    current_example.set_label(dps[i].get_label());
-    examples[i] = current_example;
+ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
+  // train possible stacks on the examples as well
+  vector<Feature*> features = getActiveFeatures();
+
+  for(vector<Feature*>::iterator i = features.begin(); i != features.end(); ++i)
+    if((*i)->isStack())
+      // don't train when optimizing and all values are saved
+      if(!Parameters::getInstance()->getiParameter("mode_optimize") || 
+	 !allExtracted(dps))
+	(*i)->train(dps);
+
+  // Add Labels to Descriptors and return
+  ExampleCollection examples;
+  examples.reserve(dps.size());
+  for(DataPointCollection::const_iterator i = dps.begin(); i != dps.end(); ++i){
+    Example current_example(getDescriptor(*i, 0, true, true));
+    current_example.set_label(i->get_label());
+    examples.push_back(current_example);
   }
   return examples;
 }
 
 DescriptorCollection FeatureExtractor::getDescriptors(const DataPointCollection
 						      &dps){
-  DescriptorCollection descriptors(dps.size());
-  for(size_t i = 0; i < dps.size(); ++i){
-    Descriptor current_descriptor(getDescriptor(dps[i]));
-    descriptors[i] = current_descriptor;
-  }
+  DescriptorCollection descriptors;
+  descriptors.reserve(dps.size());
+  for(DataPointCollection::const_iterator i = dps.begin(); i != dps.end(); ++i)
+    descriptors.push_back(getDescriptor(*i));
   return descriptors;
 }
 

@@ -79,7 +79,7 @@ SetupFeature::SetupFeature(std::vector<Setup> setups)
 }
 
 bool SetupFeature::isStack(){
-  return true;
+  return false;
 }
 
 std::string SetupFeature::getParameterName(){
@@ -155,7 +155,11 @@ void SVMStackFeatures::add_to(std::vector<Feature*> &features){
 
 
 SVMActivationSetup::SVMActivationSetup(std::string setting) : 
-  Setup(setting), origin(setting){}
+  Setup(setting), origin(setting){
+  push();
+  Parameters::getInstance()->saveInteger("svm_probability_real", 1);
+  pop();
+}
 
 std::string SVMActivationSetup::getFile(){
   return origin;
@@ -264,6 +268,9 @@ std::string SVMProductRule::getParameterName(){
     name << filename;
   }
   return name.str();
+}
+
+SVMStack::SVMStack(){
 }
 
 float op_product(float i, float j){ 

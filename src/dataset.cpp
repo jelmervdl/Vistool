@@ -24,7 +24,6 @@ Dataset::Dataset(string str): root(str){
   path full_path =  system_complete(root);
   directory_iterator end_itr;
   size_t label = 0;
-  cout << "trying :" << full_path <<  "...";
   if(is_directory(full_path)){
     cout << "done! Directory is a dataset." << endl;
     try{
