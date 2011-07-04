@@ -1,0 +1,16 @@
+To Compile:
+
+Make sure the following developed libraries are installed:
+  - gcc (ofcourse probably already installed)
+  - OpenGL (probably already installed)
+  - GLUT is installed (Open GL Utility toolkit) (freeglut3-dev)
+  - Make sure Boost (boost-all-dev OR boost-filesystem-dev & boost-thread-dev) is installed
+  - Make sure Xerces-c (xerces-c-dev) is installed.
+  - ImageMagick: Magick++ (magick++-dev)
+  - OpenCV (cv-dev)
+  - OpenCV highgui (highgui-dev)
+  - OpenCV aux: (cvaux-dev)
+
+Then type make to compile
+
+and type make gui to run the gui
