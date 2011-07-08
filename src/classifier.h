@@ -9,6 +9,20 @@
 namespace vito{
 namespace classification{
 
+typedef std::pair<int, float> Probability;
+typedef std::vector<Probability > Probabilities;
+
+struct Estimation{
+  Estimation(const int i);
+  Estimation(const Probabilities &probs);
+  int result;
+  std::map<int, float> probability;
+  float likeliness;
+  float duality;
+};
+
+typedef std::vector<Estimation> EstimationCollection;
+
 class Classifier{
 
 public:
@@ -18,11 +32,12 @@ public:
   virtual std::string      get_name() = 0;
   virtual void             train(const ExampleCollection &examples ) = 0;
   virtual Label            classify(const Descriptor &descriptor ) = 0;
-
+  virtual Estimation       estimate(const Descriptor &descriptor );
+  
   // non-virtual generic methods
-  LabelCollection  crossvalidation(const ExampleCollection &files);
-  LabelCollection  classify(const DescriptorCollection &descriptor);
-
+  LabelCollection      crossvalidation(const ExampleCollection &files);
+  LabelCollection      classify(const DescriptorCollection &descriptors);
+  EstimationCollection estimate(const DescriptorCollection &descriptors);
 
 };
   

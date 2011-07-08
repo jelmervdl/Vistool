@@ -4,6 +4,7 @@ using std::string;
 using std::cout;
 using std::endl;
 using std::vector;
+using std::pair;
 
 namespace vito{
 
@@ -14,15 +15,65 @@ using features::Feature;
 using classification::SVMClassifier;
 using evaluation::Evaluation;
 
+
+
 namespace experiment{
+
+
+void recallExperiment(const string dataset_string){
+  classification::EstimationCollection estimations;
+  DataPointCollection datapoints;
+  for(int i = 0; i < 100; i++){
+    Parameters::getInstance()->saveInteger("svm_probability_real",1);
+    Dataset dataset;  
+    if(dataset_string == "")
+      dataset = Dataset::getPrefferedDataset();
+    else
+      dataset = getDataSet(dataset_string);
+    DataPointCollection dps,train,test;
+    dps = dataset.enabledPoints();
+    dataset.randomDataSplit(&train, &test, 0.5, true);
+    datapoints.insert(datapoints.end(), test.begin(), test.end());
+    SVMClassifier svm;
+    classification::Classifier &classifier = svm;
+    FeatureExtractor *fe = FeatureExtractor::getInstance();
+    classifier.train(fe->getExamples(train));
+    classification::EstimationCollection estimations_ = 
+      classifier.estimate(fe->getDescriptors(test));
+    estimations.insert(estimations.end(), 
+		       estimations_.begin(), estimations_.end());
+  } 
+  float best = 0;
+  float setting = 0;
+  float beta = 0.250;
+  for(float i = 0; i < 1.0; i+= 0.01){
+    Evaluation evaluation(datapoints, estimations, i, beta);
+    float fmeasure = evaluation.getStatsMap()[0].getfmeasure(beta);
+    cout << i << ": " << fmeasure << endl;
+    if(fmeasure > best){
+      best = fmeasure;
+      setting = i;
+    }
+  }
+  Evaluation evaluation(datapoints, estimations, setting, beta);
+  cout << "chosen i: " <<setting << endl;
+  evaluation.print();
+
+  cout << endl << evaluation.getStatsMap()[0].string()
+       << "fmeasure: " << evaluation.getStatsMap()[0].getfmeasure(beta) << endl;
+
+}
 
 float performExperiment(const string str, 
 			const string dataset_string,
 			const int repetitions,
 			const size_t kDataPoints){
   cout << "performing experiment " << str << endl;
-
-  Dataset dataset = getDataSet(dataset_string);
+  Dataset dataset;
+  if(dataset_string == "")
+    dataset = Dataset::getPrefferedDataset();
+  else
+    dataset = getDataSet(dataset_string);
   float (*exp_func)(Dataset&, size_t) = 0;
 
   if(str == "svm") exp_func = &svm;
@@ -65,8 +116,8 @@ float performExperiment(const string str,
   
   for(int i = 0; i < repetitions; i++){
     values.push_back(exp_func(dataset, kDataPoints));
-    if(i % 10 == 0)
-      cout << "done with " << i << "currently: " << values.mean() << endl;
+    //    if(i % 10 == 0)
+    //  cout << "done with " << i << "currently: " << values.mean() << endl;
     //cout << "added: " << values[i] << " currentmean: " << values.mean() << endl;
   }
   cout << "k = " << Parameters::getInstance()->getiParameter("knn_classifier_k") << endl;
@@ -96,7 +147,7 @@ Dataset abdullah2010(){
 
 float svm(Dataset &dataset, size_t datapoints){
   DataPointCollection train, test;
-  dataset.randomDataSplit(&train, &test, 0.8, true, datapoints);
+  dataset.randomDataSplit(&train, &test, 0.5, true, datapoints);
 
   //get Labels, Examples and Descriptors
   FeatureExtractor *fe = FeatureExtractor::getInstance();

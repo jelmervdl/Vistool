@@ -19,9 +19,9 @@ Macros = $(D_loc) $(Java_Include) $(Mpeg7_Include) $(Image_Magick_Threads) $(Dat
 Cpp_Flags = -Wall -DUNIX -g $(Macros)
 
 #Compiler
-Cpp_Comp = g++\
+Cpp_Comp = g++
 #Linker
-Linker = $(Cpp_Comp)
+Linker = $(Cpp_Comp) 
 
 .SUFFIXES: .Cpp
 

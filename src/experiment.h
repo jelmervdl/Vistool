@@ -13,10 +13,13 @@
 namespace vito{
 namespace experiment{
 
+std::pair<float,float> recallExperiment(const std::string str,
+					const std::string dataset_string);
+void recallExperiment(const string dataset_string = "");
 Dataset abdullah2010DataSet();
 Dataset getDataSet(const std::string str);
 float   performExperiment(const std::string str,
-			  const std::string dataset = "abdullah2010",
+			  const std::string dataset = "",
 			  const int repetitions = 1,
 			  const size_t kDataPoints = 30);
 Dataset abdullah2010();

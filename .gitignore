@@ -3,6 +3,8 @@
 *.clustercenters
 *.xml
 *.log
+*.clog
+datasets/*
 *.o
 machineVisionTool
 ztest

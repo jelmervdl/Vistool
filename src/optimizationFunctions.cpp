@@ -15,7 +15,45 @@ using evaluation::Evaluation;
 namespace optimization{
 
 float evaluateSVMAbdullah(){
-  return experiment::performExperiment("svm", "abdullah2010", 100);
+  BestResult &best = *BestResult::getInstance();
+  Statistics stats;
+  int i = 0;
+  Dataset ds = Dataset::getPrefferedDataset();  
+  for(i = 1; i < 6; i++)
+    stats.push_back(experiment::svm(ds));
+  if(best.set == true){
+    float exceed;
+    do{
+      stats.push_back(experiment::svm(ds));
+      i++;
+      exceed = studentTTest::exceedingChance(stats.mean(), stats.std(), i,
+					     best.mean, best.std, best.size);
+      cout << "exceeding chance of" 
+	   << stats.mean() << " +- " << stats.std() << " " << i << "points"  << endl
+	   << "to be over " << best.mean << " +- " << best.std  << " " << best.size << " points " << endl
+	   << "is: " << exceed << endl;
+    } while(exceed > 0.25 && exceed < 0.975 && i < 100);    
+  }
+  if(best.set != true || stats.mean() > best.mean){
+    float std = stats.std();
+    float target_std = 0.006;
+    while(std * std > i * target_std * target_std  ){
+      stats.push_back(experiment::svm(ds));
+      std = stats.std();
+      i++;
+      cout << stats.mean() << " " << stats.std() << endl;
+      cout << "target: " << target_std << " vs current: " << std << " -> " << std / (float) sqrt(i)<< endl;
+    }
+    cout << "after " << i << " rounds:" << endl
+	 << "result: " << stats.mean() << " +- " << stats.std() << endl;
+  }
+  if(stats.mean() > best.mean || !best.set){
+    best.mean = stats.mean();
+    best.std = stats.std();
+    best.size = stats.size();
+    best.set = true;
+  }
+  return stats.mean();
 }
 
 float evaluateSVM(){   

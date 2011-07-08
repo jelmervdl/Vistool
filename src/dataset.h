@@ -34,6 +34,7 @@ public:
 
 class Dataset{
  private:
+  static std::string prefdset;
   std::map<size_t, std::string> category_names;
   std::vector<Category> categories;
   std::string root;
@@ -60,6 +61,7 @@ class Dataset{
   void                    disableCategory(size_t i);
   void                    disableCategory(std::string str);
   void                    enableRandom(const int number);
+  void                    disableAll();
   void                    print();
   void                    shuffle();
   std::vector<Dataset>         split(float ratio = 0.5);
@@ -75,6 +77,10 @@ class Dataset{
 					  int max = -1);
   static Dataset          createDatasetByName(std::string str);
   static Dataset          createDatasetBySpecification(DatasetSpecification dss);
+  static Dataset          getPrefferedDataset();
+  static std::string      getPrefferedDatasetName();
+  static void             setPrefferedDataset(std::string str);
+  static bool prefferredExtracted;
 };
 }
 

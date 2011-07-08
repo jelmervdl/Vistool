@@ -5,8 +5,30 @@ using namespace boost::filesystem;
 
 namespace vito{
 
+std::string Dataset::prefdset;
+bool Dataset::prefferredExtracted = false;
+
 string Dataset::get_root() const {
   return root;
+}
+
+Dataset Dataset::getPrefferedDataset(){
+  return createDatasetByName(prefdset);
+}
+
+string Dataset::getPrefferedDatasetName(){
+  return prefdset;
+}
+
+void Dataset::disableAll(){
+  for(std::vector<Category>::iterator i = categories.begin(); 
+      i != categories.end(); ++i)
+    *(i->enabledLiveVar()) = 0;
+}
+    
+
+void Dataset::setPrefferedDataset(std::string str){
+  prefdset = str;
 }
 
 vector<Category> * Dataset::getCategories(){
@@ -17,7 +39,7 @@ void Dataset::addCategory(Category cat){
   categories.push_back(cat);
 }
 
-Dataset::Dataset(){
+Dataset::Dataset() {
 };
 
 Dataset::Dataset(string str): root(str){
@@ -25,7 +47,6 @@ Dataset::Dataset(string str): root(str){
   directory_iterator end_itr;
   size_t label = 0;
   if(is_directory(full_path)){
-    cout << "done! Directory is a dataset." << endl;
     try{
       for (directory_iterator itr( full_path ); itr != end_itr;++itr ){
 	if(is_directory(itr->path())){

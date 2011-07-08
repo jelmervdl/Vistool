@@ -7,6 +7,38 @@ using std::endl;
 namespace vito{
 namespace classification{
 
+Estimation::Estimation(const int i) : result(i), likeliness(1.0), duality(0.0){
+  cout << "your not sposed to be ere" << endl;
+  probability[i] = 1.0;
+}
+
+Estimation::Estimation(const Probabilities  &probs) : duality(0){
+  float max = 0;
+  for(Probabilities::const_iterator i = probs.begin(); i != probs.end(); ++i){
+    if(i->second > max){
+      max = i->second;
+      result = i->first;
+    }
+    duality += i->second;
+    probability[i->first] = i->second;
+  }
+  likeliness = max;
+  duality -= likeliness;
+}
+
+Estimation Classifier::estimate(const Descriptor &desc){
+  return Estimation(classify(desc));
+}
+
+
+EstimationCollection Classifier::estimate(const DescriptorCollection &desc){
+  EstimationCollection estimates;
+  estimates.reserve(desc.size());
+  for(DescriptorCollection::const_iterator i = desc.begin(); i != desc.end(); ++i)
+    estimates.push_back(estimate(*i));
+  return estimates;
+}
+
 LabelCollection Classifier::classify(const DescriptorCollection &descriptors){
   LabelCollection labels;
   labels.resize(descriptors.size());

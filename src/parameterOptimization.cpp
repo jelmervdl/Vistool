@@ -84,7 +84,7 @@ void ParameterOptimization::printCurrentParameters(){
 
 void ParameterOptimization::optimize_full_grid(string file, string dest){
   cout << "doing full grid " << file << " " << dest << endl;
-  Parameters::getInstance()->saveInteger("mode_optimize",1);
+  //Parameters::getInstance()->saveInteger("mode_optimize",1);
   progress = 0;
   if(file != ""){
     Parameters *pars = Parameters::getInstance();
@@ -98,9 +98,9 @@ void ParameterOptimization::optimize_full_grid(string file, string dest){
     optimize_grid_axis(0);
     apply_to_all_parameters(zoom<int>, zoom<float>);
   }
+  apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
   if(dest != ""){
-    apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
-  Parameters::getInstance()->saveInteger("mode_optimize",0);
+    Parameters::getInstance()->saveInteger("mode_optimize",0);
     Parameters::getInstance()->saveXML(dest);
   }
 }

@@ -35,4 +35,27 @@
     <category>251.airplanes-101</category>
     <!-- <category>253.faces-easy-101</category> -->
   </dataset>
+  <dataset name="kalooga" root="Kalooga">
+    <category>Action</category>
+    <category>Ball</category>
+    <category>Edited</category>
+    <category>Fans</category>
+    <category>Logo</category>
+    <category>Portrait</category>
+    <category>Press</category>
+    <category>Product</category>
+    <category>SinglePlayer</category>
+    <category>Stadium</category>
+    <category>Team</category>
+    <category>Wide</category>
+  </dataset>
+  <dataset name="actionkalooga" root="Kalooga">
+    <category>Action</category>
+    <category>nonAction</category>
+  </dataset>
+  <dataset name="interestingkalooga" root="Kalooga">
+    <category>Interesting</category>
+    <category>Uninteresting</category>
+  </dataset>
+
 </datasets>

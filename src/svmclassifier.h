@@ -36,6 +36,7 @@ class SVMClassifier : public Classifier {
   virtual Label                classify(const Descriptor &descriptor);
   virtual int                  classify(const Descriptor &data_point, 
 					svm_model *model);
+  virtual Estimation           estimate(const Descriptor &descriptor);
 
   // get the return values
   virtual  std::vector<double> getValues(svm_node *nodes, 
@@ -43,6 +44,8 @@ class SVMClassifier : public Classifier {
   virtual std::vector<double>  getValues(const Descriptor &descriptor);
   std::vector<double>          getValuesPerClass(svm_node *nodes,
 						 svm_model *model);
+  //get current model's class labels
+  std::vector<int>                  getLabels();
 };
 class SVMClassifier_ : public SVMClassifier, public Singleton<SVMClassifier>{};
 

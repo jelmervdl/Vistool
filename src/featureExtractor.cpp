@@ -51,7 +51,7 @@ Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
     hash << Parameters::getInstance()->getCurrentHash();
     info = &normalizations[hash.str().c_str()];
     if(!info->calibrated)
-      info->calibrateNormalization(experiment::getDataSet("abdullah2010").enabledPoints());
+      info->calibrateNormalization(Dataset::getPrefferedDataset().enabledPoints());
   }
   Descriptor descriptor;
   vector<Feature*> features = getActiveFeatures();
@@ -60,20 +60,18 @@ Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
   // loading it from file
   if(features.size() == 1 && features[0]->isStack()){
     //however while optimizing, to save time just keep the non-training points
-    if(Parameters::getInstance()->getiParameter("mode_optimize") > 0){
-      if(Stacktraining){
-	descriptor = getDescriptorWhileTrainingStack(dp);
-      }
-      else{
-	renewDescriptor(dp, force);
-	readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
-      }
+    //if(Parameters::getInstance()->getiParameter("mode_optimize") > 0){
+    //   if(Stacktraining){
+    //descriptor = getDescriptorWhileTrainingStack(dp);
+    // }
+    // else{
+    // 	renewDescriptor(dp, force);
+    // 	readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
+    //   }
 
-    }else{ // when not optimizing always recalculate stackfeatures!
-      MyImage image(dp, true);
-      descriptor = calcDescriptor(image, dp);   
-    }    
-  // if the feature isn't a stack feature just append it.
+    // }else{ // when not optimizing always recalculate stackfeatures!
+    MyImage image(dp, true);
+    descriptor = calcDescriptor(image, dp);   
   }else{  
     renewDescriptor(dp, force);
     readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
@@ -230,13 +228,16 @@ void FeatureExtractor::renewDescriptors(const DataPointCollection &dps){
 }
 
 bool FeatureExtractor::allExtracted(const DataPointCollection &dps2){
-  Dataset dset = Dataset::createDatasetByName("abdullah2010");
+  if(Dataset::prefferredExtracted == true)
+    return true;
+  Dataset dset = Dataset::getPrefferedDataset();
   const DataPointCollection dps = dset.enabledPoints();
   for(DataPointCollection::const_iterator i = dps.begin(); i!= dps.end(); ++i)
     if(!exists(path(getCurrentDescriptorLocation(*i)))){
+      cout << getCurrentDescriptorLocation(*i) << " does exist? " << endl;
       return false;
-      cout << "not all extracted yet" << endl;
     }
+  Dataset::prefferredExtracted = true;
   return true;
 }
 
@@ -247,8 +248,6 @@ ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
   for(vector<Feature*>::iterator i = features.begin(); i != features.end(); ++i)
     if((*i)->isStack())
       // don't train when optimizing and all values are saved
-      if(!Parameters::getInstance()->getiParameter("mode_optimize") || 
-	 !allExtracted(dps))
 	(*i)->train(dps);
 
   // Add Labels to Descriptors and return

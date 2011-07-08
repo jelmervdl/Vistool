@@ -1,14 +1,12 @@
 #include "svmclassifier.h"
 
 using std::string;
-using std::vector;
+using std::vector; 
 using std::cout;
 using std::endl;
 
 namespace vito{
 namespace classification{
-
-
 
 SVMClassifier::~SVMClassifier(){
   if(model != 0){
@@ -38,8 +36,6 @@ string SVMClassifier::get_name(){
 }
 
 void SVMClassifier::train(const ExampleCollection &examples){
-    cout << "training";
-  //
   if(model != 0){
     svm_free_and_destroy_model(&model);
     model = 0;
@@ -152,6 +148,34 @@ vector<double> SVMClassifier::getValues(svm_node *nodes,
     values_vector.push_back(values[i]);
   delete values;
   return values_vector;
+}
+
+vector<int> SVMClassifier::getLabels(){
+  vector<int> labels;
+  if(model != 0){
+    size_t nrclasses = svm_get_nr_class(model);
+    labels.reserve(nrclasses);
+    int *labels_svm = new int[nrclasses];
+    svm_get_labels(model, labels_svm);
+    for(size_t i = 0; i < nrclasses; i++)
+      labels.push_back(labels_svm[i]);
+    delete [] labels_svm;
+  }
+  return labels;
+}
+
+ 
+Probability createprob(int i, double d){
+  return Probability(i,d);
+}
+
+Estimation SVMClassifier::estimate(const Descriptor &descriptor){
+  vector<int> labels = getLabels();
+  vector<double> values = getValues(descriptor);
+  assert(labels.size() == values.size());
+  Probabilities result(values.size());
+  transform(labels.begin(), labels.end(), values.begin(), result.begin(), createprob );
+  return Estimation(result);
 }
 
 svm_node* SVMClassifier::constructNode(const Descriptor &descriptor){

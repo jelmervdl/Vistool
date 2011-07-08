@@ -78,12 +78,17 @@ int main(int argc, char ** argv){
   vector<string> arguments;
   Parameters *p = Parameters::getInstance();
   p->readFile("parameters.xml");
+  Dataset::setPrefferedDataset("abdullah2010");
   // get out the options
   for(int i = 1; i < argc; i++){
     if(argv[i][0] == '-' && argc > (i + 1) ){
       string option_name = string(argv[i]).substr(1);
       string value = argv[i + 1];
+      cout << option_name << " : " << value << endl;
       i++;
+      if(option_name == "d"){
+	Dataset::setPrefferedDataset(value);
+      }
       if(option_name == "p"){
 	p->readFile(value);
       }if(option_name == "c" || option_name == "C"){
@@ -100,7 +105,7 @@ int main(int argc, char ** argv){
 	if(option_name == "C"){
 	  Parameters::getInstance()->
 	    appointFeature(c_feature->getParameterName());
-	  Dataset ds = experiment::abdullah2010();
+	  //Dataset ds = experiment::abdullah2010();
 	  //c_feature->drawRandomPatches(ds.enabledPoints());
 	}
       }
@@ -166,9 +171,12 @@ int main(int argc, char ** argv){
     cout << "optimizing..." << endl;
     ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
     arg++;
-    if(arg == end)
+    if(arg == end){
       opt.optimize_full_grid();
-    else {
+      experiment::performExperiment("svm",
+				    Dataset::getPrefferedDatasetName(),
+				    100);
+    }else {
       string original = *arg;
       arg++;
       if(arg == end){
@@ -176,13 +184,20 @@ int main(int argc, char ** argv){
 	cout << "optimizing current setup (no original) with target "
 	     << target << endl;
 	opt.optimize_full_grid("",target);
+	experiment::performExperiment("svm",
+				      Dataset::getPrefferedDatasetName(),
+				    100);	
       }
       if(arg != end){
 	string target = *arg;
 	cout << "optimizing " << original << " to target: " << target << endl;
 	arg++;
-	if(arg == end)
+	if(arg == end){
 	  opt.optimize_full_grid(original, target);
+	  experiment::performExperiment("svm",
+					Dataset::getPrefferedDatasetName(),
+					100);
+	}
       }
     }
     return 0;
@@ -191,6 +206,10 @@ int main(int argc, char ** argv){
     //stack_svm();
     ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
     opt.optimize_full_grid();
+    return 0;
+  }
+  if(*arg == "recall"){
+    experiment::recallExperiment();
     return 0;
   }
   if(*arg == "stack"){
@@ -257,14 +276,22 @@ int main(int argc, char ** argv){
 	   << "   gui" << endl << "   optimize" << endl << "   cluster" << endl;
       return 0;
     }
+  }if(*arg == "studentt"){
+    arg++;
+    if(arg == end){
+      studentTTest::perform();				   
+      return 0;
+    }
   }
   if(arg != end){
+    cout << end - arg << " to go " << endl;
     cout << "following arguments were ignored:" << endl;
       while(arg != end){
 	arg++;
 	cout << *arg << endl;
       }
   }
+
   cout << "type help for a list of commands" << endl;
   return 1;
 }

@@ -9,6 +9,11 @@
 namespace vito{
 namespace optimization{
  
+struct BestResult : public Singleton<BestResult>{
+  float mean, std;
+  size_t size;
+  bool set;
+};
 
   const int kIterations  = 3;
   const float kZoom = 2.5;
