@@ -20,7 +20,8 @@ TrueClusterHistogram::TrueClusterHistogram(features::Feature *feature_,
   ncenters(Parameters::getInstance()->getiParameter("clustering_means")), 
   nsegments(1), 
   patch_size(Parameters::getInstance()->getiParameter("clustering_patch_size")),
-  spacing(Parameters::getInstance()->getiParameter("clustering_spacing")),
+  spacing
+(Parameters::getInstance()->getiParameter("clustering_spacing")),
   histogram_type(Parameters::getInstance()->
 		 getiParameter("clustering_histogram_type")),
   parameters(Parameters::getUniqueClone()),

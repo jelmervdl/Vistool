@@ -5,6 +5,7 @@ using std::cout;
 using std::endl;
 using std::vector;
 using std::pair;
+using namespace boost::filesystem;
 
 namespace vito{
 
@@ -14,11 +15,87 @@ using features::FeatureExtractor;
 using features::Feature;
 using classification::SVMClassifier;
 using evaluation::Evaluation;
-
-
+using classification::EstimationCollection;
+using classification::Classifier;
 
 namespace experiment{
 
+struct SaveTo{
+  size_t label;
+  string original;
+  float probability;
+  SaveTo(size_t i, string s, float p = 1.0) : label(i), original(s), probability(p){};
+  SaveTo(){};
+};
+
+void save(vector<SaveTo> operations, string dir,  Dataset &ds){
+  for(vector<SaveTo>::iterator i = operations.begin();
+      i != operations.end(); ++i){
+    stringstream target;
+    target << "result";
+    if(!is_directory(system_complete(target.str())))
+      create_directory(system_complete(target.str()));
+    target << "/" << dir;
+    if(!is_directory(system_complete(target.str())))
+      create_directory(system_complete(target.str()));
+    target << "/" <<  ds.getCatName(i->label);
+    if(!is_directory(system_complete(target.str())))
+      create_directory(system_complete(target.str()));
+    stringstream pro_str;
+    pro_str <<  i->probability;
+    while(pro_str.str().size() < 10)
+      pro_str << "0";
+    target << "/" << pro_str.str() << "_" << operations.end() - i << " .jpg";
+    cout << target.str() << endl;
+    copy_file(system_complete(i->original), system_complete(target.str()));
+  }	      
+}
+
+void classify(string original){
+  Dataset ds = Dataset::getPrefferedDataset();
+  path fullpath = system_complete(original);
+  vector<DataPoint> dps = getDataPoints(fullpath, 0, original);
+  SVMClassifier svm;
+  FeatureExtractor *fe = FeatureExtractor::getInstance();
+  svm.train(fe->getExamples(ds.enabledPoints()));
+  vector<Label> labels =  svm.classify(fe->getDescriptors(dps));
+  vector<SaveTo> copyOperations; copyOperations.reserve(labels.size());
+  
+  vector<DataPoint>::iterator i = dps.begin();
+  vector<Label>::iterator j = labels.begin();
+  while(i != dps.end() && j != labels.end()){
+    copyOperations.push_back(SaveTo(*j, i->get_image_url()));
+    i++; 
+    j++;
+  }
+  save(copyOperations, original, ds);
+}
+
+void estimate(string original, float cutoff){
+  Dataset ds = Dataset::getPrefferedDataset();
+  Parameters::getInstance()->saveInteger("svm_probability_real",1);
+  path fullpath = system_complete(original);
+  vector<DataPoint> dps = getDataPoints(fullpath, 0, original);
+  SVMClassifier svm_;
+  Classifier &svm = svm_;
+  FeatureExtractor *fe = FeatureExtractor::getInstance();
+  svm.train(fe->getExamples(ds.enabledPoints()));
+  EstimationCollection estimations =  svm.estimate(fe->getDescriptors(dps));
+  vector<SaveTo> copyOperations; copyOperations.reserve(estimations.size());
+  vector<DataPoint>::iterator i = dps.begin();
+  EstimationCollection::iterator j = estimations.begin();
+  while(i != dps.end() && j != estimations.end()){
+    cout << i - dps.end() << endl;
+    cout << j->likeliness << endl;
+    if(j->likeliness > cutoff){
+      cout << i - dps.end() << endl;
+      copyOperations.push_back(SaveTo(j->result, i->get_image_url(), j->likeliness));
+    }
+    i++; 
+    j++;
+  }
+  save(copyOperations, original, ds);
+}
 
 void recallExperiment(const string dataset_string){
   classification::EstimationCollection estimations;
@@ -45,10 +122,10 @@ void recallExperiment(const string dataset_string){
   } 
   float best = 0;
   float setting = 0;
-  float beta = 0.250;
+  float beta = 0.25;
   for(float i = 0; i < 1.0; i+= 0.01){
     Evaluation evaluation(datapoints, estimations, i, beta);
-    float fmeasure = evaluation.getStatsMap()[0].getfmeasure(beta);
+    float fmeasure = evaluation.getStatsMap().begin()->second.getfmeasure(beta);
     cout << i << ": " << fmeasure << endl;
     if(fmeasure > best){
       best = fmeasure;
@@ -59,8 +136,8 @@ void recallExperiment(const string dataset_string){
   cout << "chosen i: " <<setting << endl;
   evaluation.print();
 
-  cout << endl << evaluation.getStatsMap()[0].string()
-       << "fmeasure: " << evaluation.getStatsMap()[0].getfmeasure(beta) << endl;
+  cout << endl << evaluation.getStatsMap().begin()->second.string()
+       << "fmeasure: " << evaluation.getStatsMap().begin()->second.getfmeasure(beta) << endl;
 
 }
 
@@ -123,6 +200,8 @@ float performExperiment(const string str,
   cout << "k = " << Parameters::getInstance()->getiParameter("knn_classifier_k") << endl;
   cout << "mean: " << values.mean() << endl;
   cout << "std: " << values.std() << endl;
+  cout << "with gamma " << Parameters::getInstance()->getfParameter("svm_gamma") << endl;
+  cout << "with C " << Parameters::getInstance()->getfParameter("svm_C") << endl;
   return values.mean();
 }
 

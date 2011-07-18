@@ -118,8 +118,9 @@ void SiftDescriptor::drawKeyPoint(Image &draw_me, const int &orientations,
 	float angle = (bin_size * (ori + 1)) - (0.5 * bin_size);
 	if(params->getiParameter("sift_phase_shift_ori_bins"))
 	  angle -= (1.0 / orientations) * PI;
-	int end_x = origin_x + descriptor.at(ori) * window * 65  * sin(angle);
-	int end_y = origin_y - descriptor.at(ori) * window * 65 * cos(angle);
+	float length = 15.0;
+	int end_x = origin_x + descriptor.at(ori) * window * length  * sin(angle);
+	int end_y = origin_y - descriptor.at(ori) * window * length * cos(angle);
 	draw_me.draw( DrawableLine( origin_x, origin_y, end_x, end_y));
       }
     }

@@ -157,8 +157,10 @@ vector<int> SVMClassifier::getLabels(){
     labels.reserve(nrclasses);
     int *labels_svm = new int[nrclasses];
     svm_get_labels(model, labels_svm);
-    for(size_t i = 0; i < nrclasses; i++)
+    for(size_t i = 0; i < nrclasses; i++){
+      cout << "label: " << i << " = " << labels_svm[i] << endl;
       labels.push_back(labels_svm[i]);
+    }
     delete [] labels_svm;
   }
   return labels;

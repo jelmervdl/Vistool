@@ -19,7 +19,7 @@ float evaluateSVMAbdullah(){
   Statistics stats;
   int i = 0;
   Dataset ds = Dataset::getPrefferedDataset();  
-  for(i = 1; i < 6; i++)
+  for(i = 1; i < 10; i++)
     stats.push_back(experiment::svm(ds));
   if(best.set == true){
     float exceed;

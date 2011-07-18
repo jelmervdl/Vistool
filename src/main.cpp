@@ -166,6 +166,28 @@ int main(int argc, char ** argv){
     start(1,argv);
     return 0;
   }
+  if(*arg == "classify"){
+    if(arg == end)
+      return 0;
+    arg++;
+    if(arg != end){
+      string original = *arg;
+      experiment::classify(original);
+    }
+    cout << "quitting " << endl;
+    return 0;
+  }
+  if(*arg == "estimate"){
+    if(arg == end)
+      return 0;
+    arg++;
+    if(arg != end){
+      string original = *arg;
+      experiment::estimate(original);
+    }
+    cout << "quitting " << endl;
+    return 0;
+  }  
   if(*arg == "optimize"){
     //stack_function();
     cout << "optimizing..." << endl;
@@ -287,8 +309,8 @@ int main(int argc, char ** argv){
     cout << end - arg << " to go " << endl;
     cout << "following arguments were ignored:" << endl;
       while(arg != end){
-	arg++;
 	cout << *arg << endl;
+	arg++;
       }
   }
 

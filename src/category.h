@@ -22,7 +22,8 @@ class Category{
  public:
   Category(std::string give_name,
 	   std::string root, 
-	   size_t lab);
+	   size_t lab,
+	   std::vector<DataPoint> dps);
   size_t                   size()      const;
   size_t                   get_label() const;
   std::string              get_name()  const;

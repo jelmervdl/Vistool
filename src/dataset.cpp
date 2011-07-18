@@ -53,17 +53,9 @@ Dataset::Dataset(string str): root(str){
 	  string root, descriptor, catname;
 	  root = (string) itr->path().file_string().c_str();
 	  catname = (string) itr->path().filename().c_str();
-	  Category newcat(catname, root, label);
+	  vector<DataPoint> dps = getDataPoints(itr->path(), label, catname);
+	  Category newcat(catname, root, label, dps);
 	  category_names[label] = catname;
-	  for ( directory_iterator sitr(itr->path()); sitr != end_itr; ++sitr){
-	    if(is_image((string)sitr->path().extension())){
-	      string filename = (string) sitr->path().filename().c_str();
-	      string fileurl = (string) sitr->path().file_string().c_str();
-	      DataPoint n (label, filename, fileurl, catname);
-	      newcat.addDataPoint(n);
-	    }
-	  }  
-	  Category newcat2 = newcat;
 	  if(newcat.size() > 10){
 	    addCategory(newcat);
 	    label++;
@@ -74,6 +66,19 @@ Dataset::Dataset(string str): root(str){
     catch(...){
     }
   } 
+}
+
+vector<DataPoint> getDataPoints(path p, size_t label, string catname){
+  vector<DataPoint> dps;
+  directory_iterator end_itr;
+  for ( directory_iterator sitr(p); sitr != end_itr; ++sitr){
+    if(is_image((string)sitr->path().extension())){
+      string filename = (string) sitr->path().filename().c_str();
+      string fileurl = (string) sitr->path().file_string().c_str();
+      dps.push_back(DataPoint(label, filename, fileurl, catname));
+    }
+  }
+  return dps;
 }
 
 void Dataset::setRoot(string str){

@@ -29,6 +29,8 @@ string DataPoint::get_file_name() const {
 string DataPoint::get_cat_name() const{
   return cat_name;
 }
+DataPointCollection::DataPointCollection(std::vector<DataPoint> vec) : 
+  std::vector<DataPoint>(vec){}
 
 LabelCollection DataPointCollection::getLabels(){
   LabelCollection labels;

@@ -1,5 +1,6 @@
 #include "classification.h"
 
+using std::string;
 using std::cout;
 using std::endl;
 using std::vector;
@@ -23,6 +24,7 @@ vector<Classifier*> getExistingClassifiers(){
 Classifier *getExistingClassifier(int i){
   return getExistingClassifiers()[i];
 }
+
 
 }}
 

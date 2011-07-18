@@ -15,6 +15,10 @@
 
 namespace vito{
 
+std::vector<DataPoint> getDataPoints(boost::filesystem::path p,
+				     size_t label = 0,
+				     std::string = "");
+
 struct DatasetSpecification{
   std::string name;
   std::string root;

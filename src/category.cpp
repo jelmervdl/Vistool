@@ -6,8 +6,9 @@ using std::random_shuffle;
 using std::string;
 using std::vector;
 
-Category::Category(string give_name, string rt, size_t lab) : 
-  name(give_name), root(rt), enabled(0), label(lab){
+Category::Category(string give_name, string rt, 
+		   size_t lab, vector<DataPoint> dps) : 
+  name(give_name), root(rt), data_points(dps), enabled(0), label(lab){
 }
 
 string Category::get_name() const{

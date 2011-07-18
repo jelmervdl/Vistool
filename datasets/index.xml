@@ -57,5 +57,12 @@
     <category>Interesting</category>
     <category>Uninteresting</category>
   </dataset>
+  <dataset name="action" root="Kalooga">
+    <category>Action</category>
+  </dataset>
+  <dataset name="product" root="Kalooga">
+    <category>Product</category>
+    <category>nonProduct</category>
+  </dataset>
 
 </datasets>

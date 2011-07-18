@@ -1,5 +1,6 @@
 #include "statistics.h"
-
+using std::cout;
+using std::endl;
 
 float Statistics::mean(){
     float total = 0;
@@ -58,9 +59,22 @@ float student_t_test(float m1, float std1, size_t n,
     (s * sqrt((1.0 / (float) n) + (1.0 / (float) m)));
   return t;
 }
+
+void perform(float m1, float std1, size_t n, 
+	     float m2, float std2, size_t m){
+  float t = student_t_test(m1, std1, n,
+			   m2, std2, m);
+  float dof = degreesOfFreedom(std1 * std1, n, std2 * std2, m);
+  float exc = exceedingChance(t,dof);
+  cout << "t: " << t << endl;
+  cout << "dof: " << dof << endl;
+  cout << "exceeds at: " << exc << endl;
+}
+
 void perform(){
-  student_t_test(69.0, sqrt(255.8), 10,
-		 73.0, sqrt(212.7), 15);
+  perform(86.87, 2.40, 1000,
+	  87.05, 2.25, 1000);
+  
 }
 }
 

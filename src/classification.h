@@ -15,6 +15,10 @@ std::vector<Classifier*> getExistingClassifiers();
 
 // provide the pointer to a certain classifier
 Classifier              *getExistingClassifier(int i );
+
+//classify a dataset
+void                    classify(std::string original);
+
 }}
 
 #endif

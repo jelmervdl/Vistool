@@ -8,7 +8,6 @@ namespace vito{
 namespace classification{
 
 Estimation::Estimation(const int i) : result(i), likeliness(1.0), duality(0.0){
-  cout << "your not sposed to be ere" << endl;
   probability[i] = 1.0;
 }
 

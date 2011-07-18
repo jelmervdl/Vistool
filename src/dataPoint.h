@@ -33,6 +33,8 @@ class DataPoint{
 
 class DataPointCollection : public std::vector<DataPoint> {
 public:
+  DataPointCollection(){};
+  DataPointCollection(std::vector<DataPoint> vec);
   // create a labelcollection from the labels of the datapoints
   LabelCollection getLabels();
   void print();
