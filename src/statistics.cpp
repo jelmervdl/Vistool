@@ -72,9 +72,8 @@ void perform(float m1, float std1, size_t n,
 }
 
 void perform(){
-  perform(86.87, 2.40, 1000,
-	  87.05, 2.25, 1000);
-  
+  perform( 84.16, 2.45, 1000,
+	   84.55, 2.49, 1000);
 }
 }
 
