@@ -7,7 +7,7 @@
 
 #include <Magick++.h>
 #include "parameters.h"
-#include <cv.h>
+#include <opencv/cv.h>
 #include "dataPoint.h"
 #include "matrix.h"
 

@@ -12,6 +12,7 @@ namespace gui{
 void loadPicture();
 void loadDataset(std::string location);
 void loadCaltech();
+void loadCifar();
 void askDataset();
 
 }}

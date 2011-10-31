@@ -519,8 +519,8 @@ vector<string> getFiles(string root, string extension){
     directory_iterator dir_end;
     for( directory_iterator i(stack_path); i != dir_end; ++i){
       cout << "a file: " << i->path() << endl;
-      if(((string) i->path().extension()) == extension)
-	files.push_back((string) i->path().file_string());      
+      if(((string) i->path().extension().string()) == extension)
+	files.push_back((string) i->path().string().c_str());      
     }
   }
   return files;

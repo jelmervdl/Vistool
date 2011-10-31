@@ -4,9 +4,9 @@
 #define CV_NO_BACKWARD_COMPATIBILITY
 
 #include "parameters.h"
-#include "cv.h"
-#include "highgui.h"
 #include "feature.h"
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
 
 #include <cstdio>
 

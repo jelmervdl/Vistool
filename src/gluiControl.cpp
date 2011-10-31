@@ -40,6 +40,7 @@ void initGlui(){
   state.main_gui->add_button_to_panel(load_panel, "Load Picture", 0, (GLUI_Update_CB)loadPicture );
   state.main_gui->add_button_to_panel(load_panel, "Load Dataset", 0, (GLUI_Update_CB)askDataset );
   state.main_gui->add_button_to_panel(load_panel, "Load Caltech", 0, (GLUI_Update_CB)loadCaltech );
+  state.main_gui->add_button_to_panel(load_panel, "Load Cifar", 0, (GLUI_Update_CB)loadCifar );
   state.main_gui->add_button_to_panel(load_panel, "Export Selected", 0, (GLUI_Update_CB)exportSelected );
   state.main_gui->add_column(false);
 

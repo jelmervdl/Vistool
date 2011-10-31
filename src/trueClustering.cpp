@@ -8,7 +8,7 @@ using std::stringstream;
 
 using boost::filesystem::path;
 using boost::filesystem::native;
-using boost::filesystem::complete;
+using boost::filesystem::system_complete;
 
 
 namespace vito{
@@ -66,7 +66,7 @@ bool TrueClusterHistogram::isActive(){
 }
 
 void TrueClusterHistogram::assertDir(string str){
-  path p = complete(path(str, native));
+  path p = complete(path(str));
   if(!is_directory(p)){
     cout << "creating directory " << str << endl;
     create_directory(p);

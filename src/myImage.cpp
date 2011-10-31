@@ -31,18 +31,25 @@ string MyImage::getLocation(){
 
 Mat* MyImage::getOpenCVMat(){
   if(mat == NULL)  {
-    Mat orig;
-    getMagickImage();
-    magick.magick("BGR");
-    Blob blb ;
-    magick.write(&blb);
-    mat = new Mat();
-    orig = Mat(magick.size().height(),
-	       magick.size().width(), 
-	       CV_8UC3, 
-	       (void *) blb.data());
-    cvtColor(orig, *mat, CV_RGB2HSV);
-    magick.magick("RGB");
+    try {
+      Mat orig;
+      getMagickImage();
+      magick.magick("BGR");
+      Blob blb ;
+      magick.write(&blb);
+      mat = new Mat();
+      orig = Mat(magick.size().height(),
+  	       magick.size().width(), 
+  	       CV_8UC3, 
+  	       (void *) blb.data());
+      cvtColor(orig, *mat, CV_RGB2HSV);
+      magick.magick("RGB");
+    }
+    catch (Magick::Exception &e)
+    {
+      cout << "Caught a magick exception: " << e.what() << endl;
+      throw e;
+    }
   }
   return mat;
 

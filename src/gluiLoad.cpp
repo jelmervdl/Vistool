@@ -50,6 +50,11 @@ void loadCaltech(){
   loadDataset(string(DATASET_LOCATION) + "caltech101/");
 }
 
+void loadCifar()
+{
+  loadDataset(string(DATASET_LOCATION) + "cifar-10/");
+}
+
 void askDataset(){
   // loadDataset(askFile());
 }

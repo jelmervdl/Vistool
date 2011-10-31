@@ -1,6 +1,7 @@
 #include "experiment.h"
 
 using std::string;
+using std::stringstream;
 using std::cout;
 using std::endl;
 using std::vector;

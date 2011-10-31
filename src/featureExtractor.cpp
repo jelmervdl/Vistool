@@ -10,7 +10,7 @@ using cv::Mat;
 
 using boost::filesystem::path;
 using boost::filesystem::native;
-using boost::filesystem::complete;
+using boost::filesystem::system_complete;
 
 namespace vito{
 namespace features{
@@ -91,10 +91,10 @@ Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
     vector<DataPoint> * files = (*category)->get_data_points();
     string root = (*category)->get_root();
     string aap = DESCRIPTOR_LOCATION;
-    path p = complete(path(aap+name, native));
+    path p = complete(path(aap+name));
     path parameters = complete(path(Parameters::getInstance()->getFile()));
     if(!is_directory(p)){
-      cout << "creating directory " << name << endl;
+      cout << "creating directory " << p.string() << endl;
       create_directory(p);
     }
     for(vector<DataPoint>::iterator file = files->begin(); file != files->end(); ++file ){
@@ -104,7 +104,7 @@ Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
 }
 
 void FeatureExtractor::assertDir(string str){
-  path p = complete(path(str, native));
+  path p = complete(path(str));
   if(!is_directory(p)){
     cout << "creating directory " << str << endl;
     create_directory(p);
