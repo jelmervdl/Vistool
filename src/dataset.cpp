@@ -106,11 +106,11 @@ void Dataset::disableCategory(std::string str){
 
 void Dataset::print(){
   cout << "Database contains " << categories.size() 
-       << " classes" << endl << endl
+       << " classes." << endl
        << "Enabled Classes: " << endl;
   for(size_t i = 0; i < categories.size(); ++i)
     if(*categories.at(i).enabledLiveVar())
-      cout << categories.at(i).get_name() << endl;
+      cout << "  " << categories.at(i).get_name() << endl;
   cout << endl;
 }
 
@@ -197,6 +197,8 @@ map<string, DatasetSpecification> Specifications::readDatasetIndex(string str){
   DOMElement* elementRoot = doc->getDocumentElement();
   DOMNodeList *entries = 
     elementRoot->getElementsByTagName(XMLString::transcode("dataset"));
+  
+  cout << "Databases in index:\n";
   for(size_t i = 0; i < entries->getLength(); ++i){
     DOMNode *current = entries->item(i);
     DatasetSpecification dss;
@@ -206,7 +208,7 @@ map<string, DatasetSpecification> Specifications::readDatasetIndex(string str){
     dss.root = XMLString::transcode(current->getAttributes()->
 				    getNamedItem(XMLString::transcode("root"))->
 				    getNodeValue());
-    cout << "name: " << dss.name << " root: " << dss.root;
+    cout << "  name: " << dss.name << " root: " << dss.root << endl;
     DOMNodeList *categories = current->getChildNodes();
     for(size_t j = 0; j < categories->getLength(); ++j)
       if((string) XMLString::transcode(categories->item(j)->getNodeName()) ==

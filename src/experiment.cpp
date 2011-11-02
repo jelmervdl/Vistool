@@ -146,14 +146,19 @@ float performExperiment(const string str,
 			const string dataset_string,
 			const int repetitions,
 			const size_t kDataPoints){
-  cout << "performing experiment " << str << endl;
+  
+  // Determine dataset to use in this experiment
   Dataset dataset;
   if(dataset_string == "")
     dataset = Dataset::getPrefferedDataset();
   else
     dataset = getDataSet(dataset_string);
-  float (*exp_func)(Dataset&, size_t) = 0;
+  
+  cout << "performing experiment " << str << " on images from " << dataset.get_root() << endl;
+  dataset.print();
 
+  // Choose classifier function based on experiment name (svm | nn).
+  float (*exp_func)(Dataset&, size_t) = 0;
   if(str == "svm") exp_func = &svm;
   if(str == "nn") exp_func = &nn;
 
@@ -190,6 +195,8 @@ float performExperiment(const string str,
     }
    params->saveInteger("knn_classifier_k", orig);
   }
+
+  // Gather performance of the classifier
   Statistics values;
   
   for(int i = 0; i < repetitions; i++){
@@ -198,6 +205,11 @@ float performExperiment(const string str,
     //  cout << "done with " << i << "currently: " << values.mean() << endl;
     //cout << "added: " << values[i] << " currentmean: " << values.mean() << endl;
   }
+
+  cout << "Values:" << endl;
+  for (Statistics::const_iterator itr = values.begin(), end = values.end(); itr != end; itr++)
+    cout << "  " << *itr << endl;
+
   cout << "k = " << Parameters::getInstance()->getiParameter("knn_classifier_k") << endl;
   cout << "mean: " << values.mean() << endl;
   cout << "std: " << values.std() << endl;
@@ -236,10 +248,12 @@ float svm(Dataset &dataset, size_t datapoints){
   DescriptorCollection testing_descriptors = fe->getDescriptors(test);
 
   // train an svm
+  cout << "Training svm on " << training_examples.size() << " examples" << endl;
   classification::SVMClassifier svm;
   svm.train(training_examples);
 
   // classify the test
+  cout << "Testing svm on " << testing_descriptors.size() << " examples" << endl;
   LabelCollection result_labels = svm.classify(testing_descriptors);
 
   // evaluate the results
