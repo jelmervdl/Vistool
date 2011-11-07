@@ -28,7 +28,7 @@
 <sift_gradient_use_diagonals> 0 </sift_gradient_use_diagonals>
 <sift_histograms_per_keypoint> 1 </sift_histograms_per_keypoint>
 <sift_keypoint_pixel_window> -1 </sift_keypoint_pixel_window>
-<sift_number_of_keypoints_x> 12 </sift_number_of_keypoints_x>
+<sift_number_of_keypoints_x> 3 </sift_number_of_keypoints_x>
 <sift_orientation_directions> 8 </sift_orientation_directions>
 <sift_phase_shift_ori_bins> 0 </sift_phase_shift_ori_bins>
 <sift_sub_hists> 1 </sift_sub_hists>

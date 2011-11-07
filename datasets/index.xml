@@ -64,5 +64,16 @@
     <category>Product</category>
     <category>nonProduct</category>
   </dataset>
-
+  <dataset name="cifar" root="cifar-10">
+    <category>airplane</category>
+    <category>automobile</category>
+    <category>bird</category>
+    <category>cat</category>
+    <category>deer</category>
+    <category>dog</category>
+    <category>frog</category>
+    <category>horse</category>
+    <category>ship</category>
+    <category>truck</category>
+  </dataset>
 </datasets>
