@@ -69,7 +69,7 @@ public:
 		  std::string xmlfile);
 
 
-  void                train(const ExampleCollection &descriptors);
+  void                train(const DescriptorCollection &descriptors);
   bool                isActive();
   std::string         getParameterName();
   virtual Descriptor  extract_(MyImage *Image, 
@@ -128,13 +128,13 @@ public:
 class SVMStack : public std::vector<features::SVMActivationSetup>, 
 		 public Classifier{
 private:
-  ExampleCollection getStackExamples(ExampleCollection &examples);
+  DescriptorCollection getStackExamples(DescriptorCollection &examples);
   SVMClassifier svm;
 public:
   std::string          get_name();
-  void                 train(const ExampleCollection &examples);
+  void                 train(const DescriptorCollection &examples);
   Label                classify(const Descriptor &descriptor);
-  ExampleCollection    getStackExamples(const ExampleCollection &examples);
+  DescriptorCollection    getStackExamples(const DescriptorCollection &examples);
   DescriptorCollection getStackResults(const DescriptorCollection & dc);
   Descriptor           getStackResults(const Descriptor &descriptor);
 };
@@ -155,7 +155,7 @@ public:
 
   std::string      get_name();
   int              classify(const Descriptor &descriptor);
-  void             train(const ExampleCollection &files);
+  void             train(const DescriptorCollection &files);
 
 };
 

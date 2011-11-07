@@ -33,7 +33,7 @@ ClassifierSetup::ClassifierSetup( Classifier *c) :
   Parameters::select(old_name);
 }
 
-void ClassifierSetup::train(const ExampleCollection &descriptors){
+void ClassifierSetup::train(const DescriptorCollection &descriptors){
   string previous_parameters = Parameters::get_current_name();
   Parameters::setUnique(parameters);
   classifier->train(descriptors);
@@ -171,7 +171,7 @@ bool SVMActivationSetup::isStack(){
 
 void SVMActivationSetup::train(DataPointCollection dps){
   push();
-  ExampleCollection examples =
+  DescriptorCollection examples =
     FeatureExtractor::getInstance()->getExamples(dps);
   svm.train(examples);
   pop();
@@ -313,7 +313,7 @@ int ClassifierStack::classify(const Descriptor &descriptor){
   return 0;
 }
 
-void ClassifierStack::train(const ExampleCollection &examples){
+void ClassifierStack::train(const DescriptorCollection &examples){
   // train every classifier In the Stack
   cout << "training each classifier in stack:..." << endl;
   for(size_t i = 0; i < setups.size(); ++i){

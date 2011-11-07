@@ -49,7 +49,7 @@ void testClassifierStack(){
   FeatureExtractor *fe = FeatureExtractor::getInstance();
   {
     cout << "getting examples to train the stack " <<endl;
-    ExampleCollection examples = fe->getExamples(train);
+    DescriptorCollection examples = fe->getExamples(train);
     classifier_stacker.train(examples);
   }
   LabelCollection result;

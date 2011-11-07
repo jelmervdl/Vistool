@@ -31,7 +31,7 @@ void crossValidate(){
   state.train_data = enabsp;
   state.test_data = enabsp;
   cout << "getting Examples for crossvalidation" << endl;
-  ExampleCollection examples =
+  DescriptorCollection examples =
     features::FeatureExtractor::getInstance()->getExamples(state.train_data);
   state.test_result = state.current_classifier->crossvalidation(examples);
   for(vector<int>::iterator cl = state.current_classes.begin(); 

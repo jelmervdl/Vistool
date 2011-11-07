@@ -148,12 +148,12 @@ void exportSelected(){
   Dataset &dataset = ToolState::getInstance()->current_db;
   DataPointCollection datapoints = dataset.enabledPoints();
   cout << "getting datapoint for exporting" << endl;
-  ExampleCollection examples = fe.getExamples(datapoints);
-  for(ExampleCollection::iterator it = examples.begin();
+  DescriptorCollection examples = fe.getExamples(datapoints);
+  for(DescriptorCollection::iterator it = examples.begin();
       it != examples.end();
       ++it){
     myfile << it->get_label() << " ";
-    for(Example::iterator it2 = it->begin(); it2 != it->end(); it2++)
+    for(Descriptor::iterator it2 = it->begin(); it2 != it->end(); it2++)
       myfile << 1 + it2 - it->begin() << ":" << *it2 << " ";
     myfile << endl;
   }

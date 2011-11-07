@@ -17,7 +17,7 @@ protected:
   
 
 public:
-  virtual void                train(const ExampleCollection &examples);
+  virtual void                train(const DescriptorCollection &examples);
 
   void                        set_truth_label(const int i);
                               OneClassSVM();

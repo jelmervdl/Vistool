@@ -78,7 +78,7 @@ float evaluateSVM(){
     random_shuffle(points.begin(), points.end());
     SVMClassifier svm;
     FeatureExtractor *fe = FeatureExtractor::getInstance();
-    ExampleCollection examples = fe->getExamples(points);
+    DescriptorCollection examples = fe->getExamples(points);
     LabelCollection results = svm.crossvalidation(examples);
     cout << "done crossvalidating" << endl;
     Evaluation evaluation(points, results);
@@ -101,7 +101,7 @@ float evaluateOneClassSVM(){
 
   OneClassSVM segsvm(0);
   FeatureExtractor *fe = FeatureExtractor::getInstance();
-  ExampleCollection examples = fe->getExamples(train);
+  DescriptorCollection examples = fe->getExamples(train);
   segsvm.train(examples);
 
   dataset.disableCategory("accordion");

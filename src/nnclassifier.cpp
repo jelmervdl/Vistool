@@ -30,7 +30,7 @@ void NNClassifier::clean(){
   knn = 0;
 }
 
-void NNClassifier::train(const ExampleCollection &examples){
+void NNClassifier::train(const DescriptorCollection &examples){
   size_t rows, cols; 
   rows = examples.size(); 
   cols = examples[0].size(); 

@@ -16,19 +16,10 @@
 namespace vito{
 namespace features{
 
-struct NormalizationInfo{
-  float min;
-  float max;
-  bool calibrated;
-  void calibrateNormalization(const DataPointCollection &dps);
-};
-
 class FeatureExtractor:public Singleton<FeatureExtractor>{
   friend class Singleton<FeatureExtractor>;
 
  private:
-  std::map<std::string, NormalizationInfo> normalizations;
-
   std::vector<Feature*> features;
 
   //create directory if it doesn't exist
@@ -66,7 +57,7 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
 				      CvMat * training, 
 				      CvMat *  labels);
 
-  ExampleCollection     getExamples(const DataPointCollection &datapoints);
+  DescriptorCollection     getExamples(const DataPointCollection &datapoints);
   DescriptorCollection  getDescriptors(const DataPointCollection &datatpoints);
 };
 

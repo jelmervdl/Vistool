@@ -18,41 +18,11 @@ namespace features{
 using write::readDescriptor;
 using write::writeDescriptor;
 
-void NormalizationInfo::calibrateNormalization(const DataPointCollection &dps){
-  cout << "calibrating normalization... " << endl;
-  FeatureExtractor *fe = FeatureExtractor::getInstance();
-  typedef DataPointCollection::const_iterator dpcit;
-  for(dpcit i = dps.begin(); i != dps.end(); ++i){
-    float cmin, cmax;
-    Descriptor current_descriptor = fe->getDescriptor(*i, false, false, true);
-    cout << Parameters::getInstance()->getCurrentHash() << " " << current_descriptor.size() << endl;
-    cmin = *std::min_element(current_descriptor.begin(),
-			     current_descriptor.end());
-    cmax = *std::max_element(current_descriptor.begin(), 
-			     current_descriptor.end());
-    if(cmin < min || i == dps.begin())
-      min = cmin;
-    if(cmax > max || i == dps.begin())
-      max = cmax;
-  }
-  cout << "calibration results: min = " << min << " max = " << max << endl;
-  calibrated = true;
-}
-
 Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
 					   const bool force,
 					   const bool normalize,
 					   const bool Stacktraining){
 
-  // if we are to normalize, assure normalization has been calibrated
-  NormalizationInfo *info = 0;
-  if(normalize){
-    stringstream hash;
-    hash << Parameters::getInstance()->getCurrentHash();
-    info = &normalizations[hash.str().c_str()];
-    if(!info->calibrated)
-      info->calibrateNormalization(Dataset::getPrefferedDataset().enabledPoints());
-  }
   Descriptor descriptor;
   vector<Feature*> features = getActiveFeatures();
 
@@ -76,9 +46,7 @@ Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
     renewDescriptor(dp, force);
     readDescriptor(&descriptor, getCurrentDescriptorLocation(dp));
   }
-  if(normalize){
-    descriptor.normalize(info->min, info->max);
-  }
+  
   return descriptor;
 }
    
@@ -241,7 +209,7 @@ bool FeatureExtractor::allExtracted(const DataPointCollection &dps2){
   return true;
 }
 
-ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
+DescriptorCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
   // train possible stacks on the examples as well
   vector<Feature*> features = getActiveFeatures();
 
@@ -251,22 +219,23 @@ ExampleCollection FeatureExtractor::getExamples(const DataPointCollection &dps){
 	(*i)->train(dps);
 
   // Add Labels to Descriptors and return
-  ExampleCollection examples;
-  examples.reserve(dps.size());
-  for(DataPointCollection::const_iterator i = dps.begin(); i != dps.end(); ++i){
-    Example current_example(getDescriptor(*i, 0, true, true));
+  DescriptorCollection examples(dps.size());
+  for(DataPointCollection::const_iterator i = dps.begin(); i != dps.end(); ++i)
+  {
+    Descriptor current_example(getDescriptor(*i, 0, true, true));
     current_example.set_label(i->get_label());
     examples.push_back(current_example);
   }
   return examples;
 }
 
-DescriptorCollection FeatureExtractor::getDescriptors(const DataPointCollection
-						      &dps){
+DescriptorCollection FeatureExtractor::getDescriptors(const DataPointCollection &dps)
+{
   DescriptorCollection descriptors;
   descriptors.reserve(dps.size());
   for(DataPointCollection::const_iterator i = dps.begin(); i != dps.end(); ++i)
     descriptors.push_back(getDescriptor(*i));
+  
   return descriptors;
 }
 

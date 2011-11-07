@@ -48,7 +48,7 @@ LabelCollection Classifier::classify(const DescriptorCollection &descriptors){
 }
 
 
-LabelCollection Classifier::crossvalidation(const ExampleCollection &files){
+LabelCollection Classifier::crossvalidation(const DescriptorCollection &files){
   // ready CrossValidation Parameters
   const int kFolds = 
     Parameters::getInstance()->getiParameter("cross_validation_k");
@@ -61,8 +61,8 @@ LabelCollection Classifier::crossvalidation(const ExampleCollection &files){
   for(int subgroup = 0; subgroup < kFolds; ++subgroup){
     const int bin_min = (int) ((bin_size * subgroup) + 0.5);
     const int bin_max = (int) ((bin_size * (subgroup + 1) ) + 0.5);
-    ExampleCollection training_set;
-    ExampleCollection test_set;
+    DescriptorCollection training_set;
+    DescriptorCollection test_set;
     //fill training and test sets:
     for(int i = 0; i < kFiles; ++i)
       if(i >= bin_min && i < bin_max )

@@ -30,12 +30,12 @@ public:
 
   // pure methods
   virtual std::string      get_name() = 0;
-  virtual void             train(const ExampleCollection &examples ) = 0;
+  virtual void             train(const DescriptorCollection &examples ) = 0;
   virtual Label            classify(const Descriptor &descriptor ) = 0;
   virtual Estimation       estimate(const Descriptor &descriptor );
   
   // non-virtual generic methods
-  LabelCollection      crossvalidation(const ExampleCollection &files);
+  LabelCollection      crossvalidation(const DescriptorCollection &files);
   LabelCollection      classify(const DescriptorCollection &descriptors);
   EstimationCollection estimate(const DescriptorCollection &descriptors);
 

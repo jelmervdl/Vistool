@@ -35,7 +35,7 @@ string SVMClassifier::get_name(){
   return "SVM";
 }
 
-void SVMClassifier::train(const ExampleCollection &examples){
+void SVMClassifier::train(const DescriptorCollection &examples){
   if(model != 0){
     svm_free_and_destroy_model(&model);
     model = 0;
@@ -53,7 +53,7 @@ void SVMClassifier::train(const ExampleCollection &examples){
   //cout << "done training" << endl;
 }
 
-svm_problem *SVMClassifier::compileProblem(const ExampleCollection &examples){
+svm_problem *SVMClassifier::compileProblem(const DescriptorCollection &examples){
   // check if there are 1 or more examples to train on
   const int& kExamples = examples.size();
   if(kExamples < 1){
@@ -76,7 +76,7 @@ double SVMClassifier::dataPointLabel(const DataPoint &datapoint){
 }
 
 void SVMClassifier::addExampleToProblem(svm_problem &problem, 
-					const Example &example){
+					const Descriptor &example){
   const int &descriptor_length = example.size();
   const int i = problem.l;
   problem.y[i] = (double) example.get_label();

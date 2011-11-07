@@ -244,7 +244,13 @@ float svm(Dataset &dataset, size_t datapoints){
   //get Labels, Examples and Descriptors
   FeatureExtractor *fe = FeatureExtractor::getInstance();
 
-  ExampleCollection training_examples = fe->getExamples(train);
+  DescriptorCollection training_examples = fe->getExamples(train);
+
+  cout << "Normalizing training examples.." << endl;
+  pair<float, float> range = training_examples.normalize();
+  cout << "Normalized between " << range.first << " and " << range.second << endl;
+
+
   DescriptorCollection testing_descriptors = fe->getDescriptors(test);
 
   // train an svm
@@ -267,7 +273,7 @@ float nn(Dataset &dataset, size_t datapoints){
 
   //get Labels, Examples and Descriptors
   FeatureExtractor *fe = FeatureExtractor::getInstance();
-  ExampleCollection training_examples = fe->getExamples(train);
+  DescriptorCollection training_examples = fe->getExamples(train);
   DescriptorCollection testing_descriptors = fe->getDescriptors(test);
 
   // train an svm

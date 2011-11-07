@@ -25,7 +25,7 @@ void train(){
   cout << "number of train data points: " 
        << state.train_data.size() << endl;
   cout << "Getting examples for glui classifier" << endl;
-  ExampleCollection examples = 
+  DescriptorCollection examples = 
     features::FeatureExtractor::getInstance()->getExamples(state.train_data);
   cout << "training points:" << endl;
   examples.print();

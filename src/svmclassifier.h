@@ -16,11 +16,10 @@ class SVMClassifier : public Classifier {
   svm_model *model;
   svm_problem *prblm;
 
-  void                         addExampleToProblem(svm_problem &problem, 
-						     const Example &example);
+  void                         addExampleToProblem(svm_problem &problem, const Descriptor &example);
   virtual std::string          get_name();
   virtual double               dataPointLabel(const DataPoint &datapoint);
-  virtual svm_problem         *compileProblem(const ExampleCollection &files);
+  virtual svm_problem         *compileProblem(const DescriptorCollection &files);
   virtual svm_parameter       *getSVMParameters();
   svm_node                    *constructNode(const Descriptor &descriptor);
   svm_parameter               *new_svm_parameters();
@@ -32,7 +31,7 @@ class SVMClassifier : public Classifier {
   SVMClassifier() : model(0), prblm(0){};
   ~SVMClassifier();
   // train the svm
-  virtual void                 train(const ExampleCollection &files);
+  virtual void                 train(const DescriptorCollection &files);
   virtual Label                classify(const Descriptor &descriptor);
   virtual int                  classify(const Descriptor &data_point, 
 					svm_model *model);

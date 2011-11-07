@@ -9,9 +9,9 @@ using std::string;
 namespace vito{
 namespace classification{
 
-void OneClassSVM::train(const ExampleCollection &examples){
-  ExampleCollection res;
-  for(ExampleCollection::const_iterator it = examples.begin();
+void OneClassSVM::train(const DescriptorCollection &examples){
+  DescriptorCollection res;
+  for(DescriptorCollection::const_iterator it = examples.begin();
       it != examples.end();
       ++it)
     if((int) it->get_label() == truth_label)

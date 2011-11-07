@@ -24,7 +24,7 @@ class NNClassifier : public Classifier, public Singleton<NNClassifier> {
 
   std::string      get_name();
   void             clean();
-  void             train(const ExampleCollection &examples);
+  void             train(const DescriptorCollection &examples);
   Label              classify(const Descriptor &descriptor );
 
 };
