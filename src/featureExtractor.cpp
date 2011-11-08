@@ -50,33 +50,35 @@ Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
   return descriptor;
 }
    
-  void FeatureExtractor::saveDescriptorsToFile(Dataset * ds, const bool force){
+void FeatureExtractor::saveDescriptorsToFile(Dataset * ds, const bool force)
+{
   vector<Category*> enabled= ds->getEnabled();
   for(vector<Category*>::iterator category = enabled.begin();
-      category != enabled.end();
-      ++category){
+    category != enabled.end(); ++category)
+  {
     string name = (*category)->get_name();
     vector<DataPoint> * files = (*category)->get_data_points();
     string root = (*category)->get_root();
     string aap = DESCRIPTOR_LOCATION;
     path p = complete(path(aap+name));
     path parameters = complete(path(Parameters::getInstance()->getFile()));
-    if(!is_directory(p)){
-      cout << "creating directory " << p.string() << endl;
+    
+    // create directory for descriptors
+    if (!is_directory(p))
       create_directory(p);
-    }
-    for(vector<DataPoint>::iterator file = files->begin(); file != files->end(); ++file ){
+    
+    // recalculate descriptors in necessary
+    for (vector<DataPoint>::iterator file = files->begin(); file != files->end(); ++file )
       renewDescriptor(*file, force);
-    }
   }
 }
 
-void FeatureExtractor::assertDir(string str){
+void FeatureExtractor::assertDir(string str)
+{
   path p = complete(path(str));
-  if(!is_directory(p)){
-    cout << "creating directory " << str << endl;
+  
+  if(!is_directory(p))
     create_directory(p);
-  }
 }
 
 string FeatureExtractor::getCurrentDescriptorLocation(const DataPoint &dp){
@@ -134,7 +136,7 @@ void FeatureExtractor::renewDescriptor(const DataPoint &dp,
   vector<Feature*> features = getActiveFeatures();
   string final_descriptor_location = getCurrentDescriptorLocation(dp);
   if(force || !exists(path(final_descriptor_location))) {
-    cout << "having to rewrite: " << final_descriptor_location << endl;
+    //cout << "having to rewrite: " << final_descriptor_location << endl;
     MyImage image(dp);
     vector<float> descriptor = calcDescriptor(image, dp);
 
@@ -216,27 +218,48 @@ DescriptorCollection FeatureExtractor::getExamples(const DataPointCollection &dp
   for(vector<Feature*>::iterator i = features.begin(); i != features.end(); ++i)
     if((*i)->isStack())
       // don't train when optimizing and all values are saved
-	(*i)->train(dps);
-
-  // Add Labels to Descriptors and return
-  DescriptorCollection examples(dps.size());
-  for(DataPointCollection::const_iterator i = dps.begin(); i != dps.end(); ++i)
-  {
-    Descriptor current_example(getDescriptor(*i, 0, true, true));
-    current_example.set_label(i->get_label());
-    examples.push_back(current_example);
-  }
-  return examples;
+	    (*i)->train(dps);
+  
+  return map(dps, &FeatureExtractor::extractDescriptorWithLabel);
 }
 
 DescriptorCollection FeatureExtractor::getDescriptors(const DataPointCollection &dps)
 {
+  return map(dps, &FeatureExtractor::extractDescriptor);
+}
+
+DescriptorCollection FeatureExtractor::map(DataPointCollection const &dps, map_function extractor)
+{
   DescriptorCollection descriptors;
   descriptors.reserve(dps.size());
+
   for(DataPointCollection::const_iterator i = dps.begin(); i != dps.end(); ++i)
-    descriptors.push_back(getDescriptor(*i));
-  
+  {
+    std::cout << "Extracting features: "
+      << (i - dps.begin() + 1) << " of " << dps.size()
+      << "\r" << std::flush;
+    
+    descriptors.push_back((this->*extractor)(*i));
+  }
+
+  // clean-up line-break.
+  std::cout << std::endl;
+
+  assert(dps.size() == descriptors.size());
+
   return descriptors;
+}
+
+Descriptor FeatureExtractor::extractDescriptor(DataPoint const &dp)
+{
+  return getDescriptor(dp, false, true, true);
+}
+
+Descriptor FeatureExtractor::extractDescriptorWithLabel(DataPoint const &dp)
+{
+  Descriptor descriptor(getDescriptor(dp));
+  descriptor.set_label(dp.get_label());
+  return descriptor;
 }
 
 }}

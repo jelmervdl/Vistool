@@ -25,7 +25,16 @@ class FeatureExtractor:public Singleton<FeatureExtractor>{
   //create directory if it doesn't exist
   void                  assertDir(std::string str);
 
+  typedef Descriptor (FeatureExtractor::*map_function)(DataPoint const &dp);
+  Descriptor extractDescriptor(DataPoint const &);
+  Descriptor extractDescriptorWithLabel(DataPoint const &);
+
+  // this should be a feature of DataPointCollection, but my C++ template
+  // skills are not that great.
+  DescriptorCollection map(DataPointCollection const &dps, map_function);
+  
  public:
+  
   bool                  allExtracted(const DataPointCollection &dps);
 
   std::vector<float>    calcDescriptor(MyImage &image, const DataPoint &dp);
