@@ -1,13 +1,17 @@
 #include "descriptorWriter.h"
+#include "cache.hpp"
 
 using namespace std;
 
 namespace vito{
 namespace write{
 
-void writeDescriptor(vector<float> * datapoints, string destination){
+Cache<vector<float> > descriptor_cache;
+
+void writeDescriptor(vector<float> * datapoints, string destination)
+{
   size_t elements = datapoints->size();
-  ofstream file (destination.c_str(), ios::out | ios::binary); 
+  ofstream file (destination.c_str(), ios::out | ios::binary);
   file.write(reinterpret_cast<char *>
 	     (&elements),
 	     sizeof(elements));
@@ -18,10 +22,19 @@ void writeDescriptor(vector<float> * datapoints, string destination){
 	       sizeof(float));
   }
   file.close();
+
+  descriptor_cache.add(destination, *datapoints);
 }
 
-void readDescriptor(vector<float> * datapoints, string location){
+void readDescriptor(vector<float> * datapoints, string location)
+{
   size_t elements;
+
+  if (descriptor_cache.contains(location))
+  {
+    *datapoints = descriptor_cache.get(location);
+    return;
+  }
 
   ifstream file (location.c_str(), ios::in | ios::binary); 
   file.read(reinterpret_cast<char *>
@@ -38,7 +51,11 @@ void readDescriptor(vector<float> * datapoints, string location){
 }
 
 
-vector<float> readDescriptor(string location){
+vector<float> readDescriptor(string location)
+{
+  if (descriptor_cache.contains(location))
+    return descriptor_cache.get(location);
+
   vector<float> datapoints;
   size_t elements;
   ifstream file (location.c_str(), ios::in | ios::binary); 
