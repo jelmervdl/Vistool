@@ -172,10 +172,14 @@ void Dataset::randomDataSplit(vector<DataPoint> * train,
   }
 }
 
-Dataset Dataset::createDatasetByName(string str){
-  DatasetSpecification dss =  
-    Specifications::getInstance()->datasets.find(str)->second;
-  return createDatasetBySpecification(dss);
+Dataset Dataset::createDatasetByName(string str)
+{
+  Specifications::SpecificationMap::const_iterator pos = Specifications::getInstance()->datasets.find(str);
+
+  if (pos == Specifications::getInstance()->datasets.end())
+    throw std::runtime_error("Missing specification for dataset " + str);
+
+  return createDatasetBySpecification(pos->second);
 }
 
 Dataset Dataset::createDatasetBySpecification(DatasetSpecification dss){

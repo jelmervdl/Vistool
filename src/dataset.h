@@ -31,7 +31,9 @@ private:
 public:
   Specifications() :
     datasets(readDatasetIndex("datasets/index.xml")){}
-  const std::map<std::string, DatasetSpecification> datasets;
+  
+  typedef std::map<std::string, DatasetSpecification> const SpecificationMap;
+  SpecificationMap datasets;
 };
 
 
