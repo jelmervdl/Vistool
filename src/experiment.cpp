@@ -199,13 +199,9 @@ float performExperiment(const string str,
   // Gather performance of the classifier
   Statistics values;
   
-  for(int i = 0; i < repetitions; i++){
+  for (int i = 0; i < repetitions; i++)
     values.push_back(exp_func(dataset, kDataPoints));
-    //    if(i % 10 == 0)
-    //  cout << "done with " << i << "currently: " << values.mean() << endl;
-    //cout << "added: " << values[i] << " currentmean: " << values.mean() << endl;
-  }
-
+  
   cout << "Values:" << endl;
   for (Statistics::const_iterator itr = values.begin(), end = values.end(); itr != end; itr++)
     cout << "  " << *itr << endl;
@@ -250,15 +246,13 @@ float svm(Dataset &dataset, size_t datapoints){
   pair<float, float> range = training_examples.normalize();
   cout << "Normalized between " << range.first << " and " << range.second << endl;
 
-
-  DescriptorCollection testing_descriptors = fe->getDescriptors(test);
-
   // train an svm
   cout << "Training svm on " << training_examples.size() << " examples" << endl;
   classification::SVMClassifier svm;
   svm.train(training_examples);
 
   // classify the test
+  DescriptorCollection testing_descriptors = fe->getDescriptors(test);
   cout << "Testing svm on " << testing_descriptors.size() << " examples" << endl;
   LabelCollection result_labels = svm.classify(testing_descriptors);
 
