@@ -142,176 +142,184 @@ int main(int argc, char ** argv){
     }
   }
   // get actual commands
-  vector<string>::iterator
-    arg = arguments.begin(),
-    end = arguments.end();
-  if(arg == end) {
-    return 1;
-  }
-  if(*arg == "thread_test"){
-    test_threads();
-    return 0;
-  }
-  if(*arg == "face"){
-    testFaceRec();
-    return 0;
-  }
-  if(*arg == "test"){
-    testing::testAll();
-    return 0;
-  }
-  if(*arg == "gui"){
-    //stack_function();
-    //stack_svm();
-    start(1,argv);
-    return 0;
-  }
-  if(*arg == "classify"){
-    if(arg == end)
-      return 0;
-    arg++;
-    if(arg != end){
-      string original = *arg;
-      experiment::classify(original);
+  try {
+    vector<string>::iterator
+      arg = arguments.begin(),
+      end = arguments.end();
+    
+    if(arg == end) {
+      return 1;
     }
-    cout << "quitting " << endl;
-    return 0;
-  }
-  if(*arg == "estimate"){
-    if(arg == end)
+    if(*arg == "thread_test"){
+      test_threads();
       return 0;
-    arg++;
-    if(arg != end){
-      string original = *arg;
-      experiment::estimate(original);
     }
-    cout << "quitting " << endl;
-    return 0;
-  }  
-  if(*arg == "optimize"){
-    //stack_function();
-    cout << "optimizing..." << endl;
-    ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
-    arg++;
-    if(arg == end){
-      opt.optimize_full_grid();
-      experiment::performExperiment("svm",
-				    Dataset::getPrefferedDatasetName(),
-				    100);
-    }else {
-      string original = *arg;
+    if(*arg == "face"){
+      testFaceRec();
+      return 0;
+    }
+    if(*arg == "test"){
+      testing::testAll();
+      return 0;
+    }
+    if(*arg == "gui"){
+      //stack_function();
+      //stack_svm();
+      start(1,argv);
+      return 0;
+    }
+    if(*arg == "classify"){
+      if(arg == end)
+        return 0;
+      arg++;
+      if(arg != end){
+        string original = *arg;
+        experiment::classify(original);
+      }
+      cout << "quitting " << endl;
+      return 0;
+    }
+    if(*arg == "estimate"){
+      if(arg == end)
+        return 0;
+      arg++;
+      if(arg != end){
+        string original = *arg;
+        experiment::estimate(original);
+      }
+      cout << "quitting " << endl;
+      return 0;
+    }  
+    if(*arg == "optimize"){
+      //stack_function();
+      cout << "optimizing..." << endl;
+      ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
       arg++;
       if(arg == end){
-	string target = original;
-	cout << "optimizing current setup (no original) with target "
-	     << target << endl;
-	opt.optimize_full_grid("",target);
-	experiment::performExperiment("svm",
-				      Dataset::getPrefferedDatasetName(),
-				    100);	
+        opt.optimize_full_grid();
+        experiment::performExperiment("svm",
+  				    Dataset::getPrefferedDatasetName(),
+  				    100);
+      }else {
+        string original = *arg;
+        arg++;
+        if(arg == end){
+  	string target = original;
+  	cout << "optimizing current setup (no original) with target "
+  	     << target << endl;
+  	opt.optimize_full_grid("",target);
+  	experiment::performExperiment("svm",
+  				      Dataset::getPrefferedDatasetName(),
+  				    100);	
+        }
+        if(arg != end){
+  	string target = *arg;
+  	cout << "optimizing " << original << " to target: " << target << endl;
+  	arg++;
+  	if(arg == end){
+  	  opt.optimize_full_grid(original, target);
+  	  experiment::performExperiment("svm",
+  					Dataset::getPrefferedDatasetName(),
+  					100);
+  	}
+        }
       }
-      if(arg != end){
-	string target = *arg;
-	cout << "optimizing " << original << " to target: " << target << endl;
-	arg++;
-	if(arg == end){
-	  opt.optimize_full_grid(original, target);
-	  experiment::performExperiment("svm",
-					Dataset::getPrefferedDatasetName(),
-					100);
-	}
+      return 0;
+    }
+    if(*arg == "fulloptimize"){
+      //stack_svm();
+      ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
+      opt.optimize_full_grid();
+      return 0;
+    }
+    if(*arg == "recall"){
+      experiment::recallExperiment();
+      return 0;
+    }
+    if(*arg == "stack"){
+      arg++;
+      if(arg == end){
+        stack_function();
+        return 0;
       }
     }
-    return 0;
-  }
-  if(*arg == "fulloptimize"){
-    //stack_svm();
-    ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
-    opt.optimize_full_grid();
-    return 0;
-  }
-  if(*arg == "recall"){
-    experiment::recallExperiment();
-    return 0;
-  }
-  if(*arg == "stack"){
-    arg++;
-    if(arg == end){
-      stack_function();
-      return 0;
-    }
-  }
-  if(*arg == "experiment"){
-    arg++;
-    if(arg == end){
-      cout << "experiment type needed!" << endl;
-      return 1;
-    }
-    string type = *arg;
-    arg++;
-    if(arg == end){
-      //stack_function();
-      experiment::performExperiment(type);
-      return 0;
-    }
-    string dataset = *arg;
-    arg++;
-    if(arg == end){
-      experiment::performExperiment(type, dataset);
-      return 0;
-    }
-    int reps = atoi(arg->c_str());
-    arg++;
-    if(arg == end){
-	  experiment::performExperiment(type, dataset, reps);	  
-	  return 0;
-    } 
-    int kdps = atoi(arg->c_str());
-    arg++;
-    if(arg == end){
-      experiment::performExperiment(type, dataset, reps, kdps);	  
-      return 0;
-    }
-  }if(*arg == "cluster"){
-    arg++;
-    if(arg == end){
-      cout << "no filename and dataset supplied" << endl;
-      return 1;
-    }else{
-      cout << "clustering dataset: " << *arg << endl;
+    if(*arg == "experiment"){
+      arg++;
+      if(arg == end){
+        cout << "experiment type needed!" << endl;
+        return 1;
+      }
+      string type = *arg;
+      arg++;
+      if(arg == end){
+        //stack_function();
+        experiment::performExperiment(type);
+        return 0;
+      }
       string dataset = *arg;
       arg++;
-      if(arg == end ){
-	cout << "no filename supplied" <<endl;
-	return 1;
+      if(arg == end){
+        experiment::performExperiment(type, dataset);
+        return 0;
+      }
+      int reps = atoi(arg->c_str());
+      arg++;
+      if(arg == end){
+  	  experiment::performExperiment(type, dataset, reps);	  
+  	  return 0;
+      } 
+      int kdps = atoi(arg->c_str());
+      arg++;
+      if(arg == end){
+        experiment::performExperiment(type, dataset, reps, kdps);	  
+        return 0;
+      }
+    }if(*arg == "cluster"){
+      arg++;
+      if(arg == end){
+        cout << "no filename and dataset supplied" << endl;
+        return 1;
       }else{
-	cout << "saving to: " << *arg << endl;
-	experiment::cluster(dataset, *arg);
-	return 0;
+        cout << "clustering dataset: " << *arg << endl;
+        string dataset = *arg;
+        arg++;
+        if(arg == end ){
+  	cout << "no filename supplied" <<endl;
+  	return 1;
+        }else{
+  	cout << "saving to: " << *arg << endl;
+  	experiment::cluster(dataset, *arg);
+  	return 0;
+        }
+      }
+
+    }if(*arg == "help"){
+      arg++;
+      if(arg == end){
+        cout << "   help" << endl << "   experiment" << endl 
+  	   << "   gui" << endl << "   optimize" << endl << "   cluster" << endl;
+        return 0;
+      }
+    }if(*arg == "studentt"){
+      arg++;
+      if(arg == end){
+        studentTTest::perform();				   
+        return 0;
       }
     }
-
-  }if(*arg == "help"){
-    arg++;
-    if(arg == end){
-      cout << "   help" << endl << "   experiment" << endl 
-	   << "   gui" << endl << "   optimize" << endl << "   cluster" << endl;
-      return 0;
-    }
-  }if(*arg == "studentt"){
-    arg++;
-    if(arg == end){
-      studentTTest::perform();				   
-      return 0;
+    if(arg != end){
+      cout << end - arg << " to go " << endl;
+      cout << "following arguments were ignored:" << endl;
+      while(arg != end){
+        cout << *arg << endl;
+        arg++;
+      }
     }
   }
-  if(arg != end){
-    cout << end - arg << " to go " << endl;
-    cout << "following arguments were ignored:" << endl;
-      while(arg != end){
-	cout << *arg << endl;
-	arg++;
-      }
+  catch (std::runtime_error const &e)
+  {
+    std::cerr << "Caught runtime_error: " << e.what() << endl;
+    return 1;
   }
 
   cout << "type help for a list of commands" << endl;
