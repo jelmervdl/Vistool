@@ -122,7 +122,7 @@ vector<Category*> Dataset::getEnabled(){
   return enabled;
 }
 
-size_t Dataset::smallestCategory(){
+size_t Dataset::smallestCategorySize(){
   vector<Category*> enabled = getEnabled();
   size_t min = 0;
   for(vector<Category*>::iterator cat = enabled.begin();
@@ -136,37 +136,40 @@ size_t Dataset::smallestCategory(){
 void Dataset::randomDataSplit(vector<DataPoint> * train, 
 			      vector<DataPoint> * test, 
 			      float cut, 
-			      bool eqrep,
-			      int max){
+			      bool equal_n_representation,
+			      size_t max_points_per_category)
+{
   vector<Category*> enabled = getEnabled();
-  size_t min = 0;
-  if(eqrep)
-    min = smallestCategory();
+  
+  if(equal_n_representation)
+    max_points_per_category = min(smallestCategorySize(), max_points_per_category);
+  
+  // for each cateogry in the dataset..
   for(vector<Category*>::iterator cat = enabled.begin();
-      cat != enabled.end(); ++cat){
+      cat != enabled.end(); ++cat)
+  {
     // extract points for this category
     vector<DataPoint> dps = (*cat)->get_data_points_();
+
+    // shuffle them randomly
     random_shuffle(dps.begin(), dps.end());
-    if(eqrep) {
-      dps = vector<DataPoint>(dps.begin(), dps.begin() + min);
-    }
-    if(max > (int) dps.size() || max == -1) max = dps.size();
-    int int_cut;
-    max < 0? int_cut = cut * dps.size() : int_cut = cut * max;
-    //extract training points
-    for(int i = 0; i < int_cut && i < max ; ++i){
+    
+    // how many examples may/can we extract from this category?
+    size_t max = max_points_per_category != 0
+      ? min(max_points_per_category, dps.size())
+      : dps.size();
+    
+    // determine when to split the dataset between train and test
+    size_t cut_pos = cut * max;
+    
+    //extract training points [0 .. cut_pos]
+    for(size_t i = 0; i < cut_pos; ++i)
       train->push_back(dps.at(i));
-    }
-    //extract test points
-    for(int i = int_cut; i < (int) dps.size() && i < max; ++i){
+    
+    //extract test points [cut_pos .. max]
+    for(size_t i = cut_pos; i < max; ++i)
       test->push_back(dps.at(i));
-    }
   }
-  /*
-  cout << "random data split taken of " << enabled.size()
-       << " enabled Categories: train:" << train->size() 
-       << " test: " << test->size() << endl;
-  */
 }
 
 Dataset Dataset::createDatasetByName(string str){
@@ -220,7 +223,7 @@ map<string, DatasetSpecification> Specifications::readDatasetIndex(string str){
 }
 
 vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
-  size_t min = smallestCategory();
+  size_t min = smallestCategorySize();
   vector<Category*> enabled = getEnabled();
   vector<DataPoint*> result;
   for(size_t i = 0; i < enabled.size(); ++ i){
@@ -237,7 +240,7 @@ vector<DataPoint*> Dataset::enabledDataPoints(bool eqrep){
 }
 
 DataPointCollection Dataset::enabledPoints(bool eqrep) {
-  int min = smallestCategory();
+  int min = smallestCategorySize();
   vector<Category*> enabled_categories = getEnabled();
   DataPointCollection result;
   for(size_t i = 0; i < enabled_categories.size(); ++i){

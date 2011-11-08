@@ -43,6 +43,9 @@ class Dataset{
   std::vector<Category> categories;
   std::string root;
 
+ protected:
+  size_t                  smallestCategorySize();
+
  public:
   //constructor:
   Dataset();
@@ -54,7 +57,6 @@ class Dataset{
 
   std::string             getCatName(size_t cat) ;
   std::string             get_root() const ;
-  size_t                  smallestCategory() ;
 
   //setters
 
@@ -78,7 +80,7 @@ class Dataset{
 					  std::vector<DataPoint> * test, 
 					  float cut = 0.5, 
 					  bool eqrep = true,
-					  int max = -1);
+					  size_t max_points_per_category = 0);
   static Dataset          createDatasetByName(std::string str);
   static Dataset          createDatasetBySpecification(DatasetSpecification dss);
   static Dataset          getPrefferedDataset();
