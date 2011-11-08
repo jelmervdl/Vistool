@@ -82,27 +82,37 @@ float Evaluation::getfmeasure(){
 Evaluation::Evaluation(){
 }
 
-Evaluation::Evaluation(DataPointCollection &dps, 
-		       const LabelCollection &cls){
+Evaluation::Evaluation(DataPointCollection &dps,const LabelCollection &cls)
+{
   instances = 0;
   correct = 0;
-  for(vector<DataPoint>::const_iterator dp = dps.begin();
-      dp != dps.end(); ++dp){
+
+  if(dps.size() != cls.size())
+    throw std::runtime_error("datapoint-collection and label collection are not of equal size");
+  
+  // initialize mappings
+  for(vector<DataPoint>::const_iterator dp = dps.begin(); dp != dps.end(); ++dp)
+  {
     map_total_to_label[dp->get_label()] = 0;
     map_correct_to_label[dp->get_label()] = 0;
   }
-  if(dps.size() != cls.size())
-    throw "bla";
-  for(size_t i = 0; i < dps.size(); ++i){
+  
+  // count classifications per category and correct classifications
+  for(size_t i = 0; i < dps.size(); ++i)
+  {
     instances++;
     map_total_to_label[dps[i].get_label()]++;
-    if((int) dps[i].get_label() == cls[i]){
+
+    if((int) dps[i].get_label() == cls[i])
+    {
       correct++;
       map_correct_to_label[dps[i].get_label()]++;
     }
+
     classificationmap[cls[i]].push_back(&dps[i]);
   }
-  precision = (float) correct  / (float ) instances ;
+
+  precision = (float) correct / (float) instances;
 }
 
 size_t Evaluation::getCorrect(){
