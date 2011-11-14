@@ -14,10 +14,10 @@ ParameterOptimization::~ParameterOptimization(){
   fout.close();
 }
 
-ParameterOptimization::ParameterOptimization(float (*func) ())
+ParameterOptimization::ParameterOptimization(float (*func) (), string const &log_filename)
   : evaluation_function(func),
     best(-9999999.0), 
-    fout("optimization_log.txt", std::ios_base::app){
+    fout(log_filename.c_str(), std::ios_base::app){
 
   add_float_parameter("svm_gamma", -20.0, -0.1, false, true);
   add_float_parameter("svm_C", -20.0, 20.0, false, true);

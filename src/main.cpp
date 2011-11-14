@@ -228,7 +228,8 @@ int main(int argc, char ** argv){
     }
     if(*arg == "fulloptimize"){
       //stack_svm();
-      ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
+      ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah,
+        string("fulloptimize_") + Dataset::getPrefferedDatasetName());
       opt.optimize_full_grid();
       return 0;
     }

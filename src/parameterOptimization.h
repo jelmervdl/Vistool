@@ -64,7 +64,7 @@ struct BestResult : public Singleton<BestResult>{
     void         apply_to_all_parameters(void (*int_func) (Parameter<int>*),
 					 void (*fl_func)  (Parameter<float>*));
   public:
-                 ParameterOptimization( float(*func)() );
+                 ParameterOptimization( float(*func)(), std::string const &log_filename = "optimization_log.txt");
                 ~ParameterOptimization();
     void         optimize();
     void         optimize_full_grid(std::string str = "", std::string dest = "");

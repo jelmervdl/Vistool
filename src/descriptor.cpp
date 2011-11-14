@@ -125,7 +125,7 @@ std::pair<float, float> DescriptorCollection::normalize()
         max = pt;
     }
 
-  assert(!(max == -1 or min == 10));
+  assert(!(size() > 0 && (max == -1 or min == 10)));
 
   foreach (Descriptor &descriptor, *this)
     descriptor.normalize(min, max);

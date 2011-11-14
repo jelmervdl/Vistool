@@ -23,10 +23,10 @@ Dataset getDataSet(const std::string str);
 float   performExperiment(const std::string str,
 			  const std::string dataset = "",
 			  const int repetitions = 1,
-			  const size_t kDataPoints = 1000);
+			  const size_t kDataPoints = 500);
 Dataset abdullah2010();
-float   svm(Dataset &dataset, size_t datapoint = 1000);
-float   nn(Dataset &dataset, size_t datapoints = 1000);
+float   svm(Dataset &dataset, size_t datapoint = 500);
+float   nn(Dataset &dataset, size_t datapoints = 500);
 float   clustering( Dataset &dataset);
 void cluster(std::string dataset, std::string filename);
 

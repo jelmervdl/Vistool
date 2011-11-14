@@ -235,7 +235,7 @@ Dataset abdullah2010(){
 
 float svm(Dataset &dataset, size_t datapoints){
   DataPointCollection train, test;
-  dataset.randomDataSplit(&train, &test, 0.5, true, datapoints);
+  dataset.randomDataSplit(&train, &test, 0.9, true, datapoints);
 
   //get Labels, Examples and Descriptors
   FeatureExtractor *fe = FeatureExtractor::getInstance();
