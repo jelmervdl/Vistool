@@ -1,0 +1,721 @@
+
+result is improvement:0.367467
+using the following parameters:
+	svm_gamma is set to 9.53674e-07
+	svm_C is set to 1473.66
+
+results:0.35
+using the following parameters:
+	svm_gamma is set to 9.53674e-07
+	svm_C is set to 9.53674e-07
+
+results:0.353571
+using the following parameters:
+	svm_gamma is set to 9.53674e-07
+	svm_C is set to 5.00693e-05
+
+results:0.366364
+using the following parameters:
+	svm_gamma is set to 9.53674e-07
+	svm_C is set to 0.00262871
+
+results:0.352
+using the following parameters:
+	svm_gamma is set to 9.53674e-07
+	svm_C is set to 0.138011
+
+results:0.358947
+using the following parameters:
+	svm_gamma is set to 9.53674e-07
+	svm_C is set to 7.24579
+
+results:0.35375
+using the following parameters:
+	svm_gamma is set to 9.53674e-07
+	svm_C is set to 380.415
+
+result is improvement:0.387917
+using the following parameters:
+	svm_gamma is set to 9.53674e-07
+	svm_C is set to 19972.3
+
+results:0.35
+using the following parameters:
+	svm_gamma is set to 9.53674e-07
+	svm_C is set to 1.04858e+06
+
+results:0.337
+using the following parameters:
+	svm_gamma is set to 6.84204e-06
+	svm_C is set to 1.04858e+06
+
+results:0.346
+using the following parameters:
+	svm_gamma is set to 6.84204e-06
+	svm_C is set to 9.53674e-07
+
+results:0.368182
+using the following parameters:
+	svm_gamma is set to 6.84204e-06
+	svm_C is set to 5.00693e-05
+
+results:0.336
+using the following parameters:
+	svm_gamma is set to 6.84204e-06
+	svm_C is set to 0.00262871
+
+results:0.347
+using the following parameters:
+	svm_gamma is set to 6.84204e-06
+	svm_C is set to 0.138011
+
+results:0.343
+using the following parameters:
+	svm_gamma is set to 6.84204e-06
+	svm_C is set to 7.24579
+
+results:0.385484
+using the following parameters:
+	svm_gamma is set to 6.84204e-06
+	svm_C is set to 380.415
+
+results:0.374545
+using the following parameters:
+	svm_gamma is set to 6.84204e-06
+	svm_C is set to 19972.3
+
+results:0.33
+using the following parameters:
+	svm_gamma is set to 6.84204e-06
+	svm_C is set to 1.04858e+06
+
+results:0.33
+using the following parameters:
+	svm_gamma is set to 4.90875e-05
+	svm_C is set to 1.04858e+06
+
+results:0.335
+using the following parameters:
+	svm_gamma is set to 4.90875e-05
+	svm_C is set to 9.53674e-07
+
+results:0.36
+using the following parameters:
+	svm_gamma is set to 4.90875e-05
+	svm_C is set to 5.00693e-05
+
+results:0.331
+using the following parameters:
+	svm_gamma is set to 4.90875e-05
+	svm_C is set to 0.00262871
+
+results:0.361
+using the following parameters:
+	svm_gamma is set to 4.90875e-05
+	svm_C is set to 0.138011
+
+results:0.356
+using the following parameters:
+	svm_gamma is set to 4.90875e-05
+	svm_C is set to 7.24579
+
+result is improvement:0.393494
+using the following parameters:
+	svm_gamma is set to 4.90875e-05
+	svm_C is set to 380.415
+
+results:0.379
+using the following parameters:
+	svm_gamma is set to 4.90875e-05
+	svm_C is set to 19972.3
+
+results:0.338
+using the following parameters:
+	svm_gamma is set to 4.90875e-05
+	svm_C is set to 1.04858e+06
+
+results:0.329
+using the following parameters:
+	svm_gamma is set to 0.000352173
+	svm_C is set to 1.04858e+06
+
+results:0.357
+using the following parameters:
+	svm_gamma is set to 0.000352173
+	svm_C is set to 9.53674e-07
+
+results:0.381
+using the following parameters:
+	svm_gamma is set to 0.000352173
+	svm_C is set to 5.00693e-05
+
+results:0.332
+using the following parameters:
+	svm_gamma is set to 0.000352173
+	svm_C is set to 0.00262871
+
+results:0.337
+using the following parameters:
+	svm_gamma is set to 0.000352173
+	svm_C is set to 0.138011
+
+results:0.377
+using the following parameters:
+	svm_gamma is set to 0.000352173
+	svm_C is set to 7.24579
+
+results:0.356
+using the following parameters:
+	svm_gamma is set to 0.000352173
+	svm_C is set to 380.415
+
+results:0.345
+using the following parameters:
+	svm_gamma is set to 0.000352173
+	svm_C is set to 19972.3
+
+results:0.343
+using the following parameters:
+	svm_gamma is set to 0.000352173
+	svm_C is set to 1.04858e+06
+
+results:0.353
+using the following parameters:
+	svm_gamma is set to 0.00252663
+	svm_C is set to 1.04858e+06
+
+results:0.342
+using the following parameters:
+	svm_gamma is set to 0.00252663
+	svm_C is set to 9.53674e-07
+
+results:0.357
+using the following parameters:
+	svm_gamma is set to 0.00252663
+	svm_C is set to 5.00693e-05
+
+results:0.348
+using the following parameters:
+	svm_gamma is set to 0.00252663
+	svm_C is set to 0.00262871
+
+results:0.364
+using the following parameters:
+	svm_gamma is set to 0.00252663
+	svm_C is set to 0.138011
+
+results:0.367
+using the following parameters:
+	svm_gamma is set to 0.00252663
+	svm_C is set to 7.24579
+
+results:0.364
+using the following parameters:
+	svm_gamma is set to 0.00252663
+	svm_C is set to 380.415
+
+results:0.353
+using the following parameters:
+	svm_gamma is set to 0.00252663
+	svm_C is set to 19972.3
+
+results:0.374545
+using the following parameters:
+	svm_gamma is set to 0.00252663
+	svm_C is set to 1.04858e+06
+
+result is improvement:0.410635
+using the following parameters:
+	svm_gamma is set to 0.018127
+	svm_C is set to 1.04858e+06
+
+results:0.383
+using the following parameters:
+	svm_gamma is set to 0.018127
+	svm_C is set to 9.53674e-07
+
+results:0.355
+using the following parameters:
+	svm_gamma is set to 0.018127
+	svm_C is set to 5.00693e-05
+
+results:0.364
+using the following parameters:
+	svm_gamma is set to 0.018127
+	svm_C is set to 0.00262871
+
+results:0.39
+using the following parameters:
+	svm_gamma is set to 0.018127
+	svm_C is set to 0.138011
+
+result is improvement:0.417347
+using the following parameters:
+	svm_gamma is set to 0.018127
+	svm_C is set to 7.24579
+
+results:0.411053
+using the following parameters:
+	svm_gamma is set to 0.018127
+	svm_C is set to 380.415
+
+results:0.391
+using the following parameters:
+	svm_gamma is set to 0.018127
+	svm_C is set to 19972.3
+
+results:0.406364
+using the following parameters:
+	svm_gamma is set to 0.018127
+	svm_C is set to 1.04858e+06
+
+results:0.415556
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 1.04858e+06
+
+results:0.273
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 9.53674e-07
+
+results:0.262
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 5.00693e-05
+
+results:0.273
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 0.00262871
+
+results:0.29
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 0.138011
+
+results:0.395
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 7.24579
+
+results:0.411176
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 380.415
+
+results:0.407692
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 19972.3
+
+results:0.401
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 1.04858e+06
+
+results:0.166
+using the following parameters:
+	svm_gamma is set to 0.933033
+	svm_C is set to 1.04858e+06
+
+results:0.116
+using the following parameters:
+	svm_gamma is set to 0.933033
+	svm_C is set to 9.53674e-07
+
+results:0.123
+using the following parameters:
+	svm_gamma is set to 0.933033
+	svm_C is set to 5.00693e-05
+
+results:0.12
+using the following parameters:
+	svm_gamma is set to 0.933033
+	svm_C is set to 0.00262871
+
+results:0.123
+using the following parameters:
+	svm_gamma is set to 0.933033
+	svm_C is set to 0.138011
+
+results:0.177
+using the following parameters:
+	svm_gamma is set to 0.933033
+	svm_C is set to 7.24579
+
+results:0.18
+using the following parameters:
+	svm_gamma is set to 0.933033
+	svm_C is set to 380.415
+
+results:0.146
+using the following parameters:
+	svm_gamma is set to 0.933033
+	svm_C is set to 19972.3
+
+results:0.168
+using the following parameters:
+	svm_gamma is set to 0.933033
+	svm_C is set to 1.04858e+06
+
+results:0.402973
+using the following parameters:
+	svm_gamma is set to 0.011065
+	svm_C is set to 1.04858e+06
+
+results:0.381
+using the following parameters:
+	svm_gamma is set to 0.011065
+	svm_C is set to 0.123315
+
+results:0.376
+using the following parameters:
+	svm_gamma is set to 0.011065
+	svm_C is set to 0.33194
+
+results:0.393
+using the following parameters:
+	svm_gamma is set to 0.011065
+	svm_C is set to 0.893515
+
+results:0.407936
+using the following parameters:
+	svm_gamma is set to 0.011065
+	svm_C is set to 2.40516
+
+results:0.4
+using the following parameters:
+	svm_gamma is set to 0.011065
+	svm_C is set to 6.47422
+
+results:0.411053
+using the following parameters:
+	svm_gamma is set to 0.011065
+	svm_C is set to 17.4273
+
+results:0.404
+using the following parameters:
+	svm_gamma is set to 0.011065
+	svm_C is set to 46.9108
+
+results:0.384
+using the following parameters:
+	svm_gamma is set to 0.011065
+	svm_C is set to 126.275
+
+results:0.395
+using the following parameters:
+	svm_gamma is set to 0.0181092
+	svm_C is set to 126.275
+
+results:0.368
+using the following parameters:
+	svm_gamma is set to 0.0181092
+	svm_C is set to 0.123315
+
+results:0.407273
+using the following parameters:
+	svm_gamma is set to 0.0181092
+	svm_C is set to 0.33194
+
+results:0.394
+using the following parameters:
+	svm_gamma is set to 0.0181092
+	svm_C is set to 0.893515
+
+results:0.395
+using the following parameters:
+	svm_gamma is set to 0.0181092
+	svm_C is set to 2.40516
+
+results:0.404
+using the following parameters:
+	svm_gamma is set to 0.0181092
+	svm_C is set to 6.47422
+
+results:0.410921
+using the following parameters:
+	svm_gamma is set to 0.0181092
+	svm_C is set to 17.4273
+
+results:0.402
+using the following parameters:
+	svm_gamma is set to 0.0181092
+	svm_C is set to 46.9108
+
+results:0.404
+using the following parameters:
+	svm_gamma is set to 0.0181092
+	svm_C is set to 126.275
+
+results:0.412632
+using the following parameters:
+	svm_gamma is set to 0.0296377
+	svm_C is set to 126.275
+
+results:0.379
+using the following parameters:
+	svm_gamma is set to 0.0296377
+	svm_C is set to 0.123315
+
+results:0.416842
+using the following parameters:
+	svm_gamma is set to 0.0296377
+	svm_C is set to 0.33194
+
+results:0.403846
+using the following parameters:
+	svm_gamma is set to 0.0296377
+	svm_C is set to 0.893515
+
+result is improvement:0.436962
+using the following parameters:
+	svm_gamma is set to 0.0296377
+	svm_C is set to 2.40516
+
+results:0.417
+using the following parameters:
+	svm_gamma is set to 0.0296377
+	svm_C is set to 6.47422
+
+results:0.423846
+using the following parameters:
+	svm_gamma is set to 0.0296377
+	svm_C is set to 17.4273
+
+results:0.425
+using the following parameters:
+	svm_gamma is set to 0.0296377
+	svm_C is set to 46.9108
+
+results:0.41859
+using the following parameters:
+	svm_gamma is set to 0.0296377
+	svm_C is set to 126.275
+
+results:0.434783
+using the following parameters:
+	svm_gamma is set to 0.0485055
+	svm_C is set to 126.275
+
+results:0.391
+using the following parameters:
+	svm_gamma is set to 0.0485055
+	svm_C is set to 0.123315
+
+results:0.402
+using the following parameters:
+	svm_gamma is set to 0.0485055
+	svm_C is set to 0.33194
+
+results:0.418333
+using the following parameters:
+	svm_gamma is set to 0.0485055
+	svm_C is set to 0.893515
+
+results:0.423077
+using the following parameters:
+	svm_gamma is set to 0.0485055
+	svm_C is set to 2.40516
+
+result is improvement:0.44082
+using the following parameters:
+	svm_gamma is set to 0.0485055
+	svm_C is set to 6.47422
+
+result is improvement:0.445937
+using the following parameters:
+	svm_gamma is set to 0.0485055
+	svm_C is set to 17.4273
+
+results:0.435833
+using the following parameters:
+	svm_gamma is set to 0.0485055
+	svm_C is set to 46.9108
+
+results:0.437692
+using the following parameters:
+	svm_gamma is set to 0.0485055
+	svm_C is set to 126.275
+
+results:0.434
+using the following parameters:
+	svm_gamma is set to 0.0793848
+	svm_C is set to 126.275
+
+results:0.342
+using the following parameters:
+	svm_gamma is set to 0.0793848
+	svm_C is set to 0.123315
+
+results:0.342
+using the following parameters:
+	svm_gamma is set to 0.0793848
+	svm_C is set to 0.33194
+
+results:0.402
+using the following parameters:
+	svm_gamma is set to 0.0793848
+	svm_C is set to 0.893515
+
+results:0.435
+using the following parameters:
+	svm_gamma is set to 0.0793848
+	svm_C is set to 2.40516
+
+results:0.431875
+using the following parameters:
+	svm_gamma is set to 0.0793848
+	svm_C is set to 6.47422
+
+results:0.431
+using the following parameters:
+	svm_gamma is set to 0.0793848
+	svm_C is set to 17.4273
+
+results:0.443889
+using the following parameters:
+	svm_gamma is set to 0.0793848
+	svm_C is set to 46.9108
+
+results:0.424
+using the following parameters:
+	svm_gamma is set to 0.0793848
+	svm_C is set to 126.275
+
+results:0.405
+using the following parameters:
+	svm_gamma is set to 0.129922
+	svm_C is set to 126.275
+
+results:0.305
+using the following parameters:
+	svm_gamma is set to 0.129922
+	svm_C is set to 0.123315
+
+results:0.272
+using the following parameters:
+	svm_gamma is set to 0.129922
+	svm_C is set to 0.33194
+
+results:0.381
+using the following parameters:
+	svm_gamma is set to 0.129922
+	svm_C is set to 0.893515
+
+results:0.429375
+using the following parameters:
+	svm_gamma is set to 0.129922
+	svm_C is set to 2.40516
+
+results:0.431
+using the following parameters:
+	svm_gamma is set to 0.129922
+	svm_C is set to 6.47422
+
+results:0.381
+using the following parameters:
+	svm_gamma is set to 0.129922
+	svm_C is set to 17.4273
+
+results:0.402
+using the following parameters:
+	svm_gamma is set to 0.129922
+	svm_C is set to 46.9108
+
+results:0.404
+using the following parameters:
+	svm_gamma is set to 0.129922
+	svm_C is set to 126.275
+
+results:0.348
+using the following parameters:
+	svm_gamma is set to 0.212633
+	svm_C is set to 126.275
+
+results:0.21
+using the following parameters:
+	svm_gamma is set to 0.212633
+	svm_C is set to 0.123315
+
+results:0.211
+using the following parameters:
+	svm_gamma is set to 0.212633
+	svm_C is set to 0.33194
+
+results:0.249
+using the following parameters:
+	svm_gamma is set to 0.212633
+	svm_C is set to 0.893515
+
+results:0.363
+using the following parameters:
+	svm_gamma is set to 0.212633
+	svm_C is set to 2.40516
+
+results:0.352
+using the following parameters:
+	svm_gamma is set to 0.212633
+	svm_C is set to 6.47422
+
+results:0.348
+using the following parameters:
+	svm_gamma is set to 0.212633
+	svm_C is set to 17.4273
+
+results:0.371
+using the following parameters:
+	svm_gamma is set to 0.212633
+	svm_C is set to 46.9108
+
+results:0.332
+using the following parameters:
+	svm_gamma is set to 0.212633
+	svm_C is set to 126.275
+
+results:0.28
+using the following parameters:
+	svm_gamma is set to 0.347998
+	svm_C is set to 126.275
+
+results:0.167
+using the following parameters:
+	svm_gamma is set to 0.347998
+	svm_C is set to 0.123315
+
+results:0.157
+using the following parameters:
+	svm_gamma is set to 0.347998
+	svm_C is set to 0.33194
+
+results:0.146
+using the following parameters:
+	svm_gamma is set to 0.347998
+	svm_C is set to 0.893515
+
+results:0.28
+using the following parameters:
+	svm_gamma is set to 0.347998
+	svm_C is set to 2.40516
+
+results:0.277
+using the following parameters:
+	svm_gamma is set to 0.347998
+	svm_C is set to 6.47422
+
+results:0.279
+using the following parameters:
+	svm_gamma is set to 0.347998
+	svm_C is set to 17.4273
+
+results:0.306
+using the following parameters:
+	svm_gamma is set to 0.347998
+	svm_C is set to 46.9108
+
+results:0.284
+using the following parameters:
+	svm_gamma is set to 0.347998
+	svm_C is set to 126.275
+
