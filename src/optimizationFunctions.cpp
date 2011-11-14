@@ -32,7 +32,7 @@ float evaluateSVMAbdullah(){
 	   << stats.mean() << " +- " << stats.std() << " " << i << "points"  << endl
 	   << "to be over " << best.mean << " +- " << best.std  << " " << best.size << " points " << endl
 	   << "is: " << exceed << endl;
-    } while(exceed > 0.25 && exceed < 0.975 && i < 100);    
+    } while(exceed > 0.25 && exceed < 0.975 && i < 20);    
   }
   if(best.set != true || stats.mean() > best.mean){
     float std = stats.std();
