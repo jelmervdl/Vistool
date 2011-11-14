@@ -1074,3 +1074,7 @@ using the following parameters:
 	svm_gamma is set to 0.933033
 	svm_C is set to 19972.3
 
+best results (so far):0.518737
+using the following parameters:
+	svm_gamma is set to 0.13005
+	svm_C is set to 1.04858e+06
