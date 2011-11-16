@@ -234,8 +234,9 @@ Dataset abdullah2010(){
 }
 
 float svm(Dataset &dataset, size_t datapoints){
-  DataPointCollection train, test;
-  dataset.randomDataSplit(&train, &test, 0.9, true, datapoints);
+  DataPointCollection train, seen_test, unseen_test;
+  dataset.randomDataSplit(&train, &unseen_test, 0.9, true, datapoints);
+  seen_test = train.getRandomSubSet(unseen_test.size());
 
   //get Labels, Examples and Descriptors
   FeatureExtractor *fe = FeatureExtractor::getInstance();
@@ -251,14 +252,21 @@ float svm(Dataset &dataset, size_t datapoints){
   classification::SVMClassifier svm;
   svm.train(training_examples);
 
+  DescriptorCollection seen_test_descriptors = fe->getDescriptors(seen_test);
+  cout << "Testing svm on already seen set: " << seen_test_descriptors.size() << " examples" << endl;
+  Evaluation seen_test_evaluation(seen_test, svm.classify(seen_test_descriptors));
+
   // classify the test
-  DescriptorCollection testing_descriptors = fe->getDescriptors(test);
-  cout << "Testing svm on " << testing_descriptors.size() << " examples" << endl;
-  LabelCollection result_labels = svm.classify(testing_descriptors);
+  DescriptorCollection unseen_test_descriptors = fe->getDescriptors(unseen_test);
+  cout << "Testing svm on unseen set: " << unseen_test_descriptors.size() << " examples" << endl;
+  Evaluation unseen_test_evaluation(unseen_test, svm.classify(unseen_test_descriptors));
+
+  cout << "Results: " << endl
+       << "  " << seen_test_evaluation.getPrecision() << " on seen images" << endl
+       << "  " << unseen_test_evaluation.getPrecision() << " on unseen images" << endl;
 
   // evaluate the results
-  Evaluation evaluation(test, result_labels);
-  return evaluation.getPrecision();
+  return unseen_test_evaluation.getPrecision();
 }
 
 float nn(Dataset &dataset, size_t datapoints){
