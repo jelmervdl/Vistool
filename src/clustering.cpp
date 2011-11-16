@@ -1,4 +1,5 @@
 #include "clustering.h"
+#include <cassert>
 
 using std::string;
 using std::cout;

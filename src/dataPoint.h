@@ -38,6 +38,7 @@ public:
   // create a labelcollection from the labels of the datapoints
   LabelCollection getLabels();
   void print();
+  DataPointCollection getRandomSubSet(size_t subset_size) const;
 };
 
 }

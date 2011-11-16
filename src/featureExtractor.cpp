@@ -17,6 +17,7 @@ namespace features{
 
 using write::readDescriptor;
 using write::writeDescriptor;
+using write::descriptorExists;
 
 Descriptor FeatureExtractor::getDescriptor(const DataPoint &dp,
 					   const bool force,
@@ -121,7 +122,7 @@ vector<float> FeatureExtractor::calcDescriptor(MyImage &image,
 Descriptor FeatureExtractor::getDescriptorWhileTrainingStack(const DataPoint &dp){
   string final_descriptor_location = getCurrentDescriptorLocation(dp);
   Descriptor desc;
-  if(!exists(path(final_descriptor_location))){
+  if(!descriptorExists(final_descriptor_location)){
     MyImage image(dp);
     desc = calcDescriptor(image, dp);
   }else{
@@ -135,7 +136,7 @@ void FeatureExtractor::renewDescriptor(const DataPoint &dp,
 				       const bool train){
   vector<Feature*> features = getActiveFeatures();
   string final_descriptor_location = getCurrentDescriptorLocation(dp);
-  if(force || !exists(path(final_descriptor_location))) {
+  if(force || !descriptorExists(final_descriptor_location)) {
     //cout << "having to rewrite: " << final_descriptor_location << endl;
     MyImage image(dp);
     vector<float> descriptor = calcDescriptor(image, dp);
@@ -203,7 +204,7 @@ bool FeatureExtractor::allExtracted(const DataPointCollection &dps2){
   Dataset dset = Dataset::getPrefferedDataset();
   const DataPointCollection dps = dset.enabledPoints();
   for(DataPointCollection::const_iterator i = dps.begin(); i!= dps.end(); ++i)
-    if(!exists(path(getCurrentDescriptorLocation(*i)))){
+    if(!descriptorExists(getCurrentDescriptorLocation(*i))){
       cout << getCurrentDescriptorLocation(*i) << " does exist? " << endl;
       return false;
     }
