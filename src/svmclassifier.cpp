@@ -1,4 +1,5 @@
 #include "svmclassifier.h"
+#include <algorithm>
 
 using std::string;
 using std::vector; 
