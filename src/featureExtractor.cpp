@@ -236,10 +236,11 @@ DescriptorCollection FeatureExtractor::map(DataPointCollection const &dps, map_f
 
   for(DataPointCollection::const_iterator i = dps.begin(); i != dps.end(); ++i)
   {
+    /*
     std::cout << "Extracting features: "
       << (i - dps.begin() + 1) << " of " << dps.size()
       << "\r" << std::flush;
-    
+    */
     descriptors.push_back((this->*extractor)(*i));
   }
 

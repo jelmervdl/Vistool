@@ -1,6 +1,7 @@
 #include "main.h"
 
 #include "facedetect.h"
+#include <ctime>
 
 using std::sprintf;
 using namespace vito;
@@ -10,6 +11,19 @@ using namespace vito::optimization;
 using namespace vito::classification;
 using namespace std;
 
+string now()
+{
+  time_t rawtime;
+  struct tm * timeinfo;
+  char buffer [80];
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  strftime (buffer, 80, "%Y%m%d%H%M%S", timeinfo);
+  
+  return string(buffer);    
+}
 
 void testFaceRec(){
   string cascadeName =
@@ -193,7 +207,7 @@ int main(int argc, char ** argv){
     if(*arg == "optimize"){
       //stack_function();
       cout << "optimizing..." << endl;
-      ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah);
+      ParameterOptimization opt(&vito::optimization::evaluateSVMAbdullah, string("optimization_log_") + now());
       arg++;
       if(arg == end){
         opt.optimize_full_grid();
