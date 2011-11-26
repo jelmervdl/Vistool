@@ -1,4 +1,5 @@
 #include "parameterOptimization.h"
+#include "dataset.h"
 
 using std::cout;
 using std::endl;
@@ -84,6 +85,13 @@ void ParameterOptimization::printCurrentParameters(){
 
 void ParameterOptimization::optimize_full_grid(string file, string dest){
   cout << "doing full grid " << file << " " << dest << endl;
+
+  // write 
+  fout << "dataset: " << Dataset::getPrefferedDatasetName() << endl
+       << "input:  " << file << endl
+       << "output: " << dest << endl
+       << endl;
+  
   //Parameters::getInstance()->saveInteger("mode_optimize",1);
   progress = 0;
   if(file != ""){
@@ -188,8 +196,13 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter,
       printCurrentParameters();
       std::cout << "and that's a fact" << std::endl;
       printf("result: %.6f\n\n", result);
+      
       // log results
-      result > best? fout << "result is improvement:" : fout << "results:";
+      if (result > best)
+        fout << "result is improvement:";
+      else
+        fout << "results:";
+      
       fout << result << endl;
       printCurrentParametersToFile();
       fout << endl;
@@ -199,12 +212,12 @@ void ParameterOptimization::optimize_int_parameter(Parameter<int> &parameter,
       TestResult res( handle, result);
       current_results.push_back(res);
       if(result > best){
-	printf("improvement: %f -> %f\n", best, result);
-	best = result;
-	apply_to_all_parameters(&set_current_as_best<int>, 
-				&set_current_as_best<float> );
+	      printf("improvement: %f -> %f\n", best, result);
+	      best = result;
+	      apply_to_all_parameters(&set_current_as_best<int>, &set_current_as_best<float>);
       }
     }
+
     if(fullgrid)
       optimize_grid_axis(step + 1);
   }
