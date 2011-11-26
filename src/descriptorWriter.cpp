@@ -14,7 +14,7 @@ namespace write{
 
 Cache<vector<float> > descriptor_cache;
 
-const bool use_disk = true;
+const bool use_disk = false;
 
 void writeDescriptor(vector<float> * datapoints, string destination)
 {
