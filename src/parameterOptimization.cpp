@@ -83,7 +83,8 @@ void ParameterOptimization::printCurrentParameters(){
 }
 
 
-void ParameterOptimization::optimize_full_grid(string file, string dest){
+void ParameterOptimization::optimize_full_grid(string file, string dest)
+{
   cout << "doing full grid " << file << " " << dest << endl;
 
   // write 
@@ -94,20 +95,34 @@ void ParameterOptimization::optimize_full_grid(string file, string dest){
   
   //Parameters::getInstance()->saveInteger("mode_optimize",1);
   progress = 0;
-  if(file != ""){
+  
+  // if source is not empty, load it as the initial parameters
+  if(!file.empty())
+  {
     Parameters *pars = Parameters::getInstance();
     pars->readFile(file);
   }
+  
   cout << "performing full grid search" << endl;
+
   started_at = time(NULL);
+  
   const int kZooms = 2;
-  for(int current_zoom = 0; current_zoom < kZooms; current_zoom++){// iterate the zooms
+
+  // iterate the zooms
+  for(int current_zoom = 0; current_zoom < kZooms; current_zoom++)
+  {
     cout << "at zoom level " << current_zoom << endl;
     optimize_grid_axis(0);
     apply_to_all_parameters(zoom<int>, zoom<float>);
   }
+
   apply_to_all_parameters(set_to_best<int>, set_to_best<float>);
-  if(dest != ""){
+
+  // if the destination file is not empty, write the best found parameters
+  // to this file.
+  if(!dest.empty())
+  {
     Parameters::getInstance()->saveInteger("mode_optimize",0);
     Parameters::getInstance()->saveXML(dest);
   }
