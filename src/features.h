@@ -7,7 +7,6 @@
 #include "histogram.h"
 #include "classifierStack.h"
 
-
 namespace vito{
 namespace features{
 

@@ -1,5 +1,7 @@
 #include "features.h"
 
+#include "rawFeature.h"
+
 using std::vector;
 using std::cout;
 using std::endl;
@@ -33,6 +35,10 @@ vector<Feature*> getExistingFeatures(){
     features.push_back(clust_feats[i]);
   NaiveStackFeatures::getInstance()->add_to(features);
   SVMStackFeatures::getInstance()->add_to(features);
+
+  // raw pixel feature
+  features.push_back(RawFeature::getInstance());
+
   return features;
 }
 
