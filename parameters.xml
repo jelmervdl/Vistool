@@ -17,6 +17,7 @@
 <feature_mpeg7_scalable_color> 0 </feature_mpeg7_scalable_color>
 <feature_sift> 1 </feature_sift>
 <feature_face> 0 </feature_face>
+<feature_raw_pixels> 1 </feature_raw_pixels>
 <histogram_hbins> 10 </histogram_hbins>
 <histogram_sbins> 10 </histogram_sbins>
 <knn_classifier_k> 1 </knn_classifier_k>
@@ -32,6 +33,7 @@
 <sift_orientation_directions> 8 </sift_orientation_directions>
 <sift_phase_shift_ori_bins> 0 </sift_phase_shift_ori_bins>
 <sift_sub_hists> 1 </sift_sub_hists>
+<raw_pixels_grayscale> 1 </raw_pixels_grayscale>
 <svm_degree> 16 </svm_degree>
 <svm_nr_weight> 0 </svm_nr_weight>
 <svm_probabiity> 0 </svm_probabiity>
