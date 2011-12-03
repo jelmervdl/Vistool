@@ -20,7 +20,7 @@ void loadDataset(string location){
     vector<int*> live_vars;
     for(size_t i = 0; i < cats->size(); ++i){
       stringstream name;
-      name << i << " " << cats->at(i).get_name().c_str();
+      name << i << " " << cats->at(i).get_name();
 
       state.classes->add_checkbox_to_panel( pan,
 					    name.str().c_str(),
