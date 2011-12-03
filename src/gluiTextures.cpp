@@ -1,4 +1,5 @@
 #include "gluiTextures.h"
+#include "histogram.h"
 
 using Magick::Image;
 
@@ -62,11 +63,11 @@ void refreshTexture(size_t p){
     for(size_t i = p; i < (size_t) state.ims_per_page + p && 
 	  i < (size_t) state.currently_view_datapoints.size(); ++i){
       if(feats.size() > 0){
-	MyImage im (state.currently_view_datapoints.at(i)->get_image_url(),
+	      MyImage im (state.currently_view_datapoints.at(i)->get_image_url(),
 		    *state.currently_view_datapoints.at(i));
-	Image canvas;
-	feats[0]->extract_(&im, true, &canvas);
-	state.textures.push_back(Texture(&canvas, state.image_display_window));
+	      Image canvas;
+	      Histogram::getInstance()->extract_(&im, true, &canvas);
+	      state.textures.push_back(Texture(&canvas, state.image_display_window));
       }
     }
   }

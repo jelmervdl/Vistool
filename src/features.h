@@ -1,11 +1,7 @@
 #ifndef FEATURES_H
 #define FEATURES_H
 
-#include "mpeg7.h"
-#include "facedetect.h"
-#include "sift.h"
-#include "histogram.h"
-#include "classifierStack.h"
+#include "feature.h"
 
 namespace vito{
 namespace features{

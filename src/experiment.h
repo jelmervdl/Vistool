@@ -1,6 +1,8 @@
 #ifndef EXPERIMENT_H
 #define EXPERIMENT_H
 
+#include <string>
+
 #include "clusterFeatureExtractor.h"
 #include "featureExtractor.h"
 #include "classification.h"
@@ -13,11 +15,11 @@
 namespace vito{
 namespace experiment{
 
-void classify(string original);
-void estimate(string original, float cutoff = 0.0);
+void classify(std::string original);
+void estimate(std::string original, float cutoff = 0.0);
 std::pair<float,float> recallExperiment(const std::string str,
 					const std::string dataset_string);
-void recallExperiment(const string dataset_string = "");
+void recallExperiment(const std::string dataset_string = "");
 Dataset abdullah2010DataSet();
 Dataset getDataSet(const std::string str);
 float   performExperiment(const std::string str,
