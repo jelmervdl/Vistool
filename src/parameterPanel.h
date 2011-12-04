@@ -8,13 +8,17 @@
 namespace vito{
 namespace gui{
 
-class ParameterPanel{
- private:
+class ParameterPanel
+{
+
+private:
   std::vector<GLUI_EditText*> fields;
   GLUI *panel;
-  void setupFloatVariables(std::map<std::string, float> &float_parameters);
-  void setupIntVariables(std::map<std::string, int>   &int_parameters);
- public:
+  
+  template <class T>
+  void setupVariables(std::map<std::string, T> &parameters, int data_type);
+
+public:
   ParameterPanel();
 };
 
